@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _liftFromGround = false;
 
     public bool IsWalking => _walking;
+    public float AngleLerpValue { get; private set; }
 
     void Awake()
     {
@@ -68,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         else if (angles.x < 180 && angles.x > 40)
             angles.x = 40;
 
+        AngleLerpValue = Mathf.InverseLerp(340, 400, angles.x < 180 ? angles.x + 360: angles.x);
+
         followTarget.transform.localEulerAngles = angles;
     }
 
@@ -90,8 +93,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _velocity.x = _velocity.z = 0;
 
-            // if (_drawBow)
-            //     FaceWithFollowTarget();
+            if (behaviour.IsDrawingBow)
+                FaceWithFollowTarget();
         }
     }
 
