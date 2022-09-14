@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MPack;
 
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField]
     private Camera mainCamera;
     [SerializeField]
-    private PlayerInput playerInput;
+    private PlayerInput input;
+    [SerializeField]
+    private new PlayerAnimation animation;
 
     [SerializeField]
     private LayerMask hitLayers;
+
+    [Header("Arrows")]
+    [SerializeField]
+    private Transform arrowPlacePoint;
+    [SerializeField]
+    private Arrow arrowPrefab;
+    [SerializeField]
+    private LimitedPrefabPool<Arrow> arrowPrefabPool;
+
+    [SerializeField]
+    private Transform aimBall;
 
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
@@ -21,19 +35,22 @@ public class PlayerBehaviour : MonoBehaviour
     private int _aimCameraIndex;
 
     public bool IsDrawingBow { get; private set; }
+    public Arrow PreparedArrow { get; private set; }
 
     private Ray _currentRay;
     public Vector3 CurrentRayHitPosition { get; private set; }
 
     void Awake()
     {
-        playerInput.OnAimDown += OnAimDown;
-        playerInput.OnAimUp += OnAimUp;
+        input.OnAimDown += OnAimDown;
+        input.OnAimUp += OnAimUp;
 
-        playerInput.OnOutFocus += OnOutFocus;
+        input.OnOutFocus += OnOutFocus;
 
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walking");
         _aimCameraIndex = CameraSwitcher.GetCameraIndex("Aim");
+
+        arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");
     }
 
 
@@ -49,6 +66,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             CurrentRayHitPosition = _currentRay.GetPoint(50);
         }
+
+        aimBall.position = CurrentRayHitPosition;
+        // Debug.DrawLine(_currentRay.origin, CurrentRayHitPosition, Color.blue, 0.1f);
     }
 
 
@@ -61,18 +81,42 @@ public class PlayerBehaviour : MonoBehaviour
             return;
         }
 
-        CameraSwitcher.ins.SwitchTo(_aimCameraIndex);
         IsDrawingBow = true;
+
+        if (PreparedArrow == null)
+        {
+            PreparedArrow = arrowPrefabPool.Get();
+            Transform arrowTransform =  PreparedArrow.transform;
+            arrowTransform.SetParent(arrowPlacePoint);
+            arrowTransform.localPosition = Vector3.zero;
+            arrowTransform.localRotation = Quaternion.identity;
+        }
+        else
+            PreparedArrow.gameObject.SetActive(true);
+
+        CameraSwitcher.ins.SwitchTo(_aimCameraIndex);
         OnDrawBow?.Invoke();
     }
 
     void OnAimUp()
     {
-        if (!CursorFocued)
+        if (!CursorFocued || !IsDrawingBow)
             return;
 
-        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
         IsDrawingBow = false;
+
+        if (animation.IsDrawArrowFullyPlayed)
+        {
+            PreparedArrow.transform.SetParent(null);
+            PreparedArrow.Shoot();
+            PreparedArrow = null;
+        }
+        else
+        {
+            PreparedArrow.gameObject.SetActive(false);
+        }
+
+        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
         OnDrawBowEnd?.Invoke();
     }
 

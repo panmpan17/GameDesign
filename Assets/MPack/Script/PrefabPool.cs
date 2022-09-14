@@ -111,6 +111,96 @@ namespace MPack {
     }
 
 
+    public class LimitedPrefabPool<T> where T : MonoBehaviour, IPoolableObj
+    {
+        public T Prefab;
+
+        public delegate T PrefabInstantiateFunc();
+
+        public T[] Objects;
+        public bool[] Actives;
+        private int _index;
+
+        public Transform PoolCollection;
+
+        public LimitedPrefabPool(T prefab, int initialCount, bool createPoolCollection = false, string poolCollectionName = "Pool Collection")
+        {
+            Prefab = prefab;
+            Objects = new T[initialCount];
+            Actives = new bool[initialCount];
+
+            if (createPoolCollection)
+            {
+                GameObject obj = new GameObject(poolCollectionName);
+                PoolCollection = obj.transform;
+            }
+
+            for (int i = 0; i < initialCount; i++)
+            {
+                T newObject = GameObject.Instantiate(Prefab);
+                Objects[i] = newObject;
+
+                newObject.Instantiate();
+                newObject.DeactivateObj(PoolCollection);
+            }
+        }
+
+        public LimitedPrefabPool(PrefabInstantiateFunc instantiateFunc, int initialCount, bool createPoolCollection = false, string poolCollectionName = "Pool Collection")
+        {
+            Prefab = null;
+            Objects = new T[initialCount];
+            Actives = new bool[initialCount];
+
+            if (createPoolCollection)
+            {
+                GameObject obj = new GameObject(poolCollectionName);
+                PoolCollection = obj.transform;
+            }
+
+            for (int i = 0; i < initialCount; i++)
+            {
+                T newObject = instantiateFunc.Invoke();
+                Objects[i] = newObject;
+
+                newObject.Instantiate();
+                newObject.DeactivateObj(PoolCollection);
+            }
+        }
+
+        public T Get()
+        {
+            T component = Objects[_index];
+
+            if (Actives[_index])
+                component.DeactivateObj(PoolCollection);
+
+            component.Reinstantiate();
+
+            if (++_index >= Actives.Length)
+                _index = 0;
+
+            return component;
+        }
+
+        public void Put(T component)
+        {
+            for (int i = 0; i < Objects.Length; i++)
+            {
+                if (Objects[i] == component)
+                {
+                    component.DeactivateObj(PoolCollection);
+                    Actives[i] = false;
+                    return;
+                }
+            }
+
+#if UNITY_EDITOR
+            throw new System.ArgumentException("Component doesn't belong to this prefab pool");
+#endif
+        }
+    }
+
+
     [System.Serializable]
     public class GameObjectPrefabPool
     {

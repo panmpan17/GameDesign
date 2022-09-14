@@ -35,6 +35,22 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private Quaternion chestRotationOffset;
 
+    [SerializeField]
+    private Transform drawBowLeftHandFinalPosition;
+    [SerializeField]
+    private Transform drawBowRightHandFinalPosition;
+    
+    [SerializeField]
+    private Transform rightHand;
+    [SerializeField]
+    private Transform bow;
+    [SerializeField]
+    private Quaternion bowRotationOffset;
+
+    [Header("Editor only")]
+    [SerializeField]
+    private LayerMask groundLayers;
+
     private int _walkingKey = 0;
     private int _jumpKey = 0;
     private int _jumpEndKey = 0;
@@ -44,8 +60,11 @@ public class PlayerAnimation : MonoBehaviour
     private bool _walking = false;
 
     private bool _drawBow = false;
+    private Transform _prepareArrowTransform;
 
     private Coroutine _weightTweenRoutine;
+
+    public bool IsDrawArrowFullyPlayed => animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1 && !animator.IsInTransition(1);
 
 
     void Awake()
@@ -72,10 +91,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (_drawBow)
         {
-            Quaternion chestRotation = Quaternion.LookRotation(behaviour.CurrentRayHitPosition - chest.position, transform.up);
-            // chestRotationOffset = Quaternion.Lerp(chestRotationOffsetA, chestRotationOffsetB, movement.AngleLerpValue);
-            // chest.rotation = chestRotation * Quaternion.Lerp(chestRotationOffsetA, chestRotationOffsetB, movement.AngleLerpValue);
-            chest.rotation = chestRotation * chestRotationOffset;
+            RotateChest();
+            // TestRotateChest();
         }
 
 
@@ -98,10 +115,34 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetTrigger(_jumpEndKey);
     }
 
+    void RotateChest()
+    {
+        Quaternion chestRotation = Quaternion.LookRotation(behaviour.CurrentRayHitPosition - chest.position, transform.up);
+        chest.rotation = chestRotation * Quaternion.Lerp(chestRotationOffsetA, chestRotationOffsetB, movement.AngleLerpValue);
+
+        bow.rotation = Quaternion.LookRotation(bow.position - rightHand.position, transform.up) * bowRotationOffset;
+        _prepareArrowTransform.rotation = Quaternion.LookRotation(_prepareArrowTransform.position - rightHand.position, _prepareArrowTransform.up);
+    }
+
+    void TestRotateChest()
+    {
+        Vector3 hitPosition = behaviour.CurrentRayHitPosition;
+
+        Quaternion chestRotation = Quaternion.LookRotation(hitPosition - chest.position, transform.up);
+        chest.rotation = chestRotation * chestRotationOffset;
+
+        Debug.DrawRay(hitPosition, Vector3.up * 3, Color.white, 0.1f);
+        Debug.DrawLine(chest.position, hitPosition, Color.red, 0.1f);
+
+        Vector3 arrowVector = drawBowLeftHandFinalPosition.position - drawBowRightHandFinalPosition.position;
+        Debug.DrawRay(chest.position, arrowVector * 15, Color.yellow, 0.1f);
+        Debug.DrawRay(drawBowRightHandFinalPosition.position, arrowVector * 15, Color.green, 0.1f);
+    }
 
     void OnDrawBow()
     {
         _drawBow = true;
+        _prepareArrowTransform = behaviour.PreparedArrow.transform;
         animator.SetBool(_drawingBowKey, true);
 
         if (_weightTweenRoutine != null)
@@ -111,6 +152,7 @@ public class PlayerAnimation : MonoBehaviour
     void OnDrawBowEnd()
     {
         _drawBow = false;
+        _prepareArrowTransform = null;
         animator.SetBool(_drawingBowKey, false);
 
         if (_weightTweenRoutine != null)
