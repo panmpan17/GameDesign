@@ -108,7 +108,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (animation.IsDrawArrowFullyPlayed)
         {
             PreparedArrow.transform.SetParent(null);
-            PreparedArrow.Shoot();
+            PreparedArrow.Shoot(CurrentRayHitPosition);
             PreparedArrow = null;
         }
         else

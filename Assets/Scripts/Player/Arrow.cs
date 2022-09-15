@@ -5,6 +5,9 @@ using MPack;
 
 public class Arrow : MonoBehaviour, IPoolableObj
 {
+    private const float HeightLimit = 300;
+    private const float LowLimit = -30;
+
     [SerializeField]
     private float speed;
     [SerializeField]
@@ -29,20 +32,43 @@ public class Arrow : MonoBehaviour, IPoolableObj
         rigidbody.velocity = Vector3.zero;
     }
 
-    public void Shoot()
+    public void Shoot(Vector3 targetPosition)
     {
+        transform.rotation = Quaternion.LookRotation(targetPosition - transform.position, transform.up);
+
         rigidbody.velocity = transform.forward * speed;
         rigidbody.isKinematic = false;
     }
 
+    void FixedUpdate()
+    {
+        if (transform.position.y > HeightLimit || transform.position.y < LowLimit)
+            gameObject.SetActive(false);
+    }
+
     void OnTriggerEnter(Collider collider)
     {
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.isKinematic = true;
+        HandleHit(collider.transform);
     }
     void OnCollisionEnter(Collision collision)
     {
+        HandleHit(collision.transform);
+    }
+
+    void HandleHit(Transform otherTransform)
+    {
         rigidbody.velocity = Vector3.zero;
         rigidbody.isKinematic = true;
+
+        if (otherTransform.CompareTag("Slime"))
+        {
+            transform.SetParent(otherTransform);
+        }
+        else if (otherTransform.CompareTag("SlimeCore"))
+        {
+            transform.SetParent(otherTransform.parent);
+            var slimeCore = otherTransform.GetComponent<SlimeCore>();
+            slimeCore.OnDamage();
+        }
     }
 }

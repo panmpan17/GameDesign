@@ -19,7 +19,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("paramater")]
     [SerializeField]
-    private float rotateSpeed;
+    private FloatReference mouseXSensitive;
+    [SerializeField]
+    private FloatReference mouseYSensitive;
     [SerializeField]
     private float walkSpeed;
     [SerializeField]
@@ -57,9 +59,9 @@ public class PlayerMovement : MonoBehaviour
         if (!behaviour.CursorFocued)
             return;
 
-        followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.x * rotateSpeed, Vector3.up);
+        followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.x * mouseXSensitive.Value, Vector3.up);
 
-        followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.y * rotateSpeed, Vector3.right);
+        followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.y * mouseYSensitive.Value, Vector3.right);
 
         Vector3 angles = followTarget.transform.localEulerAngles;
         angles.z = 0;
