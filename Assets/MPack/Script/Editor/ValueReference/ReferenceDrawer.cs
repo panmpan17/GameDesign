@@ -50,12 +50,12 @@ namespace MPack
             EditorGUI.LabelField(labelRect, label);
             EditorGUI.LabelField(settingIconRect, settingIcon);
 
-            serializedObject.Update();
+            // serializedObject.Update();
 
             DrawValue(rest);
 
             HandleContextnMenu(settingIconRect);
-            serializedObject.ApplyModifiedProperties();
+            // serializedObject.ApplyModifiedProperties();
         }
 
         protected abstract void DrawValue(Rect rest);

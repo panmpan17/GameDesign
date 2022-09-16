@@ -10,6 +10,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private PlayerInput input;
     [SerializeField]
+    private PlayerMovement movement;
+    [SerializeField]
     private new PlayerAnimation animation;
 
     [SerializeField]
@@ -44,6 +46,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         input.OnAimDown += OnAimDown;
         input.OnAimUp += OnAimUp;
+
+        movement.OnRoll += OnRoll;
 
         input.OnOutFocus += OnOutFocus;
 
@@ -124,5 +128,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         CursorFocued = false;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    void OnRoll()
+    {
+        if (IsDrawingBow)
+        {
+            IsDrawingBow = false;
+            PreparedArrow.gameObject.SetActive(false);
+            CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
+            OnDrawBowEnd?.Invoke();
+        }
     }
 }

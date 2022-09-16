@@ -15,6 +15,8 @@ public class PlayerInput : MonoBehaviour
 
     public event System.Action OnOutFocus;
 
+    public event System.Action OnRoll;
+
 
     public Vector2 MovementAxis { get; private set; }
     public Vector2 LookAxis { get; private set; }
@@ -39,6 +41,8 @@ public class PlayerInput : MonoBehaviour
         _scheme.Player.Jump.performed += OnJumpPerformed;
 
         _scheme.Player.OutFocus.performed += OnOutFocusPerformed;
+
+        _scheme.Player.Roll.performed += OnRollPerformed;
     }
 
     void OnEnable()
@@ -62,4 +66,6 @@ public class PlayerInput : MonoBehaviour
     void OnJumpPerformed(CallbackContext callbackContext) => OnJump?.Invoke();
 
     void OnOutFocusPerformed(CallbackContext callbackContext) => OnOutFocus?.Invoke();
+
+    void OnRollPerformed(CallbackContext callbackContext) => OnRoll?.Invoke();
 }

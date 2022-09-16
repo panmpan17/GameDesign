@@ -31,6 +31,12 @@ public class SimpleSlime : MonoBehaviour
     [Layer]
     private int groundLayer; 
 
+    [Header("Shoot")]
+    [SerializeField]
+    private BulletTrigger bulletTrigger;
+    [SerializeField]
+    private bool shootWhenLand;
+
     private SlimeState _state;
     private enum SlimeState { None, Jump, Land }
 
@@ -104,9 +110,12 @@ public class SimpleSlime : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == groundLayer)
+        if (_state == SlimeState.Land && collision.gameObject.layer == groundLayer)
         {
             _state = SlimeState.None;
+            
+            if (shootWhenLand)
+                bulletTrigger.Trigger();
         }
     }
 }

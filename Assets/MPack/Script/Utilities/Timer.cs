@@ -154,6 +154,97 @@ namespace MPack {
 
 
     [System.Serializable]
+    public struct SimpleTimer
+    {
+        public float TargetTime;
+        [System.NonSerialized]
+        public float RunTime;
+
+        public SimpleTimer(float time)
+        {
+            TargetTime = time;
+            RunTime = 0;
+        }
+
+        /// <summary>
+        /// Reset timer run timer to 0
+        /// </summary>
+        public void Reset()
+        {
+            RunTime = 0;
+        }
+
+        /// <summary>
+        /// Progress of the timer
+        /// </summary>
+        /// <value></value>
+        public float Progress
+        {
+            get
+            {
+                return Mathf.Clamp(RunTime / TargetTime, 0, 1);
+            }
+        }
+
+        /// <summary>
+        /// Return weather run time reached target time
+        /// </summary>
+        /// <value></value>
+        public bool Ended => RunTime >= TargetTime;
+
+        /// <summary>
+        /// Run time add Time.deltaTime, return weather run time reached target time
+        /// </summary>
+        /// <value></value>
+        public bool UpdateEnd
+        {
+            get
+            {
+                RunTime += Time.deltaTime;
+                return RunTime >= TargetTime;
+            }
+        }
+
+        public bool Update()
+        {
+            if (RunTime >= TargetTime)
+                return false;
+            else
+            {
+                RunTime += Time.deltaTime;
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Run time add Time.fixedDeltaTime, return weather run time reached target time
+        /// </summary>
+        /// <value></value>
+        public bool FixedUpdateEnd
+        {
+            get
+            {
+                RunTime += Time.fixedDeltaTime;
+                return RunTime >= TargetTime;
+            }
+        }
+
+        /// <summary>
+        /// Run time add Time.unscaledDeltaTime, return weather run time reached target time
+        /// </summary>
+        /// <value></value>
+        public bool UnscaleUpdateTimeEnd
+        {
+            get
+            {
+                RunTime += Time.unscaledDeltaTime;
+                return RunTime >= TargetTime;
+            }
+        }
+    }
+
+
+    [System.Serializable]
     public struct FloatLerpTimer {
         public float From, To;
         public Timer Timer;

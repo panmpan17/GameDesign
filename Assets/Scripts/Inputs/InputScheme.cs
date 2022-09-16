@@ -587,6 +587,15 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""1583396a-ca3b-4a30-a4a9-90c79b9314bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -853,6 +862,17 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""action"": ""OutFocus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e96e274a-8282-4a26-924f-6c960804fe8a"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -878,6 +898,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_OutFocus = m_Player.FindAction("OutFocus", throwIfNotFound: true);
+        m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1047,6 +1068,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_OutFocus;
+    private readonly InputAction m_Player_Roll;
     public struct PlayerActions
     {
         private @InputScheme m_Wrapper;
@@ -1056,6 +1078,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @OutFocus => m_Wrapper.m_Player_OutFocus;
+        public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1080,6 +1103,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @OutFocus.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOutFocus;
                 @OutFocus.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOutFocus;
                 @OutFocus.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOutFocus;
+                @Roll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1099,6 +1125,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @OutFocus.started += instance.OnOutFocus;
                 @OutFocus.performed += instance.OnOutFocus;
                 @OutFocus.canceled += instance.OnOutFocus;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
             }
         }
     }
@@ -1123,5 +1152,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnOutFocus(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
     }
 }

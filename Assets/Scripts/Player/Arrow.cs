@@ -48,11 +48,13 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
     void OnTriggerEnter(Collider collider)
     {
-        HandleHit(collider.transform);
+        if (!rigidbody.isKinematic)
+            HandleHit(collider.transform);
     }
     void OnCollisionEnter(Collision collision)
     {
-        HandleHit(collision.transform);
+        if (!rigidbody.isKinematic)
+            HandleHit(collision.transform);
     }
 
     void HandleHit(Transform otherTransform)

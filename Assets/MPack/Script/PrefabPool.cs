@@ -173,6 +173,7 @@ namespace MPack {
 
             if (Actives[_index])
                 component.DeactivateObj(PoolCollection);
+            Actives[_index] = true;
 
             component.Reinstantiate();
 

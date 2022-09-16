@@ -11,13 +11,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private PlayerBehaviour behaviour;
     [SerializeField]
+    private new PlayerAnimation animation;
+
+    [SerializeField]
     private CharacterController characterController;
     [SerializeField]
     private SmartGroundDetect smartGroundDetect;
     [SerializeField]
     private Transform followTarget;
 
-    [Header("paramater")]
+    [Header("Paramater")]
     [SerializeField]
     private FloatReference mouseXSensitive;
     [SerializeField]
@@ -28,9 +31,16 @@ public class PlayerMovement : MonoBehaviour
     private float jumpForce;
     [SerializeField]
     private Timer waitJumpTimer;
+    [SerializeField]
+    private float rollSpeed;
+    [SerializeField]
+    private AnimationCurve rollSpeedCurve;
 
     public event System.Action OnJump;
     public event System.Action OnJumpEnd;
+
+    public event System.Action OnRoll;
+    public event System.Action OnRollEnd;
 
     private Vector3 _velocity = Vector3.zero;
     private float _yVelocity = 0;
@@ -39,18 +49,27 @@ public class PlayerMovement : MonoBehaviour
     private bool _jumping = false;
     private bool _liftFromGround = false;
 
+    private bool _rolling = false;
+    private Vector3 _rollDirection = Vector3.zero;
+
     public bool IsWalking => _walking;
     public float AngleLerpValue { get; private set; }
 
     void Awake()
     {
         input.OnJump += Jump;
+        input.OnRoll += Roll;
     }
 
     void Update()
     {
-        HandleAimRotation();
-        HandleWalking();
+        if (_rolling)
+            HandleRolling();
+        else
+        {
+            HandleAimRotation();
+            HandleWalking();
+        }
         HandlePhysic();
     }
 
@@ -97,6 +116,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (behaviour.IsDrawingBow)
                 FaceWithFollowTarget();
+        }
+    }
+
+    void HandleRolling()
+    {
+        float progress = animation.RollAnimationProgress;
+        _velocity = _rollDirection * (rollSpeed * rollSpeedCurve.Evaluate(progress));
+
+        if (progress >= 1)
+        {
+            _rolling = false;
+            FaceWithFollowTarget();
+            OnRollEnd?.Invoke();
         }
     }
 
@@ -148,5 +180,36 @@ public class PlayerMovement : MonoBehaviour
         _yVelocity = jumpForce;
 
         OnJump?.Invoke();
+    }
+
+    void Roll()
+    {
+        if (!behaviour.CursorFocued)
+            return;
+        if (_jumping || !smartGroundDetect.IsGrounded)
+            return;
+        if (_rolling)
+            return;
+
+        _rolling = true;
+        if (input.MovementAxis.sqrMagnitude < 0.01f)
+        {
+            FaceWithFollowTarget();
+            _rollDirection = followTarget.forward;
+            _rollDirection.y = 0;
+            _rollDirection.Normalize();
+        }
+        else
+        {
+            Quaternion previousRotation = followTarget.rotation;
+
+            _rollDirection = (transform.right * input.MovementAxis.x + transform.forward * input.MovementAxis.y).normalized;
+            transform.rotation = Quaternion.LookRotation(_rollDirection, Vector3.up);
+
+            followTarget.rotation = previousRotation;
+            // followTarget.localEulerAngles = new Vector3(followTarget.transform.localEulerAngles.x, 0, 0);
+        }
+
+        OnRoll?.Invoke();
     }
 }

@@ -11,6 +11,7 @@ public class PlayerAnimation : MonoBehaviour
     private const string AnimKeyEndJump = "EndJump";
     private const string AnimKeyDrawingBow = "DrawingBow";
     private const string AnimKeyWalkSpeed = "WalkSpeed";
+    private const string AnimKeyRoll = "Roll";
     
     [SerializeField]
     private Animator animator;
@@ -56,6 +57,7 @@ public class PlayerAnimation : MonoBehaviour
     private int _jumpEndKey = 0;
     private int _drawingBowKey = 0;
     private int _walkingSpeedKey = 0;
+    private int _rollKey = 0;
 
     private bool _walking = false;
 
@@ -65,12 +67,15 @@ public class PlayerAnimation : MonoBehaviour
     private Coroutine _weightTweenRoutine;
 
     public bool IsDrawArrowFullyPlayed => animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1 && !animator.IsInTransition(1);
+    public float RollAnimationProgress => animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    // public bool IsRollFullyPlayed => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !animator.IsInTransition(1);
 
 
     void Awake()
     {
         movement.OnJump += OnJump;
         movement.OnJumpEnd += OnJumpEnd;
+        movement.OnRoll += OnRoll;
 
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
@@ -85,6 +90,7 @@ public class PlayerAnimation : MonoBehaviour
         _jumpEndKey = Animator.StringToHash(AnimKeyEndJump);
         _drawingBowKey = Animator.StringToHash(AnimKeyDrawingBow);
         _walkingSpeedKey = Animator.StringToHash(AnimKeyWalkSpeed);
+        _rollKey = Animator.StringToHash(AnimKeyRoll);
     }
 
     void LateUpdate()
@@ -113,6 +119,11 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.ResetTrigger(_jumpKey);
         animator.SetTrigger(_jumpEndKey);
+    }
+
+    void OnRoll()
+    {
+        animator.SetTrigger(_rollKey);
     }
 
     void RotateChest()
