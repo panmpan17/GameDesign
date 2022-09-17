@@ -15,4 +15,16 @@ namespace MPack {
             EditorGUI.PropertyField(position, property.FindPropertyRelative("TargetTime"), GUIContent.none);
         }
     }
+
+    [CustomPropertyDrawer(typeof(SimpleTimer))]
+    public class SimpleTimerPropertyDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            position.width = position.width / 2 - 5;
+            EditorGUI.LabelField(position, label);
+            position.x += position.width + 2;
+            EditorGUI.PropertyField(position, property.FindPropertyRelative("TargetTime"), GUIContent.none);
+        }
+    }
 }

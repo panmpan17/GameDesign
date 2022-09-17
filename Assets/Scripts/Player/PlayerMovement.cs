@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _rolling = false;
     private Vector3 _rollDirection = Vector3.zero;
+    public bool IsRolling => _rolling;
 
     public bool IsWalking => _walking;
     public float AngleLerpValue { get; private set; }

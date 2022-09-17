@@ -10,6 +10,8 @@ public class BaseBullet : MonoBehaviour, IPoolableObj
     private new Rigidbody rigidbody;
     [SerializeField]
     private SimpleTimer disapearTimer; 
+    [SerializeField]
+    private float damage;
 
     public void DeactivateObj(Transform collectionTransform) {
         transform.SetParent(collectionTransform);
@@ -32,7 +34,16 @@ public class BaseBullet : MonoBehaviour, IPoolableObj
 
     void OnTriggerEnter(Collider collider)
     {
+        if (!collider.CompareTag(PlayerBehaviour.Tag))
+            return;
+
+        var playerBehaviour = collider.GetComponent<PlayerBehaviour>();
+
+        if (playerBehaviour.Movement.IsRolling)
+            return;
+
         BulletBillboards.ins.PutBullet(this);
+        playerBehaviour.OnDamage(damage);
     }
 
     public void Shoot(Vector3 velocity)

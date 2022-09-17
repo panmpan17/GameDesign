@@ -11,6 +11,16 @@ public class SimpleSlime : MonoBehaviour
     [SerializeField]
     private float rotateSpeed;
 
+    [Header("Sense Player")]
+    [SerializeField]
+    private Transform target;
+    [SerializeField]
+    private SimpleTimer checkTargetTimer;
+    [SerializeField]
+    private float senseRange;
+    [SerializeField]
+    private LayerMask raycastLayers;
+
     [Header("Jump")]
     [SerializeField]
     private float jumpForce;
@@ -26,8 +36,6 @@ public class SimpleSlime : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
-    private Transform target;
-    [SerializeField]
     [Layer]
     private int groundLayer; 
 
@@ -38,7 +46,7 @@ public class SimpleSlime : MonoBehaviour
     private bool shootWhenLand;
 
     private SlimeState _state;
-    private enum SlimeState { None, Jump, Land }
+    private enum SlimeState { Idle, WaitJump, Jump, Land }
 
     private SlimeCore[] _cores;
 
@@ -57,12 +65,24 @@ public class SimpleSlime : MonoBehaviour
     {
         switch (_state)
         {
-            case SlimeState.None:
-                Vector3 delta = target.position - transform.position;
-                Quaternion destinationRotation = Quaternion.Euler(0, Quaternion.LookRotation(target.position - transform.position).eulerAngles.y, 0);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, destinationRotation, rotateSpeed * Time.deltaTime);
+            case SlimeState.Idle:
+                if (checkTargetTimer.UpdateEnd)
+                {
+                    checkTargetTimer.Reset();
+                    if (IsTargetInView())
+                    {
+                        _state = SlimeState.WaitJump;
+                    }
+                }
+                break;
 
-                if (_jumpWaitTimer.UpdateEnd)
+            case SlimeState.WaitJump:
+                Quaternion destinationRotation = Quaternion.Euler(0, Quaternion.LookRotation(target.position - transform.position).eulerAngles.y, 0);
+                destinationRotation = Quaternion.RotateTowards(transform.rotation, destinationRotation, rotateSpeed * Time.deltaTime);
+                float angleDifference = Quaternion.Angle(transform.rotation, destinationRotation);
+                transform.rotation = destinationRotation;
+
+                if (_jumpWaitTimer.UpdateEnd && angleDifference < 0.01f)
                 {
                     _jumpWaitTimer.Reset();
                     _jumpWaitTimer.TargetTime = jumpWaitTimeRange.PickRandomNumber();
@@ -86,6 +106,17 @@ public class SimpleSlime : MonoBehaviour
             case SlimeState.Land:
                 break;
         }
+    }
+
+    bool IsTargetInView()
+    {
+        if ((target.position - transform.position).sqrMagnitude > senseRange * senseRange)
+            return false;
+        
+        if (Physics.Linecast(transform.position, target.position, raycastLayers))
+            return false;
+
+        return true;
     }
 
     void OnCoreDamage()
@@ -112,7 +143,7 @@ public class SimpleSlime : MonoBehaviour
     {
         if (_state == SlimeState.Land && collision.gameObject.layer == groundLayer)
         {
-            _state = SlimeState.None;
+            _state = IsTargetInView() ? SlimeState.WaitJump : SlimeState.Idle;
             
             if (shootWhenLand)
                 bulletTrigger.Trigger();

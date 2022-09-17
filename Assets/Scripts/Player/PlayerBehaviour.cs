@@ -5,6 +5,9 @@ using MPack;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public const string Tag = "Player";
+
+    [Header("Other components")]
     [SerializeField]
     private Camera mainCamera;
     [SerializeField]
@@ -13,9 +16,17 @@ public class PlayerBehaviour : MonoBehaviour
     private PlayerMovement movement;
     [SerializeField]
     private new PlayerAnimation animation;
+    public PlayerInput Input => input;
+    public PlayerMovement Movement => movement;
 
+    [Header("Paramater")]
     [SerializeField]
     private LayerMask hitLayers;
+    [SerializeField]
+    private float maxHealth;
+    private float _health;
+    [SerializeField]
+    private EventReference healthChangeEvent;
 
     [Header("Arrows")]
     [SerializeField]
@@ -57,6 +68,11 @@ public class PlayerBehaviour : MonoBehaviour
         arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");
     }
 
+    void Start()
+    {
+        _health = maxHealth;
+        healthChangeEvent?.Invoke(1);
+    }
 
     void Update()
     {
@@ -72,7 +88,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         aimBall.position = CurrentRayHitPosition;
-        // Debug.DrawLine(_currentRay.origin, CurrentRayHitPosition, Color.blue, 0.1f);
     }
 
 
@@ -139,5 +154,12 @@ public class PlayerBehaviour : MonoBehaviour
             CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
             OnDrawBowEnd?.Invoke();
         }
+    }
+
+    public void OnDamage(float amount)
+    {
+        _health -= amount;
+
+        healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
     }
 }
