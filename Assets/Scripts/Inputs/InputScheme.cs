@@ -580,18 +580,27 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""OutFocus"",
+                    ""name"": ""Roll"",
                     ""type"": ""Button"",
-                    ""id"": ""44801e49-d641-45da-9d87-375487b3007f"",
+                    ""id"": ""1583396a-ca3b-4a30-a4a9-90c79b9314bb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Roll"",
+                    ""name"": ""Run"",
                     ""type"": ""Button"",
-                    ""id"": ""1583396a-ca3b-4a30-a4a9-90c79b9314bb"",
+                    ""id"": ""d9bc7dab-8ea4-4b01-8cc8-81dd449e358a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escap"",
+                    ""type"": ""Button"",
+                    ""id"": ""1dfa8f44-9157-4748-8e17-9c33d2004e00"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -766,6 +775,28 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c0878d40-2624-448d-b242-bd33b6739b88"",
+                    ""path"": ""<XInputController>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d8f3f1a-80be-4e42-9790-957212a34fbf"",
+                    ""path"": ""<HID::Logitech Logitech Dual Action>/hat"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7328169c-e27e-434f-95f1-cc8542c43376"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
@@ -854,12 +885,12 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e43e844f-6f66-4286-8407-8e188a0ac36f"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""ccbf7e2e-c71d-4808-9770-393fb5aebb49"",
+                    ""path"": ""<HID::Logitech Logitech Dual Action>/button2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""OutFocus"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -871,6 +902,83 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be2435a2-c253-4487-a00a-c06107aa2301"",
+                    ""path"": ""<HID::Logitech Logitech Dual Action>/button3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cc4268e-0ad3-4a61-ac79-6e08349771cd"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bfcba0b-fffd-4f2d-8a18-91e0ace215e8"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""186141ef-5d9b-4b07-82c8-e2434186f0a3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d841ec9-4c59-4267-9741-7855683d6004"",
+                    ""path"": ""<HID::Logitech Logitech Dual Action>/button10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b0d1c61-c567-435e-83d0-63d32b55cfaa"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c15ed0b6-eca4-4cf9-92f1-d76d3acb8d48"",
+                    ""path"": ""<HID::Logitech Logitech Dual Action>/button6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -897,8 +1005,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_OutFocus = m_Player.FindAction("OutFocus", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
+        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_Escap = m_Player.FindAction("Escap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1067,8 +1176,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_OutFocus;
     private readonly InputAction m_Player_Roll;
+    private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_Escap;
     public struct PlayerActions
     {
         private @InputScheme m_Wrapper;
@@ -1077,8 +1187,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @OutFocus => m_Wrapper.m_Player_OutFocus;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
+        public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @Escap => m_Wrapper.m_Player_Escap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1100,12 +1211,15 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @OutFocus.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOutFocus;
-                @OutFocus.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOutFocus;
-                @OutFocus.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOutFocus;
                 @Roll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
                 @Roll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
                 @Roll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Run.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
+                @Run.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
+                @Run.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
+                @Escap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
+                @Escap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
+                @Escap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1122,12 +1236,15 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @OutFocus.started += instance.OnOutFocus;
-                @OutFocus.performed += instance.OnOutFocus;
-                @OutFocus.canceled += instance.OnOutFocus;
                 @Roll.started += instance.OnRoll;
                 @Roll.performed += instance.OnRoll;
                 @Roll.canceled += instance.OnRoll;
+                @Run.started += instance.OnRun;
+                @Run.performed += instance.OnRun;
+                @Run.canceled += instance.OnRun;
+                @Escap.started += instance.OnEscap;
+                @Escap.performed += instance.OnEscap;
+                @Escap.canceled += instance.OnEscap;
             }
         }
     }
@@ -1151,7 +1268,8 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnOutFocus(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnEscap(InputAction.CallbackContext context);
     }
 }

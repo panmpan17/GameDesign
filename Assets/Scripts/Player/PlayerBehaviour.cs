@@ -19,9 +19,7 @@ public class PlayerBehaviour : MonoBehaviour
     public PlayerInput Input => input;
     public PlayerMovement Movement => movement;
 
-    [Header("Paramater")]
-    [SerializeField]
-    private LayerMask hitLayers;
+    [Header("Health")]
     [SerializeField]
     private float maxHealth;
     private float _health;
@@ -36,8 +34,13 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private LimitedPrefabPool<Arrow> arrowPrefabPool;
 
+    [Header("Others")]
     [SerializeField]
-    private Transform aimBall;
+    private LayerMask hitLayers;
+    [SerializeField]
+    private EventReference pauseEvent;
+    [SerializeField]
+    private EventReference focusEvent;
 
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
@@ -60,7 +63,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         movement.OnRoll += OnRoll;
 
-        input.OnOutFocus += OnOutFocus;
+        input.OnEscap += OnEscap;
+
+        focusEvent.InvokeEvents += FocusCursor;
 
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walking");
         _aimCameraIndex = CameraSwitcher.GetCameraIndex("Aim");
@@ -72,6 +77,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _health = maxHealth;
         healthChangeEvent?.Invoke(1);
+
+        FocusCursor();
     }
 
     void Update()
@@ -86,8 +93,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             CurrentRayHitPosition = _currentRay.GetPoint(50);
         }
-
-        aimBall.position = CurrentRayHitPosition;
     }
 
 
@@ -95,8 +100,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (!CursorFocued)
         {
-            CursorFocued = true;
-            Cursor.lockState = CursorLockMode.Locked;
+            // FocusCursor();
             return;
         }
 
@@ -139,10 +143,12 @@ public class PlayerBehaviour : MonoBehaviour
         OnDrawBowEnd?.Invoke();
     }
 
-    void OnOutFocus()
+    void OnEscap()
     {
         CursorFocued = false;
         Cursor.lockState = CursorLockMode.None;
+
+        pauseEvent.Invoke();
     }
 
     void OnRoll()
@@ -161,5 +167,16 @@ public class PlayerBehaviour : MonoBehaviour
         _health -= amount;
 
         healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
+    }
+
+    public void FocusCursor()
+    {
+        CursorFocued = true;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void OnDestroy()
+    {
+        focusEvent.InvokeEvents -= FocusCursor;
     }
 }

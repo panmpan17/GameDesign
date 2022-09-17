@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using Cinemachine;
+using MPack;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -47,6 +48,10 @@ public class PlayerAnimation : MonoBehaviour
     private Transform bow;
     [SerializeField]
     private Quaternion bowRotationOffset;
+
+    [Header("Others")]
+    [SerializeField]
+    private FloatReference drawBowSlowDown;
 
     [Header("Editor only")]
     [SerializeField]
@@ -155,6 +160,7 @@ public class PlayerAnimation : MonoBehaviour
         _drawBow = true;
         _prepareArrowTransform = behaviour.PreparedArrow.transform;
         animator.SetBool(_drawingBowKey, true);
+        animator.SetFloat(_walkingKey, drawBowSlowDown.Value);
 
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);
@@ -165,6 +171,7 @@ public class PlayerAnimation : MonoBehaviour
         _drawBow = false;
         _prepareArrowTransform = null;
         animator.SetBool(_drawingBowKey, false);
+        animator.SetFloat(_walkingKey, 1);
 
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);

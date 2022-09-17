@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private float rollSpeed;
     [SerializeField]
     private AnimationCurve rollSpeedCurve;
+    [SerializeField]
+    private FloatReference drawBowSlowDown;
 
     public event System.Action OnJump;
     public event System.Action OnJumpEnd;
@@ -109,7 +111,10 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 acceleration = transform.right * input.MovementAxis.x + transform.forward * input.MovementAxis.y;
 
-            _velocity = acceleration * walkSpeed;
+            if (behaviour.IsDrawingBow)
+                _velocity = acceleration * walkSpeed * drawBowSlowDown.Value;
+            else
+                _velocity = acceleration * walkSpeed;
         }
         else
         {

@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
 
     public event System.Action OnJump;
 
-    public event System.Action OnOutFocus;
+    public event System.Action OnEscap;
 
     public event System.Action OnRoll;
 
@@ -40,7 +40,7 @@ public class PlayerInput : MonoBehaviour
 
         _scheme.Player.Jump.performed += OnJumpPerformed;
 
-        _scheme.Player.OutFocus.performed += OnOutFocusPerformed;
+        _scheme.Player.Escap.performed += OnOutEscapPerformed;
 
         _scheme.Player.Roll.performed += OnRollPerformed;
     }
@@ -65,7 +65,7 @@ public class PlayerInput : MonoBehaviour
 
     void OnJumpPerformed(CallbackContext callbackContext) => OnJump?.Invoke();
 
-    void OnOutFocusPerformed(CallbackContext callbackContext) => OnOutFocus?.Invoke();
+    void OnOutEscapPerformed(CallbackContext callbackContext) => OnEscap?.Invoke();
 
     void OnRollPerformed(CallbackContext callbackContext) => OnRoll?.Invoke();
 }
