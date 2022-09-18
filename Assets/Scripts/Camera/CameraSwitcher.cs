@@ -10,7 +10,6 @@ public class CameraSwitcher : MonoBehaviour
 
     public static int RegisterCamera(CameraRole cameraRole)
     {
-        Debug.Log(cameraRole.CameraName);
         for (int i = 0; i < s_cameraNames.Count; i++)
         {
             if (s_cameraNames[i] == cameraRole.CameraName)

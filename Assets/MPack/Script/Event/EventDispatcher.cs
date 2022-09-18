@@ -10,6 +10,7 @@ public class EventDispatcher : MonoBehaviour
 
     public UnityEvent Event;
     public FloatUnityEvent FloatEvent;
+    public IntUnityEvent IntEvent;
 
     void OnEnable()
     {
@@ -22,7 +23,11 @@ public class EventDispatcher : MonoBehaviour
 
     public void DispatchEvent() => Event.Invoke();
     public void DispatchEvent(float floatValue) => FloatEvent.Invoke(floatValue);
+    public void DispatchEvent(int intValue) => IntEvent.Invoke(intValue);
 
     [System.Serializable]
     public class FloatUnityEvent : UnityEvent<float> {}
+
+    [System.Serializable]
+    public class IntUnityEvent : UnityEvent<int> { }
 }

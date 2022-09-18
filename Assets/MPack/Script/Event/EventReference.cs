@@ -10,6 +10,7 @@ public class EventReference : ScriptableObject
 
     public event System.Action InvokeEvents;
     public event System.Action<float> InvokeFloatEvents;
+    public event System.Action<int> InvokeIntEvents;
 
     public void Invoke()
     {
@@ -25,6 +26,14 @@ public class EventReference : ScriptableObject
             eventDispatchers[i].DispatchEvent(floatValue);
 
         InvokeFloatEvents?.Invoke(floatValue);
+    }
+
+    public void Invoke(int intValue)
+    {
+        for (int i = eventDispatchers.Count - 1; i >= 0; i--)
+            eventDispatchers[i].DispatchEvent(intValue);
+
+        InvokeIntEvents?.Invoke(intValue);
     }
 
     public void RegisterEvent(EventDispatcher dispatcher) => eventDispatchers.Add(dispatcher);

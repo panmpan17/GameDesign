@@ -2057,7 +2057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3320,7 +3320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3356,6 +3356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ccfa06b41e945afa22d426a6163f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryChangeEvent: {fileID: 11400000, guid: 99f7d598adae6464e881f9bded09eace, type: 2}
+  itemCountText: {fileID: 1442049542}
 --- !u!1 &647106743
 GameObject:
   m_ObjectHideFlags: 0
@@ -3831,6 +3833,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  IntEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &810369341
 GameObject:
   m_ObjectHideFlags: 0
@@ -4201,7 +4206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4983,7 +4988,6 @@ GameObject:
   - component: {fileID: 1103065489}
   - component: {fileID: 1103065488}
   - component: {fileID: 1103065487}
-  - component: {fileID: 1103065486}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -4991,23 +4995,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1103065486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103065485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1103065487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6044,7 +6031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6101,7 +6088,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
-  m_isRichText: 1
+  m_isRichText: 0
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -6798,6 +6785,7 @@ MonoBehaviour:
     m_Bits: 1280
   pauseEvent: {fileID: 11400000, guid: a4d9e9ff7b3664a2ba30364afecb38e8, type: 2}
   focusEvent: {fileID: 11400000, guid: 6b1e6f134a2df4a15902e25accbbaee4, type: 2}
+  inventoryEvent: {fileID: 11400000, guid: 99f7d598adae6464e881f9bded09eace, type: 2}
 --- !u!114 &1552896135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8346,7 +8334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

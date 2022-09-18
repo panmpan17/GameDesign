@@ -7,6 +7,8 @@ public class SimpleSlime : MonoBehaviour
 {
     [SerializeField]
     private new Rigidbody rigidbody;
+    [SerializeField]
+    private Animator animator;
 
     [SerializeField]
     private float rotateSpeed;
@@ -44,6 +46,10 @@ public class SimpleSlime : MonoBehaviour
     private BulletTrigger bulletTrigger;
     [SerializeField]
     private bool shootWhenLand;
+
+    [Header("Other")]
+    [SerializeField]
+    private LootTable lootTable;
 
     private SlimeState _state;
     private enum SlimeState { Idle, WaitJump, Jump, Land }
@@ -88,6 +94,8 @@ public class SimpleSlime : MonoBehaviour
                     _jumpWaitTimer.TargetTime = jumpWaitTimeRange.PickRandomNumber();
 
                     _state = SlimeState.Jump;
+
+                    animator.SetTrigger("Jump");
                 }
                 break;
 
@@ -136,7 +144,25 @@ public class SimpleSlime : MonoBehaviour
             arrows[i].gameObject.SetActive(false);
         }
 
+        if (lootTable)
+            SpawnLootTable();
+
         Destroy(gameObject);
+    }
+
+    void SpawnLootTable()
+    {
+        for (int i = 0; i < lootTable.LootRules.Length; i++)
+        {
+            LootTable.LootRule lootRule = lootTable.LootRules[i];
+
+            if (Random.value < lootRule.Chance)
+            {
+                DroppedItem item = DroppedItem.Pool.Get();
+                item.transform.position = transform.position;
+                item.Setup(lootRule.Type);
+            }
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -144,7 +170,9 @@ public class SimpleSlime : MonoBehaviour
         if (_state == SlimeState.Land && collision.gameObject.layer == groundLayer)
         {
             _state = IsTargetInView() ? SlimeState.WaitJump : SlimeState.Idle;
-            
+
+            animator.SetTrigger("Land");
+
             if (shootWhenLand)
             {
                 bulletTrigger.Trigger();

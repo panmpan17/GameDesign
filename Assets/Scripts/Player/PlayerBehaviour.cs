@@ -41,6 +41,11 @@ public class PlayerBehaviour : MonoBehaviour
     private EventReference pauseEvent;
     [SerializeField]
     private EventReference focusEvent;
+    
+    [Header("Inventory")]
+    [SerializeField]
+    private EventReference inventoryEvent;
+    private int _itemCount;
 
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
@@ -173,6 +178,12 @@ public class PlayerBehaviour : MonoBehaviour
     {
         CursorFocued = true;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void AddItem(ItemType itemType)
+    {
+        _itemCount += 1;
+        inventoryEvent.Invoke(_itemCount);
     }
 
     void OnDestroy()
