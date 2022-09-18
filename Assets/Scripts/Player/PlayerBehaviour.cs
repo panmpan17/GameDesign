@@ -67,7 +67,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         focusEvent.InvokeEvents += FocusCursor;
 
-        _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walking");
+        _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walk");
         _aimCameraIndex = CameraSwitcher.GetCameraIndex("Aim");
 
         arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");

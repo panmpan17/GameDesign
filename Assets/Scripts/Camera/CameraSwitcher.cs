@@ -10,6 +10,7 @@ public class CameraSwitcher : MonoBehaviour
 
     public static int RegisterCamera(CameraRole cameraRole)
     {
+        Debug.Log(cameraRole.CameraName);
         for (int i = 0; i < s_cameraNames.Count; i++)
         {
             if (s_cameraNames[i] == cameraRole.CameraName)
@@ -41,6 +42,8 @@ public class CameraSwitcher : MonoBehaviour
 
     [SerializeField]
     private CameraRole startCamera;
+    [SerializeField]
+    private string startCameraName;
     private int _currentIndex;
 
 
@@ -51,8 +54,16 @@ public class CameraSwitcher : MonoBehaviour
 
     void Start()
     {
-        _currentIndex = GetCameraIndex(startCamera.name);
-        startCamera.Enable();
+        if (startCamera)
+        {
+            _currentIndex = GetCameraIndex(startCamera.name);
+            startCamera.Enable();
+        }
+        else
+        {
+            _currentIndex = GetCameraIndex(startCameraName);
+            s_cameras[_currentIndex].Enable();
+        }
     }
 
     public void SwitchTo(string cameraName)

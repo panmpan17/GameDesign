@@ -11,7 +11,7 @@ public class PlayerAnimation : MonoBehaviour
     private const string AnimKeyJump = "Jump";
     private const string AnimKeyEndJump = "EndJump";
     private const string AnimKeyDrawingBow = "DrawingBow";
-    private const string AnimKeyWalkSpeed = "WalkSpeed";
+    private const string AnimKeyWalkSpeed = "WalkingSpeed";
     private const string AnimKeyRoll = "Roll";
     
     [SerializeField]
@@ -160,7 +160,7 @@ public class PlayerAnimation : MonoBehaviour
         _drawBow = true;
         _prepareArrowTransform = behaviour.PreparedArrow.transform;
         animator.SetBool(_drawingBowKey, true);
-        animator.SetFloat(_walkingKey, drawBowSlowDown.Value);
+        animator.SetFloat(_walkingSpeedKey, drawBowSlowDown.Value);
 
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);
@@ -171,7 +171,7 @@ public class PlayerAnimation : MonoBehaviour
         _drawBow = false;
         _prepareArrowTransform = null;
         animator.SetBool(_drawingBowKey, false);
-        animator.SetFloat(_walkingKey, 1);
+        animator.SetFloat(_walkingSpeedKey, 1);
 
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);

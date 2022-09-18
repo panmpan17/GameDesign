@@ -35,7 +35,10 @@ public class BaseBullet : MonoBehaviour, IPoolableObj
     void OnTriggerEnter(Collider collider)
     {
         if (!collider.CompareTag(PlayerBehaviour.Tag))
+        {
+            BulletBillboards.ins.PutBullet(this);
             return;
+        }
 
         var playerBehaviour = collider.GetComponent<PlayerBehaviour>();
 

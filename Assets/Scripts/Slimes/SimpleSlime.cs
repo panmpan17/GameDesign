@@ -146,7 +146,10 @@ public class SimpleSlime : MonoBehaviour
             _state = IsTargetInView() ? SlimeState.WaitJump : SlimeState.Idle;
             
             if (shootWhenLand)
+            {
                 bulletTrigger.Trigger();
+                bulletTrigger.Invoke("Trigger", 0.2f);
+            }
         }
     }
 }
