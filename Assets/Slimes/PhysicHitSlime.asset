@@ -45,7 +45,7 @@ MonoBehaviour:
   - {fileID: 4547739788932489096}
   - {fileID: -2416710676626021}
   - {fileID: 8295141724381611202}
-  - {fileID: 5701251845254916007}
+  - {fileID: 593553123121153434}
   - {fileID: -7105056377877159192}
 --- !u!114 &-1116465762519608589
 MonoBehaviour:
@@ -87,7 +87,7 @@ MonoBehaviour:
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
-  drawGizmos: 0
+  drawGizmos: 1
   senseRange: 20
   raycastLayers:
     serializedVersion: 2
@@ -118,8 +118,31 @@ MonoBehaviour:
   - {fileID: 5938664393090166391}
   - {fileID: 4547739788932489096}
   - {fileID: 5701251845254916007}
+  - {fileID: 593553123121153434}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &593553123121153434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd83f3d25f754c1ea625f0828343765, type: 3}
+  m_Name: ContactDamage
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: ee8d1d346e4944381bd54bfa71540a0e
+  position: {x: -60.00005, y: 579}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 5701251845254916007}
+  damangeAmount: 10
 --- !u!114 &1559538727858598782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +243,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 5af7b47d8dc5842ce8f75158fcf125ee
-  position: {x: -60, y: 579}
+  position: {x: -59.999966, y: 690.12256}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -240,6 +263,7 @@ MonoBehaviour:
     TargetTime: 0.3
     Running: 0
     ReverseMode: 0
+  grounLayer: 10
 --- !u!114 &5938664393090166391
 MonoBehaviour:
   m_ObjectHideFlags: 0

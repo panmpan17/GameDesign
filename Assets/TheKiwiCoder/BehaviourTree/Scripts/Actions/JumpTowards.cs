@@ -14,6 +14,9 @@ public class JumpTowards : ActionNode
     private AnimationCurveReference jumpForceCurve;
     [SerializeField]
     private Timer jumpTimer;
+    [SerializeField]
+    [Layer]
+    private int grounLayer;
 
     private bool _landing;
     private bool _landed;
@@ -46,7 +49,7 @@ public class JumpTowards : ActionNode
         {
             jumpTimer.Reset();
             _landing = true;
-            context.slimeBehaviour.OnLandEvent += OnLand;
+            context.slimeBehaviour.OnCollisionEnterEvent += OnLand;
         }
 
         Vector3 velocity = Vector3.up * jumpForce * jumpForceCurve.Value.Evaluate(jumpTimer.Progress);
@@ -54,10 +57,13 @@ public class JumpTowards : ActionNode
         context.rigidbody.velocity = velocity;
     }
 
-    void OnLand()
+    void OnLand(Collision collision)
     {
-        context.slimeBehaviour.OnLandEvent -= OnLand;
-        _landed = true;
-        context.animator.SetTrigger("Land");
+        if (collision.gameObject.layer == grounLayer)
+        {
+            context.slimeBehaviour.OnCollisionEnterEvent -= OnLand;
+            _landed = true;
+            context.animator.SetTrigger("Land");
+        }
     }
 }

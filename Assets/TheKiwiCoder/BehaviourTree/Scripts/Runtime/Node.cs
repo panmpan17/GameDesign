@@ -16,7 +16,9 @@ namespace TheKiwiCoder {
         [HideInInspector] public Vector2 position;
         [HideInInspector] public Context context;
         [HideInInspector] public Blackboard blackboard;
+#if UNITY_EDITOR
         [TextArea] public string description;
+#endif
         public bool drawGizmos = false;
 
         public State Update() {
@@ -49,6 +51,7 @@ namespace TheKiwiCoder {
         }
 
         public virtual void OnDrawGizmos() { }
+        public virtual void DrawGizmos(Transform transform) { }
 
         protected abstract void OnStart();
         protected abstract void OnStop();

@@ -30,4 +30,10 @@ public class CheckTargetInEyeSight : ActionNode
     protected override State OnUpdate() {
         return IsTargetInView() ?  State.Success : State.Failure;
     }
+
+    public override void DrawGizmos(Transform transform)
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, senseRange);
+    }
 }

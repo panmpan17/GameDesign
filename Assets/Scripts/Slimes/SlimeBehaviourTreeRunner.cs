@@ -22,7 +22,9 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     [SerializeField]
     private float sinkHeight;
 
-    public event System.Action OnLandEvent;
+    public event System.Action<Collider> OnTriggerEnterEvent;
+    public event System.Action<Collision> OnCollisionEnterEvent;
+    public event System.Action<Collision> OnCollisionExitEvent;
 
     private SlimeCore[] _cores;
 
@@ -131,9 +133,7 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
         return Context.Create(this);
     }
 
-
-    void OnCollisionEnter(Collision collision)
-    {
-        OnLandEvent?.Invoke();
-    }
+    void OnColliderEnter(Collider collider) => OnTriggerEnterEvent?.Invoke(collider);
+    void OnCollisionEnter(Collision collision) => OnCollisionEnterEvent?.Invoke(collision);
+    void OnCollisionExit(Collision collision) => OnCollisionExitEvent?.Invoke(collision);
 }

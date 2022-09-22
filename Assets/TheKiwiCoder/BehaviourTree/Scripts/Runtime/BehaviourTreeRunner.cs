@@ -37,7 +37,7 @@ namespace TheKiwiCoder {
 
             BehaviourTree.Traverse(tree.rootNode, (n) => {
                 if (n.drawGizmos) {
-                    n.OnDrawGizmos();
+                    n.DrawGizmos(transform);
                 }
             });
         }
