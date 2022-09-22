@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using MPack;
 
-public class BulletTrigger : MonoBehaviour
+public interface ITriggerFire
+{
+    void TriggerFire();
+}
+
+public class BulletTrigger : MonoBehaviour, ITriggerFire
 {
     [SerializeField]
     private float bulletSpeed;
@@ -11,5 +16,15 @@ public class BulletTrigger : MonoBehaviour
     public void Trigger()
     {
         BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
+    }
+
+    public void TriggerFire()
+    {
+        BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawRay(transform.position, transform.forward);
     }
 }

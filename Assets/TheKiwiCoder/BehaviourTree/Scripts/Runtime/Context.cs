@@ -11,11 +11,22 @@ namespace TheKiwiCoder {
     // Feel free to extend this class 
     public class Context {
         public GameObject gameObject;
+        public Transform transform;
+        public SlimeBehaviourTreeRunner slimeBehaviour;
+        public Animator animator;
 
-        public static Context CreateFromGameObject(GameObject gameObject) {
+        public Rigidbody rigidbody => _rigidobdy == null ? gameObject.GetComponent<Rigidbody>() : _rigidobdy;
+        private Rigidbody _rigidobdy;
+
+        public static Context Create(SlimeBehaviourTreeRunner _slimeBehaviour)
+        {
             // Fetch all commonly used components
-            Context context = new Context();
-            context.gameObject = gameObject;
+            Context context = new Context {
+                gameObject = _slimeBehaviour.gameObject,
+                transform = _slimeBehaviour.transform,
+                slimeBehaviour = _slimeBehaviour,
+                animator = _slimeBehaviour.GetComponentInChildren<Animator>(),
+            };
 
             return context;
         }

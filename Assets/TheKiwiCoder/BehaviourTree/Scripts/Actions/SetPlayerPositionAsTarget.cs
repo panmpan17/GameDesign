@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
-public class ShootTrigger : ActionNode
+public class SetPlayerPositionAsTarget : ActionNode
 {
     protected override void OnStart() {
     }
@@ -12,7 +12,7 @@ public class ShootTrigger : ActionNode
     }
 
     protected override State OnUpdate() {
-        context.slimeBehaviour.TriggerFire();
+        blackboard.TargetPosition = context.slimeBehaviour.PlayerTarget.position;
         return State.Success;
     }
 }

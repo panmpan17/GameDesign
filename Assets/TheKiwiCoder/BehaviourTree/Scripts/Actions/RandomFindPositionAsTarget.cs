@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
-public class ShootTrigger : ActionNode
+public class RandomFindPositionAsTarget : ActionNode
 {
     protected override void OnStart() {
     }
@@ -12,7 +12,6 @@ public class ShootTrigger : ActionNode
     }
 
     protected override State OnUpdate() {
-        context.slimeBehaviour.TriggerFire();
         return State.Success;
     }
 }

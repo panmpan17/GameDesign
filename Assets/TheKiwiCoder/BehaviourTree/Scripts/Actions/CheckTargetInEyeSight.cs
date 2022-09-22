@@ -5,13 +5,29 @@ using TheKiwiCoder;
 
 public class CheckTargetInEyeSight : ActionNode
 {
+    [SerializeField]
+    private float senseRange;
+    [SerializeField]
+    private LayerMask raycastLayers;
+
     protected override void OnStart() {
     }
 
     protected override void OnStop() {
     }
 
+    bool IsTargetInView()
+    {
+        if ((blackboard.TargetPosition - context.transform.position).sqrMagnitude > senseRange * senseRange)
+            return false;
+
+        if (Physics.Linecast(context.transform.position, blackboard.TargetPosition, raycastLayers))
+            return false;
+
+        return true;
+    }
+
     protected override State OnUpdate() {
-        return State.Success;
+        return IsTargetInView() ?  State.Success : State.Failure;
     }
 }
