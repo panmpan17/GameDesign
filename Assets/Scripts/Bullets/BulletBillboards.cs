@@ -12,14 +12,39 @@ public class BulletBillboards : MonoBehaviour
     [SerializeField]
     private BaseBullet bulletPrefab;
     [SerializeField]
+    private int bulletInitialCount;
     private LimitedPrefabPool<BaseBullet> bulletPrefabPool;
+
+    [SerializeField]
+    private CanonShell canonShellPrefab;
+    [SerializeField]
+    private int canonShellInitialCount;
+    private LimitedPrefabPool<CanonShell> canonShellPrefabPool;
+
+#if UNITY_EDITOR
+    private Transform poolColletionTransform;
+#endif
 
     private Quaternion _faceCameraRotation;
 
     void Awake()
     {
         ins = this;
-        bulletPrefabPool = new LimitedPrefabPool<BaseBullet>(bulletPrefab, 100, true, "Bullets (Collection)");
+        CreatePrefabPool();
+    }
+
+    void CreatePrefabPool()
+    {
+#if UNITY_EDITOR
+        GameObject newObject = new GameObject("BulletBillboards(Pool)");
+        poolColletionTransform = newObject.transform;
+
+        bulletPrefabPool = new LimitedPrefabPool<BaseBullet>(bulletPrefab, bulletInitialCount, collectionTransform: poolColletionTransform);
+        canonShellPrefabPool = new LimitedPrefabPool<CanonShell>(canonShellPrefab, canonShellInitialCount, collectionTransform: poolColletionTransform);
+#else
+        bulletPrefabPool = new LimitedPrefabPool<BaseBullet>(bulletPrefab, 100);
+        canonShellPrefabPool = new LimitedPrefabPool<CanonShell>(canonShellPrefab, canonShellInitialCount, collectionTransform: poolColletionTransform);
+#endif
     }
 
     void LateUpdate()
@@ -33,6 +58,14 @@ public class BulletBillboards : MonoBehaviour
                 bulletPrefabPool.Objects[i].transform.rotation = _faceCameraRotation;
             }
         }
+
+        for (int i = 0; i < canonShellPrefabPool.Actives.Length; i++)
+        {
+            if (canonShellPrefabPool.Actives[i])
+            {
+                canonShellPrefabPool.Objects[i].transform.rotation = _faceCameraRotation;
+            }
+        }
     }
 
     public void FireBullet(Vector3 position, Vector3 velocity)
@@ -42,8 +75,12 @@ public class BulletBillboards : MonoBehaviour
         baseBullet.Shoot(velocity);
     }
 
-    public void PutBullet(BaseBullet bullet)
+    public void FireCanonShell(PhysicSimulate physicSimulate)
     {
-        bulletPrefabPool.Put(bullet);
+        CanonShell shell = canonShellPrefabPool.Get();
+        shell.Setup(physicSimulate);
     }
+
+    public void PutBullet(BaseBullet bullet) => bulletPrefabPool.Put(bullet);
+    public void PutCanonShell(CanonShell canon) => canonShellPrefabPool.Put(canon);
 }

@@ -12,6 +12,9 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     [SerializeField]
     private Transform player;
     public Transform PlayerTarget => player;
+    [SerializeField]
+    private Transform fixedTarget;
+    public Transform FixedTarget => fixedTarget;
 
     [SerializeField]
     private LootTable lootTable;
