@@ -137,21 +137,27 @@ namespace TheKiwiCoder {
 
                 var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
                 foreach (var type in types) {
-                    evt.menu.AppendAction($"[Action]/{type.Name}", (a) => CreateNode(type, nodePosition));
+                    var titleNameAttribute = (NodeTitleNameAttribute)Attribute.GetCustomAttribute(type, typeof(NodeTitleNameAttribute));
+                    string typeName = titleNameAttribute != null ? titleNameAttribute.Title : type.Name;
+                    evt.menu.AppendAction($"[Action]/{typeName}", (a) => CreateNode(type, nodePosition));
                 }
             }
 
             {
                 var types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
                 foreach (var type in types) {
-                    evt.menu.AppendAction($"[Composite]/{type.Name}", (a) => CreateNode(type, nodePosition));
+                    var titleNameAttribute = (NodeTitleNameAttribute)Attribute.GetCustomAttribute(type, typeof(NodeTitleNameAttribute));
+                    string typeName = titleNameAttribute != null ? titleNameAttribute.Title : type.Name;
+                    evt.menu.AppendAction($"[Composite]/{typeName}", (a) => CreateNode(type, nodePosition));
                 }
             }
 
             {
                 var types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
                 foreach (var type in types) {
-                    evt.menu.AppendAction($"[Decorator]/{type.Name}", (a) => CreateNode(type, nodePosition));
+                    var titleNameAttribute = (NodeTitleNameAttribute)Attribute.GetCustomAttribute(type, typeof(NodeTitleNameAttribute));
+                    string typeName = titleNameAttribute != null ? titleNameAttribute.Title : type.Name;
+                    evt.menu.AppendAction($"[Decorator]/{typeName}", (a) => CreateNode(type, nodePosition));
                 }
             }
         }

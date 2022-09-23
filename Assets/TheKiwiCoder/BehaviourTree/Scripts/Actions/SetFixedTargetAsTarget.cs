@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+#if UNITY_EDITOR
+[NodeTitleName("設固定點為目標")]
+#endif
 public class SetFixedTargetAsTarget : ActionNode
 {
     protected override void OnStart() {

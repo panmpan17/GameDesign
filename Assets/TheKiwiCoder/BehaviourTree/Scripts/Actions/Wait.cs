@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheKiwiCoder {
+#if UNITY_EDITOR
+    [NodeTitleName("等待")]
+#endif
     public class Wait : ActionNode {
         public float duration = 1;
         float startTime;

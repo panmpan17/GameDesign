@@ -123,13 +123,19 @@ namespace MPack {
 
         public Transform PoolCollection;
 
-        public LimitedPrefabPool(T prefab, int initialCount, bool createPoolCollection = false, string poolCollectionName = "Pool Collection")
+        public LimitedPrefabPool(T prefab, int initialCount,
+            bool createPoolCollection=false, string poolCollectionName="Pool Collection",
+            Transform collectionTransform=null)
         {
             Prefab = prefab;
             Objects = new T[initialCount];
             Actives = new bool[initialCount];
 
-            if (createPoolCollection)
+            if (collectionTransform != null)
+            {
+                PoolCollection = collectionTransform;
+            }
+            else if (createPoolCollection)
             {
                 GameObject obj = new GameObject(poolCollectionName);
                 PoolCollection = obj.transform;

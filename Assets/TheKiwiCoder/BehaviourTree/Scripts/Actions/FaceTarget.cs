@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+#if UNITY_EDITOR
+[NodeTitleName("面向目標")]
+#endif
 public class FaceTarget : ActionNode
 {
     [SerializeField]

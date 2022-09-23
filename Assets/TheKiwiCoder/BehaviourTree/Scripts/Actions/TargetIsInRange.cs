@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+#if UNITY_EDITOR
+[NodeTitleName("檢查目標在範圍內")]
+#endif
 public class TargetIsInRange : ActionNode
 {
     [SerializeField]

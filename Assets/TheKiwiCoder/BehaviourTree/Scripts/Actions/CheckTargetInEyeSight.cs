@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+#if UNITY_EDITOR
+[NodeTitleName("檢查目標在視線內")]
+#endif
 public class CheckTargetInEyeSight : ActionNode
 {
     [SerializeField]

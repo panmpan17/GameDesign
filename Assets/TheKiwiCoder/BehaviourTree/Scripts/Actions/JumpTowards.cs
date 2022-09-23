@@ -4,6 +4,9 @@ using UnityEngine;
 using TheKiwiCoder;
 using MPack;
 
+#if UNITY_EDITOR
+[NodeTitleName("往前跳")]
+#endif
 public class JumpTowards : ActionNode
 {
     [SerializeField]

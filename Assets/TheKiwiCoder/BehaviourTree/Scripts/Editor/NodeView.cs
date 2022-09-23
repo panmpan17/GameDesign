@@ -18,7 +18,13 @@ namespace TheKiwiCoder {
         public NodeView(Node node) : base(AssetDatabase.GetAssetPath(BehaviourTreeSettings.GetOrCreateSettings().nodeXml)) {
             this.node = node;
             this.node.name = node.GetType().Name;
-            this.title = node.name.Replace("(Clone)", "").Replace("Node", "");
+
+            var titleNameAttribute = (NodeTitleNameAttribute)Attribute.GetCustomAttribute(node.GetType(), typeof(NodeTitleNameAttribute));
+
+            if (titleNameAttribute != null)
+                this.title = titleNameAttribute.Title;
+            else
+                this.title = node.name.Replace("(Clone)", "").Replace("Node", "");
             this.viewDataKey = node.guid;
 
             style.left = node.position.x;
