@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+#if UNITY_EDITOR
+[NodeTitleName("設玩家為目標")]
+#endif
 public class SetPlayerPositionAsTarget : ActionNode
 {
     protected override void OnStart() {

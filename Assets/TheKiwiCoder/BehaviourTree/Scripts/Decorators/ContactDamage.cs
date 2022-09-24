@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+
+#if UNITY_EDITOR
+[NodeTitleName("接觸傷害")]
+#endif
 public class ContactDamage : DecoratorNode
 {
     [SerializeField]

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+
+#if UNITY_EDITOR
+[NodeTitleName("設隨機點為目標")]
+#endif
 public class RandomFindPositionAsTarget : ActionNode
 {
     [SerializeField]

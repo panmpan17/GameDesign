@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheKiwiCoder {
+    #if UNITY_EDITOR
+    [NodeTitleName("永遠失敗")]
+    #endif
     public class Failure : DecoratorNode {
         protected override void OnStart() {
         }

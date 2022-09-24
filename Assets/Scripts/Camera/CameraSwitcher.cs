@@ -40,7 +40,7 @@ public class CameraSwitcher : MonoBehaviour
     public static CameraSwitcher ins;
 
     [SerializeField]
-    private CameraRole startCamera;
+    private TransformPointer player;
     [SerializeField]
     private string startCameraName;
     private int _currentIndex;
@@ -49,20 +49,19 @@ public class CameraSwitcher : MonoBehaviour
     void Awake()
     {
         ins = this;
+
+        CinemachineVirtualCamera[] cameras = GetComponentsInChildren<CinemachineVirtualCamera>(true);
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            if (cameras[i].Follow != null) cameras[i].Follow = player.Target;
+            if (cameras[i].LookAt != null) cameras[i].LookAt = player.Target;
+        }
     }
 
     void Start()
     {
-        if (startCamera)
-        {
-            _currentIndex = GetCameraIndex(startCamera.name);
-            startCamera.Enable();
-        }
-        else
-        {
-            _currentIndex = GetCameraIndex(startCameraName);
-            s_cameras[_currentIndex].Enable();
-        }
+        _currentIndex = GetCameraIndex(startCameraName);
+        s_cameras[_currentIndex].Enable();
     }
 
     public void SwitchTo(string cameraName)

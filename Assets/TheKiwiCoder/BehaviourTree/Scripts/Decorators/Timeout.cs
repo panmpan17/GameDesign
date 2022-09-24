@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheKiwiCoder {
+    #if UNITY_EDITOR
+    [NodeTitleName("時間到停止")]
+    #endif
     public class Timeout : DecoratorNode {
         public float duration = 1.0f;
         float startTime;

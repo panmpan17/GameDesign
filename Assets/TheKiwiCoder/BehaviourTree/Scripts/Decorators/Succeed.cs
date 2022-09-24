@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheKiwiCoder {
+    #if UNITY_EDITOR
+    [NodeTitleName("總是成功")]
+    #endif
     public class Succeed : DecoratorNode {
         protected override void OnStart() {
         }

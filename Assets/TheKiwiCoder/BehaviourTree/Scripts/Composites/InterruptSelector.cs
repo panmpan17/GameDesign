@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheKiwiCoder {
+    #if UNITY_EDITOR
+    [NodeTitleName("打斷選擇器")]
+    #endif
     public class InterruptSelector : Selector {
         protected override State OnUpdate() {
             int previous = current;

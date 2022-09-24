@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private SmartGroundDetect smartGroundDetect;
     [SerializeField]
     private Transform followTarget;
+    [SerializeField]
+    private TransformPointer followTargetPointer;
 
     [Header("Paramater")]
     [SerializeField]
@@ -73,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
 
         waitJumpTimer.Running = false;
         waitRollTimer.Running = false;
+
+        followTargetPointer.Target = followTarget;
     }
 
     void Update()

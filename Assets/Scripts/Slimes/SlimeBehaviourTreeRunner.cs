@@ -10,8 +10,8 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     private ITriggerFire[] triggerFires;
 
     [SerializeField]
-    private Transform player;
-    public Transform PlayerTarget => player;
+    private TransformPointer player;
+    public Transform PlayerTarget => player.Target;
     [SerializeField]
     private Transform fixedTarget;
     public Transform FixedTarget => fixedTarget;
