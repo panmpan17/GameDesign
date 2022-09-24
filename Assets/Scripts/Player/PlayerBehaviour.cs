@@ -47,6 +47,12 @@ public class PlayerBehaviour : MonoBehaviour
     private EventReference inventoryEvent;
     private int _itemCount;
 
+#if UNITY_EDITOR
+    [Header("Editor Only")]
+    [SerializeField]
+    private bool focusCursorWhenPointerDown;
+#endif
+
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
 
@@ -66,7 +72,7 @@ public class PlayerBehaviour : MonoBehaviour
         input.OnAimDown += OnAimDown;
         input.OnAimUp += OnAimUp;
 
-        movement.OnRoll += OnRoll;
+        movement.OnRollEvent += OnRoll;
 
         input.OnEscap += OnEscap;
 
@@ -105,7 +111,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (!CursorFocued)
         {
-            // FocusCursor();
+#if UNITY_EDITOR
+            if (focusCursorWhenPointerDown)
+                FocusCursor();
+#endif
             return;
         }
 

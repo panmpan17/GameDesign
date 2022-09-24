@@ -9,10 +9,12 @@ namespace MPack {
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            EditorGUI.BeginProperty(position, label, property);
             position.width = position.width / 2 - 5;
             EditorGUI.LabelField(position, label);
             position.x += position.width + 2;
             EditorGUI.PropertyField(position, property.FindPropertyRelative("TargetTime"), GUIContent.none);
+            EditorGUI.EndProperty();
         }
     }
 
@@ -21,10 +23,12 @@ namespace MPack {
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            EditorGUI.BeginProperty(position, label, property);
             position.width = position.width / 2 - 5;
             EditorGUI.LabelField(position, label);
             position.x += position.width + 2;
             EditorGUI.PropertyField(position, property.FindPropertyRelative("TargetTime"), GUIContent.none);
+            EditorGUI.EndProperty();
         }
     }
 }

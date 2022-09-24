@@ -47,12 +47,14 @@ namespace MPack
             rest.width *= 0.6f;
             rest.x += labelRect.width + 20 + 5;
 
+            EditorGUI.BeginProperty(position, label, property);
             EditorGUI.LabelField(labelRect, label);
             EditorGUI.LabelField(settingIconRect, settingIcon);
 
             // serializedObject.Update();
 
             DrawValue(rest);
+            EditorGUI.EndProperty();
 
             HandleContextnMenu(settingIconRect);
             // serializedObject.ApplyModifiedProperties();

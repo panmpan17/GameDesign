@@ -28,21 +28,29 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float walkSpeed;
     [SerializeField]
+    private FloatReference drawBowSlowDown;
+
+    [Header("Jump")]
+    [SerializeField]
     private float jumpForce;
     [SerializeField]
     private Timer waitJumpTimer;
+
+    [Header("Roll")]
     [SerializeField]
     private float rollSpeed;
     [SerializeField]
     private AnimationCurve rollSpeedCurve;
     [SerializeField]
-    private FloatReference drawBowSlowDown;
+    private Timer waitRollTimer;
 
-    public event System.Action OnJump;
-    public event System.Action OnJumpEnd;
 
-    public event System.Action OnRoll;
-    public event System.Action OnRollEnd;
+    public event System.Action OnJumpEvent;
+    public event System.Action OnJumpEndEvent;
+    public event System.Action OnRejumpEvent;
+
+    public event System.Action OnRollEvent;
+    public event System.Action OnRollEndEvent;
 
     private Vector3 _velocity = Vector3.zero;
     private float _yVelocity = 0;
@@ -60,8 +68,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        input.OnJump += Jump;
-        input.OnRoll += Roll;
+        input.OnJump += OnJump;
+        input.OnRoll += OnRoll;
+
+        waitJumpTimer.Running = false;
+        waitRollTimer.Running = false;
     }
 
     void Update()
@@ -73,6 +84,12 @@ public class PlayerMovement : MonoBehaviour
             HandleAimRotation();
             HandleWalking();
         }
+
+        if (waitJumpTimer.Running)
+            waitJumpTimer.Running = !waitJumpTimer.UpdateEnd;
+        if (waitRollTimer.Running)
+            waitRollTimer.Running = !waitRollTimer.UpdateEnd;
+
         HandlePhysic();
     }
 
@@ -134,37 +151,50 @@ public class PlayerMovement : MonoBehaviour
         {
             _rolling = false;
             FaceWithFollowTarget();
-            OnRollEnd?.Invoke();
+            OnRollEndEvent?.Invoke();
+
+            if (waitJumpTimer.Running) Jump();
+            if (waitRollTimer.Running) Roll();
         }
     }
 
     void HandlePhysic()
     {
         if (smartGroundDetect.IsGrounded)
-        {
-            if (_jumping)
-            {
-                if (_liftFromGround)
-                {
-                    _jumping = false;
-                    OnJumpEnd?.Invoke();
-                }
-            }
-            else
-                _yVelocity = 0;
-        }
+            HandleGroundedPhysic();
         else
         {
             _yVelocity += Physics.gravity.y * Time.deltaTime;
 
-            if (_jumping && !_liftFromGround)
-            {
-                _liftFromGround = true;
-            }
+            if (_jumping && !_liftFromGround) _liftFromGround = true;
         }
 
         _velocity.y = _yVelocity;
         characterController.Move(_velocity * Time.deltaTime);
+    }
+
+    void HandleGroundedPhysic()
+    {
+        if (!_jumping)
+        {
+            _yVelocity = 0;
+            return;
+        }
+
+        if (!_liftFromGround)
+            return;
+
+        if (waitJumpTimer.Running)
+        {
+            Jump();
+            return;
+        }
+
+        _jumping = false;
+        OnJumpEndEvent?.Invoke();
+
+        if (waitRollTimer.Running)
+            Roll();
     }
 
     void FaceWithFollowTarget()
@@ -173,30 +203,53 @@ public class PlayerMovement : MonoBehaviour
         followTarget.localEulerAngles = new Vector3(followTarget.transform.localEulerAngles.x, 0, 0);
     }
 
-    void Jump()
+    void OnJump()
     {
-        if (_jumping || !smartGroundDetect.IsGrounded)
+        if (!behaviour.CursorFocued)
+            return;
+        if (_rolling || _jumping || !smartGroundDetect.IsGrounded)
         {
+            waitRollTimer.Running = false;
             waitJumpTimer.Reset();
             return;
         }
-        
-        _jumping = true;
+
+        Jump();
+    }
+
+    void Jump()
+    {
         _liftFromGround = false;
         _yVelocity = jumpForce;
 
-        OnJump?.Invoke();
+        if (_jumping)
+        {
+            OnRejumpEvent?.Invoke();
+        }
+        else
+        {
+            _jumping = true;
+            OnJumpEvent?.Invoke();
+        }
+    }
+
+    void OnRoll()
+    {
+        if (!behaviour.CursorFocued)
+            return;
+        if (_rolling || _jumping || !smartGroundDetect.IsGrounded)
+        {
+
+            waitJumpTimer.Running = false;
+            waitRollTimer.Reset();
+            return;
+        }
+
+        Roll();
     }
 
     void Roll()
     {
-        if (!behaviour.CursorFocued)
-            return;
-        if (_jumping || !smartGroundDetect.IsGrounded)
-            return;
-        if (_rolling)
-            return;
-
         _rolling = true;
         if (input.MovementAxis.sqrMagnitude < 0.01f)
         {
@@ -213,9 +266,8 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(_rollDirection, Vector3.up);
 
             followTarget.rotation = previousRotation;
-            // followTarget.localEulerAngles = new Vector3(followTarget.transform.localEulerAngles.x, 0, 0);
         }
 
-        OnRoll?.Invoke();
+        OnRollEvent?.Invoke();
     }
 }

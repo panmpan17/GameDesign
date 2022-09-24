@@ -12,38 +12,48 @@ public class BulletBillboards : MonoBehaviour
     [SerializeField]
     private BaseBullet bulletPrefab;
     [SerializeField]
+    private int bulletInitialCount;
     private LimitedPrefabPool<BaseBullet> bulletPrefabPool;
 
+    [SerializeField]
+    private CanonShell canonShellPrefab;
+    [SerializeField]
+    private int canonShellInitialCount;
+    private LimitedPrefabPool<CanonShell> canonShellPrefabPool;
+
+    [SerializeField]
+    private BulletType[] bulletTypes;
+
     private Quaternion _faceCameraRotation;
+    public Quaternion FaceCameraRotation => _faceCameraRotation;
 
     void Awake()
     {
         ins = this;
-        bulletPrefabPool = new LimitedPrefabPool<BaseBullet>(bulletPrefab, 100, true, "Bullets (Collection)");
+        CreatePrefabPool();
+    }
+
+    void CreatePrefabPool()
+    {
+#if UNITY_EDITOR
+        for (int i = 0; i < bulletTypes.Length; i++)
+            bulletTypes[i].InstaintiatePrefabPool(new GameObject("BulletBillboards(Pool)").transform);
+#else
+        for (int i = 0; i < bulletTypes.Length; i++)
+            bulletTypes[i].InstaintiatePrefabPool(null);
+#endif
     }
 
     void LateUpdate()
     {
         _faceCameraRotation = mainCameraTransform.rotation;
 
-        for (int i = 0; i < bulletPrefabPool.Actives.Length; i++)
+        for (int i = 0; i < bulletTypes.Length; i++)
         {
-            if (bulletPrefabPool.Actives[i])
+            if (bulletTypes[i].UseBillboardRotate)
             {
-                bulletPrefabPool.Objects[i].transform.rotation = _faceCameraRotation;
+                bulletTypes[i].SetBillboardRotation(_faceCameraRotation);
             }
         }
-    }
-
-    public void FireBullet(Vector3 position, Vector3 velocity)
-    {
-        BaseBullet baseBullet = bulletPrefabPool.Get();
-        baseBullet.transform.SetPositionAndRotation(position, _faceCameraRotation);
-        baseBullet.Shoot(velocity);
-    }
-
-    public void PutBullet(BaseBullet bullet)
-    {
-        bulletPrefabPool.Put(bullet);
     }
 }
