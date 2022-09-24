@@ -41,6 +41,8 @@ public class PlayerBehaviour : MonoBehaviour
     private EventReference pauseEvent;
     [SerializeField]
     private EventReference focusEvent;
+    [SerializeField]
+    private TransformPointer transformPointer;
     
     [Header("Inventory")]
     [SerializeField]
@@ -82,6 +84,9 @@ public class PlayerBehaviour : MonoBehaviour
         _aimCameraIndex = CameraSwitcher.GetCameraIndex("Aim");
 
         arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");
+
+        mainCamera = mainCamera == null ? Camera.main : mainCamera;
+        transformPointer.Target = transform;
     }
 
     void Start()
