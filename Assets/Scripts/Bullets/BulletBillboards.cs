@@ -31,6 +31,8 @@ public class BulletBillboards : MonoBehaviour
     {
         ins = this;
         CreatePrefabPool();
+
+        if (mainCameraTransform == null) mainCameraTransform = Camera.main.transform;
     }
 
     void CreatePrefabPool()
