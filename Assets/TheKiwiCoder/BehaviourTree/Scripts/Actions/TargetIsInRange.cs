@@ -18,7 +18,8 @@ public class TargetIsInRange : ActionNode
     }
 
     protected override State OnUpdate() {
-        bool inRange = (blackboard.TargetPosition - context.transform.position).sqrMagnitude < radius * radius;
+        Vector3 delta = blackboard.TargetPosition - context.transform.position;
+        bool inRange = (delta.x * delta.x + delta.z * delta.z) < radius * radius;
         return inRange ? State.Success : State.Failure;
     }
 
