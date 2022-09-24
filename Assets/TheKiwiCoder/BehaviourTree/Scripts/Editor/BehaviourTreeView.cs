@@ -160,6 +160,11 @@ namespace TheKiwiCoder {
                     evt.menu.AppendAction($"[Decorator]/{typeName}", (a) => CreateNode(type, nodePosition));
                 }
             }
+
+            {
+                evt.menu.AppendAction("[Function]/呼叫 Function", (a) => CreateNode(typeof(CallFunctionNode), nodePosition));
+                evt.menu.AppendAction("[Function]/定義新 Function", (a) => CreateNode(typeof(DefineFunctionNode), nodePosition));
+            }
         }
 
         void SelectFolder(string path) {

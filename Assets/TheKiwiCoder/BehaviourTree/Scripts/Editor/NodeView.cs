@@ -20,11 +20,20 @@ namespace TheKiwiCoder {
             this.node.name = node.GetType().Name;
 
             var titleNameAttribute = (NodeTitleNameAttribute)Attribute.GetCustomAttribute(node.GetType(), typeof(NodeTitleNameAttribute));
-
             if (titleNameAttribute != null)
                 this.title = titleNameAttribute.Title;
             else
                 this.title = node.name.Replace("(Clone)", "").Replace("Node", "");
+
+            if (node is DefineFunctionNode)
+            {
+                this.title += $"\n{((DefineFunctionNode)node).FunctionName}";
+            }
+            else if (node is CallFunctionNode)
+            {
+                this.title += $"\n{((CallFunctionNode)node).FunctionName}";
+            }
+
             this.viewDataKey = node.guid;
 
             style.left = node.position.x;
@@ -51,6 +60,10 @@ namespace TheKiwiCoder {
                 AddToClassList("decorator");
             } else if (node is RootNode) {
                 AddToClassList("root");
+            } else if (node is DefineFunctionNode) {
+                AddToClassList("function");
+            } else if (node is CallFunctionNode) {
+                AddToClassList("function");
             }
         }
 
@@ -63,6 +76,10 @@ namespace TheKiwiCoder {
                 input = new NodePort(Direction.Input, Port.Capacity.Single);
             } else if (node is RootNode) {
 
+            } else if (node is DefineFunctionNode) {
+
+            } else if (node is CallFunctionNode) {
+                input = new NodePort(Direction.Input, Port.Capacity.Single);
             }
 
             if (input != null) {
@@ -81,6 +98,10 @@ namespace TheKiwiCoder {
                 output = new NodePort(Direction.Output, Port.Capacity.Single);
             } else if (node is RootNode) {
                 output = new NodePort(Direction.Output, Port.Capacity.Single);
+            } else if (node is DefineFunctionNode) {
+                output = new NodePort(Direction.Output, Port.Capacity.Single);
+            } else if (node is CallFunctionNode) {
+
             }
 
             if (output != null) {
