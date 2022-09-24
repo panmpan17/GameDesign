@@ -12,15 +12,23 @@ public class BulletTrigger : MonoBehaviour, ITriggerFire
 {
     [SerializeField]
     private float bulletSpeed;
+    [SerializeField]
+    private BulletType bulletType;
 
     public void Trigger()
     {
-        BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
+        var bullet = bulletType.Pool.Get();
+        bullet.transform.SetPositionAndRotation(transform.position, BulletBillboards.ins.FaceCameraRotation);
+        bullet.Shoot(transform.forward * bulletSpeed);
+        // BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
     }
 
     public void TriggerFire()
     {
-        BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
+        var bullet = bulletType.Pool.Get();
+        bullet.transform.SetPositionAndRotation(transform.position, BulletBillboards.ins.FaceCameraRotation);
+        bullet.Shoot(transform.forward * bulletSpeed);
+        // BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
     }
 
     void OnDrawGizmosSelected()

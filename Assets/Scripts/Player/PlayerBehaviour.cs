@@ -72,7 +72,7 @@ public class PlayerBehaviour : MonoBehaviour
         input.OnAimDown += OnAimDown;
         input.OnAimUp += OnAimUp;
 
-        movement.OnRoll += OnRoll;
+        movement.OnRollEvent += OnRoll;
 
         input.OnEscap += OnEscap;
 

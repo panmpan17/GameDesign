@@ -21,11 +21,11 @@ public class BulletBillboards : MonoBehaviour
     private int canonShellInitialCount;
     private LimitedPrefabPool<CanonShell> canonShellPrefabPool;
 
-#if UNITY_EDITOR
-    private Transform poolColletionTransform;
-#endif
+    [SerializeField]
+    private BulletType[] bulletTypes;
 
     private Quaternion _faceCameraRotation;
+    public Quaternion FaceCameraRotation => _faceCameraRotation;
 
     void Awake()
     {
@@ -36,14 +36,11 @@ public class BulletBillboards : MonoBehaviour
     void CreatePrefabPool()
     {
 #if UNITY_EDITOR
-        GameObject newObject = new GameObject("BulletBillboards(Pool)");
-        poolColletionTransform = newObject.transform;
-
-        bulletPrefabPool = new LimitedPrefabPool<BaseBullet>(bulletPrefab, bulletInitialCount, collectionTransform: poolColletionTransform);
-        canonShellPrefabPool = new LimitedPrefabPool<CanonShell>(canonShellPrefab, canonShellInitialCount, collectionTransform: poolColletionTransform);
+        for (int i = 0; i < bulletTypes.Length; i++)
+            bulletTypes[i].InstaintiatePrefabPool(new GameObject("BulletBillboards(Pool)").transform);
 #else
-        bulletPrefabPool = new LimitedPrefabPool<BaseBullet>(bulletPrefab, 100);
-        canonShellPrefabPool = new LimitedPrefabPool<CanonShell>(canonShellPrefab, canonShellInitialCount, collectionTransform: poolColletionTransform);
+        for (int i = 0; i < bulletTypes.Length; i++)
+            bulletTypes[i].InstaintiatePrefabPool(null);
 #endif
     }
 
@@ -51,36 +48,12 @@ public class BulletBillboards : MonoBehaviour
     {
         _faceCameraRotation = mainCameraTransform.rotation;
 
-        for (int i = 0; i < bulletPrefabPool.Actives.Length; i++)
+        for (int i = 0; i < bulletTypes.Length; i++)
         {
-            if (bulletPrefabPool.Actives[i])
+            if (bulletTypes[i].UseBillboardRotate)
             {
-                bulletPrefabPool.Objects[i].transform.rotation = _faceCameraRotation;
-            }
-        }
-
-        for (int i = 0; i < canonShellPrefabPool.Actives.Length; i++)
-        {
-            if (canonShellPrefabPool.Actives[i])
-            {
-                canonShellPrefabPool.Objects[i].transform.rotation = _faceCameraRotation;
+                bulletTypes[i].SetBillboardRotation(_faceCameraRotation);
             }
         }
     }
-
-    public void FireBullet(Vector3 position, Vector3 velocity)
-    {
-        BaseBullet baseBullet = bulletPrefabPool.Get();
-        baseBullet.transform.SetPositionAndRotation(position, _faceCameraRotation);
-        baseBullet.Shoot(velocity);
-    }
-
-    public void FireCanonShell(PhysicSimulate physicSimulate)
-    {
-        CanonShell shell = canonShellPrefabPool.Get();
-        shell.Setup(physicSimulate);
-    }
-
-    public void PutBullet(BaseBullet bullet) => bulletPrefabPool.Put(bullet);
-    public void PutCanonShell(CanonShell canon) => canonShellPrefabPool.Put(canon);
 }

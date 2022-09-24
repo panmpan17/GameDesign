@@ -9,6 +9,8 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
     private PhysicSimulate physicSimulate;
     [SerializeField]
     private float startForce;
+    [SerializeField]
+    private BulletType bulletType;
 
     [Header("Gizmos Simulate")]
     [SerializeField]
@@ -19,7 +21,8 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
     public void TriggerFire()
     {
         physicSimulate.SetPositionAndVelocity(transform.position, startForce * transform.forward);
-        BulletBillboards.ins.FireCanonShell(physicSimulate);
+        var canonShell = bulletType.Pool.Get();
+        canonShell.Shoot(physicSimulate);
     }
 
     void OnDrawGizmosSelected()

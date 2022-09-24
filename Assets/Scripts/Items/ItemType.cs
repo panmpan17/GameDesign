@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName="Game/Item Type")]
+[CreateAssetMenu(menuName="Game/物品類型")]
 public class ItemType : ScriptableObject
 {
     public string Name;

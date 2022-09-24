@@ -618,9 +618,13 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: e601110d664924f8e9768b096aa837fe, type: 2}
     UseVariable: 1
   walkSpeed: 6
+  drawBowSlowDown:
+    Constant: 0
+    Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
+    UseVariable: 1
   jumpForce: 5
   waitJumpTimer:
-    TargetTime: 0.3
+    TargetTime: 0.5
     Running: 0
     ReverseMode: 0
   rollSpeed: 10
@@ -657,10 +661,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  drawBowSlowDown:
-    Constant: 0
-    Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
-    UseVariable: 1
+  waitRollTimer:
+    TargetTime: 0.5
+    Running: 0
+    ReverseMode: 0
 --- !u!114 &2787180225705632302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,6 +691,7 @@ MonoBehaviour:
   pauseEvent: {fileID: 11400000, guid: a4d9e9ff7b3664a2ba30364afecb38e8, type: 2}
   focusEvent: {fileID: 11400000, guid: 6b1e6f134a2df4a15902e25accbbaee4, type: 2}
   inventoryEvent: {fileID: 11400000, guid: 99f7d598adae6464e881f9bded09eace, type: 2}
+  focusCursorWhenPointerDown: 0
 --- !u!143 &2787180225705632303
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2070,22 +2075,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2787180224821109791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3057773122955090242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RigLayers:
-  - m_Rig: {fileID: 2787180225006930143}
-    m_Active: 1
-  m_Effectors: []
 --- !u!114 &2787180224821109789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2120,6 +2109,22 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &2787180224821109791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057773122955090242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RigLayers:
+  - m_Rig: {fileID: 2787180225006930143}
+    m_Active: 1
+  m_Effectors: []
 --- !u!4 &3891571532942558231 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8021001004253913084, guid: ec6981a4e1af8436e85fdab4cfba5444, type: 3}

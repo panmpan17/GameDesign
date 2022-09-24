@@ -9,6 +9,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     private const string AnimKeyWalking = "Walking";
     private const string AnimKeyJump = "Jump";
+    private const string AnimKeyRejump = "Rejump";
     private const string AnimKeyEndJump = "EndJump";
     private const string AnimKeyDrawingBow = "DrawingBow";
     private const string AnimKeyWalkSpeed = "WalkingSpeed";
@@ -58,8 +59,11 @@ public class PlayerAnimation : MonoBehaviour
     private LayerMask groundLayers;
 
     private int _walkingKey = 0;
+
     private int _jumpKey = 0;
+    private int _rejumpKey = 0;
     private int _jumpEndKey = 0;
+
     private int _drawingBowKey = 0;
     private int _walkingSpeedKey = 0;
     private int _rollKey = 0;
@@ -78,9 +82,10 @@ public class PlayerAnimation : MonoBehaviour
 
     void Awake()
     {
-        movement.OnJump += OnJump;
-        movement.OnJumpEnd += OnJumpEnd;
-        movement.OnRoll += OnRoll;
+        movement.OnJumpEvent += OnJump;
+        movement.OnJumpEndEvent += OnJumpEnd;
+        movement.OnRejumpEvent += OnRejump;
+        movement.OnRollEvent += OnRoll;
 
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
@@ -93,6 +98,7 @@ public class PlayerAnimation : MonoBehaviour
         _walkingKey = Animator.StringToHash(AnimKeyWalking);
         _jumpKey = Animator.StringToHash(AnimKeyJump);
         _jumpEndKey = Animator.StringToHash(AnimKeyEndJump);
+        _rejumpKey = Animator.StringToHash(AnimKeyRejump);
         _drawingBowKey = Animator.StringToHash(AnimKeyDrawingBow);
         _walkingSpeedKey = Animator.StringToHash(AnimKeyWalkSpeed);
         _rollKey = Animator.StringToHash(AnimKeyRoll);
@@ -124,6 +130,13 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.ResetTrigger(_jumpKey);
         animator.SetTrigger(_jumpEndKey);
+    }
+
+    void OnRejump()
+    {
+        animator.ResetTrigger(_jumpKey);
+        animator.ResetTrigger(_jumpEndKey);
+        animator.SetTrigger(_rejumpKey);
     }
 
     void OnRoll()

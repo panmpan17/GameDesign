@@ -3,22 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using MPack;
 
-public class CanonShell : MonoBehaviour, IPoolableObj
+public class CanonShell : BulletBehaviour
 {
-    public void DeactivateObj(Transform collectionTransform)
-    {
-        gameObject.SetActive(false);
-        transform.SetParent(collectionTransform);
-    }
-    public void Instantiate() {}
-    public void Reinstantiate()
-    {
-        gameObject.SetActive(true);
-        rigidbody.isKinematic = false;
-    }
-
-    [SerializeField]
-    private new Rigidbody rigidbody;
     [SerializeField]
     private float damageAmount;
     [SerializeField]
@@ -28,7 +14,7 @@ public class CanonShell : MonoBehaviour, IPoolableObj
     [SerializeField]
     private float explosionRadius;
 
-    public void Setup(PhysicSimulate physicSimulate)
+    public override void Shoot(PhysicSimulate physicSimulate)
     {
         transform.position = physicSimulate.Position;
         rigidbody.mass = physicSimulate.Mass;
@@ -77,7 +63,14 @@ public class CanonShell : MonoBehaviour, IPoolableObj
             yield return null;
         }
 
-        BulletBillboards.ins.PutCanonShell(this);
+        PutBackToPool();
+    }
+
+
+    public override void Reinstantiate()
+    {
+        base.Reinstantiate();
+        rigidbody.isKinematic = false;
     }
 
     void OnDrawGizmosSelected()

@@ -4,31 +4,19 @@ using UnityEngine;
 using MPack;
 
 
-public class BaseBullet : MonoBehaviour, IPoolableObj
+public class BaseBullet : BulletBehaviour
 {
-    [SerializeField]
-    private new Rigidbody rigidbody;
     [SerializeField]
     private SimpleTimer disapearTimer; 
     [SerializeField]
     private float damage;
-
-    public void DeactivateObj(Transform collectionTransform) {
-        transform.SetParent(collectionTransform);
-        gameObject.SetActive(false);
-    }
-    public void Instantiate() {}
-    public void Reinstantiate() {
-        gameObject.SetActive(true);
-        disapearTimer.Reset();
-    }
 
     void FixedUpdate()
     {
         if (disapearTimer.FixedUpdateEnd)
         {
             disapearTimer.Reset();
-            BulletBillboards.ins.PutBullet(this);
+            PutBackToPool();
         }
     }
 
@@ -36,7 +24,7 @@ public class BaseBullet : MonoBehaviour, IPoolableObj
     {
         if (!collider.CompareTag(PlayerBehaviour.Tag))
         {
-            BulletBillboards.ins.PutBullet(this);
+            PutBackToPool();
             return;
         }
 
@@ -45,12 +33,19 @@ public class BaseBullet : MonoBehaviour, IPoolableObj
         if (playerBehaviour.Movement.IsRolling)
             return;
 
-        BulletBillboards.ins.PutBullet(this);
+        PutBackToPool();
         playerBehaviour.OnDamage(damage);
     }
 
-    public void Shoot(Vector3 velocity)
+    public override void Shoot(Vector3 velocity)
     {
         rigidbody.velocity = velocity;
+    }
+
+
+    public override void Reinstantiate()
+    {
+        base.Reinstantiate();
+        disapearTimer.Reset();
     }
 }
