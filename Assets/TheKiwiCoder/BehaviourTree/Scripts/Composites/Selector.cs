@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheKiwiCoder {
+    #if UNITY_EDITOR
+    [NodeTitleName("選擇器")]
+    #endif
     public class Selector : CompositeNode {
         protected int current;
 

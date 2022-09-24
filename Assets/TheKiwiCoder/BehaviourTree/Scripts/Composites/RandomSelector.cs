@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 namespace TheKiwiCoder {
+    #if UNITY_EDITOR
+    [NodeTitleName("隨機選擇器")]
+    #endif
     public class RandomSelector : CompositeNode {
         protected int current;
 

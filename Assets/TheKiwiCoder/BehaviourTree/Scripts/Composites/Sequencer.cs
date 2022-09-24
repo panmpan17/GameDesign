@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheKiwiCoder {
+    #if UNITY_EDITOR
+    [NodeTitleName("順序執行")]
+    #endif
     public class Sequencer : CompositeNode {
         protected int current;
 

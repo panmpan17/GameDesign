@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheKiwiCoder {
+#if UNITY_EDITOR
+    [NodeTitleName("Inverter 相反器")]
+#endif
     public class Inverter : DecoratorNode {
         protected override void OnStart() {
         }

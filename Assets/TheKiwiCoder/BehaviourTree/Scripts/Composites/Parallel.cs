@@ -4,6 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 namespace TheKiwiCoder {
+    #if UNITY_EDITOR
+    [NodeTitleName("平行")]
+    #endif
     public class Parallel : CompositeNode {
         List<State> childrenLeftToExecute = new List<State>();
 
