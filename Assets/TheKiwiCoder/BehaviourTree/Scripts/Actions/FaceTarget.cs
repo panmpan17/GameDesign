@@ -18,10 +18,7 @@ public class FaceTarget : ActionNode
     }
 
     protected override State OnUpdate() {
-        Quaternion destinationRotation = Quaternion.Euler(
-            0,
-            Quaternion.LookRotation(blackboard.TargetPosition - context.transform.position).eulerAngles.y,
-            0);
+        Quaternion destinationRotation = Quaternion.LookRotation(blackboard.TargetPosition - context.transform.position, context.transform.up);
         destinationRotation = Quaternion.RotateTowards(context.transform.rotation, destinationRotation, rotateSpeed * Time.deltaTime);
         float angleDifference = Quaternion.Angle(context.transform.rotation, destinationRotation);
         context.transform.rotation = destinationRotation;

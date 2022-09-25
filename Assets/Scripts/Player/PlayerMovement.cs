@@ -68,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
     public bool IsWalking => _walking;
     public float AngleLerpValue { get; private set; }
 
+    public bool IsGrounded => characterController.isGrounded || smartGroundDetect.IsGrounded;
+
     void Awake()
     {
         input.OnJump += OnJump;
@@ -164,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandlePhysic()
     {
-        if (smartGroundDetect.IsGrounded)
+        if (IsGrounded)
             HandleGroundedPhysic();
         else
         {
@@ -211,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!behaviour.CursorFocued)
             return;
-        if (_rolling || _jumping || !smartGroundDetect.IsGrounded)
+        if (_rolling || _jumping || !IsGrounded)
         {
             waitRollTimer.Running = false;
             waitJumpTimer.Reset();
@@ -241,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!behaviour.CursorFocued)
             return;
-        if (_rolling || _jumping || !smartGroundDetect.IsGrounded)
+        if (_rolling || _jumping || !IsGrounded)
         {
 
             waitJumpTimer.Running = false;

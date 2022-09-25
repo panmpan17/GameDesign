@@ -1,5 +1,26 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7152383212649494292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
+  m_Name: AlignRotationWIthGround
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d9e7baa1d384f4fcf8e960bcb6ca392b
+  position: {x: 26, y: 829}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &-7105056377877159192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,6 +63,7 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   children:
+  - {fileID: 5629273813768032542}
   - {fileID: 4547739788932489096}
   - {fileID: -2416710676626021}
   - {fileID: 8295141724381611202}
@@ -119,6 +141,9 @@ MonoBehaviour:
   - {fileID: 4547739788932489096}
   - {fileID: 5701251845254916007}
   - {fileID: 593553123121153434}
+  - {fileID: -7152383212649494292}
+  - {fileID: 5629273813768032542}
+  - {fileID: 3553119655091958712}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &593553123121153434
@@ -136,12 +161,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: ee8d1d346e4944381bd54bfa71540a0e
-  position: {x: -60.00005, y: 579}
+  position: {x: -60, y: 579}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  child: {fileID: 5701251845254916007}
+  child: {fileID: 3553119655091958712}
   damangeAmount: 10
 --- !u!114 &1559538727858598782
 MonoBehaviour:
@@ -185,8 +210,34 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   child: {fileID: 5938664393090166391}
+  repeatLimit:
+    Enable: 0
+    Value: 0
   restartOnSuccess: 1
   restartOnFailure: 0
+--- !u!114 &3553119655091958712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: b03d8d888334d4d609587f522fa86caf
+  position: {x: -60, y: 687}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: 5701251845254916007}
+  - {fileID: -7152383212649494292}
 --- !u!114 &3611525666093287271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +279,27 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
+--- !u!114 &5629273813768032542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
+  m_Name: AlignRotationWIthGround
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d96fe22b03bc241c58b1066100a61c43
+  position: {x: -755.5, y: 581.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &5701251845254916007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +315,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 5af7b47d8dc5842ce8f75158fcf125ee
-  position: {x: -59.999966, y: 690.12256}
+  position: {x: -135, y: 829}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
