@@ -50,11 +50,18 @@ public class CameraSwitcher : MonoBehaviour
     {
         ins = this;
 
+        player.OnChange += ChangeCameraTarget;
+        if (player.Target != null)
+            ChangeCameraTarget(player.Target);
+    }
+
+    void ChangeCameraTarget(Transform target)
+    {
         CinemachineVirtualCamera[] cameras = GetComponentsInChildren<CinemachineVirtualCamera>(true);
         for (int i = 0; i < cameras.Length; i++)
         {
-            if (cameras[i].Follow != null) cameras[i].Follow = player.Target;
-            if (cameras[i].LookAt != null) cameras[i].LookAt = player.Target;
+            if (cameras[i].Follow != null) cameras[i].Follow = target;
+            if (cameras[i].LookAt != null) cameras[i].LookAt = target;
         }
     }
 

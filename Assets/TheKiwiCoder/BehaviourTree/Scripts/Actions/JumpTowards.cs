@@ -18,8 +18,7 @@ public class JumpTowards : ActionNode
     [SerializeField]
     private Timer jumpTimer;
     [SerializeField]
-    [Layer]
-    private int grounLayer;
+    private LayerMask grounLayer;
 
     private bool _landing;
     private bool _landed;
@@ -62,7 +61,8 @@ public class JumpTowards : ActionNode
 
     void OnLand(Collision collision)
     {
-        if (collision.gameObject.layer == grounLayer)
+        // if (collision.gameObject.layer ==  grounLayer)
+        if (grounLayer == (grounLayer | (1 << collision.gameObject.layer)))
         {
             context.slimeBehaviour.OnCollisionEnterEvent -= OnLand;
             _landed = true;

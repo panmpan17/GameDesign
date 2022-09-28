@@ -185,6 +185,9 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   child: {fileID: 5938664393090166391}
+  repeatLimit:
+    Enable: 0
+    Value: 0
   restartOnSuccess: 1
   restartOnFailure: 0
 --- !u!114 &3611525666093287271
@@ -263,7 +266,9 @@ MonoBehaviour:
     TargetTime: 0.3
     Running: 0
     ReverseMode: 0
-  grounLayer: 10
+  grounLayer:
+    serializedVersion: 2
+    m_Bits: 1344
 --- !u!114 &5938664393090166391
 MonoBehaviour:
   m_ObjectHideFlags: 0
