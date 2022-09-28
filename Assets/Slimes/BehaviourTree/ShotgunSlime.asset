@@ -42,6 +42,7 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   children:
+  - {fileID: 4498004470902088036}
   - {fileID: 4617880792163116643}
   - {fileID: -2416710676626021}
   - {fileID: 8295141724381611202}
@@ -118,6 +119,7 @@ MonoBehaviour:
   - {fileID: -1116465762519608589}
   - {fileID: 5938664393090166391}
   - {fileID: 4617880792163116643}
+  - {fileID: 4498004470902088036}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1559538727858598782
@@ -208,6 +210,27 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
+--- !u!114 &4498004470902088036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
+  m_Name: AlignRotationWIthGround
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: eaddece30751e48f0b8953a583991ea8
+  position: {x: -768, y: 576.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4617880792163116643
 MonoBehaviour:
   m_ObjectHideFlags: 0
