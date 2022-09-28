@@ -22,18 +22,20 @@ namespace TheKiwiCoder {
         }
 
         public static List<Node> GetChildren(Node parent) {
+            if (parent is CompositeNode composite) {
+                return composite.children;
+            }
+            
             List<Node> children = new List<Node>();
 
             if (parent is DecoratorNode decorator && decorator.child != null) {
                 children.Add(decorator.child);
             }
-
-            if (parent is RootNode rootNode && rootNode.child != null) {
+            else if (parent is RootNode rootNode && rootNode.child != null) {
                 children.Add(rootNode.child);
             }
-
-            if (parent is CompositeNode composite) {
-                return composite.children;
+            else if (parent is DefineFunctionNode defineFunctionNode && defineFunctionNode.child != null) {
+                children.Add(defineFunctionNode.child);
             }
 
             return children;
@@ -46,12 +48,55 @@ namespace TheKiwiCoder {
                 children.ForEach((n) => Traverse(n, visiter));
             }
         }
+        public static void Traverse(BehaviourTree tree, Node node, System.Action<Node> visiter)
+        {
+            if (node)
+            {
+                visiter.Invoke(node);
+                var children = GetChildren(node);
+                children.ForEach((n) => Traverse(tree, n, visiter));
+
+                if (node is CallFunctionNode)
+                {
+                    var callNode = (CallFunctionNode)node;
+                    Node defineNode = FindFunction(tree, callNode.FunctionName);
+                    callNode.SetDefineNode(defineNode);
+
+                    Traverse(tree, defineNode, visiter);
+                }
+            }
+        }
+
+        public static Node FindFunction(BehaviourTree tree, string functionName)
+        {
+            for (int i = 0; i < tree.nodes.Count; i++)
+            {
+                if (tree.nodes[i] is DefineFunctionNode && ((DefineFunctionNode)tree.nodes[i]).FunctionName == functionName)
+                {
+                    return tree.nodes[i];
+                }
+            }
+
+            return null;
+        }
 
         public BehaviourTree Clone() {
             BehaviourTree tree = Instantiate(this);
             tree.rootNode = tree.rootNode.Clone();
             tree.nodes = new List<Node>();
-            Traverse(tree.rootNode, (n) => {
+
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                if (nodes[i] is DefineFunctionNode)
+                {
+                    Node cloneNode = nodes[i].Clone();
+                    Traverse(tree, cloneNode, (n) => {
+                        tree.nodes.Add(n);
+                    });
+                }
+            }
+
+            Traverse(tree, tree.rootNode, (n) => {
                 tree.nodes.Add(n);
             });
 
@@ -59,7 +104,7 @@ namespace TheKiwiCoder {
         }
 
         public void Bind(Context context) {
-            Traverse(rootNode, node => {
+            Traverse(this, rootNode, node => {
                 node.context = context;
                 node.blackboard = blackboard;
             });
@@ -115,6 +160,12 @@ namespace TheKiwiCoder {
                 composite.children.Add(child);
                 EditorUtility.SetDirty(composite);
             }
+
+            if (parent is DefineFunctionNode defineFunction) {
+                Undo.RecordObject(defineFunction, "Behaviour Tree (AddChild)");
+                defineFunction.child = child;
+                EditorUtility.SetDirty(defineFunction);
+            }
         }
 
         public void RemoveChild(Node parent, Node child) {
@@ -134,6 +185,12 @@ namespace TheKiwiCoder {
                 Undo.RecordObject(composite, "Behaviour Tree (RemoveChild)");
                 composite.children.Remove(child);
                 EditorUtility.SetDirty(composite);
+            }
+
+            if (parent is DefineFunctionNode defineFunction) {
+                Undo.RecordObject(defineFunction, "Behaviour Tree (RemoveChild)");
+                defineFunction.child = null;
+                EditorUtility.SetDirty(defineFunction);
             }
         }
 #endif
