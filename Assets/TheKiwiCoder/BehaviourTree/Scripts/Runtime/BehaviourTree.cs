@@ -84,6 +84,18 @@ namespace TheKiwiCoder {
             BehaviourTree tree = Instantiate(this);
             tree.rootNode = tree.rootNode.Clone();
             tree.nodes = new List<Node>();
+
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                if (nodes[i] is DefineFunctionNode)
+                {
+                    Node cloneNode = nodes[i].Clone();
+                    Traverse(tree, cloneNode, (n) => {
+                        tree.nodes.Add(n);
+                    });
+                }
+            }
+
             Traverse(tree, tree.rootNode, (n) => {
                 tree.nodes.Add(n);
             });
