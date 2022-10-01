@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     private float walkSpeed;
     [SerializeField]
     private FloatReference drawBowSlowDown;
+    [SerializeField]
+    private float turnSpeed;
 
     [Header("Jump")]
     [SerializeField]
@@ -130,14 +132,29 @@ public class PlayerMovement : MonoBehaviour
 
         if (_walking)
         {
-            FaceWithFollowTarget();
+            // FaceWithFollowTarget();
 
-            Vector3 acceleration = transform.right * input.MovementAxis.x + transform.forward * input.MovementAxis.y;
+            Vector3 acceleration = followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y;
 
             if (behaviour.IsDrawingBow)
                 _velocity = acceleration * walkSpeed * drawBowSlowDown.Value;
             else
                 _velocity = acceleration * walkSpeed;
+
+
+            if (behaviour.IsDrawingBow)
+            {
+                FaceWithFollowTarget();
+            }
+            else
+            {
+                Quaternion previousRotation = followTarget.rotation;
+                Vector3 faceRotationDelta = acceleration;
+                faceRotationDelta.y = 0;
+                faceRotationDelta.Normalize();
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(faceRotationDelta, Vector3.up), turnSpeed * Time.deltaTime);
+                followTarget.rotation = previousRotation;
+            }
         }
         else
         {
@@ -207,6 +224,12 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, followTarget.transform.eulerAngles.y, 0);
         followTarget.localEulerAngles = new Vector3(followTarget.transform.localEulerAngles.x, 0, 0);
+
+        // Quaternion previousRotation = followTarget.rotation;
+        // transform.rotation = Quaternion.RotateTowards(
+        //     transform.rotation,
+        //     Quaternion.Euler(0, followTarget.transform.eulerAngles.y, 0), turnSpeed * Time.deltaTime);
+        // followTarget.rotation = previousRotation;
     }
 
     void OnJump()
