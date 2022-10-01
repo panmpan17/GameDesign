@@ -173,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
         if (progress >= 1)
         {
             _rolling = false;
-            FaceWithFollowTarget();
+            // FaceWithFollowTarget();
             OnRollEndEvent?.Invoke();
 
             if (waitJumpTimer.Running) Jump();
@@ -291,10 +291,19 @@ public class PlayerMovement : MonoBehaviour
         {
             Quaternion previousRotation = followTarget.rotation;
 
-            _rollDirection = (transform.right * input.MovementAxis.x + transform.forward * input.MovementAxis.y).normalized;
+            Vector3 acceleration = followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y;
+            _rollDirection = (followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y).normalized;
             transform.rotation = Quaternion.LookRotation(_rollDirection, Vector3.up);
 
             followTarget.rotation = previousRotation;
+
+
+            // Quaternion previousRotation = followTarget.rotation;
+            // Vector3 faceRotationDelta = acceleration;
+            // faceRotationDelta.y = 0;
+            // faceRotationDelta.Normalize();
+            // transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(faceRotationDelta, Vector3.up), turnSpeed * Time.deltaTime);
+            // followTarget.rotation = previousRotation;
         }
 
         OnRollEvent?.Invoke();
