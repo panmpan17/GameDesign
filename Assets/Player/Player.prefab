@@ -591,6 +591,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47ef5b294531425ead1d52ca36c3530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookAxisXSensitive:
+    Constant: 0
+    Variable: {fileID: 11400000, guid: 154b5bb03812d4def9bf1e70a5e2aaa6, type: 2}
+    UseVariable: 1
+  lookAxisYSensitive:
+    Constant: 0
+    Variable: {fileID: 11400000, guid: e601110d664924f8e9768b096aa837fe, type: 2}
+    UseVariable: 1
 --- !u!114 &2787180225705632301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,14 +618,6 @@ MonoBehaviour:
   smartGroundDetect: {fileID: 2787180225705632296}
   followTarget: {fileID: 2787180225754473550}
   followTargetPointer: {fileID: 11400000, guid: bc106bd3fae424e6a944b21fe6f0f9d7, type: 2}
-  mouseXSensitive:
-    Constant: 0.7
-    Variable: {fileID: 11400000, guid: 154b5bb03812d4def9bf1e70a5e2aaa6, type: 2}
-    UseVariable: 1
-  mouseYSensitive:
-    Constant: -0.7
-    Variable: {fileID: 11400000, guid: e601110d664924f8e9768b096aa837fe, type: 2}
-    UseVariable: 1
   walkSpeed: 6
   drawBowSlowDown:
     Constant: 0

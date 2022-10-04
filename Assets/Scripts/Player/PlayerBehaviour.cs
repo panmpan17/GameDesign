@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     public const string Tag = "Player";
 
     [Header("Other components")]
-    [SerializeField]
+    // [SerializeField]
     private Camera mainCamera;
     [SerializeField]
     private PlayerInput input;

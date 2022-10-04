@@ -24,7 +24,7 @@ class ExportTerrain : EditorWindow
    int totalCount;
    int progressUpdateInterval = 10000;
  
-   [MenuItem("Terrain/Export To Obj...")]
+   [MenuItem("Game/Terrain/輸出 Obj 檔")]
    static void Init()
    {
       terrain = null;

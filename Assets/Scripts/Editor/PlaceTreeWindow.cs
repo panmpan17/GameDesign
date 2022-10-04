@@ -16,7 +16,7 @@ public class PlaceTreeWindow : EditorWindow
     private float _noiseSize;
     private float _coverage;
 
-    [MenuItem("Terrain/Place Tree")]
+    [MenuItem("Game/Terrain/大量放樹")]
     public static void OpenWindow()
     {
         GetWindow<PlaceTreeWindow>();

@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MPack;
 using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
 public class PlayerInput : MonoBehaviour
 {
-    private InputScheme _scheme;
+    [SerializeField]
+    private FloatReference lookAxisXSensitive;
+    [SerializeField]
+    private FloatReference lookAxisYSensitive;
 
+    private InputScheme _scheme;
 
     public event System.Action OnAimDown;
     public event System.Action OnAimUp;
@@ -57,8 +62,15 @@ public class PlayerInput : MonoBehaviour
     void OnMovePerformed(CallbackContext callbackContext) => MovementAxis = callbackContext.ReadValue<Vector2>();
     void OnMoveCanceled(CallbackContext callbackContext) => MovementAxis = callbackContext.ReadValue<Vector2>();
 
-    void OnLookPerformed(CallbackContext callbackContext) => LookAxis = callbackContext.ReadValue<Vector2>();
-    void OnLookCanceled(CallbackContext callbackContext) => LookAxis = callbackContext.ReadValue<Vector2>();
+    void OnLookPerformed(CallbackContext callbackContext) => LookAxis = ChangeByLookSensitive(callbackContext.ReadValue<Vector2>());
+    void OnLookCanceled(CallbackContext callbackContext) => LookAxis = ChangeByLookSensitive(callbackContext.ReadValue<Vector2>());
+
+    Vector2 ChangeByLookSensitive(Vector2 input)
+    {
+        input.x *= lookAxisXSensitive.Value;
+        input.y *= lookAxisXSensitive.Value;
+        return input;
+    }
 
     void OnAimPerformed(CallbackContext callbackContext) => OnAimDown?.Invoke();
     void OnAimCanceled(CallbackContext callbackContext) => OnAimUp?.Invoke();
