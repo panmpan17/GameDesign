@@ -7,15 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: a928eab95cb99494ca52ceda6ca3f13e, type: 3}
+  m_Name: TreeLeaves
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -78,11 +79,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_1a931d4e0de0489e8c532dc64b1d15e8: 3
-    - Vector1_230749d1e6b24c04b6ee60e7a053014f: 102.6
-    - Vector1_b65e61410f384a1d850780b3ac44af3b: 0.1
-    - Vector1_d858071e4fad425792775f2ec905ab49: 2
-    - Vector1_e55645c730a9432dab04982a90fe96b1: 5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -100,10 +96,9 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -111,14 +106,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_77ace169e2874a149e9bf9b5fccd3bd6: {r: 0.051886797, g: 0.9721518, b: 1, a: 1}
-    - Color_96c6365235934415ba6f34d94c7ad0c0: {r: 0.7294118, g: 2, b: 1.898039, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.15307939, g: 0.754717, b: 0.29256773, a: 1}
+    - _Color: {r: 0.15307936, g: 0.75471693, b: 0.2925677, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3803465601726099869
+--- !u!114 &7632840790187607894
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
