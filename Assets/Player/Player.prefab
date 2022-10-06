@@ -618,7 +618,7 @@ MonoBehaviour:
   smartGroundDetect: {fileID: 2787180225705632296}
   followTarget: {fileID: 2787180225754473550}
   followTargetPointer: {fileID: 11400000, guid: bc106bd3fae424e6a944b21fe6f0f9d7, type: 2}
-  walkSpeed: 6
+  walkSpeed: 8
   drawBowSlowDown:
     Constant: 0
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
@@ -629,7 +629,7 @@ MonoBehaviour:
     TargetTime: 0.5
     Running: 0
     ReverseMode: 0
-  rollSpeed: 10
+  rollSpeed: 11
   rollSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -679,7 +679,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38c70bef9975434a8f30279756fe86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   input: {fileID: 2787180225705632300}
   movement: {fileID: 2787180225705632301}
   animation: {fileID: 2787180224821109789}

@@ -9,6 +9,7 @@ public class ItemTypePropertyDrawer : PropertyDrawer
 {
     static GUIContent[] itemNames;
     static ItemType[] items;
+    static System.DateTime datetime = System.DateTime.Now;
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
@@ -51,7 +52,10 @@ public class ItemTypePropertyDrawer : PropertyDrawer
 
     void FetchItemNames()
     {
-        if (itemNames == null)
+        System.TimeSpan span = System.DateTime.Now.Subtract(datetime);
+        bool forceReload = span.TotalSeconds >= 5;
+
+        if (itemNames == null || forceReload)
         {
             string[] assets = AssetDatabase.FindAssets("t: ItemType");
             itemNames = new GUIContent[assets.Length];
