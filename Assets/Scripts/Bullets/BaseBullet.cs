@@ -30,7 +30,7 @@ public class BaseBullet : BulletBehaviour
 
         var playerBehaviour = collider.GetComponent<PlayerBehaviour>();
 
-        if (playerBehaviour.Movement.IsRolling)
+        if (!playerBehaviour.CanDamage)
             return;
 
         PutBackToPool();

@@ -37,8 +37,12 @@ public class CameraSwitcher : MonoBehaviour
         return s_cameras.Count - 1;
     }
 
+    public static CameraRole GetCamera(int index) => s_cameras[index];
+
     public static CameraSwitcher ins;
 
+    [SerializeField]
+    private CinemachineBrain cinemachineBrain;
     [SerializeField]
     private TransformPointer player;
     [SerializeField]

@@ -57,26 +57,31 @@ public class PlayerBehaviour : MonoBehaviour
 
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
+    public event System.Action OnDeath;
+    public event System.Action OnRevive;
 
     public bool CursorFocued { get; protected set; }
+    public bool IsDrawingBow { get; private set; }
+    public bool IsDead => _handleDeath;
+    public bool CanDamage => !Movement.IsRolling && !_handleDeath;
+    public Arrow PreparedArrow { get; private set; }
 
     private int _walkingCameraIndex;
     private int _aimCameraIndex;
 
-    public bool IsDrawingBow { get; private set; }
-    public Arrow PreparedArrow { get; private set; }
+    private bool _handleDeath = false;
 
     private Ray _currentRay;
     public Vector3 CurrentRayHitPosition { get; private set; }
+
 
     void Awake()
     {
         input.OnAimDown += OnAimDown;
         input.OnAimUp += OnAimUp;
+        input.OnEscap += OnEscap;
 
         movement.OnRollEvent += OnRoll;
-
-        input.OnEscap += OnEscap;
 
         focusEvent.InvokeEvents += FocusCursor;
 
@@ -183,9 +188,31 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnDamage(float amount)
     {
+        if (!CanDamage) return;
+
         _health -= amount;
 
         healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
+
+        if (_health <= 0)
+        {
+            _handleDeath = true;
+            OnDeath?.Invoke();
+        }
+    }
+
+    public void ReviveAtSpawnPoint(Transform spawnPoint)
+    {
+        _handleDeath = false;
+
+        movement.CharacterController.enabled = false;
+        transform.position = spawnPoint.position;
+        movement.CharacterController.enabled = true;
+
+        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
+        CameraSwitcher.GetCamera(_walkingCameraIndex).CancelDamping();
+
+        OnRevive?.Invoke();
     }
 
     public void FocusCursor()

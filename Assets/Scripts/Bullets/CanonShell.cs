@@ -51,7 +51,7 @@ public class CanonShell : BulletBehaviour
 
             var playerBehaviour = hits[0].GetComponent<PlayerBehaviour>();
 
-            if (playerBehaviour.Movement.IsRolling)
+            if (!playerBehaviour.CanDamage)
             {
                 yield return null;
                 continue;

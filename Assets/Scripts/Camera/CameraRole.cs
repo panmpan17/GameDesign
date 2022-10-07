@@ -28,4 +28,20 @@ public class CameraRole : MonoBehaviour
     {
         _camera.enabled = false;
     }
+
+    public void CancelDamping()
+    {
+        StartCoroutine(C_CancelDamping());
+    }
+
+    IEnumerator C_CancelDamping()
+    {
+        // _camera.DetachedLookAtTargetDamp
+
+        var follow = _camera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        Vector3 originalDamping = follow.Damping;
+        follow.Damping = Vector3.zero;
+        yield return null;
+        follow.Damping = originalDamping;
+    }
 }

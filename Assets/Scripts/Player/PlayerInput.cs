@@ -65,11 +65,11 @@ public class PlayerInput : MonoBehaviour
     void OnLookPerformed(CallbackContext callbackContext) => LookAxis = ChangeByLookSensitive(callbackContext.ReadValue<Vector2>());
     void OnLookCanceled(CallbackContext callbackContext) => LookAxis = ChangeByLookSensitive(callbackContext.ReadValue<Vector2>());
 
-    Vector2 ChangeByLookSensitive(Vector2 input)
+    Vector2 ChangeByLookSensitive(Vector2 axis)
     {
-        input.x *= lookAxisXSensitive.Value;
-        input.y *= lookAxisXSensitive.Value;
-        return input;
+        axis.x *= lookAxisXSensitive.Value;
+        axis.y *= lookAxisYSensitive.Value;
+        return axis;
     }
 
     void OnAimPerformed(CallbackContext callbackContext) => OnAimDown?.Invoke();

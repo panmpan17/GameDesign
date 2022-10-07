@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private CharacterController characterController;
+    public CharacterController CharacterController => characterController;
+
     [SerializeField]
     private SmartGroundDetect smartGroundDetect;
     [SerializeField]
@@ -73,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
         input.OnJump += OnJump;
         input.OnRoll += OnRoll;
 
+        behaviour.OnDeath += OnDeath;
+
         waitJumpTimer.Running = false;
         waitRollTimer.Running = false;
 
@@ -122,6 +126,8 @@ public class PlayerMovement : MonoBehaviour
     void HandleWalking()
     {
         if (!behaviour.CursorFocued)
+            return;
+        if (behaviour.IsDead)
             return;
 
         _walking = input.MovementAxis.sqrMagnitude > 0.01f;
@@ -232,6 +238,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!behaviour.CursorFocued)
             return;
+        if (behaviour.IsDead)
+            return;
         if (_rolling || _jumping || !IsGrounded)
         {
             waitRollTimer.Running = false;
@@ -261,6 +269,8 @@ public class PlayerMovement : MonoBehaviour
     void OnRoll()
     {
         if (!behaviour.CursorFocued)
+            return;
+        if (behaviour.IsDead)
             return;
         if (_rolling || _jumping || !IsGrounded)
         {
@@ -292,16 +302,20 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(_rollDirection, Vector3.up);
 
             followTarget.rotation = previousRotation;
-
-
-            // Quaternion previousRotation = followTarget.rotation;
-            // Vector3 faceRotationDelta = acceleration;
-            // faceRotationDelta.y = 0;
-            // faceRotationDelta.Normalize();
-            // transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(faceRotationDelta, Vector3.up), turnSpeed * Time.deltaTime);
-            // followTarget.rotation = previousRotation;
         }
 
         OnRollEvent?.Invoke();
+    }
+
+
+    void OnDeath()
+    {
+        waitJumpTimer.Running = false;
+        waitRollTimer.Running = false;
+        _velocity = Vector3.zero;
+
+        _walking = false;
+        _jumping = false;
+        _liftFromGround = false;
     }
 }

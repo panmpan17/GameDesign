@@ -7,13 +7,16 @@ using MPack;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private const string AnimKeyWalking = "Walking";
-    private const string AnimKeyJump = "Jump";
-    private const string AnimKeyRejump = "Rejump";
-    private const string AnimKeyEndJump = "EndJump";
-    private const string AnimKeyDrawingBow = "DrawingBow";
-    private const string AnimKeyWalkSpeed = "WalkingSpeed";
-    private const string AnimKeyRoll = "Roll";
+    private static readonly int AnimKeyWalking = Animator.StringToHash("Walking");
+    private static readonly int AnimKeyJump = Animator.StringToHash("Jump");
+    private static readonly int AnimKeyRejump = Animator.StringToHash("Rejump");
+    private static readonly int AnimKeyEndJump = Animator.StringToHash("EndJump");
+    private static readonly int AnimKeyDrawingBow = Animator.StringToHash("DrawingBow");
+    private static readonly int AnimKeyWalkSpeed = Animator.StringToHash("WalkingSpeed");
+    private static readonly int AnimKeyRoll = Animator.StringToHash("Roll");
+    private static readonly int AnimKeyDeath = Animator.StringToHash("Death");
+
+    private static readonly int AnimNameIdle = Animator.StringToHash("Idle");
     
     [SerializeField]
     private Animator animator;
@@ -58,16 +61,6 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayers;
 
-    private int _walkingKey = 0;
-
-    private int _jumpKey = 0;
-    private int _rejumpKey = 0;
-    private int _jumpEndKey = 0;
-
-    private int _drawingBowKey = 0;
-    private int _walkingSpeedKey = 0;
-    private int _rollKey = 0;
-
     private bool _walking = false;
 
     private bool _drawBow = false;
@@ -77,7 +70,6 @@ public class PlayerAnimation : MonoBehaviour
 
     public bool IsDrawArrowFullyPlayed => animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1 && !animator.IsInTransition(1);
     public float RollAnimationProgress => animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-    // public bool IsRollFullyPlayed => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && !animator.IsInTransition(1);
 
 
     void Awake()
@@ -89,23 +81,15 @@ public class PlayerAnimation : MonoBehaviour
 
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
-
-        FindAnimatorKey();
-    }
-
-    void FindAnimatorKey()
-    {
-        _walkingKey = Animator.StringToHash(AnimKeyWalking);
-        _jumpKey = Animator.StringToHash(AnimKeyJump);
-        _jumpEndKey = Animator.StringToHash(AnimKeyEndJump);
-        _rejumpKey = Animator.StringToHash(AnimKeyRejump);
-        _drawingBowKey = Animator.StringToHash(AnimKeyDrawingBow);
-        _walkingSpeedKey = Animator.StringToHash(AnimKeyWalkSpeed);
-        _rollKey = Animator.StringToHash(AnimKeyRoll);
+        behaviour.OnDeath += OnDeath;
+        behaviour.OnRevive += OnRevive;
     }
 
     void LateUpdate()
     {
+        if (behaviour.IsDead)
+            return;
+
         if (_drawBow)
         {
             RotateChest();
@@ -116,32 +100,32 @@ public class PlayerAnimation : MonoBehaviour
         if (movement.IsWalking != _walking)
         {
             _walking = movement.IsWalking;
-            animator.SetBool(_walkingKey, _walking);
+            animator.SetBool(AnimKeyWalking, _walking);
         }
     }
 
     void OnJump()
     {
-        animator.ResetTrigger(_jumpEndKey);
-        animator.SetTrigger(_jumpKey);
+        animator.ResetTrigger(AnimKeyEndJump);
+        animator.SetTrigger(AnimKeyJump);
     }
 
     void OnJumpEnd()
     {
-        animator.ResetTrigger(_jumpKey);
-        animator.SetTrigger(_jumpEndKey);
+        animator.ResetTrigger(AnimKeyJump);
+        animator.SetTrigger(AnimKeyEndJump);
     }
 
     void OnRejump()
     {
-        animator.ResetTrigger(_jumpKey);
-        animator.ResetTrigger(_jumpEndKey);
-        animator.SetTrigger(_rejumpKey);
+        animator.ResetTrigger(AnimKeyJump);
+        animator.ResetTrigger(AnimKeyEndJump);
+        animator.SetTrigger(AnimKeyRejump);
     }
 
     void OnRoll()
     {
-        animator.SetTrigger(_rollKey);
+        animator.SetTrigger(AnimKeyRoll);
     }
 
     void RotateChest()
@@ -168,28 +152,50 @@ public class PlayerAnimation : MonoBehaviour
         Debug.DrawRay(drawBowRightHandFinalPosition.position, arrowVector * 15, Color.green, 0.1f);
     }
 
+
+#region Player behaviour event
     void OnDrawBow()
     {
         _drawBow = true;
         _prepareArrowTransform = behaviour.PreparedArrow.transform;
-        animator.SetBool(_drawingBowKey, true);
-        animator.SetFloat(_walkingSpeedKey, drawBowSlowDown.Value);
+        animator.SetBool(AnimKeyDrawingBow, true);
+        animator.SetFloat(AnimKeyWalkSpeed, drawBowSlowDown.Value);
 
-        if (_weightTweenRoutine != null)
-            StopCoroutine(_weightTweenRoutine);
-        _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
+        // if (_weightTweenRoutine != null)
+        //     StopCoroutine(_weightTweenRoutine);
+        // _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
     }
+
     void OnDrawBowEnd()
     {
         _drawBow = false;
         _prepareArrowTransform = null;
-        animator.SetBool(_drawingBowKey, false);
-        animator.SetFloat(_walkingSpeedKey, 1);
+        animator.SetBool(AnimKeyDrawingBow, false);
+        animator.SetFloat(AnimKeyWalkSpeed, 1);
 
-        if (_weightTweenRoutine != null)
-            StopCoroutine(_weightTweenRoutine);
-        _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
+        // if (_weightTweenRoutine != null)
+        //     StopCoroutine(_weightTweenRoutine);
+        // _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
     }
+
+    void OnDeath()
+    {
+        animator.ResetTrigger(AnimKeyJump);
+        animator.ResetTrigger(AnimKeyRejump);
+        animator.ResetTrigger(AnimKeyEndJump);
+        animator.ResetTrigger(AnimKeyRoll);
+        animator.SetBool(AnimKeyWalking, false);
+        animator.SetBool(AnimKeyDrawingBow, false);
+
+        animator.SetTrigger(AnimKeyDeath);
+    }
+
+    void OnRevive()
+    {
+        animator.Play(AnimNameIdle);
+    }
+#endregion
+
 
     IEnumerator TweenRigWeight(float fromWeight, float toWeight, float duration)
     {
