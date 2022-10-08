@@ -161,9 +161,9 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool(AnimKeyDrawingBow, true);
         animator.SetFloat(AnimKeyWalkSpeed, drawBowSlowDown.Value);
 
-        // if (_weightTweenRoutine != null)
-        //     StopCoroutine(_weightTweenRoutine);
-        // _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
+        if (_weightTweenRoutine != null)
+            StopCoroutine(_weightTweenRoutine);
+        _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
     }
 
     void OnDrawBowEnd()
@@ -173,9 +173,9 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool(AnimKeyDrawingBow, false);
         animator.SetFloat(AnimKeyWalkSpeed, 1);
 
-        // if (_weightTweenRoutine != null)
-        //     StopCoroutine(_weightTweenRoutine);
-        // _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
+        if (_weightTweenRoutine != null)
+            StopCoroutine(_weightTweenRoutine);
+        _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
     }
 
     void OnDeath()

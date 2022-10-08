@@ -11,12 +11,12 @@ public class PlayerBehaviour : MonoBehaviour
     // [SerializeField]
     private Camera mainCamera;
     [SerializeField]
-    private PlayerInput input;
+    private InputInterface input;
     [SerializeField]
     private PlayerMovement movement;
     [SerializeField]
     private new PlayerAnimation animation;
-    public PlayerInput Input => input;
+    public InputInterface Input => input;
     public PlayerMovement Movement => movement;
 
     [Header("Health")]
@@ -77,6 +77,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Awake()
     {
+        input = GetComponent<InputInterface>();
         input.OnAimDown += OnAimDown;
         input.OnAimUp += OnAimUp;
         input.OnEscap += OnEscap;

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Other components")]
     [SerializeField]
-    private PlayerInput input;
+    private InputInterface input;
     [SerializeField]
     private PlayerBehaviour behaviour;
     [SerializeField]
@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        input = GetComponent<InputInterface>();
         input.OnJump += OnJump;
         input.OnRoll += OnRoll;
 
@@ -130,13 +131,12 @@ public class PlayerMovement : MonoBehaviour
         if (behaviour.IsDead)
             return;
 
-        _walking = input.MovementAxis.sqrMagnitude > 0.01f;
+        _walking = input.MovementAxis.x != 0 || input.MovementAxis.y != 0;
 
         if (_walking)
         {
-            // FaceWithFollowTarget();
-
             Vector3 acceleration = followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y;
+            acceleration.y = 0;
 
             if (behaviour.IsDrawingBow)
                 _velocity = acceleration * walkSpeed * drawBowSlowDown.Value;
@@ -151,10 +151,8 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 Quaternion previousRotation = followTarget.rotation;
-                Vector3 faceRotationDelta = acceleration;
-                faceRotationDelta.y = 0;
-                faceRotationDelta.Normalize();
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(faceRotationDelta, Vector3.up), turnSpeed * Time.deltaTime);
+                Quaternion destination = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(acceleration, Vector3.up), turnSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(0, destination.eulerAngles.y, 0);
                 followTarget.rotation = previousRotation;
             }
         }
@@ -180,6 +178,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (waitJumpTimer.Running) Jump();
             if (waitRollTimer.Running) Roll();
+
+            // Debug.Break();
         }
     }
 

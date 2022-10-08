@@ -4,7 +4,23 @@ using UnityEngine;
 using MPack;
 using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
-public class PlayerInput : MonoBehaviour
+public interface InputInterface
+{
+    event System.Action OnAimDown;
+    event System.Action OnAimUp;
+
+    event System.Action OnJump;
+
+    event System.Action OnEscap;
+
+    event System.Action OnRoll;
+
+    Vector2 MovementAxis { get; }
+    Vector2 LookAxis { get; }
+}
+
+
+public class PlayerInput : MonoBehaviour, InputInterface
 {
     [SerializeField]
     private FloatReference lookAxisXSensitive;
