@@ -20,8 +20,10 @@ public class JumpTowards : ActionNode
     [SerializeField]
     private LayerMask grounLayer;
 
-    private bool _landing;
-    private bool _landed;
+    [System.NonSerialized]
+    private bool _landing = false;
+    [System.NonSerialized]
+    private bool _landed = false;
 
     protected override void OnStart()
     {

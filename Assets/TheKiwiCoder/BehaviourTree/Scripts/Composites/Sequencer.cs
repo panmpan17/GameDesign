@@ -7,6 +7,7 @@ namespace TheKiwiCoder {
     [NodeTitleName("順序執行")]
     #endif
     public class Sequencer : CompositeNode {
+        [System.NonSerialized]
         protected int current;
 
         protected override void OnStart() {

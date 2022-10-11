@@ -307,6 +307,22 @@ public class PlayerMovement : MonoBehaviour
         OnRollEvent?.Invoke();
     }
 
+    // public void Freeze()
+    // {
+    //     _freezed = true;
+
+    //     waitJumpTimer.Running = false;
+    //     waitRollTimer.Running = false;
+    //     _velocity = Vector3.zero;
+
+    //     _walking = false;
+    //     _jumping = false;
+    //     _liftFromGround = false;
+    // }
+
+    // public void Unfreeze()
+    // {
+    // }
 
     void OnDeath()
     {

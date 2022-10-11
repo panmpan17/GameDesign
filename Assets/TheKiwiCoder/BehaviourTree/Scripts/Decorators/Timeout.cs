@@ -8,18 +8,20 @@ namespace TheKiwiCoder {
     #endif
     public class Timeout : DecoratorNode {
         public float duration = 1.0f;
+        public bool resultIsSuccess;
         float startTime;
 
         protected override void OnStart() {
-            startTime = Time.time;
+            startTime = 0;
         }
 
         protected override void OnStop() {
         }
 
         protected override State OnUpdate() {
-            if (Time.time - startTime > duration) {
-                return State.Failure;
+            startTime += Time.deltaTime;
+            if (startTime > duration) {
+                return resultIsSuccess ? State.Success : State.Failure;
             }
 
             return child.Update();

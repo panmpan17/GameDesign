@@ -17,6 +17,9 @@ public interface InputInterface
 
     Vector2 MovementAxis { get; }
     Vector2 LookAxis { get; }
+
+    void Enable();
+    void Disable();
 }
 
 
@@ -66,10 +69,12 @@ public class PlayerInput : MonoBehaviour, InputInterface
         _scheme.Player.Roll.performed += OnRollPerformed;
     }
 
+    public void Enable() => enabled = true;
     void OnEnable()
     {
         _scheme.Enable();
     }
+    public void Disable() => enabled = false;
     void OnDisable()
     {
         _scheme.Disable();

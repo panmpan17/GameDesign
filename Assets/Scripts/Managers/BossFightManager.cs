@@ -5,6 +5,8 @@ using UnityEngine;
 public class BossFightManager : MonoBehaviour
 {
     [SerializeField]
+    private PlayerBehaviour player;
+    [SerializeField]
     private PlayerDetection entranceDetect;
     // TODO: Detect when player enter the area
 
@@ -12,6 +14,8 @@ public class BossFightManager : MonoBehaviour
     private GameObject borderWall;
     [SerializeField]
     private GameObject bossSlime;
+    [SerializeField]
+    private EventReference slimeHealthShowEvent;
     // TODO: Set physic wall to block player, avoid palyer get out of the area
     // TODO: Cutscene, able to skip when player is dead or skip all cutscene
     // TODO: Boss entrance, boss health ui
@@ -24,6 +28,7 @@ public class BossFightManager : MonoBehaviour
 
     void Awake()
     {
+        bossSlime.SetActive(false);
         borderWall.SetActive(false);
         entranceDetect.OnPlayerEnter += OnPlayerEnterEntrance;
     }
@@ -38,10 +43,16 @@ public class BossFightManager : MonoBehaviour
 
     IEnumerator Test()
     {
+        bossSlime.SetActive(true);
+        slimeHealthShowEvent.Invoke();
+        yield break;
+
+        player.Input.Disable();
         CameraSwitcher.ins.SwitchTo("BossLand");
         yield return new WaitForSeconds(2f);
         bossSlime.SetActive(true);
         yield return new WaitForSeconds(4f);
+        player.Input.Enable();
         CameraSwitcher.ins.SwitchTo("Walk");
     }
 }

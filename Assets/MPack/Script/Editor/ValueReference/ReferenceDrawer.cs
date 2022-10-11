@@ -14,9 +14,7 @@ namespace MPack
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (useVariableProperty == null)
-                OnEnable(property);
-
+            OnEnable(property);
             return useVariableProperty.boolValue ? 43 : 20;
         }
 

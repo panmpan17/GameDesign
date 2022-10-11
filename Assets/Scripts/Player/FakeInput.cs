@@ -22,6 +22,14 @@ public class FakeInput : MonoBehaviour, InputInterface
     public Vector2 LookAxis { get; private set; }
     private float timer;
 
+    public void Enable() => enabled = true;
+    public void Disable()
+    {
+        enabled = false;
+        MovementAxis = Vector3.zero;
+        LookAxis = Vector3.zero;
+    }
+
 
     void Start()
     {

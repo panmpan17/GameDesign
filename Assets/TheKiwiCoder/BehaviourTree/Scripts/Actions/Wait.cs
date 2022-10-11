@@ -11,14 +11,15 @@ namespace TheKiwiCoder {
         float startTime;
 
         protected override void OnStart() {
-            startTime = Time.time;
+            startTime = 0;
         }
 
         protected override void OnStop() {
         }
 
         protected override State OnUpdate() {
-            if (Time.time - startTime > duration) {
+            startTime += Time.deltaTime;
+            if (startTime > duration) {
                 return State.Success;
             }
             return State.Running;

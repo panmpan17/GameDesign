@@ -10,6 +10,9 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     private ITriggerFire[] triggerFires;
 
     [SerializeField]
+    private ITriggerFireGroup[] triggerFireGroups;
+
+    [SerializeField]
     private TransformPointer player;
     public Transform PlayerTarget => player.Target;
     [SerializeField]
@@ -18,6 +21,9 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
 
     [SerializeField]
     private LootTable lootTable;
+
+    [SerializeField]
+    private EventReference healthChangedEvent;
 
     [Header("Dead Animation")]
     [SerializeField]
@@ -36,6 +42,14 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     {
         triggerFires = GetComponentsInChildren<ITriggerFire>();
 
+        for (int i = 0; i < triggerFireGroups.Length; i++)
+        {
+            ITriggerFireGroup group = triggerFireGroups[i];
+            ITriggerFire[] triggers = group.GroupGameObjects.GetComponentsInChildren<ITriggerFire>();
+
+            for (int e = 0; e < triggers.Length; e++)
+                group.TriggerAction += triggers[e].TriggerFire;
+        }
 
         _cores = GetComponentsInChildren<SlimeCore>();
         for (int i = 0; i < _cores.Length; i++)
@@ -46,21 +60,20 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
         sinkTimer.Timer.Running = false;
     }
 
-#if UNITY_EDITOR
     protected override void Start()
     {
-        
+#if UNITY_EDITOR
         if (tree == null)
         {
             Debug.LogError("This slime doesn't have behaviour tree", this);
             enabled = false;
         }
+#endif
 
         context = CreateBehaviourTreeContext();
         tree = tree.Clone();
         tree.Bind(context);
     }
-#endif
 
     protected override void Update()
     {
@@ -87,18 +100,31 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
         }
     }
 
+    public void TriggerFireGroup(int groupIndex)
+    {
+        triggerFireGroups[groupIndex].TriggerAction.Invoke();
+    }
+
 
 #region Damage, Death, Loot table
     void OnCoreDamage()
     {
+        int aliveCount = 0;
         for (int i = 0; i < _cores.Length; i++)
         {
             if (_cores[i].gameObject.activeSelf)
-            {
-                return;
-            }
+                aliveCount++;
         }
 
+        // float healthPercent
+        healthChangedEvent?.Invoke((float)aliveCount / (float)_cores.Length);
+
+        if (aliveCount <= 0)
+            HandleDeath();
+    }
+
+    void HandleDeath()
+    {
         var arrows = GetComponentsInChildren<Arrow>();
         for (int i = 0; i < arrows.Length; i++)
         {
@@ -139,4 +165,12 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     void OnColliderEnter(Collider collider) => OnTriggerEnterEvent?.Invoke(collider);
     void OnCollisionEnter(Collision collision) => OnCollisionEnterEvent?.Invoke(collision);
     void OnCollisionExit(Collision collision) => OnCollisionExitEvent?.Invoke(collision);
+
+
+    [System.Serializable]
+    public class ITriggerFireGroup
+    {
+        public System.Action TriggerAction;
+        public GameObject GroupGameObjects;
+    }
 }

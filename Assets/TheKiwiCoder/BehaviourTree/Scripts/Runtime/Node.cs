@@ -10,8 +10,8 @@ namespace TheKiwiCoder {
             Success
         }
 
-        [HideInInspector] public State state = State.Running;
-        [HideInInspector] public bool started = false;
+        [System.NonSerialized] public State state = State.Running;
+        [System.NonSerialized] public bool started = false;
         [HideInInspector] public string guid;
         [HideInInspector] public Vector2 position;
         [HideInInspector] public Context context;
@@ -22,7 +22,6 @@ namespace TheKiwiCoder {
         public bool drawGizmos = false;
 
         public State Update() {
-
             if (!started) {
                 OnStart();
                 started = true;

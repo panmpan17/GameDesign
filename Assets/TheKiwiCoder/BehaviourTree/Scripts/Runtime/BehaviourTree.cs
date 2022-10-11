@@ -90,7 +90,7 @@ namespace TheKiwiCoder {
                 if (nodes[i] is DefineFunctionNode)
                 {
                     Node cloneNode = nodes[i].Clone();
-                    Traverse(tree, cloneNode, (n) => {
+                    Traverse(cloneNode, (n) => {
                         tree.nodes.Add(n);
                     });
                 }
@@ -104,10 +104,15 @@ namespace TheKiwiCoder {
         }
 
         public void Bind(Context context) {
-            Traverse(this, rootNode, node => {
-                node.context = context;
-                node.blackboard = blackboard;
-            });
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                nodes[i].context = context;
+                nodes[i].blackboard = blackboard;
+            }
+            // Traverse(this, rootNode, node => {
+            //     node.context = context;
+            //     node.blackboard = blackboard;
+            // });
         }
 
 
