@@ -57,6 +57,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
+    public event System.Action OnBowShoot;
     public event System.Action OnDeath;
     public event System.Action OnRevive;
 
@@ -158,6 +159,7 @@ public class PlayerBehaviour : MonoBehaviour
             PreparedArrow.transform.SetParent(null);
             PreparedArrow.Shoot(CurrentRayHitPosition);
             PreparedArrow = null;
+            OnBowShoot?.Invoke();
         }
         else
         {

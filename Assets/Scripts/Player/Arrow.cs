@@ -11,12 +11,17 @@ public class Arrow : MonoBehaviour, IPoolableObj
     [SerializeField]
     private float speed;
     [SerializeField]
+    private Timer ignoreGravityTimer;
+    [SerializeField]
     private new Rigidbody rigidbody;
+    [SerializeField]
+    private TrailRenderer trail;
 
     public void Instantiate()
     {
         rigidbody.isKinematic = true;
         rigidbody.velocity = Vector3.zero;
+        trail.emitting = false;
     }
 
     public void DeactivateObj(Transform collectionTransform)
@@ -38,10 +43,18 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
         rigidbody.velocity = transform.forward * speed;
         rigidbody.isKinematic = false;
+        trail.emitting = true;
+
+        ignoreGravityTimer.Reset();
     }
 
     void FixedUpdate()
     {
+        if (ignoreGravityTimer.Running && ignoreGravityTimer.FixedUpdateEnd)
+        {
+            ignoreGravityTimer.Running = false;
+            rigidbody.useGravity = true;
+        }
         if (transform.position.y > HeightLimit || transform.position.y < LowLimit)
             gameObject.SetActive(false);
     }
@@ -72,5 +85,8 @@ public class Arrow : MonoBehaviour, IPoolableObj
             var slimeCore = otherTransform.GetComponent<SlimeCore>();
             slimeCore.OnDamage();
         }
+
+        trail.emitting = false;
+        rigidbody.useGravity = false;
     }
 }

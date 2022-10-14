@@ -611,7 +611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498b3de5c4a764fa495c0814c3e62283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 2787180225705632300}
   behaviour: {fileID: 2787180225705632302}
   animation: {fileID: 2787180224821109789}
   characterController: {fileID: 2787180225705632303}
@@ -667,6 +666,8 @@ MonoBehaviour:
     TargetTime: 0.5
     Running: 0
     ReverseMode: 0
+  willSlopSliding: 0
+  slopeSlideSpeed: 2
 --- !u!114 &2787180225705632302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38c70bef9975434a8f30279756fe86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 2787180225705632300}
   movement: {fileID: 2787180225705632301}
   animation: {fileID: 2787180224821109789}
   maxHealth: 100
@@ -707,7 +707,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.8
   m_Radius: 0.2
-  m_SlopeLimit: 60
+  m_SlopeLimit: 40
   m_StepOffset: 0.3
   m_SkinWidth: 0.04
   m_MinMoveDistance: 0.001
@@ -727,8 +727,9 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 1024
-  checkDistance: 0.15
-  boxSize: {x: 0.15, y: 0.15}
+  checkDistance: 0.08
+  offset: {x: 0, y: 0, z: 0}
+  boxSize: {x: 0.2, y: 0.2}
 --- !u!1 &2787180225754473551
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,6 +2058,102 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ec6981a4e1af8436e85fdab4cfba5444, type: 3}
   m_PrefabInstance: {fileID: 2787180224821109779}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &7642453997647487575
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057773122955090242}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 7454271846980062942, guid: f1cca4b424ccb4cf8ac42c626a5dd9e9, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &2787180224821109790
 Animator:
   serializedVersion: 4
@@ -2108,6 +2205,11 @@ MonoBehaviour:
     Constant: 0
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
     UseVariable: 1
+  audioSource: {fileID: 7642453997647487575}
+  runClip: {fileID: 11400000, guid: ec1c02d8480e64651969c0f43d92541e, type: 2}
+  walkClip: {fileID: 11400000, guid: 2804760d470884e0584b153959dfe8d1, type: 2}
+  shootClip: {fileID: 11400000, guid: c3b7cb05465f14de8a38e04fe59200cd, type: 2}
+  jumpClip: {fileID: 11400000, guid: 5570a6526d0124d34b4306d2c4108c1a, type: 2}
   groundLayers:
     serializedVersion: 2
     m_Bits: 1024

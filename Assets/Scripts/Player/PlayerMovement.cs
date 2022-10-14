@@ -46,6 +46,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Timer waitRollTimer;
 
+    [Header("Slope Sliding")]
+    [SerializeField]
+    private bool willSlopSliding;
+    [SerializeField]
+    private float slopeSlideSpeed;
+    private Vector3 slopeNormal;
+
+    public bool IsSlopSliding {
+        get {
+            RaycastHit hit;
+            if (!IsGrounded || !Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f, smartGroundDetect.Layers))
+                return false;
+            
+            slopeNormal = hit.normal;
+            return Vector3.Angle(slopeNormal, Vector3.up) > characterController.slopeLimit;
+        }
+    }
+
 
     public event System.Action OnJumpEvent;
     public event System.Action OnJumpEndEvent;
@@ -173,13 +191,10 @@ public class PlayerMovement : MonoBehaviour
         if (progress >= 1)
         {
             _rolling = false;
-            // FaceWithFollowTarget();
             OnRollEndEvent?.Invoke();
 
             if (waitJumpTimer.Running) Jump();
             if (waitRollTimer.Running) Roll();
-
-            // Debug.Break();
         }
     }
 
@@ -200,13 +215,24 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleGroundedPhysic()
     {
+        if (IsSlopSliding)
+        {
+            if ((slopeNormal.x > 0 && _velocity.x <= 0) || (slopeNormal.x < 0 && _velocity.x >= 0))
+                _velocity.x = slopeNormal.x * slopeSlideSpeed;
+            if ((slopeNormal.z > 0 && _velocity.z <= 0) || (slopeNormal.z < 0 && _velocity.z >= 0))
+                _velocity.z = slopeNormal.z * slopeSlideSpeed;
+            // _yVelocity += -slopeNormal.y;
+            _yVelocity += Physics.gravity.y * Time.deltaTime;
+            return;
+        }
+
         if (!_jumping)
         {
             _yVelocity = 0;
             return;
         }
 
-        if (!_liftFromGround)
+        if (_jumping && !_liftFromGround)
             return;
 
         if (waitJumpTimer.Running)
@@ -246,6 +272,8 @@ public class PlayerMovement : MonoBehaviour
             waitJumpTimer.Reset();
             return;
         }
+        if (IsSlopSliding)
+            return;
 
         Jump();
     }

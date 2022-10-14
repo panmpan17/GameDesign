@@ -9,10 +9,12 @@ public class SmartGroundDetect : MonoBehaviour
     [SerializeField]
     private float checkDistance;
     [SerializeField]
+    private Vector3 offset;
+    [SerializeField]
     private Vector2 boxSize;
 
     public bool IsGrounded { get; protected set; }
-    public float ClosestDistanceToGround { get; protected set; }
+    public LayerMask Layers => groundLayers;
 
     private Vector3[] _raycastPoints;
     private bool[] _hitResult;
@@ -28,43 +30,36 @@ public class SmartGroundDetect : MonoBehaviour
     void GenerateRaycastPoints()
     {
         _raycastPoints = new Vector3[5];
-        _raycastPoints[0] = Vector3.zero;
-        _raycastPoints[1] = new Vector3(boxSize.x / 2, 0, boxSize.y / 2);
-        _raycastPoints[2] = new Vector3(boxSize.x / 2, 0, -boxSize.y / 2);
-        _raycastPoints[3] = new Vector3(-boxSize.x / 2, 0,  -boxSize.y / 2);
-        _raycastPoints[4] = new Vector3(-boxSize.x / 2, 0,  boxSize.y / 2);
+        _raycastPoints[0] = offset;
+        _raycastPoints[1] = offset + new Vector3(boxSize.x / 2, 0, boxSize.y / 2);
+        _raycastPoints[2] = offset + new Vector3(boxSize.x / 2, 0, -boxSize.y / 2);
+        _raycastPoints[3] = offset + new Vector3(-boxSize.x / 2, 0,  -boxSize.y / 2);
+        _raycastPoints[4] = offset + new Vector3(-boxSize.x / 2, 0,  boxSize.y / 2);
     }
 
     void Update()
     {
         Vector3 down = Vector3.down * checkDistance;
         IsGrounded = false;
-        ClosestDistanceToGround = 0;
 
         for (int i = 0; i < _raycastPoints.Length; i++)
         {
-            Vector3 point = transform.position + _raycastPoints[i];
+            Vector3 point = transform.TransformPoint(_raycastPoints[i]);
             if (Physics.Raycast(point, Vector3.down, out RaycastHit hit, checkDistance, groundLayers))
             {
                 _hitResult[i] = true;
                 _hitPoints[i] = hit.point;
 
-                if (!IsGrounded)
-                {
-                    IsGrounded = true;
-                    ClosestDistanceToGround = point.y - hit.point.y;
-                }
-                else
-                {
-                    if (point.y - hit.point.y < ClosestDistanceToGround)
-                    {
-                        ClosestDistanceToGround = point.y - hit.point.y;
-                    }
-                }
+                IsGrounded = true;
             }
             else
                 _hitResult[i] = false;
         }
+    }
+
+    void OnValidate()
+    {
+        GenerateRaycastPoints();
     }
 
     void OnDrawGizmosSelected()
@@ -72,7 +67,7 @@ public class SmartGroundDetect : MonoBehaviour
         if (_raycastPoints == null)
             GenerateRaycastPoints();
 
-        Gizmos.DrawWireCube(transform.position, new Vector3(boxSize.x, 0.01f, boxSize.y));
+        // Gizmos.DrawWireCube(transform.position + offset, new Vector3(boxSize.x, 0.01f, boxSize.y));
 
         for (int i = 0; i < _raycastPoints.Length; i++)
         {
@@ -84,8 +79,14 @@ public class SmartGroundDetect : MonoBehaviour
                 Gizmos.color = Color.white;
 
             Gizmos.DrawLine(
-                transform.position + _raycastPoints[i],
-                transform.position + _raycastPoints[i] + Vector3.down * checkDistance);
+                transform.TransformPoint(_raycastPoints[i]),
+                transform.TransformPoint(_raycastPoints[i] + Vector3.down * checkDistance));
+
+
+            bool isLast = i == _raycastPoints.Length - 1;
+            Gizmos.DrawLine(
+                transform.TransformPoint(_raycastPoints[i]),
+                transform.TransformPoint(_raycastPoints[isLast ? 0 : i + 1]));
         }
     }
 }

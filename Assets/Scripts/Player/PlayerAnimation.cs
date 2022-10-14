@@ -57,6 +57,18 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private FloatReference drawBowSlowDown;
 
+    [Header("Audio")]
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClipSet runClip;
+    [SerializeField]
+    private AudioClipSet walkClip;
+    [SerializeField]
+    private AudioClipSet shootClip;
+    [SerializeField]
+    private AudioClipSet jumpClip;
+
     [Header("Editor only")]
     [SerializeField]
     private LayerMask groundLayers;
@@ -81,6 +93,7 @@ public class PlayerAnimation : MonoBehaviour
 
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
+        behaviour.OnBowShoot += OnBowShoot;
         behaviour.OnDeath += OnDeath;
         behaviour.OnRevive += OnRevive;
     }
@@ -101,11 +114,13 @@ public class PlayerAnimation : MonoBehaviour
         {
             _walking = movement.IsWalking;
             animator.SetBool(AnimKeyWalking, _walking);
+            animator.ResetTrigger(AnimKeyEndJump);
         }
     }
 
     void OnJump()
     {
+        audioSource.PlayOneShot(jumpClip);
         animator.ResetTrigger(AnimKeyEndJump);
         animator.SetTrigger(AnimKeyJump);
     }
@@ -152,6 +167,19 @@ public class PlayerAnimation : MonoBehaviour
         Debug.DrawRay(drawBowRightHandFinalPosition.position, arrowVector * 15, Color.green, 0.1f);
     }
 
+    public void AnimationEvent(string eventName)
+    {
+        switch (eventName)
+        {
+            case "RunStep":
+                audioSource.PlayOneShot(runClip);
+                break;
+            case "WalkStep":
+                audioSource.PlayOneShot(walkClip);
+                break;
+        }
+    }
+
 
 #region Player behaviour event
     void OnDrawBow()
@@ -176,6 +204,11 @@ public class PlayerAnimation : MonoBehaviour
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);
         _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
+    }
+
+    void OnBowShoot()
+    {
+        audioSource.PlayOneShot(shootClip);
     }
 
     void OnDeath()
