@@ -56,6 +56,8 @@ public class PlayerAnimation : MonoBehaviour
     [Header("Others")]
     [SerializeField]
     private FloatReference drawBowSlowDown;
+    [SerializeField]
+    private ParticleSystem stepDustParticle;
 
     [Header("Audio")]
     [SerializeField]
@@ -91,6 +93,8 @@ public class PlayerAnimation : MonoBehaviour
         movement.OnRejumpEvent += OnRejump;
         movement.OnRollEvent += OnRoll;
 
+
+
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
         behaviour.OnBowShoot += OnBowShoot;
@@ -115,6 +119,11 @@ public class PlayerAnimation : MonoBehaviour
             _walking = movement.IsWalking;
             animator.SetBool(AnimKeyWalking, _walking);
             animator.ResetTrigger(AnimKeyEndJump);
+
+            if (movement.IsWalking)
+                stepDustParticle.Play();
+            else
+                stepDustParticle.Stop();
         }
     }
 

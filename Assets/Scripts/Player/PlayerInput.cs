@@ -17,6 +17,7 @@ public interface InputInterface
 
     Vector2 MovementAxis { get; }
     Vector2 LookAxis { get; }
+    bool HasMovementAxis { get; }
 
     void Enable();
     void Disable();
@@ -44,6 +45,8 @@ public class PlayerInput : MonoBehaviour, InputInterface
 
     public Vector2 MovementAxis { get; private set; }
     public Vector2 LookAxis { get; private set; }
+    public bool HasMovementAxis => MovementAxis.sqrMagnitude > 0.01f;
+    // input.MovementAxis.x != 0 || input.MovementAxis.y != 0
 
     void Awake()
     {

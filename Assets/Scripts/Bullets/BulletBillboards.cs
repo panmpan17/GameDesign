@@ -38,8 +38,9 @@ public class BulletBillboards : MonoBehaviour
     void CreatePrefabPool()
     {
 #if UNITY_EDITOR
+        Transform pool = new GameObject("BulletBillboards(Pool)").transform;
         for (int i = 0; i < bulletTypes.Length; i++)
-            bulletTypes[i].InstaintiatePrefabPool(new GameObject("BulletBillboards(Pool)").transform);
+            bulletTypes[i].InstaintiatePrefabPool(pool);
 #else
         for (int i = 0; i < bulletTypes.Length; i++)
             bulletTypes[i].InstaintiatePrefabPool(null);

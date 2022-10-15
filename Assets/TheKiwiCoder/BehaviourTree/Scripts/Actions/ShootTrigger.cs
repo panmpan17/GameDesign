@@ -12,7 +12,6 @@ public class ShootTrigger : ActionNode
     public ValueWithEnable<int> TriggerGroupIndex;
 
     protected override void OnStart() {
-        Debug.Log("shoot");
     }
 
     protected override void OnStop() {

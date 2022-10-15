@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     private FloatReference drawBowSlowDown;
     [SerializeField]
     private float turnSpeed;
+    [Tooltip("球體旋轉角度, 下面到中間時從0變成360, 所以下會比上多")]
+    [SerializeField]
+    private float aimDownLimit = 320;
+    [SerializeField]
+    private float aimUpLimit = 40;
 
     [Header("Jump")]
     [SerializeField]
@@ -132,12 +137,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 angles = followTarget.transform.localEulerAngles;
         angles.z = 0;
 
-        if (angles.x > 180 && angles.x < 340)
-            angles.x = 340;
-        else if (angles.x < 180 && angles.x > 40)
-            angles.x = 40;
+        if (angles.x > 180 && angles.x < aimDownLimit)
+            angles.x = aimDownLimit;
+        else if (angles.x < 180 && angles.x > aimUpLimit)
+            angles.x = aimUpLimit;
 
-        AngleLerpValue = Mathf.InverseLerp(340, 400, angles.x < 180 ? angles.x + 360: angles.x);
+        AngleLerpValue = Mathf.InverseLerp(aimDownLimit, 360 + aimUpLimit, angles.x < 180 ? angles.x + 360: angles.x);
 
         followTarget.transform.localEulerAngles = angles;
     }
@@ -149,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         if (behaviour.IsDead)
             return;
 
-        _walking = input.MovementAxis.x != 0 || input.MovementAxis.y != 0;
+        _walking = input.HasMovementAxis;
 
         if (_walking)
         {
@@ -221,7 +226,6 @@ public class PlayerMovement : MonoBehaviour
                 _velocity.x = slopeNormal.x * slopeSlideSpeed;
             if ((slopeNormal.z > 0 && _velocity.z <= 0) || (slopeNormal.z < 0 && _velocity.z >= 0))
                 _velocity.z = slopeNormal.z * slopeSlideSpeed;
-            // _yVelocity += -slopeNormal.y;
             _yVelocity += Physics.gravity.y * Time.deltaTime;
             return;
         }
@@ -252,12 +256,6 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, followTarget.transform.eulerAngles.y, 0);
         followTarget.localEulerAngles = new Vector3(followTarget.transform.localEulerAngles.x, 0, 0);
-
-        // Quaternion previousRotation = followTarget.rotation;
-        // transform.rotation = Quaternion.RotateTowards(
-        //     transform.rotation,
-        //     Quaternion.Euler(0, followTarget.transform.eulerAngles.y, 0), turnSpeed * Time.deltaTime);
-        // followTarget.rotation = previousRotation;
     }
 
     void OnJump()
@@ -314,7 +312,7 @@ public class PlayerMovement : MonoBehaviour
     void Roll()
     {
         _rolling = true;
-        if (input.MovementAxis.sqrMagnitude < 0.01f)
+        if (!input.HasMovementAxis)
         {
             FaceWithFollowTarget();
             _rollDirection = followTarget.forward;
@@ -327,7 +325,10 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 acceleration = followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y;
             _rollDirection = (followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y).normalized;
-            transform.rotation = Quaternion.LookRotation(_rollDirection, Vector3.up);
+            // transform.rotation = Quaternion.LookRotation(_rollDirection, Vector3.up);
+
+            Quaternion destination = Quaternion.LookRotation(_rollDirection, Vector3.up);
+            transform.rotation = Quaternion.Euler(0, destination.eulerAngles.y, 0);
 
             followTarget.rotation = previousRotation;
         }

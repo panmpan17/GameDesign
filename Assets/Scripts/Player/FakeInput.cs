@@ -5,6 +5,8 @@ using UnityEngine;
 public class FakeInput : MonoBehaviour, InputInterface
 {
     [SerializeField]
+    private bool repeat;
+    [SerializeField]
     private InputStep[] steps;
     private int stepIndex;
 
@@ -20,6 +22,7 @@ public class FakeInput : MonoBehaviour, InputInterface
 
     public Vector2 MovementAxis { get; private set; }
     public Vector2 LookAxis { get; private set; }
+    public bool HasMovementAxis => MovementAxis.sqrMagnitude > 0.01f;
     private float timer;
 
     public void Enable() => enabled = true;
@@ -45,6 +48,13 @@ public class FakeInput : MonoBehaviour, InputInterface
         {
             if (++stepIndex >= steps.Length)
             {
+                if (repeat)
+                {
+                    stepIndex = 0;
+                    MovementAxis = steps[stepIndex].MovementAxis;
+                    LookAxis = steps[stepIndex].LookAxis;
+                    return;
+                }
                 enabled = false;
                 MovementAxis = Vector2.zero;
             }
