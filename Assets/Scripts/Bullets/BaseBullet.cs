@@ -11,6 +11,9 @@ public class BaseBullet : BulletBehaviour
     [SerializeField]
     private float damage;
 
+    public event System.Action<Vector3> OnShoot;
+
+
     void FixedUpdate()
     {
         if (disapearTimer.FixedUpdateEnd)
@@ -40,6 +43,7 @@ public class BaseBullet : BulletBehaviour
     public override void Shoot(Vector3 velocity)
     {
         rigidbody.velocity = velocity;
+        OnShoot?.Invoke(velocity);
     }
 
 

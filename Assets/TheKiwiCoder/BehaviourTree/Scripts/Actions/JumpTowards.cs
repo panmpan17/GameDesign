@@ -27,7 +27,7 @@ public class JumpTowards : ActionNode
 
     protected override void OnStart()
     {
-        context.animator.SetTrigger("Jump");
+        context.animator?.SetTrigger("Jump");
         jumpTimer.Reset();
         _landing = _landed = false;
     }
@@ -68,7 +68,7 @@ public class JumpTowards : ActionNode
         {
             context.slimeBehaviour.OnCollisionEnterEvent -= OnLand;
             _landed = true;
-            context.animator.SetTrigger("Land");
+            context.animator?.SetTrigger("Land");
         }
     }
 }
