@@ -372,6 +372,9 @@ MonoBehaviour:
   IntEvent:
     m_PersistentCalls:
       m_Calls: []
+  BoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3490682399116465865
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,25 +612,28 @@ MonoBehaviour:
   eventReference: {fileID: 11400000, guid: 33dbc374c89514a30aad4369c02c22bd, type: 2}
   Event:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3637695562751254779}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   FloatEvent:
     m_PersistentCalls:
       m_Calls: []
   IntEvent:
     m_PersistentCalls:
       m_Calls: []
+  BoolEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3637695562751254779}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3490682399741015423
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,5 +985,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   IntEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  BoolEvent:
     m_PersistentCalls:
       m_Calls: []

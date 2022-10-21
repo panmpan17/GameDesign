@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class BossFightManager : MonoBehaviour
 {
@@ -11,9 +12,14 @@ public class BossFightManager : MonoBehaviour
     // TODO: Detect when player enter the area
 
     [SerializeField]
+    private CinemachineVirtualCamera lookBossCam;
+    [SerializeField]
     private GameObject borderWall;
     [SerializeField]
-    private GameObject bossSlime;
+    private Transform bossStartPosition;
+    [SerializeField]
+    private GameObject bossSlimePrefab;
+    private GameObject _bossSlime;
     [SerializeField]
     private EventReference slimeHealthShowEvent;
     // TODO: Set physic wall to block player, avoid palyer get out of the area
@@ -26,15 +32,24 @@ public class BossFightManager : MonoBehaviour
 
     // TODO: If player win, then what?
 
+#if UNITY_EDITOR
+    [Header("Editor Only")]
+    [SerializeField]
+    private bool startFightImmediately;
+    [SerializeField]
+    private Transform overrideBossStartPosition;
+#endif
+
     void Awake()
     {
-        bossSlime.SetActive(false);
         borderWall.SetActive(false);
-        entranceDetect.OnPlayerEnter += OnPlayerEnterEntrance;
+        entranceDetect.OnPlayerEnterEvent += OnPlayerEnterEntrance;
     }
 
     void OnPlayerEnterEntrance()
     {
+        GameManager.ins.OnPlayerRevive += ResetBossFight;
+
         entranceDetect.gameObject.SetActive(false);
         borderWall.SetActive(true);
 
@@ -43,16 +58,39 @@ public class BossFightManager : MonoBehaviour
 
     IEnumerator Test()
     {
-        bossSlime.SetActive(true);
-        slimeHealthShowEvent.Invoke();
-        yield break;
+#if UNITY_EDITOR
+        if (startFightImmediately) {
+            _bossSlime = Instantiate(
+                bossSlimePrefab,
+                overrideBossStartPosition? overrideBossStartPosition.position : bossStartPosition.position,
+                overrideBossStartPosition? overrideBossStartPosition.rotation : bossStartPosition.rotation);
+            slimeHealthShowEvent.Invoke(true);
+            yield break;
+        }
+#endif
 
         player.Input.Disable();
         CameraSwitcher.ins.SwitchTo("BossLand");
-        yield return new WaitForSeconds(2f);
-        bossSlime.SetActive(true);
+        lookBossCam.LookAt = bossStartPosition;
+        yield return new WaitForSeconds(0.5f);
+
+        _bossSlime = Instantiate(bossSlimePrefab, bossStartPosition.position, bossStartPosition.rotation);
+        lookBossCam.LookAt = _bossSlime.transform;
         yield return new WaitForSeconds(4f);
+
         player.Input.Enable();
+        slimeHealthShowEvent.Invoke(true);
         CameraSwitcher.ins.SwitchTo("Walk");
+    }
+
+    void ResetBossFight()
+    {
+        GameManager.ins.OnPlayerRevive -= ResetBossFight;
+
+        borderWall.SetActive(false);
+        slimeHealthShowEvent.Invoke(false);
+        Destroy(_bossSlime);
+
+        entranceDetect.gameObject.SetActive(true);
     }
 }

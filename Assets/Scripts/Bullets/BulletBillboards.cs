@@ -35,6 +35,11 @@ public class BulletBillboards : MonoBehaviour
         if (mainCameraTransform == null) mainCameraTransform = Camera.main.transform;
     }
 
+    void Start()
+    {
+        GameManager.ins.OnPlayerRevive += ResetBullets;
+    }
+
     void CreatePrefabPool()
     {
 #if UNITY_EDITOR
@@ -57,6 +62,14 @@ public class BulletBillboards : MonoBehaviour
             {
                 bulletTypes[i].SetBillboardRotation(_faceCameraRotation);
             }
+        }
+    }
+
+    void ResetBullets()
+    {
+        for (int i = 0; i < bulletTypes.Length; i++)
+        {
+            bulletTypes[i].Pool.DisableAll();
         }
     }
 }

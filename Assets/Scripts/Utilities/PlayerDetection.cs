@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerDetection : MonoBehaviour
 {
-    public System.Action OnPlayerEnter;
+    [SerializeField]
+    private UnityEvent OnPlayerEnter;
+
+    public event System.Action OnPlayerEnterEvent;
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag(PlayerBehaviour.Tag))
         {
-            OnPlayerEnter?.Invoke();
+            OnPlayerEnterEvent?.Invoke();
+            OnPlayerEnter.Invoke();
         }
     }
 }

@@ -125,13 +125,6 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
 
     void HandleDeath()
     {
-        var arrows = GetComponentsInChildren<Arrow>();
-        for (int i = 0; i < arrows.Length; i++)
-        {
-            arrows[i].transform.SetParent(null);
-            arrows[i].gameObject.SetActive(false);
-        }
-
         if (lootTable)
             SpawnLootTable();
 
@@ -152,6 +145,16 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
                 item.transform.position = transform.position;
                 item.Setup(lootRule.Type);
             }
+        }
+    }
+
+    void OnDestroy()
+    {
+        var arrows = GetComponentsInChildren<Arrow>();
+        for (int i = 0; i < arrows.Length; i++)
+        {
+            arrows[i].transform.SetParent(null);
+            arrows[i].gameObject.SetActive(false);
         }
     }
 #endregion

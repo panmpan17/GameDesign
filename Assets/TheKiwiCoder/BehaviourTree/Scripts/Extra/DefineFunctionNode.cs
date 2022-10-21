@@ -21,4 +21,11 @@ public class DefineFunctionNode : Node
     {
         return child.Update();
     }
+
+    public override Node Clone()
+    {
+        DefineFunctionNode node = Instantiate(this);
+        node.child = child.Clone();
+        return node;
+    }
 }

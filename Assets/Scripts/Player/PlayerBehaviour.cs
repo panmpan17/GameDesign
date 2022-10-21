@@ -204,12 +204,15 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    public void ReviveAtSpawnPoint(Transform spawnPoint)
+    public void ReviveAtSpawnPoint(PlayerSpawnPoint spawnPoint)
     {
         _handleDeath = false;
 
+        _health = maxHealth;
+        healthChangeEvent?.Invoke(1f);
+
         movement.CharacterController.enabled = false;
-        transform.position = spawnPoint.position;
+        transform.position = spawnPoint.transform.position;
         movement.CharacterController.enabled = true;
 
         CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);

@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     private static readonly int AnimKeyDeath = Animator.StringToHash("Death");
 
     private static readonly int AnimNameIdle = Animator.StringToHash("Idle");
+    private static readonly int AnimNameEmpty = Animator.StringToHash("Empty");
     
     [SerializeField]
     private Animator animator;
@@ -83,7 +84,14 @@ public class PlayerAnimation : MonoBehaviour
     private Coroutine _weightTweenRoutine;
 
     public bool IsDrawArrowFullyPlayed => animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1 && !animator.IsInTransition(1);
-    public float RollAnimationProgress => animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    public float RollAnimationProgress {
+        get {
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("Roll"))
+                return stateInfo.normalizedTime;
+            return 0;
+        }
+    }
 
 
     void Awake()
@@ -228,13 +236,23 @@ public class PlayerAnimation : MonoBehaviour
         animator.ResetTrigger(AnimKeyRoll);
         animator.SetBool(AnimKeyWalking, false);
         animator.SetBool(AnimKeyDrawingBow, false);
+        rig.weight = 0;
 
         animator.SetTrigger(AnimKeyDeath);
     }
 
     void OnRevive()
     {
-        animator.Play(AnimNameIdle);
+        animator.Play(AnimNameIdle, 0);
+        animator.Play(AnimNameEmpty, 1);
+
+        // animator.ResetTrigger(AnimKeyJump);
+        // animator.ResetTrigger(AnimKeyRejump);
+        // animator.ResetTrigger(AnimKeyEndJump);
+        // animator.ResetTrigger(AnimKeyRoll);
+        // animator.SetBool(AnimKeyWalking, false);
+        // animator.SetBool(AnimKeyDrawingBow, false);
+        // rig.weight = 0;
     }
 #endregion
 
