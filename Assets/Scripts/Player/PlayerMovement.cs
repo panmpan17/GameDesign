@@ -71,8 +71,15 @@ public class PlayerMovement : MonoBehaviour
 
 
     public event System.Action OnJumpEvent;
+    /// <summary>
+    /// If rejump, jump end waont be called
+    /// </summary>
     public event System.Action OnJumpEndEvent;
     public event System.Action OnRejumpEvent;
+    /// <summary>
+    /// Even if rejump, land will still be called
+    /// </summary>
+    public event System.Action OnLandEvent;
 
     public event System.Action OnRollEvent;
     public event System.Action OnRollEndEvent;
@@ -238,6 +245,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (_jumping && !_liftFromGround)
             return;
+
+        OnLandEvent?.Invoke();
 
         if (waitJumpTimer.Running)
         {

@@ -8,6 +8,7 @@ public class SlimeCore : MonoBehaviour
 
     public void OnDamage()
     {
+        Debug.Log("on damage");
         gameObject.SetActive(false);
         OnDamageEvent?.Invoke();
     }

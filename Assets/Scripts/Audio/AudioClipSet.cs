@@ -36,4 +36,14 @@ public static class AudioClipSetExtension
         if (clipSet && clipSet.Clips.Length > 0)
             audioSource.PlayOneShot(clipSet.ChooseOneClip(), clipSet.Volume);
     }
+
+    public static void Play(this AudioSource audioSource, AudioClipSet clipSet)
+    {
+        if (audioSource.isPlaying)
+            audioSource.Stop();
+
+        audioSource.clip = clipSet.ChooseOneClip();
+        audioSource.volume = clipSet.Volume;
+        audioSource.Play();
+    }
 }

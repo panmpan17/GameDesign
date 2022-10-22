@@ -32,8 +32,6 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private Rig rig;
     [SerializeField]
-    private Transform neck;
-    [SerializeField]
     private Transform chest;
     [SerializeField]
     private Quaternion chestRotationOffsetA;
@@ -42,11 +40,10 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private Quaternion chestRotationOffset;
 
+    [HideInInspector]
     [SerializeField]
-    private Transform drawBowLeftHandFinalPosition;
-    [SerializeField]
-    private Transform drawBowRightHandFinalPosition;
-    
+    private Transform drawBowLeftHandFinalPosition, drawBowRightHandFinalPosition;
+
     [SerializeField]
     private Transform rightHand;
     [SerializeField]
@@ -59,18 +56,26 @@ public class PlayerAnimation : MonoBehaviour
     private FloatReference drawBowSlowDown;
     [SerializeField]
     private ParticleSystem stepDustParticle;
+    [SerializeField]
+    private EventReference aimProgressEvent;
 
     [Header("Audio")]
     [SerializeField]
     private AudioSource audioSource;
     [SerializeField]
+    private AudioSource oneShotAudioSource;
+    [SerializeField]
     private AudioClipSet runClip;
     [SerializeField]
     private AudioClipSet walkClip;
     [SerializeField]
-    private AudioClipSet shootClip;
+    private AudioClipSet bowDrawClip;
+    [SerializeField]
+    private AudioClipSet bowShootClip;
     [SerializeField]
     private AudioClipSet jumpClip;
+    [SerializeField]
+    private AudioClipSet landClip;
 
     [Header("Editor only")]
     [SerializeField]
@@ -99,6 +104,7 @@ public class PlayerAnimation : MonoBehaviour
         movement.OnJumpEvent += OnJump;
         movement.OnJumpEndEvent += OnJumpEnd;
         movement.OnRejumpEvent += OnRejump;
+        movement.OnLandEvent += OnLand;
         movement.OnRollEvent += OnRoll;
 
 
@@ -117,8 +123,8 @@ public class PlayerAnimation : MonoBehaviour
 
         if (_drawBow)
         {
+            aimProgressEvent.Invoke(animator.GetCurrentAnimatorStateInfo(1).normalizedTime);
             RotateChest();
-            // TestRotateChest();
         }
 
 
@@ -135,9 +141,12 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+
+#region Movement Event
     void OnJump()
     {
-        audioSource.PlayOneShot(jumpClip);
+        stepDustParticle.Stop();
+        oneShotAudioSource.PlayOneShot(jumpClip);
         animator.ResetTrigger(AnimKeyEndJump);
         animator.SetTrigger(AnimKeyJump);
     }
@@ -155,10 +164,19 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetTrigger(AnimKeyRejump);
     }
 
+    void OnLand()
+    {
+        // TODO: player land animation
+        if (movement.IsWalking) stepDustParticle.Play();
+        oneShotAudioSource.PlayOneShot(landClip);
+    }
+
     void OnRoll()
     {
         animator.SetTrigger(AnimKeyRoll);
     }
+#endregion
+
 
     void RotateChest()
     {
@@ -189,10 +207,10 @@ public class PlayerAnimation : MonoBehaviour
         switch (eventName)
         {
             case "RunStep":
-                audioSource.PlayOneShot(runClip);
+                oneShotAudioSource.PlayOneShot(runClip);
                 break;
             case "WalkStep":
-                audioSource.PlayOneShot(walkClip);
+                oneShotAudioSource.PlayOneShot(walkClip);
                 break;
         }
     }
@@ -209,6 +227,8 @@ public class PlayerAnimation : MonoBehaviour
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);
         _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
+
+        audioSource.Play(bowDrawClip);
     }
 
     void OnDrawBowEnd()
@@ -221,11 +241,15 @@ public class PlayerAnimation : MonoBehaviour
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);
         _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
+
+        audioSource.Stop();
+
+        aimProgressEvent.Invoke(0f);
     }
 
     void OnBowShoot()
     {
-        audioSource.PlayOneShot(shootClip);
+        oneShotAudioSource.PlayOneShot(bowShootClip);
     }
 
     void OnDeath()

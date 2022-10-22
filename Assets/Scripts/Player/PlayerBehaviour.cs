@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MPack;
+using Cinemachine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -26,13 +27,15 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private EventReference healthChangeEvent;
 
-    [Header("Arrows")]
+    [Header("Aim")]
     [SerializeField]
     private Transform arrowPlacePoint;
     [SerializeField]
     private Arrow arrowPrefab;
     [SerializeField]
     private LimitedPrefabPool<Arrow> arrowPrefabPool;
+    [SerializeField]
+    private CinemachineImpulseSource impulseSource;
 
     [Header("Others")]
     [SerializeField]
@@ -154,20 +157,21 @@ public class PlayerBehaviour : MonoBehaviour
 
         IsDrawingBow = false;
 
+        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
+        OnDrawBowEnd?.Invoke();
+
         if (animation.IsDrawArrowFullyPlayed)
         {
             PreparedArrow.transform.SetParent(null);
             PreparedArrow.Shoot(CurrentRayHitPosition);
             PreparedArrow = null;
             OnBowShoot?.Invoke();
+            impulseSource.GenerateImpulse();
         }
         else
         {
             PreparedArrow.gameObject.SetActive(false);
         }
-
-        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
-        OnDrawBowEnd?.Invoke();
     }
 
     void OnEscap()
