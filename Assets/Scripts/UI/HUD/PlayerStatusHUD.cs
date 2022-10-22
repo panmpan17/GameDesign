@@ -25,6 +25,10 @@ public class PlayerStatusHUD : MonoBehaviour
     private Color beforeFull = new Color(1, 1, 1, 0.7f);
     [SerializeField]
     private Color full = new Color(1, 1, 1, 1f);
+    [SerializeField]
+    private Color extraBeforeFull = new Color(1, 1, 1, 1f);
+    [SerializeField]
+    private Color extrafull = new Color(1, 1, 1, 1f);
 
     [SerializeField]
     private EventReference aimProgressEvent;
@@ -63,13 +67,21 @@ public class PlayerStatusHUD : MonoBehaviour
 
     void ChangeAimProgress(float progress)
     {
-        Color color = progress >= 0.99f ? full : Color.Lerp(transparent, beforeFull, progress);
+        Color color;
+
+        if (progress <= 0.99f)
+            color = Color.Lerp(transparent, beforeFull, progress);
+        else if (progress <= 1.99f)
+            color = Color.Lerp(full, extraBeforeFull, Mathf.Max(progress - 1, 0));
+        else
+            color = extrafull;
+
         aimPiece1.color = color;
         aimPiece2.color = color;
         aimPiece3.color = color;
 
-        aimPiece1.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition1, _aimPiecePositionTo1, progress);
-        aimPiece2.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition2, _aimPiecePositionTo2, progress);
-        aimPiece3.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition3, _aimPiecePositionTo3, progress);
+        aimPiece1.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition1, _aimPiecePositionTo1, progress / 2);
+        aimPiece2.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition2, _aimPiecePositionTo2, progress / 2);
+        aimPiece3.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition3, _aimPiecePositionTo3, progress / 2);
     }
 }

@@ -56,8 +56,6 @@ public class PlayerAnimation : MonoBehaviour
     private FloatReference drawBowSlowDown;
     [SerializeField]
     private ParticleSystem stepDustParticle;
-    [SerializeField]
-    private EventReference aimProgressEvent;
 
     [Header("Audio")]
     [SerializeField]
@@ -98,6 +96,8 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public event System.Action<float> OnAimAnimatinoChanged;
+
 
     void Awake()
     {
@@ -123,7 +123,7 @@ public class PlayerAnimation : MonoBehaviour
 
         if (_drawBow)
         {
-            aimProgressEvent.Invoke(animator.GetCurrentAnimatorStateInfo(1).normalizedTime);
+            OnAimAnimatinoChanged?.Invoke(animator.GetCurrentAnimatorStateInfo(1).normalizedTime);
             RotateChest();
         }
 
@@ -243,8 +243,6 @@ public class PlayerAnimation : MonoBehaviour
         _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
 
         audioSource.Stop();
-
-        aimProgressEvent.Invoke(0f);
     }
 
     void OnBowShoot()

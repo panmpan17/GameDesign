@@ -12,6 +12,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
     private float speed;
     [SerializeField]
     private Timer ignoreGravityTimer;
+    private float _baseTime;
     [SerializeField]
     private new Rigidbody rigidbody;
     [SerializeField]
@@ -30,6 +31,8 @@ public class Arrow : MonoBehaviour, IPoolableObj
         rigidbody.isKinematic = true;
         rigidbody.velocity = Vector3.zero;
         trail.emitting = false;
+
+        _baseTime = ignoreGravityTimer.TargetTime;
     }
 
     public void DeactivateObj(Transform collectionTransform)
@@ -46,9 +49,11 @@ public class Arrow : MonoBehaviour, IPoolableObj
         rigidbody.velocity = Vector3.zero;
     }
 
-    public void Shoot(Vector3 targetPosition)
+    public void Shoot(Vector3 targetPosition, float extraDuration)
     {
         enabled = true;
+
+        ignoreGravityTimer.TargetTime = _baseTime + extraDuration;
 
         transform.rotation = Quaternion.LookRotation(targetPosition - transform.position, transform.up);
 

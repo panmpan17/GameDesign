@@ -37,6 +37,16 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private CinemachineImpulseSource impulseSource;
 
+    [SerializeField]
+    private EventReference aimProgressEvent;
+    [SerializeField]
+    private float extraAimTime;
+    [SerializeField]
+    private float extraAimArrowExtendDuration;
+
+    private bool _extraAimStarted = false;
+    private Stopwatch _extraAimStopWatch = new Stopwatch();
+
     [Header("Others")]
     [SerializeField]
     private LayerMask hitLayers;
@@ -97,6 +107,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         mainCamera = mainCamera == null ? Camera.main : mainCamera;
         transformPointer.Target = transform;
+
+        animation.OnAimAnimatinoChanged += OnAimProgress;
+        // aimProgressEvent.InvokeFloatEvents;
     }
 
     void Start()
@@ -160,10 +173,15 @@ public class PlayerBehaviour : MonoBehaviour
         CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
         OnDrawBowEnd?.Invoke();
 
+        _extraAimStarted = false;
+        aimProgressEvent.Invoke(0f);
+
         if (animation.IsDrawArrowFullyPlayed)
         {
+            float extraDuration = extraAimArrowExtendDuration * Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
+
             PreparedArrow.transform.SetParent(null);
-            PreparedArrow.Shoot(CurrentRayHitPosition);
+            PreparedArrow.Shoot(CurrentRayHitPosition, extraDuration);
             PreparedArrow = null;
             OnBowShoot?.Invoke();
             impulseSource.GenerateImpulse();
@@ -172,6 +190,24 @@ public class PlayerBehaviour : MonoBehaviour
         {
             PreparedArrow.gameObject.SetActive(false);
         }
+    }
+
+    void OnAimProgress(float progress)
+    {
+        if (progress < 1)
+        {
+            aimProgressEvent.Invoke(progress);
+            return;
+        }
+
+        if (!_extraAimStarted)
+        {
+            _extraAimStarted = true;
+            _extraAimStopWatch.Update();
+        }
+
+        float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
+        aimProgressEvent.Invoke(1 + extraProgress);
     }
 
     void OnEscap()

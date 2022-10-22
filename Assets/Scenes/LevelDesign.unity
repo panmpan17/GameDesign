@@ -29184,6 +29184,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: full.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: full.b
+      value: 0.2980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: full.g
+      value: 0.89257205
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: extrafull.a
+      value: 0.9019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: extrafull.b
+      value: 0.2971698
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: extrafull.g
+      value: 0.4316169
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: extrafull.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: extraBeforeFull.a
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: extraBeforeFull.b
+      value: 0.2980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: extraBeforeFull.g
+      value: 0.7342103
+      objectReference: {fileID: 0}
     - target: {fileID: 3490682399321688384, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -29591,7 +29631,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2787180225705632302, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
   m_PrefabInstance: {fileID: 1623890923}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301896173}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c38c70bef9975434a8f30279756fe86b, type: 3}
@@ -30106,11 +30146,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4fa010f5ba6ab4a6f9ea2a8abdb5a5e9, type: 3}
   m_PrefabInstance: {fileID: 1293866078}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1301896173 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2787180225705632297, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
-  m_PrefabInstance: {fileID: 1623890923}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1301973198
 PrefabInstance:
@@ -31908,33 +31943,15 @@ MonoBehaviour:
   repeat: 1
   steps:
   - MovementAxis: {x: 0, y: 0}
-    LookAxis: {x: -6, y: 0}
-    Duration: 1
-    Roll: 0
-  - MovementAxis: {x: -1, y: 1}
     LookAxis: {x: 0, y: 0}
-    Duration: 1
+    Duration: 5
     Roll: 0
-  - MovementAxis: {x: -1, y: 1}
-    LookAxis: {x: 0, y: 0}
-    Duration: 0
-    Roll: 1
-  - MovementAxis: {x: -1, y: 1}
+    Aim: 1
+  - MovementAxis: {x: 0, y: 0}
     LookAxis: {x: 0, y: 0}
     Duration: 1
     Roll: 0
-  - MovementAxis: {x: -1, y: 1}
-    LookAxis: {x: 0, y: 0}
-    Duration: 0
-    Roll: 1
-  - MovementAxis: {x: -1, y: 1}
-    LookAxis: {x: 0, y: 0}
-    Duration: 1
-    Roll: 0
-  - MovementAxis: {x: -1, y: 1}
-    LookAxis: {x: 0, y: 0}
-    Duration: 0
-    Roll: 1
+    Aim: 0
 --- !u!1001 &1417660455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33227,59 +33244,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
   m_PrefabInstance: {fileID: 1623890923}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1516364579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301896173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_ImpulseShape: 1
-    m_CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ImpulseDuration: 0.1
-    m_ImpulseType: 0
-    m_DissipationRate: 0.25
-    m_RawSignal: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.7
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 0
-    m_DissipationMode: 2
-    m_DissipationDistance: 100
-    m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: -0.1, y: -0.1, z: 0}
 --- !u!1001 &1519172861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35315,18 +35279,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2787180225705632297, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632302, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: maxHealth
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2787180225705632302, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
-      propertyPath: impulseSource
-      value: 
-      objectReference: {fileID: 1516364579}
     - target: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: m_RootOrder
       value: 6
