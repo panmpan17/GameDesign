@@ -17,6 +17,12 @@ public class JumpTowards : ActionNode
     private AnimationCurveReference jumpForceCurve;
     [SerializeField]
     private Timer jumpTimer;
+
+    [Header("Landing")]
+    [SerializeField]
+    private bool landingMoveforawrd;
+    [SerializeField]
+    private float extraGravity = 0;
     [SerializeField]
     private LayerMask grounLayer;
 
@@ -38,6 +44,14 @@ public class JumpTowards : ActionNode
     protected override State OnUpdate() {
         if (_landing)
         {
+            if (landingMoveforawrd)
+                MoveForawrd();
+
+            if (extraGravity != 0)
+            {
+                context.rigidbody.velocity += Physics.gravity * extraGravity * Time.deltaTime;
+            }
+
             return _landed ? State.Success : State.Running;
         }
         else
@@ -49,13 +63,23 @@ public class JumpTowards : ActionNode
 
     void HandleJumping()
     {
+        MoveForawrd();
+
         if (jumpTimer.UpdateEnd)
         {
             jumpTimer.Reset();
             _landing = true;
             context.slimeBehaviour.OnCollisionEnterEvent += OnLand;
-        }
 
+            if (!landingMoveforawrd)
+            {
+                context.rigidbody.velocity = new Vector3(0, context.rigidbody.velocity.y, 0);
+            }
+        }
+    }
+
+    void MoveForawrd()
+    {
         Vector3 velocity = Vector3.up * jumpForce * jumpForceCurve.Value.Evaluate(jumpTimer.Progress);
         velocity += context.transform.forward * forwardSpeed;
         context.rigidbody.velocity = velocity;

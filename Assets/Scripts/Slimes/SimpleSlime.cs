@@ -175,7 +175,6 @@ public class SimpleSlime : MonoBehaviour
 
             if (shootWhenLand)
             {
-                bulletTrigger.Trigger();
                 bulletTrigger.Invoke("Trigger", 0.2f);
             }
         }

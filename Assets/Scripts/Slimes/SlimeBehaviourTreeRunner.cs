@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 using MPack;
+using Cinemachine;
 
 
 public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
@@ -11,6 +12,8 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
 
     [SerializeField]
     private ITriggerFireGroup[] triggerFireGroups;
+    [SerializeField]
+    private CinemachineImpulseSource impulseSource;
 
     [SerializeField]
     private TransformPointer player;
@@ -106,19 +109,15 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     }
 
 
+    public void TriggerImpluse(float forceSize)
+    {
+        impulseSource.GenerateImpulse(forceSize);
+    }
+
 #region Damage, Death, Loot table
     void OnCoreDamage()
     {
-        int aliveCount = 0;
-        for (int i = 0; i < _cores.Length; i++)
-        {
-            if (_cores[i].gameObject.activeSelf)
-                aliveCount++;
-        }
-
-        // float healthPercent
-        healthChangedEvent?.Invoke((float)aliveCount / (float)_cores.Length);
-
+        int aliveCount = UpdateHealth();
         if (aliveCount <= 0)
             HandleDeath();
     }
@@ -159,6 +158,22 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     }
 #endregion
 
+
+    /// <summary>
+    /// Update health
+    /// </summary>
+    /// <returns>How many core left</returns>
+    public int UpdateHealth()
+    {
+        int aliveCount = 0;
+        for (int i = 0; i < _cores.Length; i++)
+        {
+            if (_cores[i].gameObject.activeSelf)
+                aliveCount++;
+        }
+        healthChangedEvent?.Invoke((float)aliveCount / (float)_cores.Length);
+        return aliveCount;
+    }
 
     protected override Context CreateBehaviourTreeContext()
     {

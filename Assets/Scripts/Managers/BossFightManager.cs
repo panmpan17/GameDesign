@@ -19,7 +19,7 @@ public class BossFightManager : MonoBehaviour
     private Transform bossStartPosition;
     [SerializeField]
     private GameObject bossSlimePrefab;
-    private GameObject _bossSlime;
+    private SlimeBehaviourTreeRunner _bossSlime;
     [SerializeField]
     private EventReference slimeHealthShowEvent;
     // TODO: Set physic wall to block player, avoid palyer get out of the area
@@ -63,7 +63,7 @@ public class BossFightManager : MonoBehaviour
             _bossSlime = Instantiate(
                 bossSlimePrefab,
                 overrideBossStartPosition? overrideBossStartPosition.position : bossStartPosition.position,
-                overrideBossStartPosition? overrideBossStartPosition.rotation : bossStartPosition.rotation);
+                overrideBossStartPosition? overrideBossStartPosition.rotation : bossStartPosition.rotation).GetComponent<SlimeBehaviourTreeRunner>();
             slimeHealthShowEvent.Invoke(true);
             yield break;
         }
@@ -74,12 +74,13 @@ public class BossFightManager : MonoBehaviour
         lookBossCam.LookAt = bossStartPosition;
         yield return new WaitForSeconds(0.5f);
 
-        _bossSlime = Instantiate(bossSlimePrefab, bossStartPosition.position, bossStartPosition.rotation);
+        _bossSlime = Instantiate(bossSlimePrefab, bossStartPosition.position, bossStartPosition.rotation).GetComponent<SlimeBehaviourTreeRunner>();
         lookBossCam.LookAt = _bossSlime.transform;
         yield return new WaitForSeconds(4f);
 
         player.Input.Enable();
         slimeHealthShowEvent.Invoke(true);
+        _bossSlime.UpdateHealth();
         CameraSwitcher.ins.SwitchTo("Walk");
     }
 
@@ -89,7 +90,7 @@ public class BossFightManager : MonoBehaviour
 
         borderWall.SetActive(false);
         slimeHealthShowEvent.Invoke(false);
-        Destroy(_bossSlime);
+        Destroy(_bossSlime.gameObject);
 
         entranceDetect.gameObject.SetActive(true);
     }

@@ -11,12 +11,28 @@ public class TransformFollower : MonoBehaviour
 
     [SerializeField]
     private UpdateMode updateMode;
+
+    [Header("Position")]
     [SerializeField]
-    private bool lockX;
+    private bool updatePosition;
     [SerializeField]
-    private bool lockY;
+    private bool positionLockX;
     [SerializeField]
-    private bool lockZ;
+    private bool positionLockY;
+    [SerializeField]
+    private bool positionLockZ;
+
+    [Header("Rotation")]
+    [SerializeField]
+    private bool updateRotation;
+    [SerializeField]
+    private bool rotationLockX;
+    [SerializeField]
+    private bool rotationLockY;
+    [SerializeField]
+    private bool rotationLockZ;
+    [SerializeField]
+    private Vector3 offset;
 
     private enum UpdateMode { LateUpdate, FixedUpdate, Manual }
 
@@ -34,10 +50,23 @@ public class TransformFollower : MonoBehaviour
 
     void Trigger()
     {
-        Vector3 position = target.position;
-        if (lockX) position.x = transform.position.x;
-        if (lockY) position.y = transform.position.y;
-        if (lockZ) position.z = transform.position.z;
-        transform.position = position;
+        if (updatePosition)
+        {
+            Vector3 position = transform.position;
+            if (!positionLockX) position.x = target.position.x;
+            if (!positionLockY) position.y = target.position.y;
+            if (!positionLockZ) position.z = target.position.z;
+            transform.position = position;
+        }
+
+        if (updateRotation)
+        {
+            Vector3 euler = transform.rotation.eulerAngles;
+            if (!rotationLockX) euler.x = target.rotation.eulerAngles.x;
+            if (!rotationLockY) euler.y = target.rotation.eulerAngles.y;
+            if (!rotationLockZ) euler.z = target.rotation.eulerAngles.z;
+            euler += offset;
+            transform.rotation = Quaternion.Euler(euler);
+        }
     }
 }
