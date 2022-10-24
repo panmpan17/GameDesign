@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     private static readonly int AnimKeyDeath = Animator.StringToHash("Death");
 
     private static readonly int AnimNameIdle = Animator.StringToHash("Idle");
+    private static readonly int AnimNameEmpty = Animator.StringToHash("Empty");
     
     [SerializeField]
     private Animator animator;
@@ -31,8 +32,6 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private Rig rig;
     [SerializeField]
-    private Transform neck;
-    [SerializeField]
     private Transform chest;
     [SerializeField]
     private Quaternion chestRotationOffsetA;
@@ -41,11 +40,10 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private Quaternion chestRotationOffset;
 
+    [HideInInspector]
     [SerializeField]
-    private Transform drawBowLeftHandFinalPosition;
-    [SerializeField]
-    private Transform drawBowRightHandFinalPosition;
-    
+    private Transform drawBowLeftHandFinalPosition, drawBowRightHandFinalPosition;
+
     [SerializeField]
     private Transform rightHand;
     [SerializeField]
@@ -56,6 +54,26 @@ public class PlayerAnimation : MonoBehaviour
     [Header("Others")]
     [SerializeField]
     private FloatReference drawBowSlowDown;
+    [SerializeField]
+    private ParticleSystem stepDustParticle;
+
+    [Header("Audio")]
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioSource oneShotAudioSource;
+    [SerializeField]
+    private AudioClipSet runClip;
+    [SerializeField]
+    private AudioClipSet walkClip;
+    [SerializeField]
+    private AudioClipSet bowDrawClip;
+    [SerializeField]
+    private AudioClipSet bowShootClip;
+    [SerializeField]
+    private AudioClipSet jumpClip;
+    [SerializeField]
+    private AudioClipSet landClip;
 
     [Header("Editor only")]
     [SerializeField]
@@ -69,7 +87,16 @@ public class PlayerAnimation : MonoBehaviour
     private Coroutine _weightTweenRoutine;
 
     public bool IsDrawArrowFullyPlayed => animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1 && !animator.IsInTransition(1);
-    public float RollAnimationProgress => animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    public float RollAnimationProgress {
+        get {
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("Roll"))
+                return stateInfo.normalizedTime;
+            return 0;
+        }
+    }
+
+    public event System.Action<float> OnAimAnimatinoChanged;
 
 
     void Awake()
@@ -77,10 +104,14 @@ public class PlayerAnimation : MonoBehaviour
         movement.OnJumpEvent += OnJump;
         movement.OnJumpEndEvent += OnJumpEnd;
         movement.OnRejumpEvent += OnRejump;
+        movement.OnLandEvent += OnLand;
         movement.OnRollEvent += OnRoll;
+
+
 
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
+        behaviour.OnBowShoot += OnBowShoot;
         behaviour.OnDeath += OnDeath;
         behaviour.OnRevive += OnRevive;
     }
@@ -92,8 +123,8 @@ public class PlayerAnimation : MonoBehaviour
 
         if (_drawBow)
         {
+            OnAimAnimatinoChanged?.Invoke(animator.GetCurrentAnimatorStateInfo(1).normalizedTime);
             RotateChest();
-            // TestRotateChest();
         }
 
 
@@ -101,11 +132,21 @@ public class PlayerAnimation : MonoBehaviour
         {
             _walking = movement.IsWalking;
             animator.SetBool(AnimKeyWalking, _walking);
+            animator.ResetTrigger(AnimKeyEndJump);
+
+            if (movement.IsWalking)
+                stepDustParticle.Play();
+            else
+                stepDustParticle.Stop();
         }
     }
 
+
+#region Movement Event
     void OnJump()
     {
+        stepDustParticle.Stop();
+        oneShotAudioSource.PlayOneShot(jumpClip);
         animator.ResetTrigger(AnimKeyEndJump);
         animator.SetTrigger(AnimKeyJump);
     }
@@ -123,10 +164,19 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetTrigger(AnimKeyRejump);
     }
 
+    void OnLand()
+    {
+        // TODO: player land animation
+        if (movement.IsWalking) stepDustParticle.Play();
+        oneShotAudioSource.PlayOneShot(landClip);
+    }
+
     void OnRoll()
     {
         animator.SetTrigger(AnimKeyRoll);
     }
+#endregion
+
 
     void RotateChest()
     {
@@ -152,6 +202,19 @@ public class PlayerAnimation : MonoBehaviour
         Debug.DrawRay(drawBowRightHandFinalPosition.position, arrowVector * 15, Color.green, 0.1f);
     }
 
+    public void AnimationEvent(string eventName)
+    {
+        switch (eventName)
+        {
+            case "RunStep":
+                oneShotAudioSource.PlayOneShot(runClip);
+                break;
+            case "WalkStep":
+                oneShotAudioSource.PlayOneShot(walkClip);
+                break;
+        }
+    }
+
 
 #region Player behaviour event
     void OnDrawBow()
@@ -164,6 +227,8 @@ public class PlayerAnimation : MonoBehaviour
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);
         _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
+
+        audioSource.Play(bowDrawClip);
     }
 
     void OnDrawBowEnd()
@@ -176,6 +241,13 @@ public class PlayerAnimation : MonoBehaviour
         if (_weightTweenRoutine != null)
             StopCoroutine(_weightTweenRoutine);
         _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
+
+        audioSource.Stop();
+    }
+
+    void OnBowShoot()
+    {
+        oneShotAudioSource.PlayOneShot(bowShootClip);
     }
 
     void OnDeath()
@@ -186,13 +258,23 @@ public class PlayerAnimation : MonoBehaviour
         animator.ResetTrigger(AnimKeyRoll);
         animator.SetBool(AnimKeyWalking, false);
         animator.SetBool(AnimKeyDrawingBow, false);
+        rig.weight = 0;
 
         animator.SetTrigger(AnimKeyDeath);
     }
 
     void OnRevive()
     {
-        animator.Play(AnimNameIdle);
+        animator.Play(AnimNameIdle, 0);
+        animator.Play(AnimNameEmpty, 1);
+
+        // animator.ResetTrigger(AnimKeyJump);
+        // animator.ResetTrigger(AnimKeyRejump);
+        // animator.ResetTrigger(AnimKeyEndJump);
+        // animator.ResetTrigger(AnimKeyRoll);
+        // animator.SetBool(AnimKeyWalking, false);
+        // animator.SetBool(AnimKeyDrawingBow, false);
+        // rig.weight = 0;
     }
 #endregion
 

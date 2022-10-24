@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MPack;
+using Cinemachine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -26,13 +27,25 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private EventReference healthChangeEvent;
 
-    [Header("Arrows")]
+    [Header("Aim")]
     [SerializeField]
     private Transform arrowPlacePoint;
     [SerializeField]
     private Arrow arrowPrefab;
     [SerializeField]
     private LimitedPrefabPool<Arrow> arrowPrefabPool;
+    [SerializeField]
+    private CinemachineImpulseSource impulseSource;
+
+    [SerializeField]
+    private EventReference aimProgressEvent;
+    [SerializeField]
+    private float extraAimTime;
+    [SerializeField]
+    private float extraAimArrowExtendDuration;
+
+    private bool _extraAimStarted = false;
+    private Stopwatch _extraAimStopWatch = new Stopwatch();
 
     [Header("Others")]
     [SerializeField]
@@ -57,6 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
+    public event System.Action OnBowShoot;
     public event System.Action OnDeath;
     public event System.Action OnRevive;
 
@@ -93,6 +107,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         mainCamera = mainCamera == null ? Camera.main : mainCamera;
         transformPointer.Target = transform;
+
+        animation.OnAimAnimatinoChanged += OnAimProgress;
+        // aimProgressEvent.InvokeFloatEvents;
     }
 
     void Start()
@@ -153,19 +170,44 @@ public class PlayerBehaviour : MonoBehaviour
 
         IsDrawingBow = false;
 
+        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
+        OnDrawBowEnd?.Invoke();
+
+        _extraAimStarted = false;
+        aimProgressEvent.Invoke(0f);
+
         if (animation.IsDrawArrowFullyPlayed)
         {
+            float extraDuration = extraAimArrowExtendDuration * Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
+
             PreparedArrow.transform.SetParent(null);
-            PreparedArrow.Shoot(CurrentRayHitPosition);
+            PreparedArrow.Shoot(CurrentRayHitPosition, extraDuration);
             PreparedArrow = null;
+            OnBowShoot?.Invoke();
+            impulseSource.GenerateImpulse();
         }
         else
         {
             PreparedArrow.gameObject.SetActive(false);
         }
+    }
 
-        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
-        OnDrawBowEnd?.Invoke();
+    void OnAimProgress(float progress)
+    {
+        if (progress < 1)
+        {
+            aimProgressEvent.Invoke(progress);
+            return;
+        }
+
+        if (!_extraAimStarted)
+        {
+            _extraAimStarted = true;
+            _extraAimStopWatch.Update();
+        }
+
+        float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
+        aimProgressEvent.Invoke(1 + extraProgress);
     }
 
     void OnEscap()
@@ -202,12 +244,15 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    public void ReviveAtSpawnPoint(Transform spawnPoint)
+    public void ReviveAtSpawnPoint(PlayerSpawnPoint spawnPoint)
     {
         _handleDeath = false;
 
+        _health = maxHealth;
+        healthChangeEvent?.Invoke(1f);
+
         movement.CharacterController.enabled = false;
-        transform.position = spawnPoint.position;
+        transform.position = spawnPoint.transform.position;
         movement.CharacterController.enabled = true;
 
         CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);

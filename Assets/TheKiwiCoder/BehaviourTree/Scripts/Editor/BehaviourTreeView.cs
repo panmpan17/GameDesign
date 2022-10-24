@@ -125,11 +125,17 @@ namespace TheKiwiCoder {
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt) {
 
             //base.BuildContextualMenu(evt);
+            bool hasNode = false;
+            for (int i = 0; i < selection.Count && !hasNode; i++) {
+                hasNode = selection[i] is NodeView;
+            }
+            if (!EditorApplication.isPlaying && hasNode)
+                evt.menu.AppendAction("Clone", CloneSelectionNode);
 
             // New script functions
-            evt.menu.AppendAction($"Create Script.../New Action Node", (a) => CreateNewScript(scriptFileAssets[0]));
-            evt.menu.AppendAction($"Create Script.../New Composite Node", (a) => CreateNewScript(scriptFileAssets[1]));
-            evt.menu.AppendAction($"Create Script.../New Decorator Node", (a) => CreateNewScript(scriptFileAssets[2]));
+            evt.menu.AppendAction("Create Script.../New Action Node", (a) => CreateNewScript(scriptFileAssets[0]));
+            evt.menu.AppendAction("Create Script.../New Composite Node", (a) => CreateNewScript(scriptFileAssets[1]));
+            evt.menu.AppendAction("Create Script.../New Decorator Node", (a) => CreateNewScript(scriptFileAssets[2]));
             evt.menu.AppendSeparator();
 
             Vector2 nodePosition = this.ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);
@@ -198,10 +204,63 @@ namespace TheKiwiCoder {
             CreateNodeView(node);
         }
 
-        void CreateNodeView(Node node) {
+        NodeView CreateNodeView(Node node) {
             NodeView nodeView = new NodeView(node);
             nodeView.OnNodeSelected = OnNodeSelected;
             AddElement(nodeView);
+            return nodeView;
+        }
+
+        void CloneSelectionNode(DropdownMenuAction item)
+        {
+            Undo.RecordObject(tree, "Behaviour Tree (Clone Node)");
+
+            List<Node> cloneNodes = new List<Node>();
+
+            for (int i = 0; i < selection.Count; i++)
+            {
+                if (!(selection[i] is NodeView))
+                    continue;
+
+                var nodeView = (NodeView)selection[i];
+                if (cloneNodes.Contains(nodeView.node))
+                    continue;
+
+                BehaviourTree.Traverse(nodeView.node, (node) => { cloneNodes.Add(node); });
+
+                Node cloneNode = nodeView.node.Clone();
+
+                // Clone children, add to tree, add view
+                BehaviourTree.Traverse(cloneNode, (node) => {
+                    node.guid = GUID.Generate().ToString();
+                    node.position += new Vector2(20, 20);
+
+                    AssetDatabase.AddObjectToAsset(node, tree);
+                    Undo.RegisterCreatedObjectUndo(node, "Behaviour Tree (Clone Node)");
+
+                    tree.nodes.Add(node);
+                    CreateNodeView(node);
+                });
+
+                // Connect edge
+                BehaviourTree.Traverse(cloneNode, (node) =>
+                {
+                    var children = BehaviourTree.GetChildren(node);
+                    children.ForEach(c =>
+                    {
+                        NodeView parentView = FindNodeView(node);
+                        NodeView childView = FindNodeView(c);
+
+                        if (parentView == null || childView == null)
+                            return;
+
+                        Edge edge = parentView.output.ConnectTo(childView.input);
+                        AddElement(edge);
+                    });
+                });
+            }
+
+            AssetDatabase.SaveAssets();
         }
 
         public void UpdateNodeStates() {

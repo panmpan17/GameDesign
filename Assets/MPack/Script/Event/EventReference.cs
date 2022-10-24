@@ -11,6 +11,7 @@ public class EventReference : ScriptableObject
     public event System.Action InvokeEvents;
     public event System.Action<float> InvokeFloatEvents;
     public event System.Action<int> InvokeIntEvents;
+    public event System.Action<bool> IntBoolEvents;
 
     public void Invoke()
     {
@@ -34,6 +35,14 @@ public class EventReference : ScriptableObject
             eventDispatchers[i].DispatchEvent(intValue);
 
         InvokeIntEvents?.Invoke(intValue);
+    }
+
+    public void Invoke(bool boolValue)
+    {
+        for (int i = eventDispatchers.Count - 1; i >= 0; i--)
+            eventDispatchers[i].DispatchEvent(boolValue);
+
+        IntBoolEvents?.Invoke(boolValue);
     }
 
     public void RegisterEvent(EventDispatcher dispatcher) => eventDispatchers.Add(dispatcher);

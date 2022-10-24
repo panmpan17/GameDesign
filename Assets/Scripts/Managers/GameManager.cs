@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager ins;
+
     [SerializeField]
     private PlayerBehaviour player;
     [SerializeField]
-    private Transform spawnPoint;
+    private PlayerSpawnPoint spawnPoint;
     [SerializeField]
     private float playerReviveTime;
 
+    public event System.Action OnPlayerRevive;
+
     void Awake()
     {
+        ins = this;
+
         player.OnDeath += HandlePlayerDeath;
     }
 
@@ -25,5 +31,11 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(playerReviveTime);
         player.ReviveAtSpawnPoint(spawnPoint);
+        OnPlayerRevive?.Invoke();
+    }
+
+    public void ChangePlayerSpawnPoint(PlayerSpawnPoint spawnPoint)
+    {
+        this.spawnPoint = spawnPoint;
     }
 }

@@ -15,18 +15,13 @@ public class BulletTrigger : MonoBehaviour, ITriggerFire
     [SerializeField]
     private BulletType bulletType;
 
-    public void Trigger()
-    {
-        var bullet = bulletType.Pool.Get();
-        bullet.transform.SetPositionAndRotation(transform.position, BulletBillboards.ins.FaceCameraRotation);
-        bullet.Shoot(transform.forward * bulletSpeed);
-        // BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
-    }
-
     public void TriggerFire()
     {
         var bullet = bulletType.Pool.Get();
-        bullet.transform.SetPositionAndRotation(transform.position, BulletBillboards.ins.FaceCameraRotation);
+        if (bulletType.UseBillboardRotate)
+            bullet.transform.SetPositionAndRotation(transform.position, BulletBillboards.ins.FaceCameraRotation);
+        else
+            bullet.transform.position = transform.position;
         bullet.Shoot(transform.forward * bulletSpeed);
         // BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
     }

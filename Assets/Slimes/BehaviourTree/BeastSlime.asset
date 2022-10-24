@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3e153bb4bc4048cc89ceb3596029433, type: 3}
   m_Name: TargetIsInRange
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 9e0bd7c96b9eb4e5082ede8e9e8c755c
   position: {x: 67.78746, y: 845}
   blackboard:
@@ -33,8 +31,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: a21ce037540c14866a6854c51a95583a
   position: {x: 217.7875, y: 578.99994}
   blackboard:
@@ -54,8 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 47a1298da01e84ac79885543b0b549ed
   position: {x: -232.21254, y: 406.5}
   blackboard:
@@ -82,8 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb5496e8cd973748a10b3e3ef436ebd, type: 3}
   m_Name: Repeat
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: ca1144fe7d98b4f2197c321ec7855efe
   position: {x: -82.212494, y: 578.99994}
   blackboard:
@@ -108,8 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
   m_Name: AlignRotationWIthGround
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 83c26179864144d3aabc797a0b2afc7e
   position: {x: -260.5, y: 845}
   blackboard:
@@ -129,8 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
   m_Name: AlignRotationWIthGround
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 5171fc85d6b47406eb04db15765a5827
   position: {x: -710.5, y: 579}
   blackboard:
@@ -150,8 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 3b7a6c78a568a4bda88a2ddf78c840db
   position: {x: -82.212494, y: 845}
   blackboard:
@@ -171,8 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 041356bca1d8d429e83d681f5c16b031
   position: {x: 369.49988, y: 406.5}
   blackboard:
@@ -192,8 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: fecf51cfe669b4fa0b68a6f0acc8467f
   position: {x: -82.212494, y: 701}
   blackboard:
@@ -217,8 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d636e16b5426400fb03ee9a883e6c05, type: 3}
   m_Name: CheckTargetInEyeSight
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: cce8f324215e4431eb1245f7ab7b118d
   position: {x: -382.00003, y: 576.5}
   blackboard:
@@ -275,8 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163c147d123e4a945b688eddc64e3ea5, type: 3}
   m_Name: RootNode
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: a4374315efc29429e868a9165290435e
   position: {x: 0, y: 0}
   blackboard:
@@ -296,8 +274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb5496e8cd973748a10b3e3ef436ebd, type: 3}
   m_Name: Repeat
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 774b2fdd793b949bd8128a8073c49258
   position: {x: 0, y: 134}
   blackboard:
@@ -322,14 +298,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
   m_Name: ShootTrigger
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 0748f9c3b7c834800b15ea3bc977be9a
   position: {x: 67.78746, y: 578.99994}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 0
+    Value: 0
 --- !u!114 &5701251845254916007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,8 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab74b0c3ed1b40f9aee14870a7163d3, type: 3}
   m_Name: JumpTowards
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 5af7b47d8dc5842ce8f75158fcf125ee
   position: {x: -410.5, y: 845}
   blackboard:
@@ -365,6 +340,8 @@ MonoBehaviour:
     TargetTime: 0.3
     Running: 0
     ReverseMode: 0
+  landingMoveforawrd: 0
+  extraGravity: 0
   grounLayer:
     serializedVersion: 2
     m_Bits: 1344
@@ -380,8 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460be9e34c566ea45b9e282b1adcb028, type: 3}
   m_Name: Selector
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 29184d908d19e4fec917797bc3f008e4
   position: {x: 0, y: 266}
   blackboard:
@@ -403,8 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f987fe2a4f2d24887a6b2641d5d1af66, type: 3}
   m_Name: RandomFindPositionAsTarget
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: dca71f6c4e90f4b2b9fb0662e7382d53
   position: {x: -532, y: 579}
   blackboard:
@@ -425,8 +398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1305ada2353741dda1310a2c4f2a630, type: 3}
   m_Name: FaceTarget
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 41aab64e584ad4043b597b83808f2916
   position: {x: -232.21254, y: 578.99994}
   blackboard:

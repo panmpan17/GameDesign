@@ -5,6 +5,8 @@ using UnityEngine;
 public class FakeInput : MonoBehaviour, InputInterface
 {
     [SerializeField]
+    private bool repeat;
+    [SerializeField]
     private InputStep[] steps;
     private int stepIndex;
 
@@ -20,6 +22,7 @@ public class FakeInput : MonoBehaviour, InputInterface
 
     public Vector2 MovementAxis { get; private set; }
     public Vector2 LookAxis { get; private set; }
+    public bool HasMovementAxis => MovementAxis.sqrMagnitude > 0.01f;
     private float timer;
 
     public void Enable() => enabled = true;
@@ -33,8 +36,7 @@ public class FakeInput : MonoBehaviour, InputInterface
 
     void Start()
     {
-        MovementAxis = steps[stepIndex].MovementAxis;
-        LookAxis = steps[stepIndex].LookAxis;
+        StepStart(steps[0]);
     }
 
     void Update()
@@ -43,21 +45,43 @@ public class FakeInput : MonoBehaviour, InputInterface
 
         if (timer >= steps[stepIndex].Duration)
         {
+            StepEnd(steps[stepIndex]);
+
             if (++stepIndex >= steps.Length)
             {
+                if (repeat)
+                {
+                    stepIndex = 0;
+                    StepStart(steps[stepIndex]);
+                    return;
+                }
                 enabled = false;
                 MovementAxis = Vector2.zero;
             }
             else
             {
                 timer = 0;
-                MovementAxis = steps[stepIndex].MovementAxis;
-                LookAxis = steps[stepIndex].LookAxis;
-
-                if (steps[stepIndex].Roll)
-                    OnRoll?.Invoke();
+                StepStart(steps[stepIndex]);
             }
         }
+    }
+
+    void StepStart(InputStep step)
+    {
+        MovementAxis = steps[stepIndex].MovementAxis;
+        LookAxis = steps[stepIndex].LookAxis;
+
+        if (steps[stepIndex].Roll)
+            OnRoll?.Invoke();
+
+        if (steps[stepIndex].Aim)
+            OnAimDown?.Invoke();
+    }
+
+    void StepEnd(InputStep step)
+    {
+        if (steps[stepIndex].Aim)
+            OnAimUp?.Invoke();
     }
 
 
@@ -68,5 +92,6 @@ public class FakeInput : MonoBehaviour, InputInterface
         public Vector2 LookAxis;
         public float Duration;
         public bool Roll;
+        public bool Aim;
     }
 }

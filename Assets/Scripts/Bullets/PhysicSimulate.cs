@@ -4,11 +4,11 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class PhysicSimulate
+public struct PhysicSimulate
 {
     [Min(0.001f)]
-    public float Mass = 1;
-    public Vector3 Gravity = new Vector3(0, -9.8f, 0);
+    public float Mass;
+    public Vector3 Gravity;
 
     private Vector3 _position;
     private Vector3 _accelerateion;

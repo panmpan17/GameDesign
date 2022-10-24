@@ -8,6 +8,10 @@ using UnityEditor;
 
 public class PlayerSpawnPoint : MonoBehaviour
 {
+    public void ChangeThisToPlayerSpawnPoint()
+    {
+        GameManager.ins.ChangePlayerSpawnPoint(this);
+    }
 }
 
 #if UNITY_EDITOR

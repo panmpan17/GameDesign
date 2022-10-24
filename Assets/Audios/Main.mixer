@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!243 &-8334704520055278507
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Enviroment
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: a80afa86556d2435ca11fa376f06e07e
+  m_Children: []
+  m_Volume: 5cfaebe4e8c1946a08d40bdb1c1012fc
+  m_Pitch: 0921f9d6706304a4cae9df4cf5ee0d9a
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -4804681669660428637}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &-5735266036080838599
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -10,6 +29,20 @@ AudioMixerEffectController:
   m_EffectID: 048d0bf48a5ad49eeb44ea3635e884fe
   m_EffectName: Attenuation
   m_MixLevel: 34694e7857d9a4acf88d8b29ec93203a
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-4804681669660428637
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0588fd6b6873d43b2ae1a6f05d84d1e3
+  m_EffectName: Attenuation
+  m_MixLevel: 9ac447a9998f448c68af4363fc19ae7c
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
@@ -36,6 +69,7 @@ AudioMixerController:
     - 825aaccbfba6740cb98dbeb121de5db4
     - de6854ecea92c4cd08180a38ad3be306
     - f95f0e500e932483b89795c231a749bc
+    - a80afa86556d2435ca11fa376f06e07e
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -52,6 +86,7 @@ AudioMixerGroupController:
   - {fileID: 8426213847601711555}
   - {fileID: 7454271846980062942}
   - {fileID: 7361900206464600497}
+  - {fileID: -8334704520055278507}
   m_Volume: f757396a25bce4898938882eb312535f
   m_Pitch: fb3d9a7160ac846d8a2dfc4bcaa09bb6
   m_Send: 00000000000000000000000000000000
@@ -85,6 +120,8 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: e87e6615438664f83ab845d5797f3a8b
   m_FloatValues:
+    5cfaebe4e8c1946a08d40bdb1c1012fc: -24.900742
+    c6a5d14b56ec6433e82d7096e5014f92: -10.867776
     835fb60c803594f3b86b541e32d78e7b: -20
   m_TransitionOverrides: {}
 --- !u!244 &211764321243403567

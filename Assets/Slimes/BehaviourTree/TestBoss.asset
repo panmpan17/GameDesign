@@ -1,5 +1,102 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8107021734465891921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab74b0c3ed1b40f9aee14870a7163d3, type: 3}
+  m_Name: JumpTowards
+  m_EditorClassIdentifier: 
+  guid: 8d680d698cb924ffeac4c68484dd3d0a
+  position: {x: 2146.6255, y: 1401.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  forwardSpeed: 0
+  jumpForce: 10
+  jumpForceCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
+    UseVariable: 1
+  jumpTimer:
+    TargetTime: 1.5
+    Running: 0
+    ReverseMode: 0
+  landingMoveforawrd: 0
+  extraGravity: 4
+  grounLayer:
+    serializedVersion: 2
+    m_Bits: 1344
+--- !u!114 &-7821538175416404879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: 611161ed00c614072bf9a171dbfa3dc1
+  position: {x: 919.50006, y: 959.4999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 4
+--- !u!114 &-7401437555473238737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c056fcb977ce47558c2e9a5a36465a2, type: 3}
+  m_Name: CallFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 9402ca5f6e34c4e87825874fc6087d13
+  position: {x: 129.5, y: 684.25}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  FunctionName: 3B
+--- !u!114 &-7342282317170907042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  guid: eab47e8570a4248e7a493e0ca79e9e28
+  position: {x: 1982, y: 1798.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  duration: 1.8
 --- !u!114 &-7253535147055290784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,12 +110,12 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   guid: a8aa40f58b263424c8e8aea149e94a08
-  position: {x: -150, y: 406.5}
+  position: {x: -554, y: 684.25}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  FunctionName: Test
+  FunctionName: 1A
 --- !u!114 &-7081089699509909625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,9 +129,9 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   guid: 47a1298da01e84ac79885543b0b549ed
-  position: {x: -150, y: 774.5}
+  position: {x: -150, y: 1262.5}
   blackboard:
-    TargetPosition: {x: 534.17523, y: 80.04066, z: 194.95056}
+    TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   children:
@@ -43,7 +140,168 @@ MonoBehaviour:
   - {fileID: 8295141724381611202}
   - {fileID: 662007886547806827}
   - {fileID: 4242212508726938970}
-  - {fileID: -2051787074638938513}
+  - {fileID: 5917940211701306561}
+  - {fileID: 6336829705910279752}
+--- !u!114 &-6814576931198318454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 6385dc420b44e494b8f659f02bbea55b
+  position: {x: 769.5, y: 624}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 0}
+  FunctionName: 2A
+--- !u!114 &-6794456462529262047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c056fcb977ce47558c2e9a5a36465a2, type: 3}
+  m_Name: CallFunctionNode
+  m_EditorClassIdentifier: 
+  guid: e68180517b29f48868b0fb9c98630f88
+  position: {x: -362.5, y: 684.25}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  FunctionName: 1B
+--- !u!114 &-6532464730230996150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  guid: 9c3d8c69ad75b4aa5bb419c945bc37b5
+  position: {x: 1683, y: 2060}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: 2078956897250300594}
+  - {fileID: -4551153458666722632}
+  - {fileID: -3949106236736012220}
+  - {fileID: -4583163053208711160}
+  - {fileID: 1157411020910088124}
+--- !u!114 &-6113278735399925043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 47492abd80fdb493cbb5973f6683443c
+  position: {x: 1069.5, y: 624}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 0}
+  FunctionName: 2C
+--- !u!114 &-5871928126130397635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e77c6cba4cc4a7d94605865bace79a, type: 3}
+  m_Name: SetPlayerPositionAsTarget
+  m_EditorClassIdentifier: 
+  guid: e8fc3533c0d05474cb3dda4df5763522
+  position: {x: 1513, y: 1401.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+--- !u!114 &-5856459241937120212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c056fcb977ce47558c2e9a5a36465a2, type: 3}
+  m_Name: CallFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 7a5205110773f463192fb985cada545d
+  position: {x: -22, y: 684.25}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  FunctionName: 3B
+--- !u!114 &-5266413147658848308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
+  m_Name: AlignRotationWIthGround
+  m_EditorClassIdentifier: 
+  guid: 238bc903534f6455aac9bf01a53d3c88
+  position: {x: 1334.5, y: 1401.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &-4829335072286560530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: b4906df347e4540b7897d484c2ab8f54
+  position: {x: 769.4999, y: 831.4999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 2
 --- !u!114 &-4687392221652523225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,12 +315,109 @@ MonoBehaviour:
   m_Name: AlignRotationWIthGround
   m_EditorClassIdentifier: 
   guid: 29fdd6d7181ff42aba785b7a84bbb59b
-  position: {x: -638.35016, y: 952.0001}
+  position: {x: -628.5, y: 1434}
   blackboard:
-    TargetPosition: {x: 534.17523, y: 80.04066, z: 194.95056}
+    TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &-4583163053208711160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: 6cfbb45c1fa9a4068832f6a2eafbd1f8
+  position: {x: 1833, y: 2216}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 7
+--- !u!114 &-4551153458666722632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e77c6cba4cc4a7d94605865bace79a, type: 3}
+  m_Name: SetPlayerPositionAsTarget
+  m_EditorClassIdentifier: 
+  guid: 7499b9d44675d4828a0bfb03199dcebf
+  position: {x: 1533, y: 2216}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+--- !u!114 &-4339907403301930636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: ce9d1081fd2b640629140c7724c834f6
+  position: {x: 1069.5, y: 895.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 3
+--- !u!114 &-3988661268061533609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e77c6cba4cc4a7d94605865bace79a, type: 3}
+  m_Name: SetPlayerPositionAsTarget
+  m_EditorClassIdentifier: 
+  guid: 423c3ae746d1e4505930076838654235
+  position: {x: -373, y: 1873}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+--- !u!114 &-3949106236736012220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1305ada2353741dda1310a2c4f2a630, type: 3}
+  m_Name: FaceTarget
+  m_EditorClassIdentifier: 
+  guid: 80c4a974ab1314896a688cff138fd642
+  position: {x: 1683, y: 2216}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotateSpeed: 60
 --- !u!114 &-3642317406534718288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,13 +431,59 @@ MonoBehaviour:
   m_Name: DefineFunctionNode
   m_EditorClassIdentifier: 
   guid: 652a563327ba84d2f8c7e6455df50804
-  position: {x: -150, y: 590}
+  position: {x: -150, y: 1122.5}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   child: {fileID: -7081089699509909625}
-  FunctionName: Test
+  FunctionName: 1A
+--- !u!114 &-3156156986473414396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: bb886eeaaaff14a009f7a485f5370881
+  position: {x: 919.50006, y: 895.4999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 3
+--- !u!114 &-2518870200038760514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  guid: c9b26e9b62b8f483386ea6d07c0f1919
+  position: {x: -150, y: 1712}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: 7406328043188143815}
+  - {fileID: -3988661268061533609}
+  - {fileID: 7392739860580101095}
+  - {fileID: -1327394631044994075}
+  - {fileID: -1954145323173667681}
+  - {fileID: 1867450188002559802}
 --- !u!114 &-2372878334269000277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,49 +497,231 @@ MonoBehaviour:
   m_Name: SetPlayerPositionAsTarget
   m_EditorClassIdentifier: 
   guid: bccb4065ee2ea44fd85ee5dd420f9fc5
-  position: {x: -459.8502, y: 952.0001}
-  blackboard:
-    TargetPosition: {x: 534.17523, y: 80.04066, z: 194.95056}
-  description: 
-  drawGizmos: 0
---- !u!114 &-2051787074638938513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
-  m_Name: Wait
-  m_EditorClassIdentifier: 
-  guid: 5e07c799c64a84a5f8b00f42bd6dc760
-  position: {x: 150, y: 952}
-  blackboard:
-    TargetPosition: {x: 534.17523, y: 80.04066, z: 194.95056}
-  description: 
-  drawGizmos: 0
-  duration: 0.3
---- !u!114 &-1116465762519608589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
-  m_Name: Wait
-  m_EditorClassIdentifier: 
-  guid: 041356bca1d8d429e83d681f5c16b031
-  position: {x: 369.49988, y: 406.5}
+  position: {x: -450, y: 1434}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  duration: 1
+--- !u!114 &-2343922756884104753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  guid: b2c9bb53aedee4397ac9fd482b808628
+  position: {x: 1962, y: 1401.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  duration: 1.8
+--- !u!114 &-2291437890605390101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 45a4de830c3a74af8a78d3f4df41eca6
+  position: {x: -150, y: 1564.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: -2518870200038760514}
+  FunctionName: 1B
+--- !u!114 &-2133478017619321885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 338b9eb9f88d34d33853f58441e0e898
+  position: {x: 2166, y: 623.9999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 0}
+  FunctionName: 3D
+--- !u!114 &-1954145323173667681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: 6a5ca9cf49b324a078db55a0ef541b65
+  position: {x: 77, y: 1873}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 1
+--- !u!114 &-1901577279799732359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: 2c93bcc8f0eb74572b40059e85dd5b20
+  position: {x: 1813, y: 1401.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 5
+--- !u!114 &-1327394631044994075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab74b0c3ed1b40f9aee14870a7163d3, type: 3}
+  m_Name: JumpTowards
+  m_EditorClassIdentifier: 
+  guid: 86b88f52970f2406d89aff89dc35d68d
+  position: {x: -75, y: 1873}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  forwardSpeed: 3
+  jumpForce: 3
+  jumpForceCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
+    UseVariable: 1
+  jumpTimer:
+    TargetTime: 0.6
+    Running: 0
+    ReverseMode: 0
+  landingMoveforawrd: 0
+  extraGravity: 1
+  grounLayer:
+    serializedVersion: 2
+    m_Bits: 1344
+--- !u!114 &-1309702957749125075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: 54ef7d85669074e308744a17821a30c9
+  position: {x: 769.5, y: 895.4999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 3
+--- !u!114 &-896573074149439561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: deed4d76f84e2418ab9506ef7600ae4e
+  position: {x: 919.50006, y: 831.4999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 2
+--- !u!114 &-714208359770587173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
+  m_Name: AlignRotationWIthGround
+  m_EditorClassIdentifier: 
+  guid: 23d6bd53cd07f42a5969d0e3e8e8d81e
+  position: {x: 1354.5, y: 1798.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &-22379998164534065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 3cb553ecd0ada44ada3aac2fd6c31b00
+  position: {x: 1663, y: 1122.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 7692953423541333491}
+  FunctionName: 3A
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,17 +742,115 @@ MonoBehaviour:
   - {fileID: 3070886631383018155}
   - {fileID: 8295141724381611202}
   - {fileID: 4242212508726938970}
-  - {fileID: -2051787074638938513}
   - {fileID: 3611525666093287271}
-  - {fileID: -1116465762519608589}
-  - {fileID: 5938664393090166391}
   - {fileID: -2372878334269000277}
   - {fileID: -4687392221652523225}
   - {fileID: -7253535147055290784}
   - {fileID: -3642317406534718288}
   - {fileID: 662007886547806827}
+  - {fileID: -2291437890605390101}
+  - {fileID: -6814576931198318454}
+  - {fileID: 4815246481194468287}
+  - {fileID: -6113278735399925043}
+  - {fileID: 7370990374116368046}
+  - {fileID: -22379998164534065}
+  - {fileID: 6435285306403489336}
+  - {fileID: 47797585166630479}
+  - {fileID: -2133478017619321885}
+  - {fileID: 6226961007987193565}
+  - {fileID: 7406328043188143815}
+  - {fileID: -3988661268061533609}
+  - {fileID: 7392739860580101095}
+  - {fileID: -1327394631044994075}
+  - {fileID: -1954145323173667681}
+  - {fileID: -2518870200038760514}
+  - {fileID: -6794456462529262047}
+  - {fileID: 2335085673315952559}
+  - {fileID: 6336829705910279752}
+  - {fileID: 1867450188002559802}
+  - {fileID: 5917940211701306561}
+  - {fileID: -8107021734465891921}
+  - {fileID: 4155852691236190134}
+  - {fileID: 6030435953450992838}
+  - {fileID: 4791530562966295518}
+  - {fileID: 2084755664863440676}
+  - {fileID: 5838450086756705718}
+  - {fileID: 4293551609420528757}
+  - {fileID: -1901577279799732359}
+  - {fileID: 2027653711032836242}
+  - {fileID: -4583163053208711160}
+  - {fileID: 9194448582960900450}
+  - {fileID: -4829335072286560530}
+  - {fileID: -1309702957749125075}
+  - {fileID: 1996919121750145531}
+  - {fileID: -7821538175416404879}
+  - {fileID: -3156156986473414396}
+  - {fileID: -896573074149439561}
+  - {fileID: 2211368534918876113}
+  - {fileID: -4339907403301930636}
+  - {fileID: 5819121671460354508}
+  - {fileID: 364907650673994772}
+  - {fileID: -5266413147658848308}
+  - {fileID: -5871928126130397635}
+  - {fileID: 9088197331215676033}
+  - {fileID: 7692953423541333491}
+  - {fileID: -2343922756884104753}
+  - {fileID: 7642255434710279695}
+  - {fileID: -6532464730230996150}
+  - {fileID: 2078956897250300594}
+  - {fileID: -4551153458666722632}
+  - {fileID: -3949106236736012220}
+  - {fileID: 1157411020910088124}
+  - {fileID: 2658842803546874924}
+  - {fileID: -714208359770587173}
+  - {fileID: 1893337781133277148}
+  - {fileID: 8372783135372145642}
+  - {fileID: -7342282317170907042}
+  - {fileID: -5856459241937120212}
+  - {fileID: -7401437555473238737}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &47797585166630479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 6965a97e272fc430685b49a17a98adff
+  position: {x: 1683, y: 1925}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: -6532464730230996150}
+  FunctionName: 3C
+--- !u!114 &364907650673994772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: b825e166206e64c4dbb8ec01c3ff30be
+  position: {x: 1219.5, y: 959.49994}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 4
 --- !u!114 &662007886547806827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,13 +864,13 @@ MonoBehaviour:
   m_Name: JumpTowards
   m_EditorClassIdentifier: 
   guid: ffe5fcee2a721479a81891cc67af6c49
-  position: {x: -150.00009, y: 951.9999}
+  position: {x: -150, y: 1434}
   blackboard:
-    TargetPosition: {x: 534.17523, y: 80.04066, z: 194.95056}
+    TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  forwardSpeed: 3
-  jumpForce: 3
+  forwardSpeed: 2.8
+  jumpForce: 3.5
   jumpForceCurve:
     Constant:
       serializedVersion: 2
@@ -200,12 +881,33 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
     UseVariable: 1
   jumpTimer:
-    TargetTime: 0.6
+    TargetTime: 1
     Running: 1
     ReverseMode: 0
+  landingMoveforawrd: 0
+  extraGravity: 1.8
   grounLayer:
     serializedVersion: 2
     m_Bits: 1344
+--- !u!114 &1157411020910088124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  guid: 42512f27fc7b34791b5c535b08449731
+  position: {x: 1982, y: 2216}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  duration: 1.8
 --- !u!114 &1559538727858598782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +927,197 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   child: {fileID: 3070886631383018155}
+--- !u!114 &1867450188002559802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  guid: c4fecfd86bd6d4190bf650e94d487269
+  position: {x: 227, y: 1873}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  duration: 1
+--- !u!114 &1893337781133277148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e77c6cba4cc4a7d94605865bace79a, type: 3}
+  m_Name: SetPlayerPositionAsTarget
+  m_EditorClassIdentifier: 
+  guid: 99ab02044b0484c33b019e797e482bea
+  position: {x: 1533, y: 1798.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+--- !u!114 &1996919121750145531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: ea8135a0d5f7b400f9867416faea3042
+  position: {x: 769.4999, y: 959.4999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 4
+--- !u!114 &2027653711032836242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: 8e33abdd696ca4b75973b5fee084ee4a
+  position: {x: 1833, y: 1798.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 6
+--- !u!114 &2078956897250300594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
+  m_Name: AlignRotationWIthGround
+  m_EditorClassIdentifier: 
+  guid: 1262497b018bc4df1b726d4ef746932c
+  position: {x: 1354.5, y: 2216}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2084755664863440676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb5496e8cd973748a10b3e3ef436ebd, type: 3}
+  m_Name: Repeat
+  m_EditorClassIdentifier: 
+  guid: c550b72d19bcb4796be4ed0f381f4eb2
+  position: {x: -197.50003, y: 428.49997}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 2335085673315952559}
+  repeatLimit:
+    Enable: 1
+    Value: 10
+  restartOnSuccess: 1
+  restartOnFailure: 0
+--- !u!114 &2211368534918876113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: 964941e13390547f2ae89f4e8b2476fd
+  position: {x: 1069.5, y: 831.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 2
+--- !u!114 &2335085673315952559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee64948bda9e2fe4fb5ad88265395141, type: 3}
+  m_Name: RandomSelector
+  m_EditorClassIdentifier: 
+  guid: da7c9a6531a2f4a6791385a0483565d3
+  position: {x: -197.5, y: 536.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: -7253535147055290784}
+  - {fileID: -6794456462529262047}
+  - {fileID: 7642255434710279695}
+  - {fileID: -5856459241937120212}
+  - {fileID: -7401437555473238737}
+--- !u!114 &2658842803546874924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  guid: 91bb4c8daec2c42ed9b22e51e8e2b9f8
+  position: {x: 1683, y: 1644.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: -714208359770587173}
+  - {fileID: 1893337781133277148}
+  - {fileID: 8372783135372145642}
+  - {fileID: 2027653711032836242}
+  - {fileID: -7342282317170907042}
 --- !u!114 &3070886631383018155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +1136,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  child: {fileID: 5938664393090166391}
+  child: {fileID: 4293551609420528757}
   repeatLimit:
     Enable: 0
     Value: 0
@@ -268,6 +1161,25 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   children: []
+--- !u!114 &4155852691236190134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dba6fef1a594d10af2b4b0994aa480, type: 3}
+  m_Name: TriggerShockWave
+  m_EditorClassIdentifier: 
+  guid: ce28276f4096b4974849a648f19178a2
+  position: {x: 2296.6255, y: 1401.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  forceSize: 1.5
 --- !u!114 &4242212508726938970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,15 +1193,15 @@ MonoBehaviour:
   m_Name: ShootTrigger
   m_EditorClassIdentifier: 
   guid: 2757e70237038486bb719cc80737b92f
-  position: {x: 0, y: 952}
+  position: {x: 0, y: 1434}
   blackboard:
-    TargetPosition: {x: 534.17523, y: 80.04066, z: 194.95056}
+    TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   TriggerGroupIndex:
     Enable: 1
-    Value: 1
---- !u!114 &5938664393090166391
+    Value: 0
+--- !u!114 &4293551609420528757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,18 +1210,298 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 460be9e34c566ea45b9e282b1adcb028, type: 3}
-  m_Name: Selector
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
   m_EditorClassIdentifier: 
-  guid: 29184d908d19e4fec917797bc3f008e4
-  position: {x: 0, y: 266}
+  guid: 08dd26c495f79456e8c38b703133188c
+  position: {x: 0.00007216263, y: 266}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   children:
-  - {fileID: -7253535147055290784}
-  - {fileID: -1116465762519608589}
+  - {fileID: 2084755664863440676}
+  - {fileID: 5838450086756705718}
+--- !u!114 &4791530562966295518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  guid: 96853bbeb0e72468f91e4d127dc008e2
+  position: {x: 2446.6252, y: 1401.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  duration: 3
+--- !u!114 &4815246481194468287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: aaebd194008d744bba0cb204cf4166bb
+  position: {x: 919.5, y: 624}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 0}
+  FunctionName: 2B
+--- !u!114 &5819121671460354508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: f910a7f22ac8346bd8c84e4334ef6319
+  position: {x: 1069.5, y: 959.49994}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 4
+--- !u!114 &5838450086756705718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c056fcb977ce47558c2e9a5a36465a2, type: 3}
+  m_Name: CallFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 8e0da6a33281b47aa9e4b4d2eae8f9d7
+  position: {x: 175.71, y: 413.9675}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  FunctionName: 4
+--- !u!114 &5917940211701306561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dba6fef1a594d10af2b4b0994aa480, type: 3}
+  m_Name: TriggerShockWave
+  m_EditorClassIdentifier: 
+  guid: 8b010bfdadb7344059de0d274bdf79e6
+  position: {x: 150, y: 1434}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  forceSize: 0.5
+--- !u!114 &6030435953450992838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  guid: 6580aa810664f46519b330ebbbbf7845
+  position: {x: 2296.6255, y: 1265.4999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: -8107021734465891921}
+  - {fileID: 4155852691236190134}
+  - {fileID: 4791530562966295518}
+--- !u!114 &6226961007987193565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: bcce18564ebbb43549cefd4b2adbdedb
+  position: {x: 2296.6255, y: 1122.4999}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 6030435953450992838}
+  FunctionName: 4
+--- !u!114 &6336829705910279752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  guid: 4cbce10e8d6934d83bf5e440dc8377dd
+  position: {x: 300, y: 1434}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  duration: 1.2
+--- !u!114 &6435285306403489336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 96936cf4e5f74459e8b437b8dfd1171c
+  position: {x: 1683, y: 1501}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 2658842803546874924}
+  FunctionName: 3B
+--- !u!114 &7370990374116368046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c9f6101fd6942c9ab7cc36c36b43ae, type: 3}
+  m_Name: DefineFunctionNode
+  m_EditorClassIdentifier: 
+  guid: dfeab6af25fab4c3f8ff4dfdd6786a76
+  position: {x: 1219.5, y: 624}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  child: {fileID: 0}
+  FunctionName: 2D
+--- !u!114 &7392739860580101095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1305ada2353741dda1310a2c4f2a630, type: 3}
+  m_Name: FaceTarget
+  m_EditorClassIdentifier: 
+  guid: 19cbcb2d028d544008135553d46c5f9b
+  position: {x: -223, y: 1873}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotateSpeed: 60
+--- !u!114 &7406328043188143815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
+  m_Name: AlignRotationWIthGround
+  m_EditorClassIdentifier: 
+  guid: 392212cc014cd4beea5c112605b00878
+  position: {x: -552.5, y: 1873}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7642255434710279695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c056fcb977ce47558c2e9a5a36465a2, type: 3}
+  m_Name: CallFunctionNode
+  m_EditorClassIdentifier: 
+  guid: e6537fc7ebc3f479bbfceae6d0fbc7b7
+  position: {x: -197.5, y: 684.25}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  FunctionName: 3A
+--- !u!114 &7692953423541333491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
+  m_Name: Sequencer
+  m_EditorClassIdentifier: 
+  guid: dbfdea4aee3b04a45a2cd10855b55f62
+  position: {x: 1663, y: 1245.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  children:
+  - {fileID: -5266413147658848308}
+  - {fileID: -5871928126130397635}
+  - {fileID: 9088197331215676033}
+  - {fileID: -1901577279799732359}
+  - {fileID: -2343922756884104753}
 --- !u!114 &8295141724381611202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,9 +1515,68 @@ MonoBehaviour:
   m_Name: FaceTarget
   m_EditorClassIdentifier: 
   guid: 41aab64e584ad4043b597b83808f2916
-  position: {x: -309.85016, y: 952.0001}
+  position: {x: -300, y: 1434}
   blackboard:
-    TargetPosition: {x: 534.17523, y: 80.04066, z: 194.95056}
+    TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
   rotateSpeed: 60
+--- !u!114 &8372783135372145642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1305ada2353741dda1310a2c4f2a630, type: 3}
+  m_Name: FaceTarget
+  m_EditorClassIdentifier: 
+  guid: 42d0c3eece8764c0a99d1cdc6147191a
+  position: {x: 1683, y: 1798.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotateSpeed: 60
+--- !u!114 &9088197331215676033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1305ada2353741dda1310a2c4f2a630, type: 3}
+  m_Name: FaceTarget
+  m_EditorClassIdentifier: 
+  guid: 816a17943c6854000becce1067b9858d
+  position: {x: 1663, y: 1401.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  rotateSpeed: 60
+--- !u!114 &9194448582960900450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
+  m_Name: ShootTrigger
+  m_EditorClassIdentifier: 
+  guid: 9f0a27df55c494a39841bfc64637d171
+  position: {x: 2166, y: 863.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  TriggerGroupIndex:
+    Enable: 1
+    Value: 8

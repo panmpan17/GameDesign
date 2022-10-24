@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     private FloatReference drawBowSlowDown;
     [SerializeField]
     private float turnSpeed;
+    [Tooltip("球體旋轉角度, 下面到中間時從0變成360, 所以下會比上多")]
+    [SerializeField]
+    private float aimDownLimit = 320;
+    [SerializeField]
+    private float aimUpLimit = 40;
 
     [Header("Jump")]
     [SerializeField]
@@ -46,10 +51,35 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Timer waitRollTimer;
 
+    [Header("Slope Sliding")]
+    [SerializeField]
+    private bool willSlopSliding;
+    [SerializeField]
+    private float slopeSlideSpeed;
+    private Vector3 slopeNormal;
+
+    public bool IsSlopSliding {
+        get {
+            RaycastHit hit;
+            if (!IsGrounded || !Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f, smartGroundDetect.Layers))
+                return false;
+            
+            slopeNormal = hit.normal;
+            return Vector3.Angle(slopeNormal, Vector3.up) > characterController.slopeLimit;
+        }
+    }
+
 
     public event System.Action OnJumpEvent;
+    /// <summary>
+    /// If rejump, jump end waont be called
+    /// </summary>
     public event System.Action OnJumpEndEvent;
     public event System.Action OnRejumpEvent;
+    /// <summary>
+    /// Even if rejump, land will still be called
+    /// </summary>
+    public event System.Action OnLandEvent;
 
     public event System.Action OnRollEvent;
     public event System.Action OnRollEndEvent;
@@ -114,12 +144,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 angles = followTarget.transform.localEulerAngles;
         angles.z = 0;
 
-        if (angles.x > 180 && angles.x < 340)
-            angles.x = 340;
-        else if (angles.x < 180 && angles.x > 40)
-            angles.x = 40;
+        if (angles.x > 180 && angles.x < aimDownLimit)
+            angles.x = aimDownLimit;
+        else if (angles.x < 180 && angles.x > aimUpLimit)
+            angles.x = aimUpLimit;
 
-        AngleLerpValue = Mathf.InverseLerp(340, 400, angles.x < 180 ? angles.x + 360: angles.x);
+        AngleLerpValue = Mathf.InverseLerp(aimDownLimit, 360 + aimUpLimit, angles.x < 180 ? angles.x + 360: angles.x);
 
         followTarget.transform.localEulerAngles = angles;
     }
@@ -131,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
         if (behaviour.IsDead)
             return;
 
-        _walking = input.MovementAxis.x != 0 || input.MovementAxis.y != 0;
+        _walking = input.HasMovementAxis;
 
         if (_walking)
         {
@@ -173,13 +203,10 @@ public class PlayerMovement : MonoBehaviour
         if (progress >= 1)
         {
             _rolling = false;
-            // FaceWithFollowTarget();
             OnRollEndEvent?.Invoke();
 
             if (waitJumpTimer.Running) Jump();
             if (waitRollTimer.Running) Roll();
-
-            // Debug.Break();
         }
     }
 
@@ -200,14 +227,26 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleGroundedPhysic()
     {
+        if (IsSlopSliding)
+        {
+            if ((slopeNormal.x > 0 && _velocity.x <= 0) || (slopeNormal.x < 0 && _velocity.x >= 0))
+                _velocity.x = slopeNormal.x * slopeSlideSpeed;
+            if ((slopeNormal.z > 0 && _velocity.z <= 0) || (slopeNormal.z < 0 && _velocity.z >= 0))
+                _velocity.z = slopeNormal.z * slopeSlideSpeed;
+            _yVelocity += Physics.gravity.y * Time.deltaTime;
+            return;
+        }
+
         if (!_jumping)
         {
             _yVelocity = 0;
             return;
         }
 
-        if (!_liftFromGround)
+        if (_jumping && !_liftFromGround)
             return;
+
+        OnLandEvent?.Invoke();
 
         if (waitJumpTimer.Running)
         {
@@ -226,12 +265,6 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, followTarget.transform.eulerAngles.y, 0);
         followTarget.localEulerAngles = new Vector3(followTarget.transform.localEulerAngles.x, 0, 0);
-
-        // Quaternion previousRotation = followTarget.rotation;
-        // transform.rotation = Quaternion.RotateTowards(
-        //     transform.rotation,
-        //     Quaternion.Euler(0, followTarget.transform.eulerAngles.y, 0), turnSpeed * Time.deltaTime);
-        // followTarget.rotation = previousRotation;
     }
 
     void OnJump()
@@ -246,6 +279,8 @@ public class PlayerMovement : MonoBehaviour
             waitJumpTimer.Reset();
             return;
         }
+        if (IsSlopSliding)
+            return;
 
         Jump();
     }
@@ -286,7 +321,7 @@ public class PlayerMovement : MonoBehaviour
     void Roll()
     {
         _rolling = true;
-        if (input.MovementAxis.sqrMagnitude < 0.01f)
+        if (!input.HasMovementAxis)
         {
             FaceWithFollowTarget();
             _rollDirection = followTarget.forward;
@@ -299,7 +334,10 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 acceleration = followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y;
             _rollDirection = (followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y).normalized;
-            transform.rotation = Quaternion.LookRotation(_rollDirection, Vector3.up);
+            // transform.rotation = Quaternion.LookRotation(_rollDirection, Vector3.up);
+
+            Quaternion destination = Quaternion.LookRotation(_rollDirection, Vector3.up);
+            transform.rotation = Quaternion.Euler(0, destination.eulerAngles.y, 0);
 
             followTarget.rotation = previousRotation;
         }

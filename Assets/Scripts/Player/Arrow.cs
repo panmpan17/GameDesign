@@ -11,16 +11,33 @@ public class Arrow : MonoBehaviour, IPoolableObj
     [SerializeField]
     private float speed;
     [SerializeField]
+    private Timer ignoreGravityTimer;
+    private float _baseTime;
+    [SerializeField]
     private new Rigidbody rigidbody;
+    [SerializeField]
+    private TrailRenderer trail;
+
+    [SerializeField]
+    private EffectReference hit;
+
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClipSet hitSound;
 
     public void Instantiate()
     {
         rigidbody.isKinematic = true;
         rigidbody.velocity = Vector3.zero;
+        trail.emitting = false;
+
+        _baseTime = ignoreGravityTimer.TargetTime;
     }
 
     public void DeactivateObj(Transform collectionTransform)
     {
+        enabled = false;
         gameObject.SetActive(false);
         transform.SetParent(collectionTransform);
     }
@@ -32,16 +49,35 @@ public class Arrow : MonoBehaviour, IPoolableObj
         rigidbody.velocity = Vector3.zero;
     }
 
-    public void Shoot(Vector3 targetPosition)
+    public void Shoot(Vector3 targetPosition, float extraDuration)
     {
+        enabled = true;
+
+        ignoreGravityTimer.TargetTime = _baseTime + extraDuration;
+
         transform.rotation = Quaternion.LookRotation(targetPosition - transform.position, transform.up);
 
         rigidbody.velocity = transform.forward * speed;
         rigidbody.isKinematic = false;
+        trail.emitting = true;
+
+        ignoreGravityTimer.Reset();
     }
 
     void FixedUpdate()
     {
+        if (ignoreGravityTimer.Running)
+        {
+            if (ignoreGravityTimer.FixedUpdateEnd)
+            {
+                ignoreGravityTimer.Running = false;
+                rigidbody.useGravity = true;
+            }
+        }
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(rigidbody.velocity, transform.up);
+        }
         if (transform.position.y > HeightLimit || transform.position.y < LowLimit)
             gameObject.SetActive(false);
     }
@@ -59,8 +95,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
     void HandleHit(Transform otherTransform)
     {
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.isKinematic = true;
+        enabled = false;
 
         if (otherTransform.CompareTag("Slime"))
         {
@@ -71,6 +106,15 @@ public class Arrow : MonoBehaviour, IPoolableObj
             transform.SetParent(otherTransform.parent);
             var slimeCore = otherTransform.GetComponent<SlimeCore>();
             slimeCore.OnDamage();
+
+            hit.AddWaitingList(transform.position, Quaternion.LookRotation(-rigidbody.velocity, Vector3.up));
+            audioSource.Play(hitSound);
         }
+
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.isKinematic = true;
+
+        trail.emitting = false;
+        rigidbody.useGravity = false;
     }
 }

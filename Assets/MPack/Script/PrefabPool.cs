@@ -205,6 +205,15 @@ namespace MPack {
             throw new System.ArgumentException("Component doesn't belong to this prefab pool");
 #endif
         }
+
+        public void DisableAll()
+        {
+            for (int i = 0; i < Objects.Length; i++)
+            {
+                Objects[i].DeactivateObj(PoolCollection);
+                Actives[i] = false;
+            }
+        }
     }
 
 

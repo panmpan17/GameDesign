@@ -16,6 +16,7 @@ class ExportTerrain : EditorWindow
    SaveFormat saveFormat = SaveFormat.Triangles;
    SaveResolution saveResolution = SaveResolution.Half;
  
+   static Terrain terrainObject;
    static TerrainData terrain;
    static Vector3 terrainPos;
  
@@ -28,7 +29,7 @@ class ExportTerrain : EditorWindow
    static void Init()
    {
       terrain = null;
-      Terrain terrainObject = Selection.activeObject as Terrain;
+      terrainObject = Selection.activeObject as Terrain;
       if (!terrainObject)
       {
          terrainObject = Terrain.activeTerrain;
@@ -44,6 +45,14 @@ class ExportTerrain : EditorWindow
  
    void OnGUI()
    {
+      EditorGUI.BeginChangeCheck();
+      terrainObject = (Terrain)EditorGUILayout.ObjectField(terrainObject, typeof(Terrain), true);
+      if (EditorGUI.EndChangeCheck())
+      {
+         terrain = terrainObject.terrainData;
+         terrainPos = terrainObject.transform.position;
+      }
+
       if (!terrain)
       {
          GUILayout.Label("No terrain found");

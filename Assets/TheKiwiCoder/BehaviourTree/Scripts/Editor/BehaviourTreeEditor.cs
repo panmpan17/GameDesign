@@ -25,7 +25,7 @@ namespace TheKiwiCoder {
         SerializedObject treeObject;
         SerializedProperty blackboardProperty;
 
-        [MenuItem("TheKiwiCoder/BehaviourTreeEditor ...")]
+        [MenuItem("Game/AI Behaviour Tree 行為樹")]
         public static void OpenWindow() {
             BehaviourTreeEditor wnd = GetWindow<BehaviourTreeEditor>();
             wnd.titleContent = new GUIContent("BehaviourTreeEditor");
@@ -70,7 +70,7 @@ namespace TheKiwiCoder {
 
             // Main treeview
             treeView = root.Q<BehaviourTreeView>();
-            treeView.OnNodeSelected = OnNodeSelectionChanged;
+            treeView.OnNodeSelected += OnNodeSelectionChanged;
 
             // Inspector View
             inspectorView = root.Q<InspectorView>();
