@@ -70,7 +70,7 @@ namespace TheKiwiCoder {
 
             // Main treeview
             treeView = root.Q<BehaviourTreeView>();
-            treeView.OnNodeSelected = OnNodeSelectionChanged;
+            treeView.OnNodeSelected += OnNodeSelectionChanged;
 
             // Inspector View
             inspectorView = root.Q<InspectorView>();

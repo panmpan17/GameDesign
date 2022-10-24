@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3554fe228b8340559ddf86ac6b9ff87, type: 3}
-  m_Name: CanonShell
+  m_Script: {fileID: 11500000, guid: 08e9d4bfb37f84176b82a6a7344045d6, type: 3}
+  m_Name: CanonLocationIndicator
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 311002395932292843, guid: 9eb5f5bd934554ac09d275eca55a1a30, type: 3}
-  AllowBulletTrigger: 0
-  AllowCanonPhysic: 1
-  UseBillboardRotate: 1
-  InstantiateCount: 30
+  Prefab: {fileID: 4579464667140326499, guid: f517c938b008b41e8a6b3665c00b3f83, type: 3}
+  CreateCollection: 1
+  CollectionName: CanonTargets

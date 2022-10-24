@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   guid: a21ce037540c14866a6854c51a95583a
-  position: {x: 182.49988, y: 576.4999}
+  position: {x: 0, y: 576.5}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -38,31 +38,8 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   children:
-  - {fileID: -5228825757130529181}
-  - {fileID: 8129671947899243657}
-  - {fileID: -2416710676626021}
-  - {fileID: 8295141724381611202}
   - {fileID: 4242212508726938970}
   - {fileID: -7105056377877159192}
---- !u!114 &-5228825757130529181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
-  m_Name: AlignRotationWIthGround
-  m_EditorClassIdentifier: 
-  guid: 077a2cdf43762449cb40143d06d70910
-  position: {x: -596, y: 576.5}
-  blackboard:
-    TargetPosition: {x: 0, y: 0, z: 0}
-  description: 
-  drawGizmos: 0
-  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &-1116465762519608589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,28 +59,6 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   duration: 1
---- !u!114 &-2416710676626021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d636e16b5426400fb03ee9a883e6c05, type: 3}
-  m_Name: CheckTargetInEyeSight
-  m_EditorClassIdentifier: 
-  guid: cce8f324215e4431eb1245f7ab7b118d
-  position: {x: -267.5, y: 576.5}
-  blackboard:
-    TargetPosition: {x: 0, y: 0, z: 0}
-  description: 
-  drawGizmos: 1
-  senseRange: 18
-  raycastLayers:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,15 +77,11 @@ MonoBehaviour:
   - {fileID: 1559538727858598782}
   - {fileID: -7081089699509909625}
   - {fileID: 3070886631383018155}
-  - {fileID: 8295141724381611202}
   - {fileID: 4242212508726938970}
   - {fileID: -7105056377877159192}
-  - {fileID: -2416710676626021}
   - {fileID: 3611525666093287271}
   - {fileID: -1116465762519608589}
   - {fileID: 5938664393090166391}
-  - {fileID: 8129671947899243657}
-  - {fileID: -5228825757130529181}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1559538727858598782
@@ -208,7 +159,7 @@ MonoBehaviour:
   m_Name: ShootTrigger
   m_EditorClassIdentifier: 
   guid: 2757e70237038486bb719cc80737b92f
-  position: {x: 32.5, y: 576.5}
+  position: {x: -193.5, y: 576.5}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -237,40 +188,3 @@ MonoBehaviour:
   children:
   - {fileID: -7081089699509909625}
   - {fileID: -1116465762519608589}
---- !u!114 &8129671947899243657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ccb93fc9ee6049489cbae6ab6b7050e, type: 3}
-  m_Name: SetFixedTargetAsTarget
-  m_EditorClassIdentifier: 
-  guid: 0f55d9217477a42559a5b8f6efd5b73b
-  position: {x: -417.5, y: 576.5}
-  blackboard:
-    TargetPosition: {x: 0, y: 0, z: 0}
-  description: 
-  drawGizmos: 0
---- !u!114 &8295141724381611202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1305ada2353741dda1310a2c4f2a630, type: 3}
-  m_Name: FaceTarget
-  m_EditorClassIdentifier: 
-  guid: 41aab64e584ad4043b597b83808f2916
-  position: {x: -117.5, y: 576.5}
-  blackboard:
-    TargetPosition: {x: 0, y: 0, z: 0}
-  description: 
-  drawGizmos: 0
-  rotateSpeed: 60

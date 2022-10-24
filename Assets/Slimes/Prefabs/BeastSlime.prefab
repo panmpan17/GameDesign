@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1387602142871391637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 72544212059931364}
+  - component: {fileID: 832382264231400579}
+  m_Layer: 8
+  m_Name: BulletTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &72544212059931364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387602142871391637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7299391971672539435}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &832382264231400579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387602142871391637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36003d0d25ea44f4dbc6552fbd49f498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 4
+  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
+  radius: 0.1
+  segmentCount: 8
 --- !u!1 &7299391971672539431
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,14 +81,7 @@ Transform:
   m_Children:
   - {fileID: 7299391972435760617}
   - {fileID: 7299391973557076120}
-  - {fileID: 7299391973248710446}
-  - {fileID: 7299391971720977082}
-  - {fileID: 7299391972536450992}
-  - {fileID: 7299391973459187232}
-  - {fileID: 7299391973252495457}
-  - {fileID: 7299391972448326582}
-  - {fileID: 7299391972711577062}
-  - {fileID: 7299391972854625832}
+  - {fileID: 72544212059931364}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -360, z: 0}
@@ -87,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 9e338a82ff492472b8128709d90ddb6a, type: 2}
   triggerFireGroups: []
+  impulseSource: {fileID: 0}
   player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
   fixedTarget: {fileID: 0}
   lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
@@ -99,52 +141,6 @@ MonoBehaviour:
       Running: 0
       ReverseMode: 0
   sinkHeight: 1
---- !u!1 &7299391971720977077
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7299391971720977082}
-  - component: {fileID: 7299391971720977083}
-  m_Layer: 7
-  m_Name: BulletTrigger (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7299391971720977082
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391971720977077}
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7299391971672539435}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
---- !u!114 &7299391971720977083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391971720977077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d86b57d4bf74c3d834103d02a25705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
 --- !u!1 &7299391972435760616
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,328 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce2d6a03ff4640a8932414e937af41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7299391972448326577
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7299391972448326582}
-  - component: {fileID: 7299391972448326583}
-  m_Layer: 7
-  m_Name: BulletTrigger (5)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7299391972448326582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391972448326577}
-  m_LocalRotation: {x: 0, y: 0.9238796, z: -0, w: -0.38268325}
-  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7299391971672539435}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 225, z: 0}
---- !u!114 &7299391972448326583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391972448326577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d86b57d4bf74c3d834103d02a25705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
---- !u!1 &7299391972536450995
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7299391972536450992}
-  - component: {fileID: 7299391972536450993}
-  m_Layer: 7
-  m_Name: BulletTrigger (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7299391972536450992
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391972536450995}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7299391971672539435}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &7299391972536450993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391972536450995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d86b57d4bf74c3d834103d02a25705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
---- !u!1 &7299391972711577057
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7299391972711577062}
-  - component: {fileID: 7299391972711577063}
-  m_Layer: 7
-  m_Name: BulletTrigger (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7299391972711577062
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391972711577057}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7299391971672539435}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!114 &7299391972711577063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391972711577057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d86b57d4bf74c3d834103d02a25705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
---- !u!1 &7299391972854625835
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7299391972854625832}
-  - component: {fileID: 7299391972854625833}
-  m_Layer: 7
-  m_Name: BulletTrigger (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7299391972854625832
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391972854625835}
-  m_LocalRotation: {x: 0, y: 0.3826836, z: -0, w: -0.92387944}
-  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7299391971672539435}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 315, z: 0}
---- !u!114 &7299391972854625833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391972854625835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d86b57d4bf74c3d834103d02a25705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
---- !u!1 &7299391973248710441
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7299391973248710446}
-  - component: {fileID: 7299391973248710447}
-  m_Layer: 7
-  m_Name: BulletTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7299391973248710446
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391973248710441}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7299391971672539435}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7299391973248710447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391973248710441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d86b57d4bf74c3d834103d02a25705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
---- !u!1 &7299391973252495456
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7299391973252495457}
-  - component: {fileID: 7299391973252495462}
-  m_Layer: 7
-  m_Name: BulletTrigger (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7299391973252495457
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391973252495456}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7299391971672539435}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &7299391973252495462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391973252495456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d86b57d4bf74c3d834103d02a25705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
---- !u!1 &7299391973459187235
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7299391973459187232}
-  - component: {fileID: 7299391973459187233}
-  m_Layer: 7
-  m_Name: BulletTrigger (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7299391973459187232
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391973459187235}
-  m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: -0.018, y: 0.828, z: 0.408}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7299391971672539435}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
---- !u!114 &7299391973459187233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299391973459187235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d86b57d4bf74c3d834103d02a25705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 3
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
 --- !u!1 &7299391973557076123
 GameObject:
   m_ObjectHideFlags: 0

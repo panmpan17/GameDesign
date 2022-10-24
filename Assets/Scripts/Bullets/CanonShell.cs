@@ -14,15 +14,34 @@ public class CanonShell : BulletBehaviour
     [SerializeField]
     private float explosionRadius;
 
+    private Vector3 _extraGravity;
+
+    public event System.Action OnCollide;
+
     public override void Shoot(PhysicSimulate physicSimulate)
     {
         transform.position = physicSimulate.Position;
         rigidbody.mass = physicSimulate.Mass;
         rigidbody.velocity = physicSimulate.Velocity;
+
+        _extraGravity = physicSimulate.Gravity - Physics.gravity;
+    }
+
+    void FixedUpdate()
+    {
+        rigidbody.velocity += (_extraGravity * Time.fixedDeltaTime) / rigidbody.mass;
+        // Vector3 gravity = globalGravity * gravityScale * Vector3.up;
+        // rigidbody.AddForce(_extraGravity, ForceMode.Acceleration);
     }
 
     void OnTriggerEnter(Collider collider)
     {
+        if (expolosionParticle.isPlaying)
+            return;
+
+        OnCollide?.Invoke();
+        OnCollide = null;
+
         rigidbody.velocity = Vector3.zero;
         rigidbody.isKinematic = true;
 
@@ -66,6 +85,13 @@ public class CanonShell : BulletBehaviour
         PutBackToPool();
     }
 
+
+    public override void DeactivateObj(Transform collectionTransform)
+    {
+        base.DeactivateObj(collectionTransform);
+        OnCollide?.Invoke();
+        OnCollide = null;
+    }
 
     public override void Reinstantiate()
     {
