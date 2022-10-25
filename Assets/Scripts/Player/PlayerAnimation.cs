@@ -71,6 +71,8 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private AudioClipSet bowShootClip;
     [SerializeField]
+    private RangeReference bowShootVolumeRange;
+    [SerializeField]
     private AudioClipSet jumpClip;
     [SerializeField]
     private AudioClipSet landClip;
@@ -245,9 +247,9 @@ public class PlayerAnimation : MonoBehaviour
         audioSource.Stop();
     }
 
-    void OnBowShoot()
+    void OnBowShoot(float extraDrawProgress)
     {
-        oneShotAudioSource.PlayOneShot(bowShootClip);
+        oneShotAudioSource.PlayOneShot(bowShootClip, volume: bowShootVolumeRange.Lerp(extraDrawProgress));
     }
 
     void OnDeath()

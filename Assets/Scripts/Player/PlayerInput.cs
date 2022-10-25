@@ -31,6 +31,10 @@ public class PlayerInput : MonoBehaviour, InputInterface
     [SerializeField]
     private FloatReference lookAxisYSensitive;
 
+    [Header("Debug use")]
+    [SerializeField]
+    private bool allowToggleConsoleWindow;
+
     private InputScheme _scheme;
 
     public event System.Action OnAimDown;
@@ -70,6 +74,8 @@ public class PlayerInput : MonoBehaviour, InputInterface
         _scheme.Player.Escap.performed += OnOutEscapPerformed;
 
         _scheme.Player.Roll.performed += OnRollPerformed;
+
+        _scheme.Player.ToggleConsoleWindow.performed += OnToggleConsoleWindow;
     }
 
     public void Enable() => enabled = true;
@@ -104,4 +110,10 @@ public class PlayerInput : MonoBehaviour, InputInterface
     void OnOutEscapPerformed(CallbackContext callbackContext) => OnEscap?.Invoke();
 
     void OnRollPerformed(CallbackContext callbackContext) => OnRoll?.Invoke();
+
+    void OnToggleConsoleWindow(CallbackContext callbackContext)
+    {
+        if (allowToggleConsoleWindow)
+            ConsoleWindow.ToggleConsoleWindow();
+    }
 }

@@ -8,15 +8,15 @@ public class Arrow : MonoBehaviour, IPoolableObj
     private const float HeightLimit = 300;
     private const float LowLimit = -30;
 
-    [SerializeField]
-    private float speed;
-    [SerializeField]
-    private Timer ignoreGravityTimer;
-    private float _baseTime;
+    [Header("Reference")]
     [SerializeField]
     private new Rigidbody rigidbody;
     [SerializeField]
     private TrailRenderer trail;
+    [SerializeField]
+    private ParticleSystem particle;
+    private ParticleSystem.MainModule particleMain;
+    private ParticleSystem.MinMaxGradient startColor;
 
     [SerializeField]
     private EffectReference hit;
@@ -26,11 +26,27 @@ public class Arrow : MonoBehaviour, IPoolableObj
     [SerializeField]
     private AudioClipSet hitSound;
 
+    [Header("Parameter")]
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private Timer ignoreGravityTimer;
+    [SerializeField]
+    private float extraDrawDuration;
+    private float _baseTime;
+
+    [SerializeField]
+    private ColorReference particleColor;
+    [SerializeField]
+    private ColorReference particleExtraColor;
+
     public void Instantiate()
     {
         rigidbody.isKinematic = true;
         rigidbody.velocity = Vector3.zero;
         trail.emitting = false;
+        particle.Stop();
+        particleMain = particle.main;
 
         _baseTime = ignoreGravityTimer.TargetTime;
     }
@@ -40,6 +56,9 @@ public class Arrow : MonoBehaviour, IPoolableObj
         enabled = false;
         gameObject.SetActive(false);
         transform.SetParent(collectionTransform);
+
+        trail.emitting = false;
+        particle.Stop();
     }
 
     public void Reinstantiate()
@@ -49,17 +68,26 @@ public class Arrow : MonoBehaviour, IPoolableObj
         rigidbody.velocity = Vector3.zero;
     }
 
-    public void Shoot(Vector3 targetPosition, float extraDuration)
+    public void Shoot(Vector3 targetPosition, float extraProgress)
     {
         enabled = true;
 
-        ignoreGravityTimer.TargetTime = _baseTime + extraDuration;
+        ignoreGravityTimer.TargetTime = _baseTime + (extraDrawDuration * extraProgress);
 
         transform.rotation = Quaternion.LookRotation(targetPosition - transform.position, transform.up);
 
         rigidbody.velocity = transform.forward * speed;
         rigidbody.isKinematic = false;
         trail.emitting = true;
+
+        Color effectColor = Color.Lerp(particleColor.Value, particleExtraColor.Value, extraProgress);;
+
+        startColor.color = Color.Lerp(particleColor.Value, particleExtraColor.Value, extraProgress);
+        particleMain.startColor = startColor;
+        particle.Play();
+
+        trail.startColor = effectColor;
+        trail.endColor = effectColor;
 
         ignoreGravityTimer.Reset();
     }
@@ -115,6 +143,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
         rigidbody.isKinematic = true;
 
         trail.emitting = false;
+        particle.Stop();
         rigidbody.useGravity = false;
     }
 }

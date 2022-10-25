@@ -605,6 +605,15 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleConsoleWindow"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e9a80e5-fdd6-4080-a9c7-2bd87dd1c8fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -981,6 +990,72 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""544d802f-e6ea-4b9d-8b55-a5a03049be84"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleConsoleWindow"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""6e511abc-1df9-4c33-a8ee-c5299cf4a135"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleConsoleWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""6fec966e-efa8-4c4d-bd61-bfee79052222"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleConsoleWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""870df112-0f23-4855-b20e-1397d56476f3"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleConsoleWindow"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""9e6e1018-47dc-41d2-8818-0a182883f040"",
+                    ""path"": ""<Keyboard>/leftMeta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleConsoleWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""3e3949be-4243-42ac-a009-842f631957df"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleConsoleWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -1008,6 +1083,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Escap = m_Player.FindAction("Escap", throwIfNotFound: true);
+        m_Player_ToggleConsoleWindow = m_Player.FindAction("ToggleConsoleWindow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1179,6 +1255,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Escap;
+    private readonly InputAction m_Player_ToggleConsoleWindow;
     public struct PlayerActions
     {
         private @InputScheme m_Wrapper;
@@ -1190,6 +1267,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Escap => m_Wrapper.m_Player_Escap;
+        public InputAction @ToggleConsoleWindow => m_Wrapper.m_Player_ToggleConsoleWindow;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1220,6 +1298,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @Escap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
                 @Escap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
                 @Escap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
+                @ToggleConsoleWindow.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleConsoleWindow;
+                @ToggleConsoleWindow.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleConsoleWindow;
+                @ToggleConsoleWindow.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleConsoleWindow;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1245,6 +1326,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @Escap.started += instance.OnEscap;
                 @Escap.performed += instance.OnEscap;
                 @Escap.canceled += instance.OnEscap;
+                @ToggleConsoleWindow.started += instance.OnToggleConsoleWindow;
+                @ToggleConsoleWindow.performed += instance.OnToggleConsoleWindow;
+                @ToggleConsoleWindow.canceled += instance.OnToggleConsoleWindow;
             }
         }
     }
@@ -1271,5 +1355,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnEscap(InputAction.CallbackContext context);
+        void OnToggleConsoleWindow(InputAction.CallbackContext context);
     }
 }

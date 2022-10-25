@@ -5414,6 +5414,7 @@ MonoBehaviour:
     Constant: 0
     Variable: {fileID: 11400000, guid: e601110d664924f8e9768b096aa837fe, type: 2}
     UseVariable: 1
+  allowToggleConsoleWindow: 0
 --- !u!114 &2787180225705632301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5433,6 +5434,7 @@ MonoBehaviour:
   followTarget: {fileID: 2787180225754473550}
   followTargetPointer: {fileID: 11400000, guid: bc106bd3fae424e6a944b21fe6f0f9d7, type: 2}
   walkSpeed: 8
+  superWalkSpeed: 0
   drawBowSlowDown:
     Constant: 0
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
@@ -5505,8 +5507,8 @@ MonoBehaviour:
   arrowPrefab: {fileID: -474245263327700704, guid: 9188c91870872419e8b68c97d3676944, type: 3}
   impulseSource: {fileID: 9159183767146581692}
   aimProgressEvent: {fileID: 11400000, guid: c427ad606924d402f931d4b4052fdfb2, type: 2}
-  extraAimTime: 1.2
-  extraAimArrowExtendDuration: 0.4
+  extraAimTime: 0.8
+  extraAimArrowExtendDuration: 0.5
   hitLayers:
     serializedVersion: 2
     m_Bits: 1280
@@ -7213,6 +7215,11 @@ MonoBehaviour:
   walkClip: {fileID: 11400000, guid: 2804760d470884e0584b153959dfe8d1, type: 2}
   bowDrawClip: {fileID: 11400000, guid: a187b96a30a6847c69613c0822dd740b, type: 2}
   bowShootClip: {fileID: 11400000, guid: c3b7cb05465f14de8a38e04fe59200cd, type: 2}
+  bowShootVolumeRange:
+    ConstantMin: 0.3
+    ConstantMax: 1
+    Variable: {fileID: 0}
+    UseVariable: 0
   jumpClip: {fileID: 11400000, guid: 5570a6526d0124d34b4306d2c4108c1a, type: 2}
   landClip: {fileID: 11400000, guid: 8a03bedda35c54c6db24a31818cf8479, type: 2}
   groundLayers:

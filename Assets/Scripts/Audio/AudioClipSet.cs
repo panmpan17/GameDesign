@@ -31,10 +31,10 @@ public class AudioClipSet : ScriptableObject
 
 public static class AudioClipSetExtension
 {
-    public static void PlayOneShot(this AudioSource audioSource, AudioClipSet clipSet)
+    public static void PlayOneShot(this AudioSource audioSource, AudioClipSet clipSet, float volume=1)
     {
         if (clipSet && clipSet.Clips.Length > 0)
-            audioSource.PlayOneShot(clipSet.ChooseOneClip(), clipSet.Volume);
+            audioSource.PlayOneShot(clipSet.ChooseOneClip(), clipSet.Volume * volume);
     }
 
     public static void Play(this AudioSource audioSource, AudioClipSet clipSet)

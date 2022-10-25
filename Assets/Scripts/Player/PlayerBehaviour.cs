@@ -70,7 +70,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
-    public event System.Action OnBowShoot;
+    /// <summary>
+    /// Paramter is for bow extra draw progress
+    /// </summary>
+    public event System.Action<float> OnBowShoot;
     public event System.Action OnDeath;
     public event System.Action OnRevive;
 
@@ -178,13 +181,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (animation.IsDrawArrowFullyPlayed)
         {
-            float extraDuration = extraAimArrowExtendDuration * Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
+            float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
 
             PreparedArrow.transform.SetParent(null);
-            PreparedArrow.Shoot(CurrentRayHitPosition, extraDuration);
+            PreparedArrow.Shoot(CurrentRayHitPosition, extraProgress);
             PreparedArrow = null;
-            OnBowShoot?.Invoke();
-            impulseSource.GenerateImpulse();
+            OnBowShoot?.Invoke(extraProgress);
+            impulseSource.GenerateImpulse(extraProgress);
         }
         else
         {

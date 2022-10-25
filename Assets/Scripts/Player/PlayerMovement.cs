@@ -69,6 +69,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    [Header("Debug Use")]
+    [SerializeField]
+    private float superWalkSpeed;
+
 
     public event System.Action OnJumpEvent;
     /// <summary>
@@ -114,6 +118,8 @@ public class PlayerMovement : MonoBehaviour
         followTargetPointer.Target = followTarget;
     }
 
+
+#region  Update
     void Update()
     {
         if (_rolling)
@@ -168,10 +174,16 @@ public class PlayerMovement : MonoBehaviour
             Vector3 acceleration = followTarget.right * input.MovementAxis.x + followTarget.forward * input.MovementAxis.y;
             acceleration.y = 0;
 
-            if (behaviour.IsDrawingBow)
-                _velocity = acceleration * walkSpeed * drawBowSlowDown.Value;
+            if (s_supperSpeed)
+            {
+                if (behaviour.IsDrawingBow) _velocity = acceleration * superWalkSpeed * drawBowSlowDown.Value;
+                else _velocity = acceleration * superWalkSpeed;
+            }
             else
-                _velocity = acceleration * walkSpeed;
+            {
+                if (behaviour.IsDrawingBow) _velocity = acceleration * walkSpeed * drawBowSlowDown.Value;
+                else _velocity = acceleration * walkSpeed;
+            }
 
 
             if (behaviour.IsDrawingBow)
@@ -260,6 +272,7 @@ public class PlayerMovement : MonoBehaviour
         if (waitRollTimer.Running)
             Roll();
     }
+#endregion
 
     void FaceWithFollowTarget()
     {
@@ -267,6 +280,7 @@ public class PlayerMovement : MonoBehaviour
         followTarget.localEulerAngles = new Vector3(followTarget.transform.localEulerAngles.x, 0, 0);
     }
 
+#region Input
     void OnJump()
     {
         if (!behaviour.CursorFocued)
@@ -344,7 +358,7 @@ public class PlayerMovement : MonoBehaviour
 
         OnRollEvent?.Invoke();
     }
-
+#endregion
     // public void Freeze()
     // {
     //     _freezed = true;
@@ -372,4 +386,15 @@ public class PlayerMovement : MonoBehaviour
         _jumping = false;
         _liftFromGround = false;
     }
+
+
+#region Console Window
+    private static bool s_supperSpeed;
+
+    [ConsoleCommand("superspeed")]
+    public static void ToggleSuperSpeed()
+    {
+        s_supperSpeed = !s_supperSpeed;
+    }
+#endregion
 }

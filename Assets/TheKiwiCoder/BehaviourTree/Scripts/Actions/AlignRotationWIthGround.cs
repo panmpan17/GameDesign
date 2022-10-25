@@ -7,9 +7,6 @@ public class AlignRotationWIthGround : ActionNode
 {
     private static int groundLayers;
 
-    [SerializeField]
-    private Quaternion rotationOffset;
-
     void OnEnable()
     {
         groundLayers = LayerMask.GetMask("Ground");
