@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TargetIsInRange
   m_EditorClassIdentifier: 
   guid: 9e0bd7c96b9eb4e5082ede8e9e8c755c
-  position: {x: 67.78746, y: 845}
+  position: {x: 68, y: 845.00006}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -106,7 +106,6 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &-3775113083725046657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +124,6 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &-3445640475590800470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +137,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   guid: 3b7a6c78a568a4bda88a2ddf78c840db
-  position: {x: -82.212494, y: 845}
+  position: {x: -81.999985, y: 845.00006}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -320,7 +318,7 @@ MonoBehaviour:
   m_Name: JumpTowards
   m_EditorClassIdentifier: 
   guid: 5af7b47d8dc5842ce8f75158fcf125ee
-  position: {x: -410.5, y: 845}
+  position: {x: -410.49997, y: 844.99994}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -337,10 +335,10 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
     UseVariable: 1
   jumpTimer:
-    TargetTime: 0.3
+    TargetTime: 0.5
     Running: 0
     ReverseMode: 0
-  landingMoveforawrd: 0
+  landingMoveforawrd: 1
   extraGravity: 0
   grounLayer:
     serializedVersion: 2
@@ -405,3 +403,4 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   rotateSpeed: 60
+  raycastPoint: 0

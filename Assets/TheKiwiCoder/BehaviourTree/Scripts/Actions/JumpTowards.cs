@@ -45,7 +45,7 @@ public class JumpTowards : ActionNode
         if (_landing)
         {
             if (landingMoveforawrd)
-                MoveForawrd();
+                MoveForawrd(false);
 
             if (extraGravity != 0)
             {
@@ -63,7 +63,7 @@ public class JumpTowards : ActionNode
 
     void HandleJumping()
     {
-        MoveForawrd();
+        MoveForawrd(true);
 
         if (jumpTimer.UpdateEnd)
         {
@@ -78,10 +78,13 @@ public class JumpTowards : ActionNode
         }
     }
 
-    void MoveForawrd()
+    void MoveForawrd(bool addJumpVelocty)
     {
-        Vector3 velocity = Vector3.up * jumpForce * jumpForceCurve.Value.Evaluate(jumpTimer.Progress);
-        velocity += context.transform.forward * forwardSpeed;
+        Vector3 velocity = context.transform.forward * forwardSpeed;
+        if (addJumpVelocty)
+            velocity += Vector3.up * jumpForce * jumpForceCurve.Value.Evaluate(jumpTimer.Progress);
+        else
+            velocity.y = context.rigidbody.velocity.y;
         context.rigidbody.velocity = velocity;
     }
 
