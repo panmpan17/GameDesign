@@ -34,4 +34,12 @@ public class CheckPlayerInRange : ActionNode
     {
         return IsRange() ? State.Success : State.Failure;
     }
+
+    public override void DrawGizmos(Transform transform)
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, min);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, max);
+    }
 }

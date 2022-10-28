@@ -10,6 +10,7 @@ using MPack;
 public class ShootTrigger : ActionNode
 {
     public ValueWithEnable<int> TriggerGroupIndex;
+    public ValueWithEnable<int> CarriedParameter;
 
     protected override void OnStart() {
     }
@@ -19,9 +20,19 @@ public class ShootTrigger : ActionNode
 
     protected override State OnUpdate() {
         if (TriggerGroupIndex.Enable)
-            context.slimeBehaviour.TriggerFireGroup(TriggerGroupIndex.Value);
+        {
+            if (CarriedParameter.Enable)
+                context.slimeBehaviour.TriggerFireGroup(TriggerGroupIndex.Value, CarriedParameter.Value);
+            else
+                context.slimeBehaviour.TriggerFireGroup(TriggerGroupIndex.Value);
+        }
         else
-            context.slimeBehaviour.TriggerFire();
+        {
+            if (CarriedParameter.Enable)
+                context.slimeBehaviour.TriggerFire(CarriedParameter.Value);
+            else
+                context.slimeBehaviour.TriggerFire();
+        }
         return State.Success;
     }
 }

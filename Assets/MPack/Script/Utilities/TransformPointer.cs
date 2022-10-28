@@ -15,4 +15,12 @@ public class TransformPointer : ScriptableObject
     }
     private Transform _target;
     public event System.Action<Transform> OnChange;
+
+    public Transform[] Targets {
+        get => _targets;
+        set {
+            _targets = value;
+        }
+    }
+    private Transform[] _targets;
 }

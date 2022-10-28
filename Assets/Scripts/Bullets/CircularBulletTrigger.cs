@@ -16,6 +16,10 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
     [Min(1)]
     private int segmentCount = 1;
 
+    [Header("Editor Only")]
+    [SerializeField]
+    private bool drawDizmos;
+
     private Vector3[] _segmentPoints;
 
     void Start()
@@ -43,6 +47,9 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
         }
     }
 
+    public void TriggerFireWithParameter(int parameter)
+    { }
+
     void CalculateSegmentPoints()
     {
         _segmentPoints = new Vector3[segmentCount];
@@ -54,12 +61,6 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
         for (int i = 0; i < segmentCount; i++)
         {
             _segmentPoints[i] = delta;
-            // Vector3 position = delta * radius;
-            // _segmentPoints[i] = new SegmentPoint {
-            //     LocalPosition = position,
-            //     Direction = delta,
-            // };
-
             delta = Quaternion.AngleAxis(rotateRadius, Vector3.up) * delta;
         }
     }
@@ -71,6 +72,8 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
 
     void OnDrawGizmosSelected()
     {
+        if (!drawDizmos)
+            return;
         // Gizmos.DrawRay(transform.position, transform.forward);
         if (_segmentPoints == null)
             CalculateSegmentPoints();

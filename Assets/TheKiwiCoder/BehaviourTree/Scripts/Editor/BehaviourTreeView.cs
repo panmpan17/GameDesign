@@ -69,18 +69,22 @@ namespace TheKiwiCoder {
 
             // Creates node view
             tree.nodes.ForEach(n => CreateNodeView(n));
+            for (int i = 0; i < tree.nodes.Count; i++)
+                CreateNodeView(tree.nodes[i]);
 
-            // Create edges
-            tree.nodes.ForEach(n => {
+            for (int i = 0; i < tree.nodes.Count; i++)
+            {
+                Node n = tree.nodes[i];
                 var children = BehaviourTree.GetChildren(n);
-                children.ForEach(c => {
+                children.ForEach(c =>
+                {
                     NodeView parentView = FindNodeView(n);
                     NodeView childView = FindNodeView(c);
 
                     Edge edge = parentView.output.ConnectTo(childView.input);
                     AddElement(edge);
                 });
-            });
+            }
         }
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter) {

@@ -58,7 +58,10 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
             ITriggerFire[] triggers = group.GroupGameObjects.GetComponentsInChildren<ITriggerFire>();
 
             for (int e = 0; e < triggers.Length; e++)
+            {
                 group.TriggerAction += triggers[e].TriggerFire;
+                group.ParameterTriggerAction += triggers[e].TriggerFireWithParameter;
+            }
         }
 
         _cores = GetComponentsInChildren<SlimeCore>();
@@ -109,10 +112,21 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
             triggerFires[i].TriggerFire();
         }
     }
+    public void TriggerFire(int parameter)
+    {
+        for (int i = 0; i < triggerFires.Length; i++)
+        {
+            triggerFires[i].TriggerFireWithParameter(parameter);
+        }
+    }
 
     public void TriggerFireGroup(int groupIndex)
     {
         triggerFireGroups[groupIndex].TriggerAction?.Invoke();
+    }
+    public void TriggerFireGroup(int groupIndex, int parameter)
+    {
+        triggerFireGroups[groupIndex].ParameterTriggerAction?.Invoke(parameter);
     }
 
 
@@ -196,6 +210,7 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     public class ITriggerFireGroup
     {
         public System.Action TriggerAction;
+        public System.Action<int> ParameterTriggerAction;
         public GameObject GroupGameObjects;
 
 #if UNITY_EDITOR

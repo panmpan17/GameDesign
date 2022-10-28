@@ -19,6 +19,8 @@ public class DefineFunctionNode : Node
 
     protected override State OnUpdate()
     {
+        if (child == null)
+            return State.Success;
         return child.Update();
     }
 

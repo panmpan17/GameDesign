@@ -35,11 +35,17 @@ namespace TheKiwiCoder {
                 return;
             }
 
-            BehaviourTree.Traverse(tree, tree.rootNode, (n) => {
-                if (n.drawGizmos) {
-                    n.DrawGizmos(transform);
-                }
-            });
+            for (int i = 0; i < tree.nodes.Count; i++)
+            {
+                Node node = tree.nodes[i];
+                if (node.drawGizmos)
+                    node.DrawGizmos(transform);
+            }
+            // BehaviourTree.Traverse(tree, tree.rootNode, (n) => {
+            //     if (n.drawGizmos) {
+            //         n.DrawGizmos(transform);
+            //     }
+            // });
         }
     }
 }

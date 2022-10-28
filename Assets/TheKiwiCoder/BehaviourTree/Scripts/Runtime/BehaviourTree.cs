@@ -9,9 +9,15 @@ using UnityEditor;
 namespace TheKiwiCoder {
     [CreateAssetMenu()]
     public class BehaviourTree : ScriptableObject {
+        [HideInInspector]
         public Node rootNode;
+        [HideInInspector]
         public Node.State treeState = Node.State.Running;
+        [HideInInspector]
         public List<Node> nodes = new List<Node>();
+
+
+        public BehaviourTree FunctionTree;
         public Blackboard blackboard = new Blackboard();
 
         public Node.State Update() {
@@ -93,6 +99,21 @@ namespace TheKiwiCoder {
                     Traverse(cloneNode, (n) => {
                         tree.nodes.Add(n);
                     });
+                }
+            }
+
+            if (tree.FunctionTree)
+            {
+                for (int i = 0; i < tree.FunctionTree.nodes.Count; i++)
+                {
+                    if (tree.FunctionTree.nodes[i] is DefineFunctionNode)
+                    {
+                        Node cloneNode = tree.FunctionTree.nodes[i].Clone();
+                        Traverse(cloneNode, (n) =>
+                        {
+                            tree.nodes.Add(n);
+                        });
+                    }
                 }
             }
 

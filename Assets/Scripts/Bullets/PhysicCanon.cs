@@ -23,6 +23,10 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
     [SerializeField]
     private LayerMask hitLayers;
 
+    [Header("Editor Only")]
+    [SerializeField]
+    private bool drawDizmos;
+
     public void TriggerFire()
     {
         physicSimulate.SetPositionAndVelocity(transform.position, startForce * transform.forward);
@@ -39,6 +43,9 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
                 ((CanonShell)canonShell).OnCollide += delegate { locationIndictePrefab.Put(indicator); };
         }
     }
+
+    public void TriggerFireWithParameter(int parameter)
+    { }
 
     bool ForecastHitPosition(out RaycastHit hit, int maxTryTime=100)
     {
@@ -69,6 +76,9 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
 
     void OnDrawGizmosSelected()
     {
+        if (!drawDizmos)
+            return;
+
         physicSimulate.SetPositionAndVelocity(transform.position, startForce * transform.forward);
 
         Gizmos.DrawSphere(physicSimulate.Position, 0.1f);

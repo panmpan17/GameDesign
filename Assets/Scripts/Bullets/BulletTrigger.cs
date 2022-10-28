@@ -6,6 +6,7 @@ using MPack;
 public interface ITriggerFire
 {
     void TriggerFire();
+    void TriggerFireWithParameter(int parameter);
 }
 
 public class BulletTrigger : MonoBehaviour, ITriggerFire
@@ -25,6 +26,9 @@ public class BulletTrigger : MonoBehaviour, ITriggerFire
         bullet.Shoot(transform.forward * bulletSpeed);
         // BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
     }
+
+    public void TriggerFireWithParameter(int parameter)
+    {}
 
     void OnDrawGizmosSelected()
     {
