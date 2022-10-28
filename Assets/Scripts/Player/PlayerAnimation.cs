@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using Cinemachine;
+// using Cinemachine;
 using MPack;
 
 public class PlayerAnimation : MonoBehaviour
@@ -25,8 +25,8 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerMovement movement;
     [SerializeField]
     private PlayerBehaviour behaviour;
-    [SerializeField]
-    private CinemachineBlenderSettings cameraBlendSettings;
+    // [SerializeField]
+    // private CinemachineBlenderSettings cameraBlendSettings;
 
     [Header("Rig reference")]
     [SerializeField]

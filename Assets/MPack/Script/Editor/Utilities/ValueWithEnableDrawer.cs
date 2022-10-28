@@ -14,6 +14,8 @@ namespace MPack
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             float originWidth = position.width;
+            EditorGUI.BeginProperty(position, label, property);
+
             position.width = 20;
 
             SerializedProperty isOverride = property.FindPropertyRelative("Enable");
@@ -27,6 +29,7 @@ namespace MPack
             position.x += 20;
             GUI.enabled = newBool;
             EditorGUI.PropertyField(position, property.FindPropertyRelative("Value"), label);
+            EditorGUI.EndProperty();
         }
     }
 

@@ -85,6 +85,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private int _walkingCameraIndex;
     private int _aimCameraIndex;
+    private int _deepAimCameraIndex;
 
     private bool _handleDeath = false;
 
@@ -105,6 +106,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walk");
         _aimCameraIndex = CameraSwitcher.GetCameraIndex("Aim");
+        _deepAimCameraIndex = CameraSwitcher.GetCameraIndex("DeepAim");
 
         arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");
 
@@ -173,7 +175,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         IsDrawingBow = false;
 
-        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
         OnDrawBowEnd?.Invoke();
 
         _extraAimStarted = false;
@@ -188,11 +189,20 @@ public class PlayerBehaviour : MonoBehaviour
             PreparedArrow = null;
             OnBowShoot?.Invoke(extraProgress);
             impulseSource.GenerateImpulse(extraProgress);
+            StartCoroutine(SwitchCamera());
         }
         else
         {
             PreparedArrow.gameObject.SetActive(false);
+            CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
         }
+    }
+
+    IEnumerator SwitchCamera()
+    {
+        CameraSwitcher.ins.SwitchTo(_aimCameraIndex);
+        yield return new WaitForSeconds(0.1f);
+        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
     }
 
     void OnAimProgress(float progress)
@@ -207,6 +217,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             _extraAimStarted = true;
             _extraAimStopWatch.Update();
+            CameraSwitcher.ins.SwitchTo(_deepAimCameraIndex);
         }
 
         float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);

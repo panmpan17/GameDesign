@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: JumpTowards
   m_EditorClassIdentifier: 
   guid: a44180b345a934abd9c9ea9147fd0969
-  position: {x: -320.35013, y: 677.0002}
+  position: {x: -320.5, y: 677}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  forwardSpeed: 3
-  jumpForce: 3
+  forwardSpeed: 2.8
+  jumpForce: 3.5
   jumpForceCurve:
     Constant:
       serializedVersion: 2
@@ -30,11 +30,11 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
     UseVariable: 1
   jumpTimer:
-    TargetTime: 0.6
+    TargetTime: 1
     Running: 0
     ReverseMode: 0
   landingMoveforawrd: 1
-  extraGravity: 3
+  extraGravity: 1.8
   grounLayer:
     serializedVersion: 2
     m_Bits: 1344
@@ -290,8 +290,8 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  forwardSpeed: 3
-  jumpForce: 3
+  forwardSpeed: 2.8
+  jumpForce: 3.5
   jumpForceCurve:
     Constant:
       serializedVersion: 2
@@ -302,11 +302,11 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
     UseVariable: 1
   jumpTimer:
-    TargetTime: 0.6
+    TargetTime: 0.8
     Running: 0
     ReverseMode: 0
   landingMoveforawrd: 1
-  extraGravity: 3
+  extraGravity: 1.2
   grounLayer:
     serializedVersion: 2
     m_Bits: 1344
@@ -478,7 +478,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  rotateSpeed: 0
+  rotateSpeed: 100
   raycastPoint: 0
 --- !u!114 &-2339819542998573416
 MonoBehaviour:
@@ -498,7 +498,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  rotateSpeed: 0
+  rotateSpeed: 100
   raycastPoint: 0
 --- !u!114 &-2291437890605390101
 MonoBehaviour:
@@ -1000,7 +1000,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  duration: 1
+  duration: 1.2
 --- !u!114 &4155852691236190134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1082,7 +1082,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  duration: 1
+  duration: 1.2
 --- !u!114 &4791530562966295518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,7 +1265,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  forceSize: 0.5
+  forceSize: 0.3
 --- !u!114 &7370990374116368046
 MonoBehaviour:
   m_ObjectHideFlags: 0

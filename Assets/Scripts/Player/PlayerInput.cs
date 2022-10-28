@@ -10,6 +10,7 @@ public interface InputInterface
     event System.Action OnAimUp;
 
     event System.Action OnJump;
+    event System.Action OnJumpEnd;
 
     event System.Action OnEscap;
 
@@ -41,6 +42,7 @@ public class PlayerInput : MonoBehaviour, InputInterface
     public event System.Action OnAimUp;
 
     public event System.Action OnJump;
+    public event System.Action OnJumpEnd;
 
     public event System.Action OnEscap;
 
@@ -70,6 +72,7 @@ public class PlayerInput : MonoBehaviour, InputInterface
         _scheme.Player.Aim.canceled += OnAimCanceled;
 
         _scheme.Player.Jump.performed += OnJumpPerformed;
+        _scheme.Player.Jump.canceled += OnJumpCanceled;
 
         _scheme.Player.Escap.performed += OnOutEscapPerformed;
 
@@ -106,6 +109,7 @@ public class PlayerInput : MonoBehaviour, InputInterface
     void OnAimCanceled(CallbackContext callbackContext) => OnAimUp?.Invoke();
 
     void OnJumpPerformed(CallbackContext callbackContext) => OnJump?.Invoke();
+    void OnJumpCanceled(CallbackContext callbackContext) => OnJumpEnd?.Invoke();
 
     void OnOutEscapPerformed(CallbackContext callbackContext) => OnEscap?.Invoke();
 

@@ -15,6 +15,7 @@ public class FakeInput : MonoBehaviour, InputInterface
     public event System.Action OnAimUp;
 
     public event System.Action OnJump;
+    public event System.Action OnJumpEnd;
 
     public event System.Action OnEscap;
 

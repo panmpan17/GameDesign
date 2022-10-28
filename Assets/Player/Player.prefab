@@ -5434,7 +5434,6 @@ MonoBehaviour:
   followTarget: {fileID: 2787180225754473550}
   followTargetPointer: {fileID: 11400000, guid: bc106bd3fae424e6a944b21fe6f0f9d7, type: 2}
   walkSpeed: 8
-  superWalkSpeed: 0
   drawBowSlowDown:
     Constant: 0
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
@@ -5447,27 +5446,34 @@ MonoBehaviour:
     TargetTime: 0.5
     Running: 0
     ReverseMode: 0
+  jumpHoldTimer:
+    TargetTime: 0.2
+    Running: 0
+    ReverseMode: 0
+  extraGravity:
+    Enable: 1
+    Value: 0.6
   rollSpeed: 11
   rollSpeedCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 3.70941
-      outSlope: 3.70941
+      value: 0.4500122
+      inSlope: 1.988479
+      outSlope: 1.988479
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.06584448
+      outWeight: 0.12434024
     - serializedVersion: 3
       time: 0.49999344
       value: 1.0013878
-      inSlope: 0.008155286
-      outSlope: 0.008155286
-      tangentMode: 34
+      inSlope: -0.031157816
+      outSlope: -0.031157816
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.15871918
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
@@ -5487,6 +5493,7 @@ MonoBehaviour:
     ReverseMode: 0
   willSlopSliding: 0
   slopeSlideSpeed: 2
+  superWalkSpeed: 20
 --- !u!114 &2787180225705632302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7193,7 +7200,6 @@ MonoBehaviour:
   animator: {fileID: 2787180224821109790}
   movement: {fileID: 2787180225705632301}
   behaviour: {fileID: 2787180225705632302}
-  cameraBlendSettings: {fileID: 11400000, guid: e82a73cf451e5420989ddff5a8cf25d1, type: 2}
   rig: {fileID: 2787180225006930143}
   chest: {fileID: 2787180224195836304}
   chestRotationOffsetA: {x: 0.01878245, y: 0.7172728, z: 0.018233273, w: 0.69630057}

@@ -42,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
     private float jumpForce;
     [SerializeField]
     private Timer waitJumpTimer;
+    [SerializeField]
+    private Timer jumpHoldTimer;
+    [SerializeField]
+    private ValueWithEnable<float> extraGravity;
 
     [Header("Roll")]
     [SerializeField]
@@ -108,12 +112,14 @@ public class PlayerMovement : MonoBehaviour
     {
         input = GetComponent<InputInterface>();
         input.OnJump += OnJump;
+        input.OnJumpEnd += OnJumpEnd;
         input.OnRoll += OnRoll;
 
         behaviour.OnDeath += OnDeath;
 
         waitJumpTimer.Running = false;
         waitRollTimer.Running = false;
+        jumpHoldTimer.Running = false;
 
         followTargetPointer.Target = followTarget;
     }
@@ -228,9 +234,24 @@ public class PlayerMovement : MonoBehaviour
             HandleGroundedPhysic();
         else
         {
-            _yVelocity += Physics.gravity.y * Time.deltaTime;
+            if (extraGravity.Enable)
+                _yVelocity += Physics.gravity.y * (1 + extraGravity.Value) * Time.deltaTime;
+            else
+                _yVelocity += Physics.gravity.y * Time.deltaTime;
 
-            if (_jumping && !_liftFromGround) _liftFromGround = true;
+            if (_jumping)
+            {
+                if (!_liftFromGround)
+                    _liftFromGround = true;
+
+                if (jumpHoldTimer.Running)
+                {
+                    _yVelocity = jumpForce;
+
+                    if (jumpHoldTimer.UpdateEnd)
+                        jumpHoldTimer.Running = false;
+                }
+            }
         }
 
         _velocity.y = _yVelocity;
@@ -296,7 +317,14 @@ public class PlayerMovement : MonoBehaviour
         if (IsSlopSliding)
             return;
 
+        if (jumpHoldTimer.TargetTime > 0)
+            jumpHoldTimer.Reset();
         Jump();
+    }
+
+    void OnJumpEnd()
+    {
+        jumpHoldTimer.Running = false;
     }
 
     void Jump()
