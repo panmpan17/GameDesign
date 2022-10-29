@@ -198,7 +198,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 1
-  senseRange: 18
+  senseRange: 23
   raycastLayers:
     serializedVersion: 2
     m_Bits: 1024
@@ -234,6 +234,7 @@ MonoBehaviour:
   - {fileID: -7754238098663147691}
   - {fileID: -2428301659265709109}
   - {fileID: -5333724263956148146}
+  FunctionTree: {fileID: 0}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1559538727858598782
@@ -319,6 +320,9 @@ MonoBehaviour:
   TriggerGroupIndex:
     Enable: 0
     Value: 0
+  CarriedParameter:
+    Enable: 0
+    Value: 0
 --- !u!114 &5300571207154672451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +342,9 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   TriggerGroupIndex:
+    Enable: 0
+    Value: 0
+  CarriedParameter:
     Enable: 0
     Value: 0
 --- !u!114 &5938664393090166391

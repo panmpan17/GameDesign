@@ -7,7 +7,9 @@ public class TransformFollower : MonoBehaviour
     [SerializeField]
     private Transform target;
     [SerializeField]
-    private Transform targetPointer;
+    private TransformPointer targetPointer;
+
+    private Transform Target => targetPointer.Target ? targetPointer.Target : target;
 
     [SerializeField]
     private UpdateMode updateMode;
@@ -50,21 +52,23 @@ public class TransformFollower : MonoBehaviour
 
     void Trigger()
     {
+        Transform t = Target;
         if (updatePosition)
         {
+
             Vector3 position = transform.position;
-            if (!positionLockX) position.x = target.position.x;
-            if (!positionLockY) position.y = target.position.y;
-            if (!positionLockZ) position.z = target.position.z;
+            if (!positionLockX) position.x = t.position.x;
+            if (!positionLockY) position.y = t.position.y;
+            if (!positionLockZ) position.z = t.position.z;
             transform.position = position;
         }
 
         if (updateRotation)
         {
             Vector3 euler = transform.rotation.eulerAngles;
-            if (!rotationLockX) euler.x = target.rotation.eulerAngles.x;
-            if (!rotationLockY) euler.y = target.rotation.eulerAngles.y;
-            if (!rotationLockZ) euler.z = target.rotation.eulerAngles.z;
+            if (!rotationLockX) euler.x = t.rotation.eulerAngles.x;
+            if (!rotationLockY) euler.y = t.rotation.eulerAngles.y;
+            if (!rotationLockZ) euler.z = t.rotation.eulerAngles.z;
             euler += offset;
             transform.rotation = Quaternion.Euler(euler);
         }
