@@ -16,6 +16,11 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
     [Min(1)]
     private int segmentCount = 1;
 
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClipSet sound;
+
     [Header("Editor Only")]
     [SerializeField]
     private bool drawDizmos;
@@ -45,6 +50,8 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
 
             bullet.Shoot(worldDirection * bulletSpeed);
         }
+
+        audioSource.Play(sound);
     }
 
     public void TriggerFireWithParameter(int parameter)

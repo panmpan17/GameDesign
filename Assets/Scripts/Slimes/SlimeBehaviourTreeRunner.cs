@@ -16,8 +16,6 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
 
     [SerializeField]
     private ITriggerFireGroup[] triggerFireGroups;
-    [SerializeField]
-    private CinemachineImpulseSource impulseSource;
 
     [SerializeField]
     private TransformPointer player;
@@ -41,6 +39,14 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     public event System.Action<Collider> OnTriggerEnterEvent;
     public event System.Action<Collision> OnCollisionEnterEvent;
     public event System.Action<Collision> OnCollisionExitEvent;
+
+    [Header("Special Effect")]
+    [SerializeField]
+    private CinemachineImpulseSource impulseSource;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClipSet slamSound;
 
     private SlimeCore[] _cores;
 
@@ -133,6 +139,7 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     public void TriggerImpluse(float forceSize)
     {
         impulseSource.GenerateImpulse(forceSize);
+        audioSource.PlayOneShot(slamSound);
     }
 
 #region Damage, Death, Loot table

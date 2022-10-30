@@ -39,6 +39,8 @@ public static class AudioClipSetExtension
 
     public static void Play(this AudioSource audioSource, AudioClipSet clipSet)
     {
+        if (!clipSet)
+            return;
         if (audioSource.isPlaying)
             audioSource.Stop();
 

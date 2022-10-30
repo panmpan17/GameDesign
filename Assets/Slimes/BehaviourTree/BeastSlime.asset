@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TargetIsInRange
   m_EditorClassIdentifier: 
   guid: 9e0bd7c96b9eb4e5082ede8e9e8c755c
-  position: {x: 68, y: 845.00006}
+  position: {x: 68.00002, y: 845.00006}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -239,6 +239,7 @@ MonoBehaviour:
   - {fileID: -8304605872606331790}
   - {fileID: -6034947125771639707}
   - {fileID: -3775113083725046657}
+  FunctionTree: {fileID: 0}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1559538727858598782
@@ -321,12 +322,12 @@ MonoBehaviour:
   m_Name: JumpTowards
   m_EditorClassIdentifier: 
   guid: 5af7b47d8dc5842ce8f75158fcf125ee
-  position: {x: -410.49997, y: 844.99994}
+  position: {x: -410.49994, y: 845.00006}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 1
-  forwardSpeed: 1.3
+  forwardSpeed: 1.8
   jumpForce: 3
   jumpForceCurve:
     Constant:
@@ -342,7 +343,7 @@ MonoBehaviour:
     Running: 0
     ReverseMode: 0
   landingMoveforawrd: 1
-  extraGravity: 0
+  extraGravity: 0.5
   grounLayer:
     serializedVersion: 2
     m_Bits: 1344
@@ -385,8 +386,8 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 1
-  startRadius: 3
-  endRadius: 3.5
+  startRadius: 4.5
+  endRadius: 6
 --- !u!114 &8295141724381611202
 MonoBehaviour:
   m_ObjectHideFlags: 0
