@@ -133,6 +133,25 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   FunctionName: 2C
+--- !u!114 &-6835653492264986084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c056fcb977ce47558c2e9a5a36465a2, type: 3}
+  m_Name: CallFunctionNode
+  m_EditorClassIdentifier: 
+  guid: 0856ccd639ef24e3596388079afeaec7
+  position: {x: -508.5, y: -1334}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  FunctionName: 2B
 --- !u!114 &-6794456462529262047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +379,7 @@ MonoBehaviour:
   - {fileID: -7090574781365952052}
   - {fileID: 6740172040432070929}
   - {fileID: 5228841090599802557}
+  - {fileID: -6835653492264986084}
   FunctionTree: {fileID: 11400000, guid: 5694727ca86a04261bce68c425cef1e1, type: 2}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
@@ -693,7 +713,7 @@ MonoBehaviour:
   - {fileID: -6987915869317038259}
   - {fileID: 8694789411828304861}
   - {fileID: 1292646928772996374}
-  - {fileID: 7192263266113182649}
+  - {fileID: -6835653492264986084}
   - {fileID: -3066203447043141518}
   - {fileID: -7090574781365952052}
   - {fileID: -2286824505649919050}
@@ -828,7 +848,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   guid: 0faf0accbffc64b4fae39eda21d36051
-  position: {x: -508.5, y: -1334.2047}
+  position: {x: -503, y: -1140.8489}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
