@@ -36,7 +36,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  duration: 1
+  duration: 0.6
 --- !u!114 &-7081089699509909625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: SetPlayerPositionAsTarget
   m_EditorClassIdentifier: 
   guid: e851c56a6655f4291934887611a66fea
-  position: {x: -577.00006, y: 578.99994}
+  position: {x: -528, y: 579}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: AlignRotationWIthGround
   m_EditorClassIdentifier: 
   guid: d96fe22b03bc241c58b1066100a61c43
-  position: {x: -755.5, y: 581.5}
+  position: {x: -706.5, y: 581.5}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -293,7 +293,7 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  forwardSpeed: 1.3
+  forwardSpeed: 2
   jumpForce: 3
   jumpForceCurve:
     Constant:
@@ -305,10 +305,10 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
     UseVariable: 1
   jumpTimer:
-    TargetTime: 0.3
+    TargetTime: 0.5
     Running: 0
     ReverseMode: 0
-  landingMoveforawrd: 0
+  landingMoveforawrd: 1
   extraGravity: 0
   grounLayer:
     serializedVersion: 2
@@ -352,5 +352,5 @@ MonoBehaviour:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  rotateSpeed: 60
-  raycastPoint: 0
+  rotateSpeed: 100
+  raycastPoint: 1

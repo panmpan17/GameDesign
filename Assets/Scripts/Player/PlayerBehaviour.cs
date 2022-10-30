@@ -56,6 +56,8 @@ public class PlayerBehaviour : MonoBehaviour
     private EventReference focusEvent;
     [SerializeField]
     private TransformPointer transformPointer;
+    [SerializeField]
+    private Transform trackTarget;
     
     [Header("Inventory")]
     [SerializeField]
@@ -111,7 +113,7 @@ public class PlayerBehaviour : MonoBehaviour
         arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");
 
         mainCamera = mainCamera == null ? Camera.main : mainCamera;
-        transformPointer.Target = transform;
+        transformPointer.Target = trackTarget ? trackTarget : transform;
 
         animation.OnAimAnimatinoChanged += OnAimProgress;
         // aimProgressEvent.InvokeFloatEvents;

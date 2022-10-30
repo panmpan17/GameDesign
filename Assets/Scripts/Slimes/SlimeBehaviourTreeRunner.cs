@@ -23,6 +23,9 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     [SerializeField]
     private Transform fixedTarget;
     public Transform FixedTarget => fixedTarget;
+    [SerializeField]
+    private Transform eyePosition;
+    public Transform EyePosition => eyePosition;
 
     [SerializeField]
     private LootTable lootTable;
