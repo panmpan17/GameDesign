@@ -24,8 +24,16 @@ public class CheckTargetInEyeSight : ActionNode
         if ((blackboard.TargetPosition - context.transform.position).sqrMagnitude > senseRange * senseRange)
             return false;
 
-        if (Physics.Linecast(context.transform.position, blackboard.TargetPosition, raycastLayers))
-            return false;
+        if (context.slimeBehaviour.EyePosition)
+        {
+            if (Physics.Linecast(context.slimeBehaviour.EyePosition.position, blackboard.TargetPosition, raycastLayers))
+                return false;
+        }
+        else
+        {
+            if (Physics.Linecast(context.transform.position, blackboard.TargetPosition, raycastLayers))
+                return false;
+        }
 
         return true;
     }

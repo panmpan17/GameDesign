@@ -24,6 +24,9 @@ public class BulletBillboards : MonoBehaviour
     [SerializeField]
     private BulletType[] bulletTypes;
 
+    [SerializeField]
+    private EventReference playerReviveEvent;
+
     private Quaternion _faceCameraRotation;
     public Quaternion FaceCameraRotation => _faceCameraRotation;
 
@@ -31,13 +34,9 @@ public class BulletBillboards : MonoBehaviour
     {
         ins = this;
         CreatePrefabPool();
+        playerReviveEvent.InvokeEvents += ResetBullets;
 
         if (mainCameraTransform == null) mainCameraTransform = Camera.main.transform;
-    }
-
-    void Start()
-    {
-        GameManager.ins.OnPlayerRevive += ResetBullets;
     }
 
     void CreatePrefabPool()

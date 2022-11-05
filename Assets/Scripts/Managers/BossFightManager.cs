@@ -9,7 +9,6 @@ public class BossFightManager : MonoBehaviour
     private PlayerBehaviour player;
     [SerializeField]
     private PlayerDetection entranceDetect;
-    // TODO: Detect when player enter the area
 
     [SerializeField]
     private CinemachineVirtualCamera lookBossCam;
@@ -22,13 +21,10 @@ public class BossFightManager : MonoBehaviour
     private SlimeBehaviourTreeRunner _bossSlime;
     [SerializeField]
     private EventReference slimeHealthShowEvent;
-    // TODO: Set physic wall to block player, avoid palyer get out of the area
-    // TODO: Cutscene, able to skip when player is dead or skip all cutscene
-    // TODO: Boss entrance, boss health ui
+    [SerializeField]
+    private EventReference playerReviveEvent;
 
-    // TODO: Reset everthing when player is dead
-    // TODO: Kill all small slime that spawn by boss
-    // TODO: Reset boss position, health, etc
+    // TODO: Cutscene, able to skip when player is dead or skip all cutscene
 
     // TODO: If player win, then what?
 
@@ -48,7 +44,7 @@ public class BossFightManager : MonoBehaviour
 
     void OnPlayerEnterEntrance()
     {
-        GameManager.ins.OnPlayerRevive += ResetBossFight;
+        playerReviveEvent.InvokeEvents += ResetBossFight;
 
         entranceDetect.gameObject.SetActive(false);
         borderWall.SetActive(true);
@@ -86,11 +82,13 @@ public class BossFightManager : MonoBehaviour
 
     void ResetBossFight()
     {
-        GameManager.ins.OnPlayerRevive -= ResetBossFight;
+        playerReviveEvent.InvokeEvents -= ResetBossFight;
 
         borderWall.SetActive(false);
         slimeHealthShowEvent.Invoke(false);
         Destroy(_bossSlime.gameObject);
+
+        // TODO: Kill all small slime that spawn by boss
 
         entranceDetect.gameObject.SetActive(true);
     }

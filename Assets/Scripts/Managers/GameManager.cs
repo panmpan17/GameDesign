@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
     private PlayerSpawnPoint spawnPoint;
     [SerializeField]
     private float playerReviveTime;
-
-    public event System.Action OnPlayerRevive;
+    [SerializeField]
+    private EventReference playerReviveEvent;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(playerReviveTime);
         player.ReviveAtSpawnPoint(spawnPoint);
-        OnPlayerRevive?.Invoke();
+        playerReviveEvent.Invoke();
     }
 
     public void ChangePlayerSpawnPoint(PlayerSpawnPoint spawnPoint)
