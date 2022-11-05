@@ -5509,14 +5509,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 2787180225705632301}
   animation: {fileID: 4057677663369091111}
+  bow: {fileID: 5260637637954937081}
   maxHealth: 100
   healthChangeEvent: {fileID: 11400000, guid: 17b0e71977e87429b972945c2b722bf1, type: 2}
-  arrowPlacePoint: {fileID: 2121007400246071444}
-  arrowPrefab: {fileID: -474245263327700704, guid: 9188c91870872419e8b68c97d3676944, type: 3}
-  impulseSource: {fileID: 9159183767146581692}
-  aimProgressEvent: {fileID: 11400000, guid: c427ad606924d402f931d4b4052fdfb2, type: 2}
-  extraAimTime: 0.8
-  extraAimArrowExtendDuration: 0.5
   hitLayers:
     serializedVersion: 2
     m_Bits: 1280
@@ -5687,6 +5682,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121007400246071444}
+  - component: {fileID: 5260637637954937081}
+  - component: {fileID: 5437307488346284415}
   m_Layer: 6
   m_Name: Bow
   m_TagString: Untagged
@@ -5710,6 +5707,78 @@ Transform:
   m_Father: {fileID: 3744362375249656189}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90.186, z: 0}
+--- !u!114 &5260637637954937081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301147274433808052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e371bda3348fe490092589a60c6cda4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPlacePoint: {fileID: 2121007400246071444}
+  arrowPrefab: {fileID: -474245263327700704, guid: 9188c91870872419e8b68c97d3676944, type: 3}
+  impulseSource: {fileID: 5437307488346284415}
+  currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
+  aimProgressEvent: {fileID: 11400000, guid: c427ad606924d402f931d4b4052fdfb2, type: 2}
+  extraAimTime: 0.8
+  extraAimArrowExtendDuration: 0.5
+--- !u!114 &5437307488346284415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301147274433808052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 1
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.1
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: -0.1, y: -0.1, z: 0}
 --- !u!1 &6488978996975587508
 GameObject:
   m_ObjectHideFlags: 0
@@ -7253,6 +7322,7 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
     UseVariable: 1
   stepDustParticle: {fileID: 118747342}
+  currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
   audioSource: {fileID: 7642453997647487575}
   oneShotAudioSource: {fileID: 1266135333095596822}
   runClip: {fileID: 11400000, guid: ec1c02d8480e64651969c0f43d92541e, type: 2}
@@ -8060,6 +8130,7 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
     UseVariable: 1
   stepDustParticle: {fileID: 118747342}
+  currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
   audioSource: {fileID: 3379590096474476584}
   oneShotAudioSource: {fileID: 1266135333095596822}
   runClip: {fileID: 11400000, guid: ec1c02d8480e64651969c0f43d92541e, type: 2}

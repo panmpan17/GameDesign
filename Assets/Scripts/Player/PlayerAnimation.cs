@@ -56,6 +56,8 @@ public class PlayerAnimation : MonoBehaviour
     private FloatReference drawBowSlowDown;
     [SerializeField]
     private ParticleSystem stepDustParticle;
+    [SerializeField]
+    private TransformPointer currentArrowPointer;
 
     [Header("Audio")]
     [SerializeField]
@@ -84,7 +86,6 @@ public class PlayerAnimation : MonoBehaviour
     private bool _walking = false;
 
     private bool _drawBow = false;
-    private Transform _prepareArrowTransform;
 
     private Coroutine _weightTweenRoutine;
 
@@ -187,7 +188,10 @@ public class PlayerAnimation : MonoBehaviour
         chest.rotation = chestRotation * chestRotationOffset;
 
         bow.rotation = Quaternion.LookRotation(bow.position - rightHand.position, transform.up) * bowRotationOffset;
-        _prepareArrowTransform.rotation = Quaternion.LookRotation(_prepareArrowTransform.position - rightHand.position, _prepareArrowTransform.up);
+
+        Transform arrow = currentArrowPointer.Target;
+        if (arrow)
+            arrow.rotation = Quaternion.LookRotation(arrow.position - rightHand.position, arrow.up);
     }
 
     void TestRotateChest()
@@ -223,7 +227,6 @@ public class PlayerAnimation : MonoBehaviour
     void OnDrawBow()
     {
         _drawBow = true;
-        _prepareArrowTransform = behaviour.PreparedArrow.transform;
         animator.SetBool(AnimKeyDrawingBow, true);
         animator.SetFloat(AnimKeyWalkSpeed, drawBowSlowDown.Value);
 
@@ -237,7 +240,6 @@ public class PlayerAnimation : MonoBehaviour
     void OnDrawBowEnd()
     {
         _drawBow = false;
-        _prepareArrowTransform = null;
         animator.SetBool(AnimKeyDrawingBow, false);
         animator.SetFloat(AnimKeyWalkSpeed, 1);
 
