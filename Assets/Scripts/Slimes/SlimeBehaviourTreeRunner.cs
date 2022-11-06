@@ -42,6 +42,7 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     public event System.Action<Collider> OnTriggerEnterEvent;
     public event System.Action<Collision> OnCollisionEnterEvent;
     public event System.Action<Collision> OnCollisionExitEvent;
+    public event System.Action OnDeath;
 
     [Header("Special Effect")]
     [SerializeField]
@@ -161,6 +162,8 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
         sinkTimer.From = transform.position;
         sinkTimer.To = transform.position + Vector3.down * sinkHeight;
         sinkTimer.Timer.Reset();
+
+        OnDeath?.Invoke();
     }
 
     void SpawnLootTable()

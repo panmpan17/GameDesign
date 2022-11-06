@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MPack;
 
 public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
 {
@@ -8,6 +9,9 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
     private TransformPointer spawnPointsPointer;
     [SerializeField]
     private GameObject[] slimePrefabs;
+
+    [SerializeField]
+    private GameObjectList spawnSlimesList;
 
     [Header("Circle Setting")]
     [SerializeField]
@@ -55,6 +59,7 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
             if (randomValue <= chance)
             {
                 GameObject newSlime = Instantiate(prefab, points[i].position, points[i].rotation);
+                SpawnPrefab(prefab, points[i].position, points[i].rotation);
                 spawnLeft--;
             }
         }
@@ -70,11 +75,23 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
             if (randomValue <= chance)
             {
                 Vector3 worldDirection = transform.TransformDirection(_segmentPoints[i]);
-                Vector3 worldPostion = transform.position + worldDirection * radius;
-                GameObject newSlime = Instantiate(prefab, worldPostion, transform.rotation);
+                Vector3 worldPosition = transform.position + worldDirection * radius;
+                SpawnPrefab(prefab, worldPosition, transform.rotation);
                 spawnLeft--;
             }
         }
+    }
+
+    void SpawnPrefab(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        if (spawnSlimesList.CountLimit.Enable && spawnSlimesList.List.Count >= spawnSlimesList.CountLimit.Value)
+            return;
+
+        GameObject newSlime = Instantiate(prefab, position, rotation);
+        spawnSlimesList.List.Add(newSlime);
+        newSlime.GetComponent<SlimeBehaviourTreeRunner>().OnDeath += delegate {
+            spawnSlimesList.List.Remove(newSlime);
+        };
     }
 
     void CalculateSegmentPoints()

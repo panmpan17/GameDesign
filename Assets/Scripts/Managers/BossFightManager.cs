@@ -23,6 +23,8 @@ public class BossFightManager : MonoBehaviour
     private EventReference slimeHealthShowEvent;
     [SerializeField]
     private EventReference playerReviveEvent;
+    [SerializeField]
+    private GameObjectList bossSpawnedSlimes;
 
     // TODO: Cutscene, able to skip when player is dead or skip all cutscene
 
@@ -88,7 +90,15 @@ public class BossFightManager : MonoBehaviour
         slimeHealthShowEvent.Invoke(false);
         Destroy(_bossSlime.gameObject);
 
-        // TODO: Kill all small slime that spawn by boss
+        // Kill all small slime that spawn by boss
+        if (bossSpawnedSlimes)
+        {
+            while (bossSpawnedSlimes.List.Count >= 1)
+            {
+                Destroy(bossSpawnedSlimes.List[0]);
+                bossSpawnedSlimes.List.RemoveAt(0);
+            }
+        }
 
         entranceDetect.gameObject.SetActive(true);
     }
