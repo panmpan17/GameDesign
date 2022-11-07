@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace MPack
 {
-    public class DemoDialogueInterpreter : AbstractDialogueInterpreter
+    public class DemoDialogueInterpreter : MonoBehaviour, IDialogueInterpreter
     {
         public static DemoDialogueInterpreter ins;
 
@@ -46,7 +46,7 @@ namespace MPack
             return true;
         }
 
-        public override void ChangeToQuestion(QuestionNode node)
+        public void ChangeToQuestion(QuestionNode node)
         {
             CleanUpLastNode();
 
@@ -73,7 +73,7 @@ namespace MPack
             }
         }
 
-        public override void ChangeToDialogue(DialogueNode node)
+        public void ChangeToDialogue(DialogueNode node)
         {
             CleanUpLastNode();
 
@@ -81,7 +81,7 @@ namespace MPack
             nextDialogue.SetActive(true);
         }
 
-        public override void OnDialogueEnd()
+        public void OnDialogueEnd()
         {
             dialogueGraph.TearDown();
             dialogueGraph = null;

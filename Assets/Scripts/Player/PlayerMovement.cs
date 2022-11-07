@@ -169,7 +169,11 @@ public class PlayerMovement : MonoBehaviour
     void HandleWalking()
     {
         if (!behaviour.CursorFocued)
+        {
+            _walking = false;
+            _velocity.x = _velocity.z = 0;
             return;
+        }
         if (behaviour.IsDead)
             return;
 
@@ -295,11 +299,26 @@ public class PlayerMovement : MonoBehaviour
     }
 #endregion
 
+#region Rotation
     void FaceWithFollowTarget()
     {
         transform.rotation = Quaternion.Euler(0, followTarget.transform.eulerAngles.y, 0);
         followTarget.localEulerAngles = new Vector3(followTarget.transform.localEulerAngles.x, 0, 0);
     }
+
+    public void FaceRotationWithoutRotateFollowTarget(Vector3 targetPosition)
+    {
+        FaceRotationWithoutRotateFollowTarget(Quaternion.LookRotation(targetPosition - transform.position, Vector3.up));
+    }
+    public void FaceRotationWithoutRotateFollowTarget(Quaternion destination)
+    {
+        Quaternion previousRotation = followTarget.rotation;
+        // Quaternion destination = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(acceleration, Vector3.up), turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0, destination.eulerAngles.y, 0);
+        followTarget.rotation = previousRotation;
+    }
+#endregion
+
 
 #region Input
     void OnJump()
@@ -387,22 +406,6 @@ public class PlayerMovement : MonoBehaviour
         OnRollEvent?.Invoke();
     }
 #endregion
-    // public void Freeze()
-    // {
-    //     _freezed = true;
-
-    //     waitJumpTimer.Running = false;
-    //     waitRollTimer.Running = false;
-    //     _velocity = Vector3.zero;
-
-    //     _walking = false;
-    //     _jumping = false;
-    //     _liftFromGround = false;
-    // }
-
-    // public void Unfreeze()
-    // {
-    // }
 
     void OnDeath()
     {

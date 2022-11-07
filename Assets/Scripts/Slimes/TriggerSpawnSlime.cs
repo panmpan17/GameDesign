@@ -89,9 +89,9 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
 
         GameObject newSlime = Instantiate(prefab, position, rotation);
         spawnSlimesList.List.Add(newSlime);
-        newSlime.GetComponent<SlimeBehaviourTreeRunner>().OnDeath += delegate {
+        newSlime.GetComponent<SlimeBehaviourTreeRunner>().OnDeath.AddListener(delegate {
             spawnSlimesList.List.Remove(newSlime);
-        };
+        });
     }
 
     void CalculateSegmentPoints()

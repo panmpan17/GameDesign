@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MPack;
-using Cinemachine;
+using UnityEngine.EventSystems;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -22,6 +21,16 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private Bow bow;
 
+    [Header("Reference")]
+    [SerializeField]
+    private TransformPointer bodyPointer;
+    [SerializeField]
+    private TransformPointer feetPointer;
+    [SerializeField]
+    private Transform body;
+    [SerializeField]
+    private Transform feet;
+
     [Header("Health")]
     [SerializeField]
     private float maxHealth;
@@ -36,10 +45,19 @@ public class PlayerBehaviour : MonoBehaviour
     private EventReference pauseEvent;
     [SerializeField]
     private EventReference focusEvent;
+
+    [Header("Interact")]
     [SerializeField]
-    private TransformPointer transformPointer;
+    private LayerMask interactLayer;
     [SerializeField]
-    private Transform trackTarget;
+    private float interactRaycastDistance;
+    [SerializeField]
+    private EventReference canInteractEvent;
+    // [SerializeField]
+    // private EventReference dialogueEndEvent;
+
+    private GameObject _interactObject;
+    private bool LastCanInteract => _interactObject != null;
     
     [Header("Inventory")]
     [SerializeField]
@@ -78,18 +96,20 @@ public class PlayerBehaviour : MonoBehaviour
         input.OnAimDown += OnAimDown;
         input.OnAimUp += OnAimUp;
         input.OnEscap += OnEscap;
+        input.OnInteract += OnInteract;
 
         movement.OnRollEvent += OnRoll;
+        animation.OnAimAnimatinoChanged += OnAimProgress;
 
         focusEvent.InvokeEvents += FocusCursor;
+        AbstractMenu.OnFirstMenuOpen += OnFirstMenuOpen;
+        AbstractMenu.OnLastMenuClose += OnLastMenuClose;
 
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walk");
 
         mainCamera = mainCamera == null ? Camera.main : mainCamera;
-        transformPointer.Target = trackTarget ? trackTarget : transform;
-
-        animation.OnAimAnimatinoChanged += OnAimProgress;
-        // aimProgressEvent.InvokeFloatEvents;
+        bodyPointer.Target = body;
+        feetPointer.Target = feet;
 
         bow.Setup(this);
     }
@@ -106,13 +126,30 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _currentRay = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
 
-        if (Physics.Raycast(_currentRay, out RaycastHit hit, 50, hitLayers))
+        if (Physics.Raycast(_currentRay, out RaycastHit shootTargetHit, 50, hitLayers))
+            CurrentRayHitPosition = shootTargetHit.point;
+        else
+            CurrentRayHitPosition = _currentRay.GetPoint(50);
+
+
+        Collider[] colliders = Physics.OverlapSphere(body.position, interactRaycastDistance, interactLayer);
+        if (colliders.Length > 0)
         {
-            CurrentRayHitPosition = hit.point;
+            // Debug.DrawLine(position1, position2, Color.green, 0.1f);
+            if (!LastCanInteract)
+            {
+                _interactObject = colliders[0].gameObject;
+                canInteractEvent.Invoke(true);
+            }
         }
         else
         {
-            CurrentRayHitPosition = _currentRay.GetPoint(50);
+            // Debug.DrawLine(position1, position2, Color.white, 0.1f);
+            if (LastCanInteract)
+            {
+                _interactObject = null;
+                canInteractEvent.Invoke(false);
+            }
         }
     }
 
@@ -123,7 +160,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
 #if UNITY_EDITOR
             if (focusCursorWhenPointerDown)
-                FocusCursor();
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                    FocusCursor();
+            }
 #endif
             return;
         }
@@ -152,10 +192,28 @@ public class PlayerBehaviour : MonoBehaviour
 
     void OnEscap()
     {
-        CursorFocued = false;
-        Cursor.lockState = CursorLockMode.None;
-
         pauseEvent.Invoke();
+#if UNITY_EDITOR
+        if (focusCursorWhenPointerDown)
+        {
+            OutFocusCursor();
+        }
+#endif
+    }
+
+    void OnInteract()
+    {
+        if (!_interactObject)
+            return;
+
+        if (_interactObject.CompareTag("NPC"))
+        {
+            var npc = _interactObject.GetComponent<NPCControl>();
+            npc.StartDialogue();
+
+            canInteractEvent?.Invoke(false);
+            movement.FaceRotationWithoutRotateFollowTarget(npc.transform.position);
+        }
     }
 
     void OnRoll()
@@ -207,6 +265,23 @@ public class PlayerBehaviour : MonoBehaviour
         CursorFocued = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    public void OutFocusCursor()
+    {
+        CursorFocued = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    void OnFirstMenuOpen(AbstractMenu menu)
+    {
+        input.Disable();
+        OutFocusCursor();
+    }
+
+    void OnLastMenuClose(AbstractMenu menu)
+    {
+        input.Enable();
+        FocusCursor();
+    }
 
     public void AddItem(ItemType itemType)
     {
@@ -217,5 +292,7 @@ public class PlayerBehaviour : MonoBehaviour
     void OnDestroy()
     {
         focusEvent.InvokeEvents -= FocusCursor;
+        AbstractMenu.OnFirstMenuOpen -= OnFirstMenuOpen;
+        AbstractMenu.OnLastMenuClose -= OnLastMenuClose;
     }
 }

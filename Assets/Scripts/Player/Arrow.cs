@@ -125,11 +125,11 @@ public class Arrow : MonoBehaviour, IPoolableObj
     {
         enabled = false;
 
-        if (otherTransform.CompareTag("Slime"))
+        if (otherTransform.CompareTag(SlimeBehaviourTreeRunner.Tag))
         {
             transform.SetParent(otherTransform);
         }
-        else if (otherTransform.CompareTag("SlimeCore"))
+        else if (otherTransform.CompareTag(SlimeCore.Tag))
         {
             transform.SetParent(otherTransform.parent);
             var slimeCore = otherTransform.GetComponent<SlimeCore>();
@@ -137,6 +137,12 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
             hit.AddWaitingList(transform.position, Quaternion.LookRotation(-rigidbody.velocity, Vector3.up));
             audioSource.Play(hitSound);
+        }
+        else if (otherTransform.CompareTag(InteractiveBase.Tag))
+        {
+            var interactive = otherTransform.GetComponent<InteractiveBase>();
+            interactive.ArrowHit();
+            gameObject.SetActive(false);
         }
 
         rigidbody.velocity = Vector3.zero;

@@ -5510,6 +5510,10 @@ MonoBehaviour:
   movement: {fileID: 2787180225705632301}
   animation: {fileID: 4057677663369091111}
   bow: {fileID: 5260637637954937081}
+  bodyPointer: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  feetPointer: {fileID: 11400000, guid: d078023746b8f4112adc4bdd062eb354, type: 2}
+  body: {fileID: 3063964680199003412}
+  feet: {fileID: 2787180225705632307}
   maxHealth: 100
   healthChangeEvent: {fileID: 11400000, guid: 17b0e71977e87429b972945c2b722bf1, type: 2}
   hitLayers:
@@ -5517,8 +5521,12 @@ MonoBehaviour:
     m_Bits: 1280
   pauseEvent: {fileID: 11400000, guid: a4d9e9ff7b3664a2ba30364afecb38e8, type: 2}
   focusEvent: {fileID: 11400000, guid: 6b1e6f134a2df4a15902e25accbbaee4, type: 2}
-  transformPointer: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
-  trackTarget: {fileID: 3063964680199003412}
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  interactRaycastDistance: 2
+  canInteractEvent: {fileID: 11400000, guid: b8fbbb11370b2494f8dd72fc8925e369, type: 2}
+  dialogueEndEvent: {fileID: 11400000, guid: 84a6f59297b02472a8eb2953de76e458, type: 2}
   inventoryEvent: {fileID: 11400000, guid: 99f7d598adae6464e881f9bded09eace, type: 2}
   focusCursorWhenPointerDown: 0
 --- !u!143 &2787180225705632303

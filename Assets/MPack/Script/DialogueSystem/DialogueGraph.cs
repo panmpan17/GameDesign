@@ -17,11 +17,11 @@ namespace MPack
 
         public AbstractNode currentNode { get; protected set; }
 
-        public AbstractDialogueInterpreter DialogueInterpreter { get; private set; }
+        public IDialogueInterpreter DialogueInterpreter { get; private set; }
 
         public VaribleStorageSystem varibles { get; private set; }
 
-        public void SetUp(AbstractDialogueInterpreter dialogueInterpreter, VaribleStorageSystem varibleStorageSystem)
+        public void SetUp(IDialogueInterpreter dialogueInterpreter, VaribleStorageSystem varibleStorageSystem)
         {
             DialogueInterpreter = dialogueInterpreter;
             varibles = varibleStorageSystem;

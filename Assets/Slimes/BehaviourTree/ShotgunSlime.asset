@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: a21ce037540c14866a6854c51a95583a
   position: {x: 93.49997, y: 576.5}
   blackboard:
@@ -33,8 +31,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61431bba79d7d7843b82bf1de71703f5, type: 3}
   m_Name: Sequencer
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 47a1298da01e84ac79885543b0b549ed
   position: {x: -206.65501, y: 406.50006}
   blackboard:
@@ -60,8 +56,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5134d9de14153468b48928d3e7359a, type: 3}
   m_Name: Wait
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 041356bca1d8d429e83d681f5c16b031
   position: {x: 369.49988, y: 406.5}
   blackboard:
@@ -81,8 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d636e16b5426400fb03ee9a883e6c05, type: 3}
   m_Name: CheckTargetInEyeSight
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: cce8f324215e4431eb1245f7ab7b118d
   position: {x: -379, y: 576.5}
   blackboard:
@@ -120,6 +112,7 @@ MonoBehaviour:
   - {fileID: 5938664393090166391}
   - {fileID: 4617880792163116643}
   - {fileID: 4498004470902088036}
+  FunctionTree: {fileID: 0}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1559538727858598782
@@ -134,8 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163c147d123e4a945b688eddc64e3ea5, type: 3}
   m_Name: RootNode
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: a4374315efc29429e868a9165290435e
   position: {x: 0, y: 0}
   blackboard:
@@ -155,8 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb5496e8cd973748a10b3e3ef436ebd, type: 3}
   m_Name: Repeat
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 774b2fdd793b949bd8128a8073c49258
   position: {x: 0, y: 134}
   blackboard:
@@ -181,8 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7bf77e26564daa41815cba042a730aa, type: 3}
   m_Name: InterruptSelector
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 3577ad145379f4bb09a25d09ac4c26f5
   position: {x: 444.5822, y: 177.99997}
   blackboard:
@@ -202,8 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bbb4010641947cba58baf1b186eb24, type: 3}
   m_Name: ShootTrigger
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 2757e70237038486bb719cc80737b92f
   position: {x: -56.499878, y: 576.5}
   blackboard:
@@ -211,6 +196,9 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   TriggerGroupIndex:
+    Enable: 0
+    Value: 0
+  CarriedParameter:
     Enable: 0
     Value: 0
 --- !u!114 &4498004470902088036
@@ -225,15 +213,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130abbfb7bbf0496b88b74201b33a7a3, type: 3}
   m_Name: AlignRotationWIthGround
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: eaddece30751e48f0b8953a583991ea8
   position: {x: -768, y: 576.5}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
   drawGizmos: 0
-  rotationOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4617880792163116643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,8 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e77c6cba4cc4a7d94605865bace79a, type: 3}
   m_Name: SetPlayerPositionAsTarget
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 5ffecb916867243bc97fc4290efc726f
   position: {x: -573.5, y: 576.5}
   blackboard:
@@ -266,8 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460be9e34c566ea45b9e282b1adcb028, type: 3}
   m_Name: Selector
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 29184d908d19e4fec917797bc3f008e4
   position: {x: 0, y: 266}
   blackboard:
@@ -289,8 +270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1305ada2353741dda1310a2c4f2a630, type: 3}
   m_Name: FaceTarget
   m_EditorClassIdentifier: 
-  state: 0
-  started: 0
   guid: 41aab64e584ad4043b597b83808f2916
   position: {x: -206.49985, y: 576.5}
   blackboard:
@@ -298,3 +277,4 @@ MonoBehaviour:
   description: 
   drawGizmos: 0
   rotateSpeed: 60
+  raycastPoint: 0

@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace MPack
 {
-    public abstract class AbstractDialogueInterpreter : MonoBehaviour
+    public interface IDialogueInterpreter
     {
-        public abstract void ChangeToQuestion(QuestionNode node);
-        public abstract void ChangeToDialogue(DialogueNode node);
-        public abstract void OnDialogueEnd();
+        void ChangeToQuestion(QuestionNode node);
+        void ChangeToDialogue(DialogueNode node);
+        void OnDialogueEnd();
     }
 }

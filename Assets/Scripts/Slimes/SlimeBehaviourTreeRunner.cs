@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TheKiwiCoder;
 using MPack;
 using Cinemachine;
@@ -12,6 +13,8 @@ using UnityEditor;
 
 public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
 {
+    public const string Tag = "Slime";
+
     private ITriggerFire[] triggerFires;
 
     [SerializeField]
@@ -38,11 +41,11 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     private Vector3LerpTimer sinkTimer;
     [SerializeField]
     private float sinkHeight;
+    public UnityEvent OnDeath;
 
     public event System.Action<Collider> OnTriggerEnterEvent;
     public event System.Action<Collision> OnCollisionEnterEvent;
     public event System.Action<Collision> OnCollisionExitEvent;
-    public event System.Action OnDeath;
 
     [Header("Special Effect")]
     [SerializeField]

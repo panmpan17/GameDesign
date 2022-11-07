@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SlimeCore : MonoBehaviour
 {
+    public const string Tag = "SlimeCore";
+
     public event System.Action OnDamageEvent;
 
     public void OnDamage()

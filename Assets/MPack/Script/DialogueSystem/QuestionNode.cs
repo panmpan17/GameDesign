@@ -15,10 +15,10 @@ namespace MPack
         [TextArea]
         public string content;
 
-        [HideInInspector]
+        // [HideInInspector]
         public Choice[] choices;
 
-        [HideInInspector]
+        // [HideInInspector]
         public int choiceCount;
 
         [System.Serializable]
