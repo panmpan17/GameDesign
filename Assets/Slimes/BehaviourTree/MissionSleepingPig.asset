@@ -98,34 +98,6 @@ MonoBehaviour:
   children:
   - {fileID: -7017309113794733387}
   - {fileID: -7536788574814741267}
---- !u!114 &-381805557008827339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f82998d0075343318a168210727b219, type: 3}
-  m_Name: TriggerEvent
-  m_EditorClassIdentifier: 
-  guid: 2350cdbbd41df4f1e9f7bce90e6a34e5
-  position: {x: 102.49993, y: 256.49997}
-  blackboard:
-    TargetPosition: {x: 0, y: 0, z: 0}
-  description: 
-  drawGizmos: 0
-  eventReference: {fileID: 11400000, guid: 2113201d5f39a440cb1dc5a6c91a15b4, type: 2}
-  carriedFloatValue:
-    Enable: 0
-    Value: 0
-  carriedIntValue:
-    Enable: 0
-    Value: 0
-  carriedBoolValue:
-    Enable: 0
-    Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,10 +121,38 @@ MonoBehaviour:
   - {fileID: -7017309113794733387}
   - {fileID: -7536788574814741267}
   - {fileID: -2293610652761847426}
-  - {fileID: -381805557008827339}
+  - {fileID: 781240841599924809}
   FunctionTree: {fileID: 0}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &781240841599924809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f82998d0075343318a168210727b219, type: 3}
+  m_Name: TriggerEvent
+  m_EditorClassIdentifier: 
+  guid: cc6e4005e57c54175a7da0e68db9f7e0
+  position: {x: 116, y: 256.5}
+  blackboard:
+    TargetPosition: {x: 0, y: 0, z: 0}
+  description: 
+  drawGizmos: 0
+  eventReference: {fileID: 11400000, guid: 25ec361e6e21544f38c2ce106d4a7344, type: 2}
+  carriedFloatValue:
+    Enable: 0
+    Value: 0
+  carriedIntValue:
+    Enable: 0
+    Value: 0
+  carriedBoolValue:
+    Enable: 0
+    Value: 0
 --- !u!114 &1225293188464140371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: Sequencer
   m_EditorClassIdentifier: 
   guid: 06968dbacd94640e6a7ac0fab34514f1
-  position: {x: 0, y: 125.5}
+  position: {x: -159.50002, y: 20.999994}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 
@@ -175,7 +175,7 @@ MonoBehaviour:
   - {fileID: 9090773735734070210}
   - {fileID: -4265692895918964314}
   - {fileID: 7292397867830195293}
-  - {fileID: -381805557008827339}
+  - {fileID: 781240841599924809}
 --- !u!114 &5029130163038652296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: RootNode
   m_EditorClassIdentifier: 
   guid: dc708eb3638e04c0b935853e0a6e537a
-  position: {x: 0, y: 0}
+  position: {x: -159.60622, y: -104.2761}
   blackboard:
     TargetPosition: {x: 0, y: 0, z: 0}
   description: 

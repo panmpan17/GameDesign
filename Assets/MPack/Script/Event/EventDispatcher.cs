@@ -15,11 +15,11 @@ public class EventDispatcher : MonoBehaviour
 
     void OnEnable()
     {
-        eventReference.RegisterEvent(this);
+        eventReference?.RegisterEvent(this);
     }
     void OnDisable()
     {
-        eventReference.UnregisterEvent(this);
+        eventReference?.UnregisterEvent(this);
     }
 
     public void DispatchEvent() => Event.Invoke();

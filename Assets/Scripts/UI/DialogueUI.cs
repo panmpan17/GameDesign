@@ -22,14 +22,12 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     private EventReference dialogueStartEvent;
 
     private List<GameObject> _aliveChoices;
-    private VaribleStorageSystem _varibleStorageSystem;
     private DialogueGraph _dialogueGraph;
     private Canvas _canvas;
 
     private void Start()
     {
         _aliveChoices = new List<GameObject>();
-        _varibleStorageSystem = new VaribleStorageSystem();
 
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
@@ -45,7 +43,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         _canvas.enabled = true;
 
         _dialogueGraph = graph;
-        _dialogueGraph.SetUp(this, _varibleStorageSystem);
+        _dialogueGraph.SetUp(this);
         _dialogueGraph.Start();
         _dialogueGraph.Proccessing();
         return;

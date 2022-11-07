@@ -19,18 +19,18 @@ namespace MPack
 
         public IDialogueInterpreter DialogueInterpreter { get; private set; }
 
-        public VaribleStorageSystem varibles { get; private set; }
+        [SerializeField]
+        private VariableStorage varibleStorage;
+        public VariableStorage varibles => varibleStorage;
 
-        public void SetUp(IDialogueInterpreter dialogueInterpreter, VaribleStorageSystem varibleStorageSystem)
+        public void SetUp(IDialogueInterpreter dialogueInterpreter)
         {
             DialogueInterpreter = dialogueInterpreter;
-            varibles = varibleStorageSystem;
         }
 
         public void TearDown()
         {
             DialogueInterpreter = null;
-            varibles = null;
         }
 
         public void Start()

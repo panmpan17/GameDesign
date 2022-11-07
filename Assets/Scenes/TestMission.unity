@@ -951,7 +951,6 @@ GameObject:
   - component: {fileID: 801899664}
   - component: {fileID: 801899663}
   - component: {fileID: 801899662}
-  - component: {fileID: 801899667}
   - component: {fileID: 801899668}
   m_Layer: 5
   m_Name: DialogueSystem
@@ -1037,38 +1036,13 @@ RectTransform:
   - {fileID: 1076134457}
   - {fileID: 1496724497}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &801899667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801899661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70bd2ea85556d4d4891493bc303336bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventReference: {fileID: 11400000, guid: 2113201d5f39a440cb1dc5a6c91a15b4, type: 2}
-  Event:
-    m_PersistentCalls:
-      m_Calls: []
-  FloatEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  IntEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  BoolEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &801899668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,6 +1138,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
+--- !u!1 &875397873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 875397874}
+  - component: {fileID: 875397875}
+  m_Layer: 0
+  m_Name: VilliagerSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &875397874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875397873}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 1.2, y: 0, z: 25.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &875397875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875397873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4459f74ea168145d19439898ab6b8712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1076134456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,7 +1782,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1597274026
 PrefabInstance:
@@ -1925,7 +1943,7 @@ PrefabInstance:
     - target: {fileID: 6467346189754202662, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1648830423}
+      objectReference: {fileID: 1648830427}
     - target: {fileID: 6467346189754202662, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1936,7 +1954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6467346189754202662, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EventTrigger, MPack
+      value: MPack.VariableStorageManipulate, MPack
       objectReference: {fileID: 0}
     - target: {fileID: 6467346189754202662, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1955,7 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b823d69a7e9eb4dbd813eee0c28c7beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1648830423
+--- !u!114 &1648830427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1964,10 +1982,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 444788402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e5a6a18d4644f939e14cb29f7be743, type: 3}
+  m_Script: {fileID: 11500000, guid: dafac9009e53840d6a24bc28ea76d46d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventReference: {fileID: 11400000, guid: 2113201d5f39a440cb1dc5a6c91a15b4, type: 2}
+  variableName: Mission1SlimeLeave
+  boolValue: 1
+  variableStorage: {fileID: 11400000, guid: 70ec3d9e124de4eb6bbbcc9c65a65ed7, type: 2}
+--- !u!114 &1648830428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444788402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bd2ea85556d4d4891493bc303336bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventReference: {fileID: 11400000, guid: 25ec361e6e21544f38c2ce106d4a7344, type: 2}
+  Event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1648830427}
+        m_TargetAssemblyTypeName: MPack.VariableStorageManipulate, MPack
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  FloatEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  IntEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  BoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1722314277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,6 +2267,7 @@ GameObject:
   - component: {fileID: 1983959640}
   - component: {fileID: 1983959641}
   - component: {fileID: 1983959642}
+  - component: {fileID: 1983959643}
   m_Layer: 12
   m_Name: Villiager
   m_TagString: NPC
@@ -2231,7 +2289,7 @@ Transform:
   m_Children:
   - {fileID: 530379904}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1983959641
 MonoBehaviour:
@@ -2261,3 +2319,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1688353, y: 2, z: 0.94265175}
   m_Center: {x: 0, y: 1, z: 0.47132587}
+--- !u!114 &1983959643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983959636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bd2ea85556d4d4891493bc303336bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventReference: {fileID: 11400000, guid: 0b62c30b8dc3744509a2419b57787b02, type: 2}
+  Event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 875397875}
+        m_TargetAssemblyTypeName: TeleportSpot, Assembly-CSharp
+        m_MethodName: Teleport
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1983959640}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  FloatEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  IntEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  BoolEvent:
+    m_PersistentCalls:
+      m_Calls: []

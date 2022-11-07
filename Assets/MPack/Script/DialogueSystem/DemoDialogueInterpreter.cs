@@ -21,7 +21,7 @@ namespace MPack
 
         private List<GameObject> aliveChoices;
 
-        private VaribleStorageSystem varibleStorageSystem;
+        // private VaribleStorageSystem varibleStorageSystem;
 
         private DialogueGraph dialogueGraph;
 
@@ -29,7 +29,7 @@ namespace MPack
             ins = this;
 
             aliveChoices = new List<GameObject>();
-            varibleStorageSystem = new VaribleStorageSystem();
+            // varibleStorageSystem = new VaribleStorageSystem();
             gameObject.SetActive(false);
         }
 
@@ -40,7 +40,7 @@ namespace MPack
             gameObject.SetActive(true);
 
             dialogueGraph = graph;
-            dialogueGraph.SetUp(this, varibleStorageSystem);
+            // dialogueGraph.SetUp(this, varibleStorageSystem);
             dialogueGraph.Start();
             dialogueGraph.Proccessing();
             return true;
