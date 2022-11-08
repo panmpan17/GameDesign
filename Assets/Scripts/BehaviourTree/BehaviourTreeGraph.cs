@@ -44,10 +44,11 @@ namespace XnodeBehaviourTree
             return _state;
         }
 
-        public BehaviourTreeGraph Clone()
+        public override XNode.NodeGraph Copy()
         {
-            this.OnInitial();
-            return this;
+            NodeGraph graph = base.Copy();
+            ((BehaviourTreeGraph)graph).OnInitial();
+            return graph;
         }
     }
 }

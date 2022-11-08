@@ -12,7 +12,7 @@ namespace XnodeBehaviourTree
 
         void Awake()
         {
-            graph = graph.Clone();
+            graph = (BehaviourTreeGraph) graph.Copy();
         }
 
         void Update()

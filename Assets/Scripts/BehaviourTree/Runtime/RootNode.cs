@@ -10,7 +10,7 @@ namespace XnodeBehaviourTree
     [CreateNodeMenu("BehaviourTree/Root")]
     public class RootNode : AbstractBehaviourNode
     {
-        [Output]
+        [Output(connectionType: ConnectionType.Override)]
         public BehaviourPort Output;
 
         [System.NonSerialized]
