@@ -11,9 +11,6 @@ namespace XnodeBehaviourTree
         [Input]
         public BehaviourPort Input;
 
-#if UNITY_EDITOR
-        [TextArea] public string description;
-#endif
         public bool drawGizmos = false;
 
 

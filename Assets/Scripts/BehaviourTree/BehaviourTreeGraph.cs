@@ -15,8 +15,10 @@ namespace XnodeBehaviourTree
         [System.NonSerialized]
         private AbstractBehaviourNode.State _state;
 
-        void OnInitial()
+        public void OnInitial(TheKiwiCoder.Context context)
         {
+            TheKiwiCoder.Blackboard blackboard = new TheKiwiCoder.Blackboard();
+
             for (int i = 0; i < nodes.Count; i++)
             {
                 AbstractBehaviourNode node;
@@ -32,6 +34,8 @@ namespace XnodeBehaviourTree
                 }
 
                 node.OnInitial();
+                node.context = context;
+                node.blackboard = blackboard;
             }
         }
 
@@ -42,13 +46,6 @@ namespace XnodeBehaviourTree
                 _state = _rootNode.Update();
             }
             return _state;
-        }
-
-        public override XNode.NodeGraph Copy()
-        {
-            NodeGraph graph = base.Copy();
-            ((BehaviourTreeGraph)graph).OnInitial();
-            return graph;
         }
     }
 }

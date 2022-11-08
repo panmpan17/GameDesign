@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace XnodeBehaviourTree
 {
+    [CreateNodeMenu("BehaviourTree/Composite/Paralle")]
     public class ParallelNode : AbstractCompositeNode
     {
         State[] childrenLeftToExecute;

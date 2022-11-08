@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace XnodeBehaviourTree
 {
+    [CreateNodeMenu("BehaviourTree/Composite/Select")]
     public class SelectNode : AbstractCompositeNode
     {
         protected int _current;

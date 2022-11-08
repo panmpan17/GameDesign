@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace XnodeBehaviourTree
 {
+    [CreateNodeMenu("BehaviourTree/Composite/Interrupt Select")]
     public class InterruptSelectNode : SelectNode
     {
         protected override State OnUpdate()

@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace XnodeBehaviourTree
 {
-    [CreateNodeMenu("BehaviourTree/Action/Wait")]
-    public class WaitNode : ActionNode
+    [CreateNodeMenu("BehaviourTree/Decorate/Timeout")]
+    public class TimeoutNode : AbstractDecorateNode
     {
-        public float duration = 1;
+        public float duration = 1.0f;
+        public bool resultIsSuccess;
         float startTime;
 
         protected override void OnStart()
@@ -25,9 +26,10 @@ namespace XnodeBehaviourTree
             startTime += Time.deltaTime;
             if (startTime > duration)
             {
-                return State.Success;
+                return resultIsSuccess ? State.Success : State.Failure;
             }
-            return State.Running;
+
+            return _child.Update();
         }
     }
 }

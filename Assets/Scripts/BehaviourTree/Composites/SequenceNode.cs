@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace XnodeBehaviourTree
 {
+    [CreateNodeMenu("BehaviourTree/Composite/Sequence")]
     public class SequenceNode : AbstractCompositeNode
     {
         [System.NonSerialized]

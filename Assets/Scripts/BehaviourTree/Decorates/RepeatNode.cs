@@ -6,6 +6,7 @@ using MPack;
 
 namespace XnodeBehaviourTree
 {
+    [CreateNodeMenu("BehaviourTree/Decorate/Repeat")]
     public class RepeatNode : AbstractDecorateNode
     {
         public ValueWithEnable<int> repeatLimit;
