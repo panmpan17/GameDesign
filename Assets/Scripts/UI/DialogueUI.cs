@@ -11,6 +11,8 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     [SerializeField]
     private TextMeshProUGUI questionText;
     [SerializeField]
+    private LanguageText dialogueLauguageText;
+    [SerializeField]
     private GameObject choiceTextPrefab;
     [SerializeField]
     private GameObject nextDialogue;
@@ -53,7 +55,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     {
         CleanUpLastNode();
 
-        questionText.text = node.content;
+        dialogueLauguageText.ChangeId(node.ContentLaguageID);
 
         for (int i = 0; i < node.choices.Length; i++)
         {
@@ -63,8 +65,8 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
             var transform = newChoiceButton.GetComponent<RectTransform>();
             transform.anchoredPosition += offset * i;
 
-            var uiText = newChoiceButton.GetComponentInChildren<TextMeshProUGUI>();
-            uiText.text = node.choices[i].content;
+            var languageText = newChoiceButton.GetComponentInChildren<LanguageText>();
+            languageText.ChangeId(node.choices[i].ContentLaguageID);
 
             var button = newChoiceButton.GetComponent<Button>();
             int index = i;
@@ -81,7 +83,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     {
         CleanUpLastNode();
 
-        questionText.text = node.content;
+        dialogueLauguageText.ChangeId(node.ContentLaguageID);
         nextDialogue.SetActive(true);
     }
 

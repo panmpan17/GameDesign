@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using MPack;
 
 
 namespace MPack
@@ -50,7 +51,7 @@ namespace MPack
         {
             CleanUpLastNode();
 
-            questionText.text = node.content;
+            // questionText.text = node.content;
 
             for (int i = 0; i < node.choices.Length; i++)
             {
@@ -61,7 +62,7 @@ namespace MPack
                 transform.anchoredPosition += new Vector2(0, offsetY * i);
 
                 Text uiText = newChoiceButton.GetComponentInChildren<Text>();
-                uiText.text = node.choices[i].content;
+                // uiText.text = node.choices[i].content;
 
                 Button button = newChoiceButton.GetComponent<Button>();
                 int index = i;
@@ -77,7 +78,7 @@ namespace MPack
         {
             CleanUpLastNode();
 
-            questionText.text = node.content;
+            // questionText.text = node.content;
             nextDialogue.SetActive(true);
         }
 

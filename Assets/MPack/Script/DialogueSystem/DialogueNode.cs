@@ -13,8 +13,8 @@ namespace MPack
         [Output(connectionType: ConnectionType.Override)]
         public NodeEmptyIO Output;
 
-        [TextArea]
-        public string content;
+        [LauguageID]
+        public int ContentLaguageID;
 
         public override void Proccess()
         {

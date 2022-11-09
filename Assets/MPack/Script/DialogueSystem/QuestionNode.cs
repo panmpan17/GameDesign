@@ -12,8 +12,8 @@ namespace MPack
         [Input]
         public NodeEmptyIO Input;
 
-        [TextArea]
-        public string content;
+        [LauguageID]
+        public int ContentLaguageID;
 
         // [HideInInspector]
         public Choice[] choices;
@@ -24,16 +24,13 @@ namespace MPack
         [System.Serializable]
         public struct Choice
         {
-            [TextArea]
-            public string content;
+            [LauguageID]
+            public int ContentLaguageID;
+
+            [HideInInspector]
             public NodePort port;
-
+            [HideInInspector]
             public int index;
-
-            public override string ToString()
-            {
-                return string.Format("<Choice '{0}'>", content);
-            }
         }
 
         public override void Proccess()

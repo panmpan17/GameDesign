@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using XNode;
 using XNodeEditor;
 
 
@@ -11,13 +12,12 @@ namespace MPack
         private DialogueGraph graph;
         private QuestionNode node;
 
+        private SerializedProperty input;
+        private SerializedProperty contentLanguageID;
+        private SerializedProperty choices;
+
         public override void OnBodyGUI()
         {
-            // base.OnBodyGUI();
-            serializedObject.Update();
-            NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("Input"));
-            NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("content"));
-
             if (node == null)
             {
                 node = (QuestionNode)target;
@@ -31,39 +31,62 @@ namespace MPack
                 }
             }
 
+            input = serializedObject.FindProperty("Input");
+            choices = serializedObject.FindProperty("choices");
+            contentLanguageID = serializedObject.FindProperty("ContentLaguageID");
 
-            for (int i = 0; i < node.choices.Length; i++)
+            serializedObject.Update();
+            NodeEditorGUILayout.PropertyField(input);
+            NodeEditorGUILayout.PropertyField(contentLanguageID);
+
+            EditorGUILayout.Space();
+
+            for (int i = 0; i < choices.arraySize; i++)
             {
-                QuestionNode.Choice choice = node.choices[i];
+                SerializedProperty choiceProperty = choices.GetArrayElementAtIndex(i);
+                NodeEditorGUILayout.PropertyField(choiceProperty);
 
-                EditorGUI.BeginChangeCheck();
-                node.choices[i].content = EditorGUILayout.TextArea(choice.content);
-                if (EditorGUI.EndChangeCheck())
-                {
-                    Undo.RecordObject(node, "");
-                }
+                SerializedProperty portProperty = choiceProperty.FindPropertyRelative("port");
+                NodePort port = node.choices[i].port;
 
                 EditorGUILayout.BeginHorizontal();
                 if (GUILayout.Button("-"))
                 {
                     Undo.RecordObject(node, "");
-                    node.RemoveDynamicPort(choice.port);
+                    node.RemoveDynamicPort(port);
                     node.RemoveChoiceAt(i);
                     return;
                 }
 
-                NodeEditorGUILayout.PortField(choice.port);
+                NodeEditorGUILayout.PortField(port);
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.Space(5);
             }
+
+            serializedObject.ApplyModifiedProperties();
 
             if (GUILayout.Button("+"))
             {
                 Undo.RecordObject(node, "");
                 node.AddNewChoice();
             }
+        }
+    }
 
-            serializedObject.ApplyModifiedProperties();
+    [CustomPropertyDrawer(typeof(QuestionNode.Choice))]
+    public class ChoiceProperty : PropertyDrawer
+    {
+        SerializedProperty contentLanguageID;
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            contentLanguageID = property.FindPropertyRelative("ContentLaguageID");
+            return EditorGUI.GetPropertyHeight(contentLanguageID);
+        }
+
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.PropertyField(position, contentLanguageID, new GUIContent("ID"));
         }
     }
 }

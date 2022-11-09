@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Question
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 600, y: 184}
+  position: {x: 600, y: 264}
   ports:
     keys:
     - Input
@@ -56,9 +56,10 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 1
-  content: Can you help me?
+  ContentLaguageID: 1011
   choices:
   - content: What's wrong?
+    ContentLaguageID: 1015
     port:
       _fieldName: choice_port_2
       _node: {fileID: -9138774596446934095}
@@ -74,6 +75,7 @@ MonoBehaviour:
       _dynamic: 1
     index: 2
   - content: I'm busy.
+    ContentLaguageID: 1016
     port:
       _fieldName: choice_port_3
       _node: {fileID: -9138774596446934095}
@@ -438,7 +440,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-  content: Thank you for before
+  ContentLaguageID: 1007
 --- !u!114 &-1259554152920336478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,7 +484,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-  content: The gift I promise you is in the house, let's head over there.
+  ContentLaguageID: 1006
 --- !u!114 &-285737596701549450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,7 +643,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 600}
+  position: {x: 1416, y: 568}
   ports:
     keys:
     - Input
@@ -671,7 +673,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-  content: ;(
+  ContentLaguageID: 1002
 --- !u!114 &1952030677929640805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,7 +799,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-  content: Ok, let me know if you're done.
+  ContentLaguageID: 1005
 --- !u!114 &4877766416503589824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,9 +843,10 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 1
-  content: Have you finished it?
+  ContentLaguageID: 1010
   choices:
   - content: No.
+    ContentLaguageID: 1014
     port:
       _fieldName: choice_port_0
       _node: {fileID: 4877766416503589824}
@@ -902,9 +905,10 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 1
-  content: Thank you, I appreciate your help!
+  ContentLaguageID: 1009
   choices:
   - content: It's no problem.
+    ContentLaguageID: 1013
     port:
       _fieldName: choice_port_0
       _node: {fileID: 5414417408511222016}
@@ -1077,7 +1081,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
-  content: Really? I'll have a gift for you after it's done.
+  ContentLaguageID: 1003
 --- !u!114 &6980172127899947010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1190,7 +1194,7 @@ MonoBehaviour:
   m_Name: Question
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 984, y: 136}
+  position: {x: 968, y: 184}
   ports:
     keys:
     - Input
@@ -1233,9 +1237,10 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 1
-  content: My house...
+  ContentLaguageID: 1004
   choices:
   - content: Ok, I'll handle it.
+    ContentLaguageID: 1017
     port:
       _fieldName: choice_port_0
       _node: {fileID: 8843528148968183139}
@@ -1251,6 +1256,7 @@ MonoBehaviour:
       _dynamic: 1
     index: 0
   - content: Sorry, I can't help.
+    ContentLaguageID: 1018
     port:
       _fieldName: choice_port_1
       _node: {fileID: 8843528148968183139}
@@ -1309,9 +1315,10 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 1
-  content: This is for you, it will make bow stronger
+  ContentLaguageID: 1008
   choices:
   - content: Thank you
+    ContentLaguageID: 1012
     port:
       _fieldName: choice_port_0
       _node: {fileID: 9031219628286627275}
