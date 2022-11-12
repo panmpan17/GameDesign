@@ -304,6 +304,50 @@ MonoBehaviour:
   FloatOutput: 0
   IntOutput: 0
   variableName: Mission1Complete
+--- !u!114 &-4183377875344150566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8549e0df648e84cd3a1a02bfef02677d, type: 3}
+  m_Name: Trigger Event
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1672, y: 136}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -4183377875344150566}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 6587698768978880381}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -4183377875344150566}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: 7129187187014234986}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  eventReference: {fileID: 11400000, guid: ac507c8cc37504a208ea0603b08529b0, type: 2}
 --- !u!114 &-2760719994085891191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,12 +540,11 @@ MonoBehaviour:
   - {fileID: 6555571388216870280}
   - {fileID: 495942423490079572}
   - {fileID: 4831351611653234465}
+  - {fileID: -4183377875344150566}
   variablePairs:
   - keyName: Mission1SpeakTo
     keyType: 2
   - keyName: Mission1SlimeLeave
-    keyType: 2
-  - keyName: Mission1VilliageMove
     keyType: 2
   - keyName: Mission1Complete
     keyType: 2
@@ -1009,7 +1052,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: 7129187187014234986}
+        node: {fileID: -4183377875344150566}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -1085,7 +1128,7 @@ MonoBehaviour:
   m_Name: Set Variable
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1704, y: 152}
+  position: {x: 1912, y: 152}
   ports:
     keys:
     - Input
@@ -1097,7 +1140,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 6587698768978880381}
+        node: {fileID: -4183377875344150566}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
