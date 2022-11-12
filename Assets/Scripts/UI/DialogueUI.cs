@@ -9,13 +9,12 @@ using TMPro;
 public class DialogueUI : AbstractMenu, IDialogueInterpreter
 {
     [SerializeField]
-    private TextMeshProUGUI questionText;
+    private SpeakerUIReference mainCharacter;
     [SerializeField]
-    private LanguageText dialogueLauguageText;
+    private SpeakerUIReference npc;
+
     [SerializeField]
     private GameObject choiceTextPrefab;
-    [SerializeField]
-    private GameObject nextDialogue;
     [SerializeField]
     private Vector2 offset;
     [SerializeField]
@@ -55,7 +54,16 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     {
         CleanUpLastNode();
 
-        dialogueLauguageText.ChangeId(node.ContentLaguageID);
+        if (node.Speaker.IsNPC)
+        {
+            npc.ChangeUI(node.Speaker, node.ContentLaguageID, false);
+            mainCharacter.Hide();
+        }
+        else
+        {
+            mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, false);
+            npc.Hide();
+        }
 
         for (int i = 0; i < node.choices.Length; i++)
         {
@@ -83,8 +91,16 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     {
         CleanUpLastNode();
 
-        dialogueLauguageText.ChangeId(node.ContentLaguageID);
-        nextDialogue.SetActive(true);
+        if (node.Speaker.IsNPC)
+        {
+            npc.ChangeUI(node.Speaker, node.ContentLaguageID, true);
+            mainCharacter.Hide();
+        }
+        else
+        {
+            mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, true);
+            npc.Hide();
+        }
     }
 
     public void OnDialogueEnd()
@@ -102,7 +118,6 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         {
             Destroy(_aliveChoices[i]);
         }
-        nextDialogue.SetActive(false);
     }
 
     public void ChoiceButtonClicked(QuestionNode node, int index)
@@ -114,5 +129,29 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     public void NextDialogue()
     {
         _dialogueGraph.Proccessing();
+    }
+
+    [System.Serializable]
+    public class SpeakerUIReference
+    {
+        public GameObject Parent;
+        public Image CharacterImage;
+        public LanguageText NameLanguageText;
+        public LanguageText DialogueLanguageText;
+        public GameObject NextDialogueButton;
+
+        public void ChangeUI(Speaker speaker, int dialogueLanguageID, bool showNextButton)
+        {
+            CharacterImage.sprite = speaker.CharacterSprite;
+            NameLanguageText.ChangeId(speaker.NameLanguageID);
+            DialogueLanguageText.ChangeId(dialogueLanguageID);
+            NextDialogueButton.SetActive(showNextButton);
+            Parent.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            Parent.SetActive(false);
+        }
     }
 }

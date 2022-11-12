@@ -13,6 +13,7 @@ namespace MPack
         [Output(connectionType: ConnectionType.Override)]
         public NodeEmptyIO Output;
 
+        public Speaker Speaker;
         [LauguageID]
         public int ContentLaguageID;
 

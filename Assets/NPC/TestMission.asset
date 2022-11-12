@@ -57,9 +57,9 @@ MonoBehaviour:
       _typeConstraint: 2
       _dynamic: 1
   ContentLaguageID: 1011
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
   choices:
-  - content: What's wrong?
-    ContentLaguageID: 1015
+  - ContentLaguageID: 1015
     port:
       _fieldName: choice_port_2
       _node: {fileID: -9138774596446934095}
@@ -74,8 +74,7 @@ MonoBehaviour:
       _typeConstraint: 2
       _dynamic: 1
     index: 2
-  - content: I'm busy.
-    ContentLaguageID: 1016
+  - ContentLaguageID: 1016
     port:
       _fieldName: choice_port_3
       _node: {fileID: -9138774596446934095}
@@ -104,7 +103,7 @@ MonoBehaviour:
   m_Name: Set Variable
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1208, y: -232}
+  position: {x: 1512, y: -264}
   ports:
     keys:
     - Input
@@ -135,6 +134,96 @@ MonoBehaviour:
   variableBoolValue: 1
   variableIntValue: 0
   variableFloatValue: 0
+--- !u!114 &-8285884253694589647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76d444df100b4a2e9262247b1524c3f, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 392, y: -328}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -8285884253694589647}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: True
+        node: {fileID: 6346465476755446438}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -8285884253694589647}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: 6088741037534251636}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
+  ContentLaguageID: 1009
+--- !u!114 &-8092149776157444630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76d444df100b4a2e9262247b1524c3f, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 360, y: -568}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -8092149776157444630}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: -341275537454954547}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -8092149776157444630}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -285737596701549450}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 3cc76626b12e04e71bb0c36b60afaecb, type: 2}
+  ContentLaguageID: 1012
 --- !u!114 &-7528286864948867013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +293,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 0
-  BooleanValue: 1
+  BooleanValue: 0
 --- !u!114 &-6210431916622429299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +345,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   varibleType: 0
-  BooleanOutput: 1
+  BooleanOutput: 0
   FloatOutput: 0
   IntOutput: 0
   variableName: Mission1Complete
@@ -311,7 +400,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: 9031219628286627275}
+        node: {fileID: -341275537454954547}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -329,7 +418,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 0
-  BooleanValue: 1
+  BooleanValue: 0
 --- !u!114 &-2760719994085891191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +470,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: 4877766416503589824}
+        node: {fileID: 6555571388216870280}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -399,7 +488,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 0
-  BooleanValue: 1
+  BooleanValue: 0
 --- !u!114 &-2495776306590508112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +529,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
   ContentLaguageID: 1007
 --- !u!114 &-1259554152920336478
 MonoBehaviour:
@@ -454,7 +544,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 696, y: -296}
+  position: {x: 1000, y: -328}
   ports:
     keys:
     - Input
@@ -465,8 +555,8 @@ MonoBehaviour:
       _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: choice_port_0
-        node: {fileID: 5414417408511222016}
+      - fieldName: Output
+        node: {fileID: 6088741037534251636}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -484,7 +574,53 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
   ContentLaguageID: 1006
+--- !u!114 &-341275537454954547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76d444df100b4a2e9262247b1524c3f, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -56, y: -600}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -341275537454954547}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: True
+        node: {fileID: -5454905677162496689}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -341275537454954547}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -8092149776157444630}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
+  ContentLaguageID: 1008
 --- !u!114 &-285737596701549450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +634,7 @@ MonoBehaviour:
   m_Name: Set Variable
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 401.2661, y: -521.36835}
+  position: {x: 648, y: -632}
   ports:
     keys:
     - Input
@@ -509,8 +645,8 @@ MonoBehaviour:
       _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: choice_port_0
-        node: {fileID: 9031219628286627275}
+      - fieldName: Output
+        node: {fileID: -8092149776157444630}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -545,7 +681,6 @@ MonoBehaviour:
   - {fileID: 3062541926817281426}
   - {fileID: 6980172127899947010}
   - {fileID: -2760719994085891191}
-  - {fileID: 4877766416503589824}
   - {fileID: 3287146586337442282}
   - {fileID: -9138774596446934095}
   - {fileID: 8843528148968183139}
@@ -553,7 +688,6 @@ MonoBehaviour:
   - {fileID: 6587698768978880381}
   - {fileID: 1952030677929640805}
   - {fileID: 6346465476755446438}
-  - {fileID: 5414417408511222016}
   - {fileID: -1259554152920336478}
   - {fileID: 7129187187014234986}
   - {fileID: 6455213657030291880}
@@ -562,9 +696,14 @@ MonoBehaviour:
   - {fileID: -6210431916622429299}
   - {fileID: -5454905677162496689}
   - {fileID: 1405110870601575816}
-  - {fileID: 9031219628286627275}
   - {fileID: -285737596701549450}
   - {fileID: -2495776306590508112}
+  - {fileID: -8092149776157444630}
+  - {fileID: -341275537454954547}
+  - {fileID: 6088741037534251636}
+  - {fileID: -8285884253694589647}
+  - {fileID: 6555571388216870280}
+  - {fileID: 495942423490079572}
   variablePairs:
   - keyName: Mission1SpeakTo
     keyType: 2
@@ -575,6 +714,51 @@ MonoBehaviour:
   - keyName: Mission1Complete
     keyType: 2
   varibleStorage: {fileID: 11400000, guid: 70ec3d9e124de4eb6bbbcc9c65a65ed7, type: 2}
+--- !u!114 &495942423490079572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76d444df100b4a2e9262247b1524c3f, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 920, y: -56}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 495942423490079572}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 6555571388216870280}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 495942423490079572}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: 3287146586337442282}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 3cc76626b12e04e71bb0c36b60afaecb, type: 2}
+  ContentLaguageID: 1014
 --- !u!114 &1405110870601575816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,7 +810,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   varibleType: 0
-  BooleanOutput: 1
+  BooleanOutput: 0
   FloatOutput: 0
   IntOutput: 0
   variableName: Mission1VilliageMove
@@ -673,6 +857,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
   ContentLaguageID: 1002
 --- !u!114 &1952030677929640805
 MonoBehaviour:
@@ -725,7 +910,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   varibleType: 0
-  BooleanOutput: 1
+  BooleanOutput: 0
   FloatOutput: 0
   IntOutput: 0
   variableName: Mission1SlimeLeave
@@ -772,7 +957,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 984, y: -40}
+  position: {x: 1208, y: -56}
   ports:
     keys:
     - Input
@@ -783,8 +968,8 @@ MonoBehaviour:
       _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: choice_port_0
-        node: {fileID: 4877766416503589824}
+      - fieldName: Output
+        node: {fileID: 495942423490079572}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -799,8 +984,9 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
   ContentLaguageID: 1005
---- !u!114 &4877766416503589824
+--- !u!114 &6088741037534251636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -809,92 +995,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd4f2bf225fdb434e90bcd135518b3d2, type: 3}
-  m_Name: Question
+  m_Script: {fileID: 11500000, guid: e76d444df100b4a2e9262247b1524c3f, type: 3}
+  m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 600, y: -72}
+  position: {x: 712, y: -360}
   ports:
     keys:
     - Input
-    - choice_port_0
+    - Output
     values:
     - _fieldName: Input
-      _node: {fileID: 4877766416503589824}
+      _node: {fileID: 6088741037534251636}
       _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: True
-        node: {fileID: -2760719994085891191}
+      - fieldName: Output
+        node: {fileID: -8285884253694589647}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: choice_port_0
-      _node: {fileID: 4877766416503589824}
-      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: 3287146586337442282}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 2
-      _dynamic: 1
-  ContentLaguageID: 1010
-  choices:
-  - content: No.
-    ContentLaguageID: 1014
-    port:
-      _fieldName: choice_port_0
-      _node: {fileID: 4877766416503589824}
-      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: 3287146586337442282}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 2
-      _dynamic: 1
-    index: 0
-  choiceCount: 1
---- !u!114 &5414417408511222016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd4f2bf225fdb434e90bcd135518b3d2, type: 3}
-  m_Name: Question
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 344, y: -360}
-  ports:
-    keys:
-    - Input
-    - choice_port_0
-    values:
-    - _fieldName: Input
-      _node: {fileID: 5414417408511222016}
-      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: True
-        node: {fileID: 6346465476755446438}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: choice_port_0
-      _node: {fileID: 5414417408511222016}
+    - _fieldName: Output
+      _node: {fileID: 6088741037534251636}
       _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
@@ -903,27 +1027,10 @@ MonoBehaviour:
         reroutePoints: []
       _direction: 1
       _connectionType: 1
-      _typeConstraint: 2
-      _dynamic: 1
-  ContentLaguageID: 1009
-  choices:
-  - content: It's no problem.
-    ContentLaguageID: 1013
-    port:
-      _fieldName: choice_port_0
-      _node: {fileID: 5414417408511222016}
-      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: -1259554152920336478}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 2
-      _dynamic: 1
-    index: 0
-  choiceCount: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 3cc76626b12e04e71bb0c36b60afaecb, type: 2}
+  ContentLaguageID: 1013
 --- !u!114 &6346465476755446438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -975,7 +1082,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: 5414417408511222016}
+        node: {fileID: -8285884253694589647}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -993,7 +1100,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 0
-  BooleanValue: 1
+  BooleanValue: 0
 --- !u!114 &6455213657030291880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,7 +1114,7 @@ MonoBehaviour:
   m_Name: Trigger Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 954.06323, y: -247.59042}
+  position: {x: 1256, y: -280}
   ports:
     keys:
     - Input
@@ -1038,6 +1145,51 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   eventReference: {fileID: 11400000, guid: 0b62c30b8dc3744509a2419b57787b02, type: 2}
+--- !u!114 &6555571388216870280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76d444df100b4a2e9262247b1524c3f, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 632, y: -24}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 6555571388216870280}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: True
+        node: {fileID: -2760719994085891191}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 6555571388216870280}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: 495942423490079572}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
+  ContentLaguageID: 1010
 --- !u!114 &6587698768978880381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1233,7 @@ MonoBehaviour:
       _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
   ContentLaguageID: 1003
 --- !u!114 &6980172127899947010
 MonoBehaviour:
@@ -1133,7 +1286,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   varibleType: 0
-  BooleanOutput: 1
+  BooleanOutput: 0
   FloatOutput: 0
   IntOutput: 0
   variableName: Mission1SpeakTo
@@ -1238,9 +1391,9 @@ MonoBehaviour:
       _typeConstraint: 2
       _dynamic: 1
   ContentLaguageID: 1004
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
   choices:
-  - content: Ok, I'll handle it.
-    ContentLaguageID: 1017
+  - ContentLaguageID: 1017
     port:
       _fieldName: choice_port_0
       _node: {fileID: 8843528148968183139}
@@ -1255,8 +1408,7 @@ MonoBehaviour:
       _typeConstraint: 2
       _dynamic: 1
     index: 0
-  - content: Sorry, I can't help.
-    ContentLaguageID: 1018
+  - ContentLaguageID: 1018
     port:
       _fieldName: choice_port_1
       _node: {fileID: 8843528148968183139}
@@ -1272,65 +1424,3 @@ MonoBehaviour:
       _dynamic: 1
     index: 1
   choiceCount: 2
---- !u!114 &9031219628286627275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd4f2bf225fdb434e90bcd135518b3d2, type: 3}
-  m_Name: Question
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -40, y: -568}
-  ports:
-    keys:
-    - Input
-    - choice_port_0
-    values:
-    - _fieldName: Input
-      _node: {fileID: 9031219628286627275}
-      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: True
-        node: {fileID: -5454905677162496689}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: choice_port_0
-      _node: {fileID: 9031219628286627275}
-      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: -285737596701549450}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 2
-      _dynamic: 1
-  ContentLaguageID: 1008
-  choices:
-  - content: Thank you
-    ContentLaguageID: 1012
-    port:
-      _fieldName: choice_port_0
-      _node: {fileID: 9031219628286627275}
-      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: -285737596701549450}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 2
-      _dynamic: 1
-    index: 0
-  choiceCount: 1

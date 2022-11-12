@@ -15,6 +15,8 @@ namespace MPack
         [LauguageID]
         public int ContentLaguageID;
 
+        public Speaker Speaker;
+
         // [HideInInspector]
         public Choice[] choices;
 

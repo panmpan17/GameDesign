@@ -13,6 +13,7 @@ namespace MPack
         private QuestionNode node;
 
         private SerializedProperty input;
+        private SerializedProperty speaker;
         private SerializedProperty contentLanguageID;
         private SerializedProperty choices;
 
@@ -29,14 +30,16 @@ namespace MPack
                 {
                     node.choices[i].port = node.GetDynamicOutput("choice_port_" + node.choices[i].index);
                 }
-            }
 
-            input = serializedObject.FindProperty("Input");
-            choices = serializedObject.FindProperty("choices");
-            contentLanguageID = serializedObject.FindProperty("ContentLaguageID");
+                input = serializedObject.FindProperty("Input");
+                speaker = serializedObject.FindProperty("Speaker");
+                contentLanguageID = serializedObject.FindProperty("ContentLaguageID");
+                choices = serializedObject.FindProperty("choices");
+            }
 
             serializedObject.Update();
             NodeEditorGUILayout.PropertyField(input);
+            NodeEditorGUILayout.PropertyField(speaker);
             NodeEditorGUILayout.PropertyField(contentLanguageID);
 
             EditorGUILayout.Space();
