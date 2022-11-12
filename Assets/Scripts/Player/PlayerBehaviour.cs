@@ -58,6 +58,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private GameObject _interactObject;
     private bool LastCanInteract => _interactObject != null;
+    private Collider[] _interactColliders = new Collider[1];
     
     [Header("Inventory")]
     [SerializeField]
@@ -132,13 +133,13 @@ public class PlayerBehaviour : MonoBehaviour
             CurrentRayHitPosition = _currentRay.GetPoint(50);
 
 
-        Collider[] colliders = Physics.OverlapSphere(body.position, interactRaycastDistance, interactLayer);
-        if (colliders.Length > 0)
+        bool isOverlap = Physics.OverlapSphereNonAlloc(body.position, interactRaycastDistance, _interactColliders, interactLayer) > 0;
+        if (isOverlap)
         {
             // Debug.DrawLine(position1, position2, Color.green, 0.1f);
             if (!LastCanInteract)
             {
-                _interactObject = colliders[0].gameObject;
+                _interactObject = _interactColliders[0].gameObject;
                 canInteractEvent.Invoke(true);
             }
         }

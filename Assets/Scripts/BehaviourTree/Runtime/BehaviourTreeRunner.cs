@@ -92,7 +92,19 @@ namespace XnodeBehaviourTree
 
         void Update()
         {
-            graph.Update();
+            if (!sinkTimer.Timer.Running)
+            {
+                graph.Update();
+                return;
+            }
+
+            if (sinkTimer.Timer.UpdateEnd)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            transform.position = sinkTimer.Value;
         }
 
 
@@ -130,6 +142,7 @@ namespace XnodeBehaviourTree
         void OnCoreDamage()
         {
             int aliveCount = UpdateHealth();
+            Debug.Log(aliveCount);
             if (aliveCount <= 0)
                 HandleDeath();
         }

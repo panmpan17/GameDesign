@@ -18,6 +18,7 @@ namespace XnodeBehaviourTree
         public void OnInitial(TheKiwiCoder.Context context)
         {
             TheKiwiCoder.Blackboard blackboard = new TheKiwiCoder.Blackboard();
+            List<DefineFunctionNode> defineFunctionNodes = new List<DefineFunctionNode>();
 
             for (int i = 0; i < nodes.Count; i++)
             {
@@ -31,6 +32,22 @@ namespace XnodeBehaviourTree
                 if (node is RootNode)
                 {
                     _rootNode = (RootNode)node;
+                }
+                else if (node is DefineFunctionNode)
+                {
+                    defineFunctionNodes.Add((DefineFunctionNode)node);
+                }
+                else if (node is CallFunctionNode)
+                {
+                    var callNode = (CallFunctionNode)node;
+                    for (int e = 0; e < defineFunctionNodes.Count; e++)
+                    {
+                        if (defineFunctionNodes[e].FunctionName == callNode.FunctionName)
+                        {
+                            callNode.SetDefineNode(defineFunctionNodes[e]);
+                            break;
+                        }
+                    }
                 }
 
                 node.OnInitial();
