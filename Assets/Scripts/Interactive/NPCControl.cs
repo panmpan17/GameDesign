@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using MPack;
 
+
+[SelectionBase]
 public class NPCControl : MonoBehaviour
 {
     public const string Tag = "NPC";
@@ -16,7 +18,8 @@ public class NPCControl : MonoBehaviour
 
     public void StartDialogue()
     {
-        transform.rotation = Quaternion.LookRotation(playerFeetPointer.Target.position - transform.position, Vector3.up);
+        Quaternion destination = Quaternion.LookRotation(playerFeetPointer.Target.position - transform.position, Vector3.up);
+        transform.rotation = Quaternion.Euler(0, destination.eulerAngles.y, 0);
         startDialogueEvent.Invoke(dialogueGraph);
     }
 }
