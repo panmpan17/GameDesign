@@ -9,10 +9,8 @@ using TheKiwiCoder;
 #endif
 public class RandomFindPositionAsTarget : ActionNode
 {
-    [SerializeField]
-    private float startRadius;
-    [SerializeField]
-    private float endRadius;
+    public float startRadius;
+    public float endRadius;
 
 
     protected override void OnStart() {

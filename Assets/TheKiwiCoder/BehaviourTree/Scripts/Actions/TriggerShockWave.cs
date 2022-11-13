@@ -8,8 +8,7 @@ using TheKiwiCoder;
 #endif
 public class TriggerShockWave : ActionNode
 {
-    [SerializeField]
-    private float forceSize;
+    public float forceSize;
 
     protected override void OnStart() {
     }

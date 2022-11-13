@@ -5,10 +5,8 @@ using TheKiwiCoder;
 
 public class CheckPlayerInRange : ActionNode
 {
-    [SerializeField]
-    private float min;
-    [SerializeField]
-    private float max;
+    public float min;
+    public float max;
 
     protected override void OnStart()
     {

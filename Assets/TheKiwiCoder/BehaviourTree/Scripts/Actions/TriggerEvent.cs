@@ -10,14 +10,10 @@ using MPack;
 #endif
 public class TriggerEvent : ActionNode
 {
-    [SerializeField]
-    private EventReference eventReference;
-    [SerializeField]
-    private ValueWithEnable<float> carriedFloatValue;
-    [SerializeField]
-    private ValueWithEnable<int> carriedIntValue;
-    [SerializeField]
-    private ValueWithEnable<bool> carriedBoolValue;
+    public EventReference eventReference;
+    public ValueWithEnable<float> carriedFloatValue;
+    public ValueWithEnable<int> carriedIntValue;
+    public ValueWithEnable<bool> carriedBoolValue;
 
 
     protected override void OnStart() {
