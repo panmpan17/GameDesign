@@ -10,6 +10,8 @@ namespace XnodeBehaviourTree
     [CreateAssetMenu(menuName="Game/BehaviourTreeGraph")]
     public class BehaviourTreeGraph : NodeGraph
     {
+        public BehaviourTreeGraph FunctionGraph;
+
         [System.NonSerialized]
         private RootNode _rootNode;
         [System.NonSerialized]
@@ -19,6 +21,19 @@ namespace XnodeBehaviourTree
         {
             TheKiwiCoder.Blackboard blackboard = new TheKiwiCoder.Blackboard();
             List<DefineFunctionNode> defineFunctionNodes = new List<DefineFunctionNode>();
+
+            if (FunctionGraph)
+            {
+                BehaviourTreeGraph cloneFunctionGraph = (BehaviourTreeGraph)FunctionGraph.Copy();
+                cloneFunctionGraph.OnInitial(context);
+
+                for (int i = 0; i < cloneFunctionGraph.nodes.Count; i++)
+                {
+                    Node node = cloneFunctionGraph.nodes[i];
+                    if (node is DefineFunctionNode)
+                        defineFunctionNodes.Add((DefineFunctionNode)node);
+                }
+            }
 
             for (int i = 0; i < nodes.Count; i++)
             {

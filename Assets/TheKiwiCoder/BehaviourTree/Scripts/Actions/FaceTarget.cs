@@ -30,7 +30,7 @@ public class FaceTarget : ActionNode
         Quaternion destinationRotation = Quaternion.LookRotation(
             blackboard.TargetPosition - context.transform.position, context.transform.up);
 
-        Vector3 origin = context.transform.position + (destinationRotation * (Vector3.forward * 0.1f)) + Vector3.up;
+        Vector3 origin = context.transform.position + (destinationRotation * (Vector3.forward * 0.1f));
 
         if (raycastPoint && Physics.Raycast(origin, Vector3.down, out RaycastHit hit, 2, groundLayers))
         {

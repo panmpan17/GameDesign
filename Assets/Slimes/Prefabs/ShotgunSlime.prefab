@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 3767067126726826444}
   - component: {fileID: 3767067126726826445}
   - component: {fileID: 3767067126726826446}
-  - component: {fileID: 3767067126726826447}
+  - component: {fileID: 1286024563860637777}
   m_Layer: 8
   m_Name: ShotgunSlime
   m_TagString: Slime
@@ -206,7 +206,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.35
   m_Center: {x: 0, y: 0.35, z: 0}
---- !u!114 &3767067126726826447
+--- !u!114 &1286024563860637777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,14 +215,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3767067126726826440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b823d69a7e9eb4dbd813eee0c28c7beb, type: 3}
+  m_Script: {fileID: 11500000, guid: 4707a5f25befc441998ac2c89488f8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: c3e7c1f08e00348eeac7e96374d1c900, type: 2}
+  graph: {fileID: 11400000, guid: bbb6b6eb2cc1f425c861035645bb79dc, type: 2}
   triggerFireGroups: []
-  impulseSource: {fileID: 0}
   player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
   fixedTarget: {fileID: 0}
+  eyePosition: {fileID: 0}
   lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
   healthChangedEvent: {fileID: 0}
   sinkTimer:
@@ -233,6 +233,12 @@ MonoBehaviour:
       Running: 0
       ReverseMode: 0
   sinkHeight: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  impulseSource: {fileID: 0}
+  audioSource: {fileID: 0}
+  slamSound: {fileID: 0}
 --- !u!1 &3767067127289742526
 GameObject:
   m_ObjectHideFlags: 0

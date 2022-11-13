@@ -8,14 +8,14 @@ using New = XnodeBehaviourTree;
 
 public static class BehaviourTreeConvert
 {
-    [MenuItem("/Game/BehaviourTree 轉換成新系統", true)]
-    public static bool ValidateStartConvert()
+    [MenuItem("/Game/BehaviourTree 轉換成新系統/Graph", true)]
+    public static bool ValidateConvertGraph()
     {
         return Selection.activeObject is Old.BehaviourTree;
     }
 
-    [MenuItem("/Game/BehaviourTree 轉換成新系統")]
-    public static void StartConvert()
+    [MenuItem("/Game/BehaviourTree 轉換成新系統/Graph")]
+    public static void ConvertGraph()
     {
         var oldTree = (Old.BehaviourTree)Selection.activeObject;
         var newGraph = ScriptableObject.CreateInstance<New.BehaviourTreeGraph>();
@@ -335,5 +335,40 @@ public static class BehaviourTreeConvert
 
         EditorUtility.FocusProjectWindow();
         Selection.activeObject = newGraph;
+    }
+
+
+    [MenuItem("/Game/BehaviourTree 轉換成新系統/Component", true)]
+    public static bool ValidateConvertComponent()
+    {
+        var oldRunner = Selection.activeGameObject.GetComponent<SlimeBehaviourTreeRunner>();
+        return oldRunner;
+    }
+
+    [MenuItem("/Game/BehaviourTree 轉換成新系統/Component")]
+    public static void ConvertComponent()
+    {
+        GameObject gameObject = Selection.activeGameObject;
+        var oldRunner = gameObject.GetComponent<SlimeBehaviourTreeRunner>();
+        var newRunner = gameObject.AddComponent<New.BehaviourTreeRunner>();
+
+        SerializedObject oldSerialObj = new SerializedObject(oldRunner);
+        SerializedObject newSerialObj = new SerializedObject(newRunner);
+
+        newSerialObj.FindProperty("player").objectReferenceValue = oldSerialObj.FindProperty("player").objectReferenceValue;
+        newSerialObj.FindProperty("fixedTarget").objectReferenceValue = oldSerialObj.FindProperty("fixedTarget").objectReferenceValue;
+        newSerialObj.FindProperty("eyePosition").objectReferenceValue = oldSerialObj.FindProperty("eyePosition").objectReferenceValue;
+        newSerialObj.FindProperty("lootTable").objectReferenceValue = oldSerialObj.FindProperty("lootTable").objectReferenceValue;
+        newSerialObj.FindProperty("healthChangedEvent").objectReferenceValue = oldSerialObj.FindProperty("healthChangedEvent").objectReferenceValue;
+
+        newSerialObj.FindProperty("sinkHeight").floatValue = oldSerialObj.FindProperty("sinkHeight").floatValue;
+        newSerialObj.FindProperty("impulseSource").objectReferenceValue = oldSerialObj.FindProperty("impulseSource").objectReferenceValue;
+        newSerialObj.FindProperty("audioSource").objectReferenceValue = oldSerialObj.FindProperty("audioSource").objectReferenceValue;
+        newSerialObj.FindProperty("slamSound").objectReferenceValue = oldSerialObj.FindProperty("slamSound").objectReferenceValue;
+        newSerialObj.ApplyModifiedPropertiesWithoutUndo();
+
+        // triggerFireGroups
+        // sinkTimer
+        // OnDeath
     }
 }

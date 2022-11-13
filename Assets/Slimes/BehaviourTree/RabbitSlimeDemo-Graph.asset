@@ -22,7 +22,10 @@ MonoBehaviour:
       _node: {fileID: -7650630230006896413}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Input
+        node: {fileID: 1411235076546556298}
+        reroutePoints: []
       _direction: 1
       _connectionType: 1
       _typeConstraint: 0
@@ -58,7 +61,7 @@ MonoBehaviour:
   m_Name: JumpForwardNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: -31.5, y: 415}
+  position: {x: 472, y: 136}
   ports:
     keys:
     - Input
@@ -67,7 +70,10 @@ MonoBehaviour:
       _node: {fileID: 461870235891599788}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Output
+        node: {fileID: 7587000343689513426}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -106,7 +112,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 133.74995, y: 415}
+  position: {x: 472, y: 424}
   ports:
     keys:
     - Input
@@ -115,7 +121,10 @@ MonoBehaviour:
       _node: {fileID: 1268105811686883001}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Output
+        node: {fileID: 7587000343689513426}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -145,7 +154,10 @@ MonoBehaviour:
       _node: {fileID: 1411235076546556298}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Output
+        node: {fileID: -7650630230006896413}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -154,7 +166,10 @@ MonoBehaviour:
       _node: {fileID: 1411235076546556298}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Input
+        node: {fileID: 7587000343689513426}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -177,7 +192,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 170.5, y: 298}
+  position: {x: 232, y: 280}
   ports:
     keys:
     - Input
@@ -187,7 +202,10 @@ MonoBehaviour:
       _node: {fileID: 7587000343689513426}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Output
+        node: {fileID: 1411235076546556298}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -196,7 +214,13 @@ MonoBehaviour:
       _node: {fileID: 7587000343689513426}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Input
+        node: {fileID: 461870235891599788}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: 1268105811686883001}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
