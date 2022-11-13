@@ -361,7 +361,7 @@ MonoBehaviour:
   onHitGround:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1648830419}
+      - m_Target: {fileID: 1648830429}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -1145,6 +1145,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: graph
+      value: 
+      objectReference: {fileID: 11400000, guid: e01d7e0e0a9f045c1adcfa6531a51612, type: 2}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: fixedTarget
+      value: 
+      objectReference: {fileID: 286010063}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1648830427}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MPack.VariableStorageManipulate, MPack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6467346189754202649, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1247,17 +1287,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
---- !u!114 &1648830419 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6467346189754202662, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
-  m_PrefabInstance: {fileID: 1648830418}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444788402}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b823d69a7e9eb4dbd813eee0c28c7beb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1648830427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,6 +1339,17 @@ MonoBehaviour:
   BoolEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1648830429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3058630968981811234, guid: 76ce09d2504454b68b012a9c9c90a44b, type: 3}
+  m_PrefabInstance: {fileID: 1648830418}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444788402}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4707a5f25befc441998ac2c89488f8d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1744465512
 PrefabInstance:
   m_ObjectHideFlags: 0

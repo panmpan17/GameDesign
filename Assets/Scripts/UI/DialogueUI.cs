@@ -32,6 +32,8 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
 
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
+        mainCharacter.Parent.SetActive(false);
+        npc.Parent.SetActive(false);
 
         dialogueStartEvent.InvokeDialogueGraphEvents += StartDialogue;
     }
