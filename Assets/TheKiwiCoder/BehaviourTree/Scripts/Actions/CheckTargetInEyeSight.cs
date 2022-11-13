@@ -8,10 +8,8 @@ using TheKiwiCoder;
 #endif
 public class CheckTargetInEyeSight : ActionNode
 {
-    [SerializeField]
-    private float senseRange;
-    [SerializeField]
-    private LayerMask raycastLayers;
+    public float senseRange;
+    public LayerMask raycastLayers;
 
     protected override void OnStart() {
     }

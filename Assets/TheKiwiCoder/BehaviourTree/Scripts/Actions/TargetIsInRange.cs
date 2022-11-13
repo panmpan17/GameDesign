@@ -8,8 +8,7 @@ using TheKiwiCoder;
 #endif
 public class TargetIsInRange : ActionNode
 {
-    [SerializeField]
-    private float radius;
+    public float radius;
 
     protected override void OnStart() {
     }

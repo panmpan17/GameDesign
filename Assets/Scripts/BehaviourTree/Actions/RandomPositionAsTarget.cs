@@ -7,10 +7,8 @@ namespace XnodeBehaviourTree
     [CreateNodeMenu("BehaviourTree/Action/Random Position As Target")]
     public class RandomPositionAsTarget : ActionNode
     {
-        [SerializeField]
-        private float startRadius;
-        [SerializeField]
-        private float endRadius;
+        public float startRadius;
+        public float endRadius;
 
 
         protected override void OnStart()

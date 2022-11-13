@@ -9,10 +9,8 @@ namespace XnodeBehaviourTree
     [CreateNodeMenu("BehaviourTree/Action/Check Target In Radius")]
     public class CheckTargetRadiusNode : ActionNode
     {
-        [SerializeField]
-        private ValueWithEnable<float> min;
-        [SerializeField]
-        private ValueWithEnable<float> max;
+        public ValueWithEnable<float> Min;
+        public ValueWithEnable<float> Max;
 
         protected override void OnStart()
         {
@@ -25,10 +23,10 @@ namespace XnodeBehaviourTree
         bool IsRange()
         {
             float sqrMagnitude = (blackboard.TargetPosition - context.transform.position).sqrMagnitude;
-            if (max.Enable && sqrMagnitude > max.Value * max.Value)
+            if (Max.Enable && sqrMagnitude > Max.Value * Max.Value)
                 return false;
 
-            if (min.Enable && sqrMagnitude < min.Value * min.Value)
+            if (Min.Enable && sqrMagnitude < Min.Value * Min.Value)
                 return false;
 
             return true;
@@ -41,15 +39,15 @@ namespace XnodeBehaviourTree
 
         public override void DrawGizmos(Transform transform)
         {
-            if (min.Enable)
+            if (Min.Enable)
             {
                 Gizmos.color = Color.cyan;
-                Gizmos.DrawWireSphere(transform.position, min.Value);
+                Gizmos.DrawWireSphere(transform.position, Min.Value);
             }
-            if (max.Enable)
+            if (Max.Enable)
             {
                 Gizmos.color = Color.blue;
-                Gizmos.DrawWireSphere(transform.position, max.Value);
+                Gizmos.DrawWireSphere(transform.position, Max.Value);
             }
         }
     }

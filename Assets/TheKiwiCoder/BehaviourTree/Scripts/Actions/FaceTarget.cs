@@ -10,10 +10,8 @@ public class FaceTarget : ActionNode
 {
     private static int groundLayers;
 
-    [SerializeField]
-    private float rotateSpeed;
-    [SerializeField]
-    private bool raycastPoint;
+    public float rotateSpeed;
+    public bool raycastPoint;
 
 
     void OnEnable()

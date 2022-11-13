@@ -8,10 +8,8 @@ namespace XnodeBehaviourTree
     [CreateNodeMenu("BehaviourTree/Action/Check Target In Eyesight")]
     public class CheckTargetInEyesightNode : ActionNode
     {
-        [SerializeField]
-        private float senseRange;
-        [SerializeField]
-        private LayerMask raycastLayers;
+        public float senseRange;
+        public LayerMask raycastLayers;
 
         protected override void OnStart() {
         }

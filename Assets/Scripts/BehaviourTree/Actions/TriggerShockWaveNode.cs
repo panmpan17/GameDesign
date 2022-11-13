@@ -8,8 +8,7 @@ namespace XnodeBehaviourTree
     [CreateNodeMenu("BehaviourTree/Action/Set Fixed As Target")]
     public class TriggerShockWaveNode : ActionNode
     {
-        [SerializeField]
-        private float forceSize;
+        public float forceSize;
 
         protected override void OnStart()
         {

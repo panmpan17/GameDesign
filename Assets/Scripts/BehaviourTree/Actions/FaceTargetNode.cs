@@ -10,10 +10,8 @@ namespace XnodeBehaviourTree
     {
         private static int groundLayers;
 
-        [SerializeField]
-        private float rotateSpeed;
-        [SerializeField]
-        private bool raycastPoint;
+        public float RotateSpeed;
+        public bool RaycastPoint;
 
 
         public override void OnInitial()
@@ -36,12 +34,12 @@ namespace XnodeBehaviourTree
 
             Vector3 origin = context.transform.position + (destinationRotation * (Vector3.forward * 0.1f)) + Vector3.up;
 
-            if (raycastPoint && Physics.Raycast(origin, Vector3.down, out RaycastHit hit, 2, groundLayers))
+            if (RaycastPoint && Physics.Raycast(origin, Vector3.down, out RaycastHit hit, 2, groundLayers))
             {
                 destinationRotation = Quaternion.LookRotation(hit.point - context.transform.position, context.transform.up);
             }
 
-            destinationRotation = Quaternion.RotateTowards(context.transform.rotation, destinationRotation, rotateSpeed * Time.deltaTime);
+            destinationRotation = Quaternion.RotateTowards(context.transform.rotation, destinationRotation, RotateSpeed * Time.deltaTime);
 
             float angleDifference = Quaternion.Angle(context.transform.rotation, destinationRotation);
             context.transform.rotation = destinationRotation;
