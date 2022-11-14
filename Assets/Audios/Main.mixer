@@ -19,6 +19,42 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!243 &-6146225788946174027
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SFX
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: df9745c833416488a90ce1606713d521
+  m_Children:
+  - {fileID: 7454271846980062942}
+  - {fileID: 7361900206464600497}
+  - {fileID: -8334704520055278507}
+  m_Volume: 4202a8402045345a18c363c4ab336de1
+  m_Pitch: aad90e2cdac82434a84057f6ba504585
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -5847541387133342813}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &-5847541387133342813
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: df9632e636834472489ac9bfd3f61d0a
+  m_EffectName: Attenuation
+  m_MixLevel: a371e22bc052549e7bbc8b0db346ccd7
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-5735266036080838599
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -62,7 +98,13 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: f757396a25bce4898938882eb312535f
+    name: MainVolume
+  - guid: 835fb60c803594f3b86b541e32d78e7b
+    name: MusicVolume
+  - guid: 4202a8402045345a18c363c4ab336de1
+    name: SFXVolume
   m_AudioMixerGroupViews:
   - guids:
     - 9cd16024dc4dd4439afd8c689e3cd694
@@ -70,6 +112,7 @@ AudioMixerController:
     - de6854ecea92c4cd08180a38ad3be306
     - f95f0e500e932483b89795c231a749bc
     - a80afa86556d2435ca11fa376f06e07e
+    - df9745c833416488a90ce1606713d521
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -84,9 +127,7 @@ AudioMixerGroupController:
   m_GroupID: 9cd16024dc4dd4439afd8c689e3cd694
   m_Children:
   - {fileID: 8426213847601711555}
-  - {fileID: 7454271846980062942}
-  - {fileID: 7361900206464600497}
-  - {fileID: -8334704520055278507}
+  - {fileID: -6146225788946174027}
   m_Volume: f757396a25bce4898938882eb312535f
   m_Pitch: fb3d9a7160ac846d8a2dfc4bcaa09bb6
   m_Send: 00000000000000000000000000000000
