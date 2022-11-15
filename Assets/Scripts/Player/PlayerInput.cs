@@ -16,6 +16,8 @@ public interface InputInterface
 
     event System.Action OnRoll;
 
+    event System.Action OnInteract;
+
     Vector2 MovementAxis { get; }
     Vector2 LookAxis { get; }
     bool HasMovementAxis { get; }
@@ -48,6 +50,8 @@ public class PlayerInput : MonoBehaviour, InputInterface
 
     public event System.Action OnRoll;
 
+    public event System.Action OnInteract;
+
 
     public Vector2 MovementAxis { get; private set; }
     public Vector2 LookAxis { get; private set; }
@@ -78,6 +82,8 @@ public class PlayerInput : MonoBehaviour, InputInterface
 
         _scheme.Player.Roll.performed += OnRollPerformed;
 
+        _scheme.Player.Interact.performed += OnInteractPerformed;
+
         _scheme.Player.ToggleConsoleWindow.performed += OnToggleConsoleWindow;
     }
 
@@ -85,11 +91,15 @@ public class PlayerInput : MonoBehaviour, InputInterface
     void OnEnable()
     {
         _scheme.Enable();
+        MovementAxis = Vector2.zero;
+        LookAxis = Vector2.zero;
     }
     public void Disable() => enabled = false;
     void OnDisable()
     {
         _scheme.Disable();
+        MovementAxis = Vector2.zero;
+        LookAxis = Vector2.zero;
     }
 
     void OnMovePerformed(CallbackContext callbackContext) => MovementAxis = callbackContext.ReadValue<Vector2>();
@@ -114,6 +124,8 @@ public class PlayerInput : MonoBehaviour, InputInterface
     void OnOutEscapPerformed(CallbackContext callbackContext) => OnEscap?.Invoke();
 
     void OnRollPerformed(CallbackContext callbackContext) => OnRoll?.Invoke();
+
+    void OnInteractPerformed(CallbackContext callbackContext) => OnInteract?.Invoke();
 
     void OnToggleConsoleWindow(CallbackContext callbackContext)
     {

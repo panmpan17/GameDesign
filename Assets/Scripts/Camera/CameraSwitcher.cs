@@ -42,8 +42,6 @@ public class CameraSwitcher : MonoBehaviour
     public static CameraSwitcher ins;
 
     [SerializeField]
-    private CinemachineBrain cinemachineBrain;
-    [SerializeField]
     private TransformPointer player;
     [SerializeField]
     private string startCameraName;

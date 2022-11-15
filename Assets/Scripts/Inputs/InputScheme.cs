@@ -614,6 +614,15 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""302560b7-a263-41ae-ae3e-a49fd33ceb5c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1056,6 +1065,17 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""action"": ""ToggleConsoleWindow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05715618-c387-443c-b037-f22fcbbf7231"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1084,6 +1104,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Escap = m_Player.FindAction("Escap", throwIfNotFound: true);
         m_Player_ToggleConsoleWindow = m_Player.FindAction("ToggleConsoleWindow", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1256,6 +1277,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Escap;
     private readonly InputAction m_Player_ToggleConsoleWindow;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @InputScheme m_Wrapper;
@@ -1268,6 +1290,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Escap => m_Wrapper.m_Player_Escap;
         public InputAction @ToggleConsoleWindow => m_Wrapper.m_Player_ToggleConsoleWindow;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1301,6 +1324,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @ToggleConsoleWindow.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleConsoleWindow;
                 @ToggleConsoleWindow.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleConsoleWindow;
                 @ToggleConsoleWindow.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleConsoleWindow;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1329,6 +1355,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @ToggleConsoleWindow.started += instance.OnToggleConsoleWindow;
                 @ToggleConsoleWindow.performed += instance.OnToggleConsoleWindow;
                 @ToggleConsoleWindow.canceled += instance.OnToggleConsoleWindow;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -1356,5 +1385,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnEscap(InputAction.CallbackContext context);
         void OnToggleConsoleWindow(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

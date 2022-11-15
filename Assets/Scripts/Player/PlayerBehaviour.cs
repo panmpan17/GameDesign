@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MPack;
-using Cinemachine;
+using UnityEngine.EventSystems;
 
 public class PlayerBehaviour : MonoBehaviour
 {
     public const string Tag = "Player";
 
     [Header("Other components")]
-    // [SerializeField]
     private Camera mainCamera;
     [SerializeField]
     private InputInterface input;
@@ -20,32 +18,25 @@ public class PlayerBehaviour : MonoBehaviour
     public InputInterface Input => input;
     public PlayerMovement Movement => movement;
 
+    [SerializeField]
+    private Bow bow;
+
+    [Header("Reference")]
+    [SerializeField]
+    private TransformPointer bodyPointer;
+    [SerializeField]
+    private TransformPointer feetPointer;
+    [SerializeField]
+    private Transform body;
+    [SerializeField]
+    private Transform feet;
+
     [Header("Health")]
     [SerializeField]
     private float maxHealth;
     private float _health;
     [SerializeField]
     private EventReference healthChangeEvent;
-
-    [Header("Aim")]
-    [SerializeField]
-    private Transform arrowPlacePoint;
-    [SerializeField]
-    private Arrow arrowPrefab;
-    [SerializeField]
-    private LimitedPrefabPool<Arrow> arrowPrefabPool;
-    [SerializeField]
-    private CinemachineImpulseSource impulseSource;
-
-    [SerializeField]
-    private EventReference aimProgressEvent;
-    [SerializeField]
-    private float extraAimTime;
-    [SerializeField]
-    private float extraAimArrowExtendDuration;
-
-    private bool _extraAimStarted = false;
-    private Stopwatch _extraAimStopWatch = new Stopwatch();
 
     [Header("Others")]
     [SerializeField]
@@ -54,10 +45,20 @@ public class PlayerBehaviour : MonoBehaviour
     private EventReference pauseEvent;
     [SerializeField]
     private EventReference focusEvent;
+
+    [Header("Interact")]
     [SerializeField]
-    private TransformPointer transformPointer;
+    private LayerMask interactLayer;
     [SerializeField]
-    private Transform trackTarget;
+    private float interactRaycastDistance;
+    [SerializeField]
+    private EventReference canInteractEvent;
+    // [SerializeField]
+    // private EventReference dialogueEndEvent;
+
+    private GameObject _interactObject;
+    private bool LastCanInteract => _interactObject != null;
+    private Collider[] _interactColliders = new Collider[1];
     
     [Header("Inventory")]
     [SerializeField]
@@ -72,10 +73,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
-    /// <summary>
-    /// Paramter is for bow extra draw progress
-    /// </summary>
     public event System.Action<float> OnBowShoot;
+
     public event System.Action OnDeath;
     public event System.Action OnRevive;
 
@@ -83,11 +82,8 @@ public class PlayerBehaviour : MonoBehaviour
     public bool IsDrawingBow { get; private set; }
     public bool IsDead => _handleDeath;
     public bool CanDamage => !Movement.IsRolling && !_handleDeath;
-    public Arrow PreparedArrow { get; private set; }
 
     private int _walkingCameraIndex;
-    private int _aimCameraIndex;
-    private int _deepAimCameraIndex;
 
     private bool _handleDeath = false;
 
@@ -101,22 +97,22 @@ public class PlayerBehaviour : MonoBehaviour
         input.OnAimDown += OnAimDown;
         input.OnAimUp += OnAimUp;
         input.OnEscap += OnEscap;
+        input.OnInteract += OnInteract;
 
         movement.OnRollEvent += OnRoll;
+        animation.OnAimAnimatinoChanged += OnAimProgress;
 
         focusEvent.InvokeEvents += FocusCursor;
+        AbstractMenu.OnFirstMenuOpen += OnFirstMenuOpen;
+        AbstractMenu.OnLastMenuClose += OnLastMenuClose;
 
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walk");
-        _aimCameraIndex = CameraSwitcher.GetCameraIndex("Aim");
-        _deepAimCameraIndex = CameraSwitcher.GetCameraIndex("DeepAim");
-
-        arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");
 
         mainCamera = mainCamera == null ? Camera.main : mainCamera;
-        transformPointer.Target = trackTarget ? trackTarget : transform;
+        bodyPointer.Target = body;
+        feetPointer.Target = feet;
 
-        animation.OnAimAnimatinoChanged += OnAimProgress;
-        // aimProgressEvent.InvokeFloatEvents;
+        bow.Setup(this);
     }
 
     void Start()
@@ -131,13 +127,30 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _currentRay = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
 
-        if (Physics.Raycast(_currentRay, out RaycastHit hit, 50, hitLayers))
+        if (Physics.Raycast(_currentRay, out RaycastHit shootTargetHit, 50, hitLayers))
+            CurrentRayHitPosition = shootTargetHit.point;
+        else
+            CurrentRayHitPosition = _currentRay.GetPoint(50);
+
+
+        bool isOverlap = Physics.OverlapSphereNonAlloc(body.position, interactRaycastDistance, _interactColliders, interactLayer) > 0;
+        if (isOverlap)
         {
-            CurrentRayHitPosition = hit.point;
+            // Debug.DrawLine(position1, position2, Color.green, 0.1f);
+            if (!LastCanInteract)
+            {
+                _interactObject = _interactColliders[0].gameObject;
+                canInteractEvent.Invoke(true);
+            }
         }
         else
         {
-            CurrentRayHitPosition = _currentRay.GetPoint(50);
+            // Debug.DrawLine(position1, position2, Color.white, 0.1f);
+            if (LastCanInteract)
+            {
+                _interactObject = null;
+                canInteractEvent.Invoke(false);
+            }
         }
     }
 
@@ -148,25 +161,17 @@ public class PlayerBehaviour : MonoBehaviour
         {
 #if UNITY_EDITOR
             if (focusCursorWhenPointerDown)
-                FocusCursor();
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                    FocusCursor();
+            }
 #endif
             return;
         }
 
         IsDrawingBow = true;
 
-        if (PreparedArrow == null)
-        {
-            PreparedArrow = arrowPrefabPool.Get();
-            Transform arrowTransform =  PreparedArrow.transform;
-            arrowTransform.SetParent(arrowPlacePoint);
-            arrowTransform.localPosition = Vector3.zero;
-            arrowTransform.localRotation = Quaternion.identity;
-        }
-        else
-            PreparedArrow.gameObject.SetActive(true);
-
-        CameraSwitcher.ins.SwitchTo(_aimCameraIndex);
+        bow.OnAimDown();
         OnDrawBow?.Invoke();
     }
 
@@ -177,61 +182,39 @@ public class PlayerBehaviour : MonoBehaviour
 
         IsDrawingBow = false;
 
+        bool isBowFullyDrawed = animation.IsDrawArrowFullyPlayed;
+        bow.OnAimUp(isBowFullyDrawed, CurrentRayHitPosition);
+
         OnDrawBowEnd?.Invoke();
-
-        _extraAimStarted = false;
-        aimProgressEvent.Invoke(0f);
-
-        if (animation.IsDrawArrowFullyPlayed)
-        {
-            float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
-
-            PreparedArrow.transform.SetParent(null);
-            PreparedArrow.Shoot(CurrentRayHitPosition, extraProgress);
-            PreparedArrow = null;
-            OnBowShoot?.Invoke(extraProgress);
-            impulseSource.GenerateImpulse(extraProgress);
-            StartCoroutine(SwitchCamera());
-        }
-        else
-        {
-            PreparedArrow.gameObject.SetActive(false);
-            CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
-        }
     }
 
-    IEnumerator SwitchCamera()
-    {
-        CameraSwitcher.ins.SwitchTo(_aimCameraIndex);
-        yield return new WaitForSeconds(0.1f);
-        CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
-    }
-
-    void OnAimProgress(float progress)
-    {
-        if (progress < 1)
-        {
-            aimProgressEvent.Invoke(progress);
-            return;
-        }
-
-        if (!_extraAimStarted)
-        {
-            _extraAimStarted = true;
-            _extraAimStopWatch.Update();
-            CameraSwitcher.ins.SwitchTo(_deepAimCameraIndex);
-        }
-
-        float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
-        aimProgressEvent.Invoke(1 + extraProgress);
-    }
+    void OnAimProgress(float progress) => bow.OnAimProgress(progress);
+    public void TriggerBowShoot(float extraProgress) => OnBowShoot?.Invoke(extraProgress);
 
     void OnEscap()
     {
-        CursorFocued = false;
-        Cursor.lockState = CursorLockMode.None;
-
         pauseEvent.Invoke();
+#if UNITY_EDITOR
+        if (focusCursorWhenPointerDown)
+        {
+            OutFocusCursor();
+        }
+#endif
+    }
+
+    void OnInteract()
+    {
+        if (!_interactObject)
+            return;
+
+        if (_interactObject.CompareTag("NPC"))
+        {
+            var npc = _interactObject.GetComponent<NPCControl>();
+            npc.StartDialogue();
+
+            canInteractEvent?.Invoke(false);
+            movement.FaceRotationWithoutRotateFollowTarget(npc.transform.position);
+        }
     }
 
     void OnRoll()
@@ -239,7 +222,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (IsDrawingBow)
         {
             IsDrawingBow = false;
-            PreparedArrow.gameObject.SetActive(false);
+            bow.PreparedArrow.gameObject.SetActive(false);
+
             CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
             OnDrawBowEnd?.Invoke();
         }
@@ -282,6 +266,23 @@ public class PlayerBehaviour : MonoBehaviour
         CursorFocued = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    public void OutFocusCursor()
+    {
+        CursorFocued = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    void OnFirstMenuOpen(AbstractMenu menu)
+    {
+        input.Disable();
+        OutFocusCursor();
+    }
+
+    void OnLastMenuClose(AbstractMenu menu)
+    {
+        input.Enable();
+        FocusCursor();
+    }
 
     public void AddItem(ItemType itemType)
     {
@@ -292,5 +293,7 @@ public class PlayerBehaviour : MonoBehaviour
     void OnDestroy()
     {
         focusEvent.InvokeEvents -= FocusCursor;
+        AbstractMenu.OnFirstMenuOpen -= OnFirstMenuOpen;
+        AbstractMenu.OnLastMenuClose -= OnLastMenuClose;
     }
 }

@@ -9,22 +9,15 @@ using MPack;
 #endif
 public class JumpTowards : ActionNode
 {
-    [SerializeField]
-    private float forwardSpeed;
-    [SerializeField]
-    private float jumpForce;
-    [SerializeField]
-    private AnimationCurveReference jumpForceCurve;
-    [SerializeField]
-    private Timer jumpTimer;
+    public float forwardSpeed;
+    public float jumpForce;
+    public AnimationCurveReference jumpForceCurve;
+    public Timer jumpTimer;
 
     [Header("Landing")]
-    [SerializeField]
-    private bool landingMoveforawrd;
-    [SerializeField]
-    private float extraGravity = 0;
-    [SerializeField]
-    private LayerMask grounLayer;
+    public bool landingMoveforawrd;
+    public float extraGravity = 0;
+    public LayerMask grounLayer;
 
     [System.NonSerialized]
     private bool _landing = false;

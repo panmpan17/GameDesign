@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using MPack;
 
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : AbstractMenu
 {
     [SerializeField]
     private Canvas canvas;
@@ -39,6 +39,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0;
         canvas.enabled = true;
         EventSystem.current.SetSelectedGameObject(firstSelected);
+        OpenMenu();
     }
 
     public void Resume()
@@ -46,6 +47,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         canvas.enabled = false;
         focusEvent.Invoke();
+        CloseMenu();
     }
 
     public void OpenSetting()

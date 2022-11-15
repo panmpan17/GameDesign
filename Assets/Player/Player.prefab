@@ -5509,21 +5509,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 2787180225705632301}
   animation: {fileID: 4057677663369091111}
+  bow: {fileID: 5260637637954937081}
+  bodyPointer: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  feetPointer: {fileID: 11400000, guid: d078023746b8f4112adc4bdd062eb354, type: 2}
+  body: {fileID: 3063964680199003412}
+  feet: {fileID: 2787180225705632307}
   maxHealth: 100
   healthChangeEvent: {fileID: 11400000, guid: 17b0e71977e87429b972945c2b722bf1, type: 2}
-  arrowPlacePoint: {fileID: 2121007400246071444}
-  arrowPrefab: {fileID: -474245263327700704, guid: 9188c91870872419e8b68c97d3676944, type: 3}
-  impulseSource: {fileID: 9159183767146581692}
-  aimProgressEvent: {fileID: 11400000, guid: c427ad606924d402f931d4b4052fdfb2, type: 2}
-  extraAimTime: 0.8
-  extraAimArrowExtendDuration: 0.5
   hitLayers:
     serializedVersion: 2
     m_Bits: 1280
   pauseEvent: {fileID: 11400000, guid: a4d9e9ff7b3664a2ba30364afecb38e8, type: 2}
   focusEvent: {fileID: 11400000, guid: 6b1e6f134a2df4a15902e25accbbaee4, type: 2}
-  transformPointer: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
-  trackTarget: {fileID: 3063964680199003412}
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  interactRaycastDistance: 2
+  canInteractEvent: {fileID: 11400000, guid: b8fbbb11370b2494f8dd72fc8925e369, type: 2}
   inventoryEvent: {fileID: 11400000, guid: 99f7d598adae6464e881f9bded09eace, type: 2}
   focusCursorWhenPointerDown: 0
 --- !u!143 &2787180225705632303
@@ -5533,17 +5535,17 @@ CharacterController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2787180225705632297}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e5a2db600ce4643c983e6b8b2e587fc4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.5
+  m_Height: 2.8
   m_Radius: 0.44
   m_SlopeLimit: 40
   m_StepOffset: 0.3
   m_SkinWidth: 0.04
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.25, z: 0}
+  m_Center: {x: 0, y: 1.4, z: 0}
 --- !u!114 &2787180225705632296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5687,6 +5689,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121007400246071444}
+  - component: {fileID: 5260637637954937081}
+  - component: {fileID: 5437307488346284415}
   m_Layer: 6
   m_Name: Bow
   m_TagString: Untagged
@@ -5710,6 +5714,78 @@ Transform:
   m_Father: {fileID: 3744362375249656189}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90.186, z: 0}
+--- !u!114 &5260637637954937081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301147274433808052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e371bda3348fe490092589a60c6cda4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPlacePoint: {fileID: 2121007400246071444}
+  arrowPrefab: {fileID: -474245263327700704, guid: 9188c91870872419e8b68c97d3676944, type: 3}
+  impulseSource: {fileID: 5437307488346284415}
+  currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
+  aimProgressEvent: {fileID: 11400000, guid: c427ad606924d402f931d4b4052fdfb2, type: 2}
+  extraAimTime: 0.8
+  extraAimArrowExtendDuration: 0.5
+--- !u!114 &5437307488346284415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301147274433808052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 1
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.1
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: -0.1, y: -0.1, z: 0}
 --- !u!1 &6488978996975587508
 GameObject:
   m_ObjectHideFlags: 0
@@ -7253,6 +7329,7 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
     UseVariable: 1
   stepDustParticle: {fileID: 118747342}
+  currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
   audioSource: {fileID: 7642453997647487575}
   oneShotAudioSource: {fileID: 1266135333095596822}
   runClip: {fileID: 11400000, guid: ec1c02d8480e64651969c0f43d92541e, type: 2}
@@ -8047,9 +8124,9 @@ MonoBehaviour:
   behaviour: {fileID: 2787180225705632302}
   rig: {fileID: 2787180225006930143}
   chest: {fileID: 6270151209238360854}
-  chestRotationOffsetA: {x: 0.01878245, y: 0.7172728, z: 0.018233273, w: 0.69630057}
-  chestRotationOffsetB: {x: 0.054446794, y: 0.63509446, z: 0.06581486, w: 0.76769716}
-  chestRotationOffset: {x: 0.12162313, y: -0.20896947, z: 0.026298856, w: -0.96997315}
+  chestRotationOffsetA: {x: -0.12413069, y: 0.3451792, z: -0.0086831, w: 0.93025136}
+  chestRotationOffsetB: {x: -0.12285016, y: 0.26028314, z: -0.019790446, w: 0.9574805}
+  chestRotationOffset: {x: -0.12413069, y: 0.34517923, z: -0.008683097, w: 0.93025136}
   drawBowLeftHandFinalPosition: {fileID: 2787180224499062659}
   drawBowRightHandFinalPosition: {fileID: 2787180225106609138}
   rightHand: {fileID: 2750228458882473666}
@@ -8060,6 +8137,7 @@ MonoBehaviour:
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
     UseVariable: 1
   stepDustParticle: {fileID: 118747342}
+  currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
   audioSource: {fileID: 3379590096474476584}
   oneShotAudioSource: {fileID: 1266135333095596822}
   runClip: {fileID: 11400000, guid: ec1c02d8480e64651969c0f43d92541e, type: 2}

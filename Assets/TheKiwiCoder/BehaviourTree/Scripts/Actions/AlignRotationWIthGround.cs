@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+
+#if UNITY_EDITOR
+[NodeTitleName("跟地面垂直")]
+#endif
 public class AlignRotationWIthGround : ActionNode
 {
     private static int groundLayers;

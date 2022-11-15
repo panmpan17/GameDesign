@@ -16,7 +16,7 @@ public class ImportPrefabs : MonoBehaviour
 
         var list = AssetDatabase.LoadAssetAtPath<GameObjectList>(Path);
 
-        for (int i = 0; i < list.List.Length; i++)
+        for (int i = 0; i < list.List.Count; i++)
         {
             GameObject prefab = list.List[i];
             GameObject existed = GameObject.Find(prefab.name);

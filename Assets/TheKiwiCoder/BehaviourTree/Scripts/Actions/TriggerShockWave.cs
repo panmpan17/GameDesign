@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TheKiwiCoder;
 
+#if UNITY_EDITOR
+[NodeTitleName("觸發震波")]
+#endif
 public class TriggerShockWave : ActionNode
 {
-    [SerializeField]
-    private float forceSize;
+    public float forceSize;
 
     protected override void OnStart() {
     }

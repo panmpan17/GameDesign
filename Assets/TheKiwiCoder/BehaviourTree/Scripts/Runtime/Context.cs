@@ -12,7 +12,7 @@ namespace TheKiwiCoder {
     public class Context {
         public GameObject gameObject;
         public Transform transform;
-        public SlimeBehaviourTreeRunner slimeBehaviour;
+        public ISlimeBehaviour slimeBehaviour;
         public Animator animator;
 
         public Rigidbody rigidbody => _rigidobdy == null ? gameObject.GetComponent<Rigidbody>() : _rigidobdy;
@@ -26,6 +26,20 @@ namespace TheKiwiCoder {
                 transform = _slimeBehaviour.transform,
                 slimeBehaviour = _slimeBehaviour,
                 animator = _slimeBehaviour.GetComponentInChildren<Animator>(),
+            };
+
+            return context;
+        }
+
+        public static Context Create(GameObject gameObject, ISlimeBehaviour _slimeBehaviour)
+        {
+            // Fetch all commonly used components
+            Context context = new Context
+            {
+                gameObject = gameObject,
+                transform = gameObject.transform,
+                slimeBehaviour = _slimeBehaviour,
+                animator = gameObject.GetComponentInChildren<Animator>(),
             };
 
             return context;

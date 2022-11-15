@@ -25,9 +25,7 @@ public class FPSDisplay : MonoBehaviour
         if (_timer.UnscaleUpdateTimeEnd)
         {
             _timer.Reset();
-
-            int fps = (int)(1f / Time.unscaledDeltaTime);
-            text.text = fps.ToString();
+            text.text = Mathf.FloorToInt(1f / Time.unscaledDeltaTime).ToString();
         }
     }
 }

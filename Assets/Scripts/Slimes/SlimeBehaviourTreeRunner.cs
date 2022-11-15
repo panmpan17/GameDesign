@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TheKiwiCoder;
 using MPack;
 using Cinemachine;
@@ -10,8 +11,28 @@ using UnityEditor;
 #endif
 
 
-public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
+public interface ISlimeBehaviour
 {
+    Transform EyePosition { get; }
+    Transform FixedTarget { get; }
+    Transform PlayerTarget { get; }
+
+    event System.Action<Collider> OnTriggerEnterEvent;
+    event System.Action<Collision> OnCollisionEnterEvent;
+    event System.Action<Collision> OnCollisionExitEvent;
+
+    void TriggerFire();
+    void TriggerFire(int parameter);
+    void TriggerFireGroup(int groupIndex);
+    void TriggerFireGroup(int groupIndex, int parameter);
+    void TriggerImpluse(float forceSize);
+}
+
+
+public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
+{
+    public const string Tag = "Slime";
+
     private ITriggerFire[] triggerFires;
 
     [SerializeField]
@@ -38,6 +59,7 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
     private Vector3LerpTimer sinkTimer;
     [SerializeField]
     private float sinkHeight;
+    public UnityEvent OnDeath;
 
     public event System.Action<Collider> OnTriggerEnterEvent;
     public event System.Action<Collision> OnCollisionEnterEvent;
@@ -161,6 +183,8 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
         sinkTimer.From = transform.position;
         sinkTimer.To = transform.position + Vector3.down * sinkHeight;
         sinkTimer.Timer.Reset();
+
+        OnDeath?.Invoke();
     }
 
     void SpawnLootTable()
@@ -208,35 +232,35 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner
 
     protected override Context CreateBehaviourTreeContext()
     {
-        return Context.Create(this);
+        // return Context.Create(this);
+        return Context.Create(gameObject, this);
     }
 
     void OnColliderEnter(Collider collider) => OnTriggerEnterEvent?.Invoke(collider);
     void OnCollisionEnter(Collision collision) => OnCollisionEnterEvent?.Invoke(collision);
     void OnCollisionExit(Collision collision) => OnCollisionExitEvent?.Invoke(collision);
+}
 
-
-    [System.Serializable]
-    public class ITriggerFireGroup
-    {
-        public System.Action TriggerAction;
-        public System.Action<int> ParameterTriggerAction;
-        public GameObject GroupGameObjects;
+[System.Serializable]
+public class ITriggerFireGroup
+{
+    public System.Action TriggerAction;
+    public System.Action<int> ParameterTriggerAction;
+    public GameObject GroupGameObjects;
 
 #if UNITY_EDITOR
-        [CustomPropertyDrawer(typeof(ITriggerFireGroup))]
-        public class _Drawer : PropertyDrawer
-        {
-            public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => 20;
+    [CustomPropertyDrawer(typeof(ITriggerFireGroup))]
+    public class _Drawer : PropertyDrawer
+    {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => 20;
 
-            public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-            {
-                position.height = 18;
-                position.y += 2;
-                SerializedProperty p = property.FindPropertyRelative("GroupGameObjects");
-                EditorGUI.ObjectField(position, p, GUIContent.none);
-            }
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            position.height = 18;
+            position.y += 2;
+            SerializedProperty p = property.FindPropertyRelative("GroupGameObjects");
+            EditorGUI.ObjectField(position, p, GUIContent.none);
         }
-#endif
     }
+#endif
 }
