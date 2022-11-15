@@ -210,7 +210,7 @@ namespace MPack {
         }
 
         [System.Serializable]
-        private struct KeyPoint {
+        public struct KeyPoint {
             public Sprite Sprite;
             public float Interval;
         }
