@@ -11,7 +11,7 @@ namespace MPack
         public System.Action onClick;
         public System.Action onSelect;
         public System.Action onDeselect;
-        public System.Action onSubmit;
+        public new System.Action onSubmit;
 
         public override void OnPointerClick(PointerEventData pointerEventData)
         {

@@ -22,6 +22,14 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
     [Min(1)]
     private int segmentCount = 1;
 
+    [Header("Raycast Ground")]
+    [SerializeField]
+    private bool spawnAtRaycastPoint;
+    [SerializeField]
+    private float raycastDistance;
+    [SerializeField]
+    private LayerMaskReference groundLayer;
+
     [Header("Editor Only")]
     [SerializeField]
     private bool drawDizmos;
@@ -35,6 +43,7 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
 
     public void TriggerFire()
     {
+        SpawnPrefabInSegmentPoints();
     }
 
     public void TriggerFireWithParameter(int parameter)
@@ -65,6 +74,32 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
         }
     }
 
+    void SpawnPrefabInSegmentPoints()
+    {
+        int spawnLeft = spawnCount;
+        for (int i = 0; spawnLeft > 0 && i < _segmentPoints.Length; i++)
+        {
+            float chance = (float)spawnLeft / (_segmentPoints.Length - i);
+            float randomValue = Random.value;
+            if (randomValue <= chance)
+            {
+                Vector3 worldDirection = transform.TransformDirection(_segmentPoints[i]);
+                Vector3 worldPosition = transform.position + worldDirection * radius;
+
+                if (spawnAtRaycastPoint)
+                {
+                    if (Physics.Raycast(worldPosition, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer.Value))
+                    {
+                        worldPosition = hit.point;
+                    }
+                }
+
+                GameObject prefab = slimePrefabs[Random.Range(0, slimePrefabs.Length)];
+                SpawnPrefab(prefab, worldPosition, transform.rotation);
+                spawnLeft--;
+            }
+        }
+    }
     void SpawnPrefabInSegmentPoints(GameObject prefab)
     {
         int spawnLeft = spawnCount;
@@ -89,7 +124,7 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
 
         GameObject newSlime = Instantiate(prefab, position, rotation);
         spawnSlimesList.List.Add(newSlime);
-        newSlime.GetComponent<SlimeBehaviourTreeRunner>().OnDeath.AddListener(delegate {
+        newSlime.GetComponent<XnodeBehaviourTree.BehaviourTreeRunner>().OnDeath.AddListener(delegate {
             spawnSlimesList.List.Remove(newSlime);
         });
     }

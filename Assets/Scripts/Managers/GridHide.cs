@@ -24,6 +24,9 @@ public class GridHide : MonoBehaviour
     private int count;
     private Grid[] grids;
 
+    [SerializeField]
+    private bool drawGizmos;
+
     void Start()
     {
         _startPosition = new Vector3(-mapSize.x / 2, 0, -mapSize.y / 2);
@@ -95,7 +98,9 @@ public class GridHide : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        return;
+        if (!drawGizmos)
+            return;
+
         if (grids != null)
         {
             Vector3 grid = new Vector3(gridSize.x, 1, gridSize.y);
