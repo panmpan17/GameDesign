@@ -6,15 +6,13 @@ using MPack;
 
 namespace XnodeBehaviourTree
 {
-    [CreateNodeMenu("BehaviourTree/Action/Jump Forward")]
-    public class JumpForawrdNode : ActionNode
+    [CreateNodeMenu("BehaviourTree/Action/Jump Forward To Height")]
+    public class JumpForwardToHeightNode : ActionNode
     {
         public float forwardSpeed;
-        public float jumpForce;
-        public AnimationCurveReference jumpForceCurve;
-        public Timer jumpTimer;
-
-        public ValueWithEnable<float> LimitJumpHeight;
+        public Timer Timer;
+        public AnimationCurveReference HeightCurve;
+        public float Height;
 
         [Header("Landing")]
         public bool landingMoveforawrd;
@@ -31,7 +29,7 @@ namespace XnodeBehaviourTree
         protected override void OnStart()
         {
             context.animator?.SetTrigger("Jump");
-            jumpTimer.Reset();
+            Timer.Reset();
             _landing = _landed = false;
 
             _positionY = context.transform.position.y;
@@ -66,35 +64,37 @@ namespace XnodeBehaviourTree
         {
             MoveForawrd(true);
 
-            if (jumpTimer.UpdateEnd)
+            if (Timer.UpdateEnd)
             {
-                jumpTimer.Reset();
+                Timer.Reset();
                 _landing = true;
                 context.slimeBehaviour.OnCollisionEnterEvent += OnLand;
 
                 if (!landingMoveforawrd)
                 {
-                    context.rigidbody.velocity = new Vector3(0, context.rigidbody.velocity.y, 0);
+                    context.rigidbody.velocity = Vector3.zero;
                 }
             }
 
-            if (LimitJumpHeight.Enable && (context.transform.position.y - _positionY) >= LimitJumpHeight.Value)
-            {
-                _landing = true;
-                context.slimeBehaviour.OnCollisionEnterEvent += OnLand;
+            // (context.transform.position.y - _positionY) >= LimitJumpHeight.Value)
+            // {
+            //     _landing = true;
+            //     context.slimeBehaviour.OnCollisionEnterEvent += OnLand;
 
-                if (!landingMoveforawrd)
-                {
-                    context.rigidbody.velocity = new Vector3(0, context.rigidbody.velocity.y, 0);
-                }
-            }
+            //     if (!landingMoveforawrd)
+            //     {
+            //         context.rigidbody.velocity = new Vector3(0, context.rigidbody.velocity.y, 0);
+            //     }
         }
 
         void MoveForawrd(bool addJumpVelocty)
         {
             Vector3 velocity = context.transform.forward * forwardSpeed;
             if (addJumpVelocty)
-                velocity.y += jumpForce * jumpForceCurve.Value.Evaluate(jumpTimer.Progress);
+            {
+                float destinateHeight = _positionY + (Height * HeightCurve.Value.Evaluate(Timer.Progress));
+                velocity.y += (destinateHeight - context.transform.position.y) * (1 / Time.deltaTime);
+            }
             else
                 velocity.y = context.rigidbody.velocity.y;
             context.rigidbody.velocity = velocity;

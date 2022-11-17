@@ -37,10 +37,10 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: -6616795187971064733}
+        node: {fileID: -5517143989110274329}
         reroutePoints: []
       - fieldName: Input
-        node: {fileID: -5517143989110274329}
+        node: {fileID: -6616795187971064733}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -92,11 +92,80 @@ MonoBehaviour:
     TargetTime: 0.5
     Running: 0
     ReverseMode: 0
+  LimitJumpHeight:
+    Enable: 0
+    Value: 1
   landingMoveforawrd: 1
   extraGravity: 0
   grounLayer:
     serializedVersion: 2
     m_Bits: 1280
+--- !u!114 &-5671653659340052225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4625e198b5845d68cbe84ef3daf5a2, type: 3}
+  m_Name: Jump Forward To Height
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1928, y: -264}
+  ports:
+    keys:
+    - Input
+    values:
+    - _fieldName: Input
+      _node: {fileID: -5671653659340052225}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  drawGizmos: 0
+  forwardSpeed: 2
+  Timer:
+    TargetTime: 2
+    Running: 0
+    ReverseMode: 0
+  HeightCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
+  Height: 20
+  landingMoveforawrd: 1
+  extraGravity: 0
+  grounLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &-5517143989110274329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +337,7 @@ MonoBehaviour:
   - {fileID: 4936477322922848611}
   - {fileID: -9114842916488748224}
   - {fileID: 4222344587171472906}
+  - {fileID: -5671653659340052225}
   FunctionGraph: {fileID: 0}
 --- !u!114 &2654383252210760615
 MonoBehaviour:
