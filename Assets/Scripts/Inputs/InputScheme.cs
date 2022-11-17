@@ -827,7 +827,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a1ae684b-2e6a-4075-a24f-d2c4278f826f"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
+                    ""path"": ""<LogitechDualAction>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Joystick"",
@@ -843,28 +843,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9d8f3f1a-80be-4e42-9790-957212a34fbf"",
-                    ""path"": ""<HID::Logitech Logitech Dual Action>/hat"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7328169c-e27e-434f-95f1-cc8542c43376"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -893,7 +871,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c0053d77-152f-49f8-8896-1b715e8e54a0"",
-                    ""path"": ""<Joystick>/trigger"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Joystick"",
@@ -948,7 +926,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ccbf7e2e-c71d-4808-9770-393fb5aebb49"",
-                    ""path"": ""<HID::Logitech Logitech Dual Action>/button2"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -970,7 +948,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""be2435a2-c253-4487-a00a-c06107aa2301"",
-                    ""path"": ""<HID::Logitech Logitech Dual Action>/button3"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1014,7 +992,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3d841ec9-4c59-4267-9741-7855683d6004"",
-                    ""path"": ""<HID::Logitech Logitech Dual Action>/button10"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
