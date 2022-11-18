@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DigitalRuby.Tween;
+using MPack;
 
 public class ChoiceSwitch : Selectable
 {
@@ -23,6 +24,8 @@ public class ChoiceSwitch : Selectable
 
     public UnityEvent leftEvent;
     public UnityEvent rightEvent;
+
+    private Stopwatch _changeResolutionColddown;
 
     protected override void Start()
     {
@@ -84,6 +87,10 @@ public class ChoiceSwitch : Selectable
 
     public override void OnMove(AxisEventData eventData)
     {
+        if (_changeResolutionColddown.DeltaTime < 0.4f)
+            return;
+
+        _changeResolutionColddown = new Stopwatch();
         switch (eventData.moveDir)
         {
             case MoveDirection.Left:

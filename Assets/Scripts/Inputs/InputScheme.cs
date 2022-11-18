@@ -947,6 +947,17 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""671755ef-a892-4aee-9d85-60600bfbddd0"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""be2435a2-c253-4487-a00a-c06107aa2301"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",

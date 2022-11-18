@@ -34,7 +34,7 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
         var canonShell = bulletType.Pool.Get();
         canonShell.Shoot(physicSimulate);
 
-        if (ForecastHitPosition(out RaycastHit hit))
+        if (locationIndictePrefab && ForecastHitPosition(out RaycastHit hit))
         {
             GameObject indicator = locationIndictePrefab.Get();
             indicator.transform.SetPositionAndRotation(hit.point + hit.normal * 0.05f, Quaternion.LookRotation(hit.normal, Vector3.up));

@@ -58,4 +58,9 @@ public abstract class AbstractMenu : MonoBehaviour
 
     protected virtual void BackToThisMenu()
     {}
+
+    protected virtual void OnDestroy()
+    {
+        s_existMenus.Remove(this);
+    }
 }

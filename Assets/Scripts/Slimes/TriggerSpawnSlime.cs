@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MPack;
+using DigitalRuby.Tween;
 
 public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
 {
@@ -9,9 +10,14 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
     private TransformPointer spawnPointsPointer;
     [SerializeField]
     private GameObject[] slimePrefabs;
+    [SerializeField]
+    private GameObjectPoolReference locationIndictePrefab;
+    [SerializeField]
+    private float delay;
 
     [SerializeField]
     private GameObjectList spawnSlimesList;
+
 
     [Header("Circle Setting")]
     [SerializeField]
@@ -41,6 +47,21 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
         CalculateSegmentPoints();
     }
 
+    void CalculateSegmentPoints()
+    {
+        _segmentPoints = new Vector3[segmentCount];
+        Vector3 delta = transform.forward;
+        float rotateRadius = 360f / (float)segmentCount;
+
+        Vector3 selfPosition = transform.position;
+
+        for (int i = 0; i < segmentCount; i++)
+        {
+            _segmentPoints[i] = delta;
+            delta = Quaternion.AngleAxis(rotateRadius, Vector3.up) * delta;
+        }
+    }
+
     public void TriggerFire()
     {
         SpawnPrefabInSegmentPoints();
@@ -56,6 +77,9 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
             SpawnPrefabInSegmentPoints(prefab);
     }
 
+
+
+
     void SpawnPrefabInSpanwPointsPointer(GameObject prefab)
     {
         int spawnLeft = spawnCount;
@@ -67,7 +91,6 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
             float randomValue = Random.value;
             if (randomValue <= chance)
             {
-                GameObject newSlime = Instantiate(prefab, points[i].position, points[i].rotation);
                 SpawnPrefab(prefab, points[i].position, points[i].rotation);
                 spawnLeft--;
             }
@@ -86,16 +109,8 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
                 Vector3 worldDirection = transform.TransformDirection(_segmentPoints[i]);
                 Vector3 worldPosition = transform.position + worldDirection * radius;
 
-                if (spawnAtRaycastPoint)
-                {
-                    if (Physics.Raycast(worldPosition, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer.Value))
-                    {
-                        worldPosition = hit.point;
-                    }
-                }
-
                 GameObject prefab = slimePrefabs[Random.Range(0, slimePrefabs.Length)];
-                SpawnPrefab(prefab, worldPosition, transform.rotation);
+                SpawnPrefab(slimePrefabs[Random.Range(0, slimePrefabs.Length)], worldPosition, transform.rotation);
                 spawnLeft--;
             }
         }
@@ -122,28 +137,64 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
         if (spawnSlimesList.CountLimit.Enable && spawnSlimesList.List.Count >= spawnSlimesList.CountLimit.Value)
             return;
 
-        GameObject newSlime = Instantiate(prefab, position, rotation);
-        spawnSlimesList.List.Add(newSlime);
-        newSlime.GetComponent<XnodeBehaviourTree.BehaviourTreeRunner>().OnDeath.AddListener(delegate {
-            spawnSlimesList.List.Remove(newSlime);
-        });
-    }
-
-    void CalculateSegmentPoints()
-    {
-        _segmentPoints = new Vector3[segmentCount];
-        Vector3 delta = transform.forward;
-        float rotateRadius = 360f / (float)segmentCount;
-
-        Vector3 selfPosition = transform.position;
-
-        for (int i = 0; i < segmentCount; i++)
+        GameObject indicator = null;
+        if (spawnAtRaycastPoint)
         {
-            _segmentPoints[i] = delta;
-            delta = Quaternion.AngleAxis(rotateRadius, Vector3.up) * delta;
+            if (Physics.Raycast(position, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer.Value))
+            {
+                position = hit.point;
+
+                if (locationIndictePrefab)
+                {
+                    indicator = locationIndictePrefab.Get();
+                    indicator.transform.SetPositionAndRotation(position + hit.normal * 0.05f, Quaternion.LookRotation(hit.normal, Vector3.up));
+                }
+            }
         }
+
+        if (delay > 0)
+        {
+            StartCoroutine(DelayExecute(prefab, position, rotation, indicator));
+        }
+        else
+            SpawnSlimeAndDoAnimation(prefab, position, rotation, indicator);
     }
 
+    private void SpawnSlimeAndDoAnimation(GameObject prefab, Vector3 position, Quaternion rotation, GameObject indicator)
+    {
+        GameObject newSlime = Instantiate(prefab, position + Vector3.down, rotation);
+        spawnSlimesList.List.Add(newSlime);
+
+        // Slime come to surface animation
+        var slimeBehaviourTree = newSlime.GetComponent<XnodeBehaviourTree.BehaviourTreeRunner>();
+        slimeBehaviourTree.enabled = false;
+        var rigidbody = newSlime.GetComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
+
+        if (indicator)
+            locationIndictePrefab.Put(indicator);
+
+        newSlime.Tween(newSlime, 0, 1, 1f, TweenScaleFunctions.Linear,
+            (tweenAction) =>
+            {
+                newSlime.transform.position = Vector3.Lerp(position + Vector3.down, position, tweenAction.CurrentValue);
+            },
+            (tweenAction) =>
+            {
+                newSlime.transform.position = position;
+                rigidbody.isKinematic = false;
+                slimeBehaviourTree.enabled = true;
+            });
+    }
+
+    private IEnumerator DelayExecute(GameObject prefab, Vector3 position, Quaternion rotation, GameObject indicator)
+    {
+        yield return new WaitForSeconds(delay);
+        SpawnSlimeAndDoAnimation(prefab, position, rotation, indicator);
+    }
+
+
+    #region Editor
     void OnValidate()
     {
         CalculateSegmentPoints();
@@ -165,4 +216,5 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
             Gizmos.DrawSphere(worldPostion, 0.1f);
         }
     }
+#endregion
 }

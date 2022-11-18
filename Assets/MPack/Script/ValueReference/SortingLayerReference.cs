@@ -24,7 +24,7 @@ namespace MPack
                     return Variable ? Variable.LayerID : throw new System.NullReferenceException("Use Varible but varible not exist");
                 return ConstantLayerID;
 #else
-                return UseVariable ? Variable.LayerID : Constant;
+                return UseVariable ? Variable.LayerID : ConstantLayerID;
 #endif
             }
         }
@@ -38,7 +38,7 @@ namespace MPack
                     return Variable ? Variable.Order : throw new System.NullReferenceException("Use Varible but varible not exist");
                 return ConstantOrder;
 #else
-                return UseVariable ? Variable.Order : Constant;
+                return UseVariable ? Variable.Order : ConstantOrder;
 #endif
             }
         }
