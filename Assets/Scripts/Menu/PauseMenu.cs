@@ -13,8 +13,6 @@ public class PauseMenu : AbstractMenu
     [SerializeField]
     private GameObject firstSelected;
     private GameObject _lastSelected;
-    [SerializeField]
-    private SettingMenu settingMenu;
 
     [SerializeField]
     private EventReference pauseEvent;
@@ -53,7 +51,7 @@ public class PauseMenu : AbstractMenu
     public void OpenSetting()
     {
         _lastSelected = EventSystem.current.currentSelectedGameObject;
-        settingMenu.Activate();
+        AbstractMenu.S_OpenMenu("Setting");
     }
 
     public void MainMenu()

@@ -7,8 +7,11 @@ using UnityEngine.EventSystems;
 using MPack;
 using TMPro;
 
-public class SettingMenu : MonoBehaviour
+public class SettingMenu : AbstractMenu
 {
+    private const string MainVolume = "MainVolume";
+    private const string MusicVolume = "MusicVolume";
+    private const string SFXVolume = "SFXVolume";
 
     [SerializeField]
     private GameObject firstSelected;
@@ -27,11 +30,6 @@ public class SettingMenu : MonoBehaviour
     [SerializeField]
     private Toggle ySensityInevert;
 
-    private float _originXSensity;
-    private bool _originXSensityInvert;
-    private float _originySensity;
-    private bool _originySensityInvert;
-
     [Header("Audio")]
     [SerializeField]
     private AudioMixer audioMixer;
@@ -41,6 +39,17 @@ public class SettingMenu : MonoBehaviour
     private Slider musicVolumeSlider;
     [SerializeField]
     private Slider sfxVolumeSlider;
+
+    [SerializeField]
+    private AnimationCurveReference volumeCurve;
+    [SerializeField]
+    private AnimationCurveReference inverseVolumeCurve;
+    [SerializeField]
+    private RangeReference volumeRange;
+
+    private float _mainVolume;
+    private float _musicVolume;
+    private float _sfxVolume;
 
     [Header("Display")]
     [SerializeField]
@@ -82,12 +91,24 @@ public class SettingMenu : MonoBehaviour
     [LauguageID]
     private int highQualityLanguageID;
 
+
+    private Canvas _canvas;
+
     void Awake()
     {
-        // xSensitySlider.onValueChanged.AddListener(XSensityChanged);
-        // ySensitySlider.onValueChanged.AddListener(YSensityChanged);
-        // xSensityInevert.onValueChanged.AddListener(XSensityInvertChanged);
-        // ySensityInevert.onValueChanged.AddListener(YSensityInvertChanged);
+        BindUI();
+
+        RegisterMenu();
+        _canvas = GetComponent<Canvas>();
+        enabled = _canvas.enabled = false;
+    }
+
+    void BindUI()
+    {
+        mainVolumeSlider.onValueChanged.AddListener(OnMainVolumeChanged);
+        musicVolumeSlider.onValueChanged.AddListener(OnMuscVolumeChanged);
+        sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+
         languageSwitch.leftEvent.AddListener(OnLanguageLeft);
         languageSwitch.rightEvent.AddListener(OnLanguageRight);
 
@@ -96,6 +117,48 @@ public class SettingMenu : MonoBehaviour
 
         windowTypeSwitch.leftEvent.AddListener(ToggleFullscreen);
         windowTypeSwitch.rightEvent.AddListener(ToggleFullscreen);
+
+        qualitySwitch.leftEvent.AddListener(DecreaseQuality);
+        qualitySwitch.rightEvent.AddListener(IncreaseQuality);
+    }
+
+    protected override void OpenMenu()
+    {
+        base.OpenMenu();
+
+        ApplyCurrentSettingToUI();
+
+        EventSystem.current.SetSelectedGameObject(firstSelected);
+        enabled = _canvas.enabled = true;
+    }
+
+    void ApplyCurrentSettingToUI()
+    {
+        xSensitySlider.SetValueWithoutNotify(Mathf.Abs(xSensity.Value));
+        xSensityInevert.SetIsOnWithoutNotify(xSensity.Value < 0);
+        ySensitySlider.SetValueWithoutNotify(Mathf.Abs(ySensity.Value));
+        ySensityInevert.SetIsOnWithoutNotify(ySensity.Value < 0);
+
+
+        if (audioMixer.GetFloat(MainVolume, out float mainVolume))
+        {
+            mainVolumeSlider.SetValueWithoutNotify(
+                inverseVolumeCurve.Value.Evaluate(volumeRange.InverseLerp(mainVolume)));
+            _mainVolume = mainVolume;
+        }
+        if (audioMixer.GetFloat(MusicVolume, out float musicVolume))
+        {
+            musicVolumeSlider.SetValueWithoutNotify(
+                inverseVolumeCurve.Value.Evaluate(volumeRange.InverseLerp(musicVolume)));
+            _musicVolume = musicVolume;
+        }
+        if (audioMixer.GetFloat(SFXVolume, out float sfxVolume))
+        {
+            sfxVolumeSlider.SetValueWithoutNotify(
+                inverseVolumeCurve.Value.Evaluate(volumeRange.InverseLerp(sfxVolume)));
+            _sfxVolume = sfxVolume;
+        }
+
 
         float width = Screen.width;
         float height = Screen.height;
@@ -106,32 +169,27 @@ public class SettingMenu : MonoBehaviour
                 currentResolutionIndex = i;
         }
 
-
-        qualitySwitch.leftEvent.AddListener(DecreaseQuality);
-        qualitySwitch.rightEvent.AddListener(IncreaseQuality);
         ApplyQualityText();
-
-        Activate();
     }
 
-    public void Activate()
+
+#region Audio
+    void OnMainVolumeChanged(float volumePercentage)
     {
-        EventSystem.current.SetSelectedGameObject(firstSelected);
-
-        _originXSensity = xSensitySlider.value;
-        _originXSensityInvert = xSensityInevert.isOn;
-        _originySensity = ySensitySlider.value;
-        _originySensityInvert = ySensityInevert.isOn;
-
-        gameObject.SetActive(true);
+        audioMixer.SetFloat(MainVolume, volumeRange.Lerp(volumeCurve.Value.Evaluate(volumePercentage)));
     }
+    void OnMuscVolumeChanged(float volumePercentage)
+    {
+        audioMixer.SetFloat(MusicVolume, volumeRange.Lerp(volumeCurve.Value.Evaluate(volumePercentage)));
+    }
+    void OnSFXVolumeChanged(float volumePercentage)
+    {
+        audioMixer.SetFloat(SFXVolume, volumeRange.Lerp(volumeCurve.Value.Evaluate(volumePercentage)));
+    }
+#endregion
 
-    // void XSensityChanged(float value) {}
-    // void YSensityChanged(float value) {}
-    // void XSensityInvertChanged(bool value) {}
-    // void YSensityInvertChanged(bool value) {}
 
-
+#region Language
     void OnLanguageLeft()
     {
         LanguageAssign.ins.PreviousLanguage();
@@ -140,8 +198,10 @@ public class SettingMenu : MonoBehaviour
     {
         LanguageAssign.ins.NextLanguage();
     }
+#endregion
 
 
+#region Resolution & Display
     void DownSizeResolution()
     {
         if (currentResolutionIndex <= 0)
@@ -175,7 +235,10 @@ public class SettingMenu : MonoBehaviour
             Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow);
         }
     }
+#endregion
 
+
+#region Quality
     void DecreaseQuality()
     {
         QualitySettings.DecreaseLevel();
@@ -203,16 +266,16 @@ public class SettingMenu : MonoBehaviour
                 break;
         }
     }
+#endregion
 
 
     public void Cancel()
     {
-        xSensitySlider.value = _originXSensity;
-        xSensityInevert.isOn = _originXSensityInvert;
-        ySensitySlider.value = _originySensity;
-        ySensityInevert.isOn = _originySensityInvert;
-
-        gameObject.SetActive(false);
+        audioMixer.SetFloat(MainVolume, _mainVolume);
+        audioMixer.SetFloat(MusicVolume, _musicVolume);
+        audioMixer.SetFloat(SFXVolume, _sfxVolume);
+        enabled = _canvas.enabled = false;
+        CloseMenu();
     }
 
     public void Save()
@@ -220,6 +283,7 @@ public class SettingMenu : MonoBehaviour
         xSensity.Value = xSensityInevert.isOn ? -xSensitySlider.value : xSensitySlider.value;
         ySensity.Value = ySensityInevert.isOn ? -ySensitySlider.value : ySensitySlider.value;
 
-        gameObject.SetActive(false);
+        enabled = _canvas.enabled = false;
+        CloseMenu();
     }
 }

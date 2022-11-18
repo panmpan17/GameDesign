@@ -55,5 +55,10 @@ namespace MPack
         {
             return UseVariable ? Mathf.Lerp(Variable.Min, Variable.Max, percenrage) : Mathf.Lerp(Min, Max, percenrage);
         }
+
+        public float InverseLerp(float value)
+        {
+            return UseVariable ? Mathf.InverseLerp(Variable.Min, Variable.Max, value) : Mathf.InverseLerp(Min, Max, value);
+        }
     }
 }

@@ -10,8 +10,31 @@ public abstract class AbstractMenu : MonoBehaviour
     public static event System.Action<AbstractMenu> OnLastMenuClose;
 
     private static Stack<AbstractMenu> s_openedMenus = new Stack<AbstractMenu>(6);
+    private static List<AbstractMenu> s_existMenus = new List<AbstractMenu>();
 
-    protected void OpenMenu()
+    public static void S_OpenMenu(string menuName)
+    {
+        for (int i = 0; i < s_existMenus.Count; i++)
+        {
+            if (s_existMenus[i].menuName == menuName)
+            {
+                s_existMenus[i].OpenMenu();
+                return;
+            }
+        }
+    }
+
+
+    [SerializeField]
+    private string menuName;
+
+
+    protected void RegisterMenu()
+    {
+        s_existMenus.Add(this);
+    }
+
+    protected virtual void OpenMenu()
     {
         s_openedMenus.Push(this);
         if (s_openedMenus.Count == 1)
@@ -27,5 +50,12 @@ public abstract class AbstractMenu : MonoBehaviour
         {
             OnLastMenuClose?.Invoke(this);
         }
+        else
+        {
+            s_openedMenus.Peek().BackToThisMenu();
+        }
     }
+
+    protected virtual void BackToThisMenu()
+    {}
 }

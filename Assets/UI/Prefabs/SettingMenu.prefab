@@ -2926,7 +2926,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8103717963830503369}
         m_TargetAssemblyTypeName: SettingMenu, Assembly-CSharp
         m_MethodName: Save
         m_Mode: 1
@@ -4888,6 +4888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0822379784934b69ba07ef87ac9e42a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuName: Setting
   firstSelected: {fileID: 8103717965222238042}
   xSensity: {fileID: 11400000, guid: 154b5bb03812d4def9bf1e70a5e2aaa6, type: 2}
   ySensity: {fileID: 11400000, guid: e601110d664924f8e9768b096aa837fe, type: 2}
@@ -4899,6 +4900,65 @@ MonoBehaviour:
   mainVolumeSlider: {fileID: 3539947001624394500}
   musicVolumeSlider: {fileID: 5474500375664140810}
   sfxVolumeSlider: {fileID: 7720997807069716196}
+  volumeCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
+  inverseVolumeCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
+  volumeRange:
+    ConstantMin: -80
+    ConstantMax: 0
+    Variable: {fileID: 0}
+    UseVariable: 0
   languageSwitch: {fileID: 8861257004983118585}
   avalibleResolution:
   - {x: 1080, y: 720}
