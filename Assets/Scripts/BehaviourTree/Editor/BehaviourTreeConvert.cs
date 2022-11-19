@@ -341,6 +341,9 @@ public static class BehaviourTreeConvert
     [MenuItem("/Game/BehaviourTree 轉換成新系統/Component", true)]
     public static bool ValidateConvertComponent()
     {
+        if (!Selection.activeGameObject)
+            return false;
+
         var oldRunner = Selection.activeGameObject.GetComponent<SlimeBehaviourTreeRunner>();
         return oldRunner;
     }

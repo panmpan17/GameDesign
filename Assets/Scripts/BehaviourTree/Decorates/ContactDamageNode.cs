@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace XnodeBehaviourTree
 {
+    [CreateNodeMenu("BehaviourTree/Decorate/Contact Damage")]
     public class ContactDamageNode : AbstractDecorateNode
     {
         [SerializeField]

@@ -18,7 +18,7 @@ public class BossFightManager : MonoBehaviour
     private Transform bossStartPosition;
     [SerializeField]
     private GameObject bossSlimePrefab;
-    private SlimeBehaviourTreeRunner _bossSlime;
+    private XnodeBehaviourTree.BehaviourTreeRunner _bossSlime;
     [SerializeField]
     private EventReference slimeHealthShowEvent;
     [SerializeField]
@@ -61,7 +61,7 @@ public class BossFightManager : MonoBehaviour
             _bossSlime = Instantiate(
                 bossSlimePrefab,
                 overrideBossStartPosition? overrideBossStartPosition.position : bossStartPosition.position,
-                overrideBossStartPosition? overrideBossStartPosition.rotation : bossStartPosition.rotation).GetComponent<SlimeBehaviourTreeRunner>();
+                overrideBossStartPosition? overrideBossStartPosition.rotation : bossStartPosition.rotation).GetComponent<XnodeBehaviourTree.BehaviourTreeRunner>();
             slimeHealthShowEvent.Invoke(true);
             yield break;
         }
@@ -72,7 +72,7 @@ public class BossFightManager : MonoBehaviour
         lookBossCam.LookAt = bossStartPosition;
         yield return new WaitForSeconds(0.5f);
 
-        _bossSlime = Instantiate(bossSlimePrefab, bossStartPosition.position, bossStartPosition.rotation).GetComponent<SlimeBehaviourTreeRunner>();
+        _bossSlime = Instantiate(bossSlimePrefab, bossStartPosition.position, bossStartPosition.rotation).GetComponent<XnodeBehaviourTree.BehaviourTreeRunner>();
         lookBossCam.LookAt = _bossSlime.transform;
         yield return new WaitForSeconds(4f);
 

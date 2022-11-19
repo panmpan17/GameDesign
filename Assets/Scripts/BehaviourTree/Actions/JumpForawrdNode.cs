@@ -14,6 +14,8 @@ namespace XnodeBehaviourTree
         public AnimationCurveReference jumpForceCurve;
         public Timer jumpTimer;
 
+        public ValueWithEnable<float> LimitJumpHeight;
+
         [Header("Landing")]
         public bool landingMoveforawrd;
         public float extraGravity = 0;
@@ -24,11 +26,15 @@ namespace XnodeBehaviourTree
         [System.NonSerialized]
         private bool _landed = false;
 
+        private float _positionY;
+
         protected override void OnStart()
         {
             context.animator?.SetTrigger("Jump");
             jumpTimer.Reset();
             _landing = _landed = false;
+
+            _positionY = context.transform.position.y;
         }
 
         protected override void OnStop()
@@ -71,13 +77,24 @@ namespace XnodeBehaviourTree
                     context.rigidbody.velocity = new Vector3(0, context.rigidbody.velocity.y, 0);
                 }
             }
+
+            if (LimitJumpHeight.Enable && (context.transform.position.y - _positionY) >= LimitJumpHeight.Value)
+            {
+                _landing = true;
+                context.slimeBehaviour.OnCollisionEnterEvent += OnLand;
+
+                if (!landingMoveforawrd)
+                {
+                    context.rigidbody.velocity = new Vector3(0, context.rigidbody.velocity.y, 0);
+                }
+            }
         }
 
         void MoveForawrd(bool addJumpVelocty)
         {
             Vector3 velocity = context.transform.forward * forwardSpeed;
             if (addJumpVelocty)
-                velocity += Vector3.up * jumpForce * jumpForceCurve.Value.Evaluate(jumpTimer.Progress);
+                velocity.y += jumpForce * jumpForceCurve.Value.Evaluate(jumpTimer.Progress);
             else
                 velocity.y = context.rigidbody.velocity.y;
             context.rigidbody.velocity = velocity;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MPack;
+using XnodeBehaviourTree;
+
 
 public class Arrow : MonoBehaviour, IPoolableObj
 {
@@ -125,6 +127,10 @@ public class Arrow : MonoBehaviour, IPoolableObj
     {
         enabled = false;
 
+        var OnArrowHit = otherTransform.GetComponent<OnArrowHit>();
+        if (OnArrowHit)
+            OnArrowHit.Trigger(transform.position);
+
         if (otherTransform.CompareTag(SlimeBehaviourTreeRunner.Tag))
         {
             transform.SetParent(otherTransform);
@@ -135,7 +141,6 @@ public class Arrow : MonoBehaviour, IPoolableObj
             var slimeCore = otherTransform.GetComponent<SlimeCore>();
             slimeCore.OnDamage();
 
-            hit.AddWaitingList(transform.position, Quaternion.LookRotation(-rigidbody.velocity, Vector3.up));
             audioSource.Play(hitSound);
         }
         else if (otherTransform.CompareTag(InteractiveBase.Tag))

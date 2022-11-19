@@ -46,7 +46,7 @@ public class TransformFollower : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (updateMode != UpdateMode.LateUpdate) return;
+        if (updateMode != UpdateMode.FixedUpdate) return;
         Trigger();
     }
 

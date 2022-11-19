@@ -10,4 +10,21 @@ public class GameObjectList : ScriptableObject
     public List<GameObject> List;
 
     public ValueWithEnable<int> CountLimit;
+
+    public int AliveCount {
+        get {
+            int count = 0;
+            for (int i = 0; i < List.Count; i++)
+            {
+                if (List[i] == null)
+                {
+                    List.RemoveAt(i);
+                    i--;
+                }
+                else
+                    count++;
+            }
+            return count;
+        }
+    }
 }

@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca26b87206d14ea59254ef8c6bd372b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cinemachineBrain: {fileID: 7328684852458996950}
   player: {fileID: 11400000, guid: bc106bd3fae424e6a944b21fe6f0f9d7, type: 2}
   startCameraName: Walk
 --- !u!1 &7328684851490053240
@@ -488,6 +487,7 @@ GameObject:
   - component: {fileID: 7328684852458996946}
   - component: {fileID: 7328684852458996949}
   - component: {fileID: 7328684852458996950}
+  - component: {fileID: 8695869404013487897}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -541,7 +541,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 6135
+    m_Bits: 14327
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -628,6 +628,20 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8695869404013487897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328684852458996945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568f6e1da6cce4e3189d7af2eaeb7c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPointer: {fileID: 11400000, guid: 2ca6f549f13e740e0a6e2c5603943caf, type: 2}
+  target: {fileID: 7328684852458996948}
 --- !u!1 &7328684853057279759
 GameObject:
   m_ObjectHideFlags: 0

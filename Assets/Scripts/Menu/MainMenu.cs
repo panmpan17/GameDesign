@@ -14,7 +14,9 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Setting()
-    {}
+    {
+        AbstractMenu.S_OpenMenu("Setting");
+    }
 
     public void Exit()
     {

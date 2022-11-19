@@ -5,11 +5,41 @@ using MPack;
 
 public class LanguageAssign : MonoBehaviour
 {
+    public static LanguageAssign ins;
+
     [SerializeField]
-    private LanguageData defaultLanguage;
+    private LanguageData[] languages;
+    private int _currentIndex;
 
     void Awake()
     {
-        LanguageMgr.AssignLanguageData(defaultLanguage);
+        if (ins)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        ins = this;
+        LanguageMgr.AssignLanguageData(languages[0]);
+    }
+
+    public void NextLanguage()
+    {
+        if (++_currentIndex >= languages.Length)
+        {
+            _currentIndex = 0;
+        }
+
+        LanguageMgr.AssignLanguageData(languages[_currentIndex]);
+    }
+
+    public void PreviousLanguage()
+    {
+        if (--_currentIndex < 0)
+        {
+            _currentIndex = languages.Length - 1;
+        }
+
+        LanguageMgr.AssignLanguageData(languages[_currentIndex]);
     }
 }
