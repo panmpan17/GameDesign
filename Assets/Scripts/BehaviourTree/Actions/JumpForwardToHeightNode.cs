@@ -71,20 +71,8 @@ namespace XnodeBehaviourTree
                 context.slimeBehaviour.OnCollisionEnterEvent += OnLand;
 
                 if (!landingMoveforawrd)
-                {
                     context.rigidbody.velocity = Vector3.zero;
-                }
             }
-
-            // (context.transform.position.y - _positionY) >= LimitJumpHeight.Value)
-            // {
-            //     _landing = true;
-            //     context.slimeBehaviour.OnCollisionEnterEvent += OnLand;
-
-            //     if (!landingMoveforawrd)
-            //     {
-            //         context.rigidbody.velocity = new Vector3(0, context.rigidbody.velocity.y, 0);
-            //     }
         }
 
         void MoveForawrd(bool addJumpVelocty)
@@ -93,7 +81,9 @@ namespace XnodeBehaviourTree
             if (addJumpVelocty)
             {
                 float destinateHeight = _positionY + (Height * HeightCurve.Value.Evaluate(Timer.Progress));
-                velocity.y += (destinateHeight - context.transform.position.y) * (1 / Time.deltaTime);
+                float destinateVeloctyY = (destinateHeight - context.transform.position.y) * (1 / Time.deltaTime);
+                if (destinateVeloctyY > 0)
+                    velocity.y = destinateVeloctyY;
             }
             else
                 velocity.y = context.rigidbody.velocity.y;
