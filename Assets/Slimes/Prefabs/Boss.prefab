@@ -641,6 +641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8725447815997289019}
   - component: {fileID: 8792720534781958144}
+  - component: {fileID: 76320675731106673}
   m_Layer: 8
   m_Name: 2-2
   m_TagString: Untagged
@@ -675,15 +676,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPointsPointer: {fileID: 0}
   slimePrefabs:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
   - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 2
-  spawnSlimesList: {fileID: 11400000, guid: 796459eb012c64c9fbfabe917be41d89, type: 2}
   spawnCount: 3
+  spawnSlimesList: {fileID: 11400000, guid: 796459eb012c64c9fbfabe917be41d89, type: 2}
+  spawnPointProvider: {fileID: 76320675731106673}
   radius: 0
   segmentCount: 1
   spawnAtRaycastPoint: 1
@@ -694,7 +695,21 @@ MonoBehaviour:
       m_Bits: 0
     Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
     UseVariable: 1
-  drawDizmos: 0
+--- !u!114 &76320675731106673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342481693126180226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 8
+  segmentCount: 8
+  drawGizmos: 0
 --- !u!1 &1979736760051572469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,6 +1639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5185194565404497939}
   - component: {fileID: 3812051341818985357}
+  - component: {fileID: 8993075568934676334}
   m_Layer: 8
   m_Name: 2-3
   m_TagString: Untagged
@@ -1658,7 +1674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPointsPointer: {fileID: 11400000, guid: 02759095ed130411cbce6b91e199e569, type: 2}
   slimePrefabs:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
@@ -1666,8 +1681,9 @@ MonoBehaviour:
   - {fileID: 2396312834613917260, guid: c8b973d8093f444189639c14eb9cb8c3, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 2
-  spawnSlimesList: {fileID: 11400000, guid: 796459eb012c64c9fbfabe917be41d89, type: 2}
   spawnCount: 0
+  spawnSlimesList: {fileID: 11400000, guid: 796459eb012c64c9fbfabe917be41d89, type: 2}
+  spawnPointProvider: {fileID: 8993075568934676334}
   radius: 0
   segmentCount: 1
   spawnAtRaycastPoint: 1
@@ -1678,7 +1694,21 @@ MonoBehaviour:
       m_Bits: 0
     Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
     UseVariable: 1
-  drawDizmos: 0
+--- !u!114 &8993075568934676334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719509313443061215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 8
+  segmentCount: 8
+  drawGizmos: 0
 --- !u!1 &4165725683963525871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,6 +1843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8122160221567943682}
   - component: {fileID: 6228139611364266965}
+  - component: {fileID: 6621773763039399749}
   m_Layer: 8
   m_Name: 2-1
   m_TagString: Untagged
@@ -1847,15 +1878,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPointsPointer: {fileID: 0}
   slimePrefabs:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
   - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 2
-  spawnSlimesList: {fileID: 11400000, guid: 796459eb012c64c9fbfabe917be41d89, type: 2}
   spawnCount: 3
+  spawnSlimesList: {fileID: 11400000, guid: 796459eb012c64c9fbfabe917be41d89, type: 2}
+  spawnPointProvider: {fileID: 6621773763039399749}
   radius: 8
   segmentCount: 8
   spawnAtRaycastPoint: 1
@@ -1866,7 +1897,21 @@ MonoBehaviour:
       m_Bits: 0
     Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
     UseVariable: 1
-  drawDizmos: 1
+--- !u!114 &6621773763039399749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626988030739219233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 8
+  segmentCount: 8
+  drawGizmos: 1
 --- !u!1 &7829717878639574994
 GameObject:
   m_ObjectHideFlags: 0

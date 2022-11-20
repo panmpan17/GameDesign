@@ -12,10 +12,6 @@ public class FightWave : MonoBehaviour
     private Timer waitTimer;
 
     [SerializeField]
-    private Transform[] spawnPoints;
-    // [SerializeField]
-    // private FightSpawnRule[] rules;
-    [SerializeField]
     private TriggerSpawnSlime[] spawnSlimeTriggers;
 
 
@@ -36,19 +32,5 @@ public class FightWave : MonoBehaviour
         {
             spawnSlimeTriggers[i].TriggerFire();
         }
-        // for (int i = 0; i < rules.Length; i++)
-        // {
-        //     SpawnByRule(rules[i]);
-        // }
     }
-
-    // void SpawnByRule(FightSpawnRule rule)
-    // {
-    //     int amount = rule.AmountRange.PickRandomNumber();
-    //     for (int i = 0; i < amount; i++)
-    //     {
-    //         Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            
-    //     }
-    // }
 }
