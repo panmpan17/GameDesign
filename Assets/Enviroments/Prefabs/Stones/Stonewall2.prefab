@@ -9,7 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1308580253033392287}
-  m_Layer: 0
+  - component: {fileID: 5064234557936395569}
+  - component: {fileID: -9195343966617945638}
+  - component: {fileID: 5206578032820426043}
+  - component: {fileID: 465759206540592580}
+  m_Layer: 10
   m_Name: Stonewall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +36,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5064234557936395569
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770991827836080817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20.015198, y: 8.411739, z: 2.4129152}
+  m_Center: {x: 1.089962, y: 3.7058692, z: 0.14120185}
+--- !u!114 &-9195343966617945638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770991827836080817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: bd9cde04e49a44a23a6972008064c4a6, type: 2}
+  sound: {fileID: 0}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &5206578032820426043
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770991827836080817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2399864, y: 3.1072593, z: 4.011525}
+  m_Center: {x: 10.111275, y: 1.0536296, z: -2.876061}
+--- !u!65 &465759206540592580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770991827836080817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.4752765, y: 3.1072593, z: 4.011525}
+  m_Center: {x: -0.92764497, y: 1.0536296, z: -2.876061}
 --- !u!1001 &1441182084554772580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,6 +154,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8801ec90b72524b85af4859bc6e0be3d, type: 3}
       propertyPath: m_Name
       value: stonewall2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8801ec90b72524b85af4859bc6e0be3d, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8801ec90b72524b85af4859bc6e0be3d, type: 3}
       propertyPath: m_StaticEditorFlags
