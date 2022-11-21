@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9114842916488748224
+--- !u!114 &-9103594432427411396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,179 +9,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b2b96b8cca3437aa3bb08419f0f4af, type: 3}
-  m_Name: SequenceNode
-  m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1768, y: -40}
-  ports:
-    keys:
-    - Input
-    - Output
-    values:
-    - _fieldName: Input
-      _node: {fileID: -9114842916488748224}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 4222344587171472906}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Output
-      _node: {fileID: -9114842916488748224}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: -6616795187971064733}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: -5517143989110274329}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
---- !u!114 &-8349270197754299020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d64f4ec86c6f844b9ac9ec06168f55c9, type: 3}
-  m_Name: Check Target Radius
+  m_Script: {fileID: 11500000, guid: 99fda4d34f7204239ab2849b381a7dc5, type: 3}
+  m_Name: Face Target
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1704, y: 744}
+  position: {x: 1080, y: 760}
   ports:
     keys:
     - Input
     values:
     - _fieldName: Input
-      _node: {fileID: -8349270197754299020}
+      _node: {fileID: -9103594432427411396}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 1538673725065967046}
+        node: {fileID: 9073978735217047744}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  Min:
-    Enable: 0
-    Value: 0
-  Max:
-    Enable: 1
-    Value: 1
---- !u!114 &-6831671847471320891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 591cd436ca5a34f9f8b2931171a1f356, type: 3}
-  m_Name: Repeat
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1080, y: 472}
-  ports:
-    keys:
-    - Input
-    - Output
-    values:
-    - _fieldName: Input
-      _node: {fileID: -6831671847471320891}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 4821114431378865035}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Output
-      _node: {fileID: -6831671847471320891}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: 1538673725065967046}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  repeatLimit:
-    Enable: 1
-    Value: 3
-  restartOnSuccess: 0
-  restartOnFailure: 1
---- !u!114 &-6616795187971064733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02790ac27b7f47c7b29b8e8f1fc31d5, type: 3}
-  m_Name: JumpForwardNode
-  m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1992, y: -200}
-  ports:
-    keys:
-    - Input
-    values:
-    - _fieldName: Input
-      _node: {fileID: -6616795187971064733}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: -9114842916488748224}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  drawGizmos: 0
-  forwardSpeed: 2
-  jumpForce: 3
-  jumpForceCurve:
-    Constant:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
-    UseVariable: 1
-  jumpTimer:
-    TargetTime: 0.5
-    Running: 0
-    ReverseMode: 0
-  landingMoveforawrd: 1
-  extraGravity: 0
-  grounLayer:
-    serializedVersion: 2
-    m_Bits: 1280
+  RotateSpeed: 300
+  RaycastPoint: 0
 --- !u!114 &-6350364619857063972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +77,7 @@ MonoBehaviour:
   m_Name: Jump Forawrd
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1704, y: 472}
+  position: {x: 1704, y: 552}
   ports:
     keys:
     - Input
@@ -244,8 +95,8 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  forwardSpeed: 4
-  jumpForce: 3
+  forwardSpeed: 15
+  jumpForce: 0
   jumpForceCurve:
     Constant:
       serializedVersion: 2
@@ -277,42 +128,14 @@ MonoBehaviour:
     TargetTime: 0.5
     Running: 0
     ReverseMode: 0
+  LimitJumpHeight:
+    Enable: 0
+    Value: 0
   landingMoveforawrd: 1
   extraGravity: 0
   grounLayer:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &-5517143989110274329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6624b11bc40da4ddca19470312007a70, type: 3}
-  m_Name: AlignRotationNode
-  m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1992, y: 88}
-  ports:
-    keys:
-    - Input
-    values:
-    - _fieldName: Input
-      _node: {fileID: -5517143989110274329}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: -9114842916488748224}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  drawGizmos: 0
 --- !u!114 &-4758999649362583935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +167,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  senseRange: 20
+  senseRange: 15
   raycastLayers:
     serializedVersion: 2
     m_Bits: 1024
@@ -361,7 +184,7 @@ MonoBehaviour:
   m_Name: Face Target
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1080, y: 344}
+  position: {x: 1992, y: 280}
   ports:
     keys:
     - Input
@@ -372,16 +195,133 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 4821114431378865035}
+        node: {fileID: -4488485690065718791}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  RotateSpeed: 300
+  RotateSpeed: 500
   RaycastPoint: 1
---- !u!114 &-2151346040958226356
+--- !u!114 &-4488485690065718791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591cd436ca5a34f9f8b2931171a1f356, type: 3}
+  m_Name: Repeat
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1704, y: 280}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -4488485690065718791}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: -1060229754876431752}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -4488485690065718791}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -4662500234044676406}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  repeatLimit:
+    Enable: 0
+    Value: 0
+  restartOnSuccess: 1
+  restartOnFailure: 0
+--- !u!114 &-4300622734163813809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4625e198b5845d68cbe84ef3daf5a2, type: 3}
+  m_Name: Jump Forward To Height
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1400, y: 408}
+  ports:
+    keys:
+    - Input
+    values:
+    - _fieldName: Input
+      _node: {fileID: -4300622734163813809}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 503743601091504946}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  drawGizmos: 0
+  forwardSpeed: 0
+  Timer:
+    TargetTime: 0.3
+    Running: 0
+    ReverseMode: 0
+  HeightCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
+  Height: 1
+  landingMoveforawrd: 0
+  extraGravity: 0
+  grounLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!114 &-2319264100647471864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -394,25 +334,25 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1384, y: 984}
+  position: {x: 1704, y: 440}
   ports:
     keys:
     - Input
     values:
     - _fieldName: Input
-      _node: {fileID: -2151346040958226356}
+      _node: {fileID: -2319264100647471864}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 4602395816212037287}
+        node: {fileID: 1538673725065967046}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  duration: 2
+  duration: 0.3
 --- !u!114 &-1098816724022391780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +401,7 @@ MonoBehaviour:
     Value: 0
   restartOnSuccess: 1
   restartOnFailure: 0
---- !u!114 &-774792231852457360
+--- !u!114 &-1060229754876431752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -470,99 +410,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de9eae53a3da841cdbbde62d9fd494f0, type: 3}
-  m_Name: Trigger Fire
+  m_Script: {fileID: 11500000, guid: a694022b644f74889a58d2f860940e8d, type: 3}
+  m_Name: Timeout
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1384, y: 856}
+  position: {x: 1400, y: 280}
   ports:
     keys:
     - Input
+    - Output
     values:
     - _fieldName: Input
-      _node: {fileID: -774792231852457360}
+      _node: {fileID: -1060229754876431752}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 4602395816212037287}
+        node: {fileID: 503743601091504946}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  drawGizmos: 0
-  TriggerGroupIndex:
-    Enable: 0
-    Value: 0
-  CarriedParameter:
-    Enable: 0
-    Value: 0
---- !u!114 &-586485321480507153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99fda4d34f7204239ab2849b381a7dc5, type: 3}
-  m_Name: FaceTargetNode
-  m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1512, y: -184}
-  ports:
-    keys:
-    - Input
-    values:
-    - _fieldName: Input
-      _node: {fileID: -586485321480507153}
+    - _fieldName: Output
+      _node: {fileID: -1060229754876431752}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
-      - fieldName: Output
-        node: {fileID: 4277139291619617382}
+      - fieldName: Input
+        node: {fileID: -4488485690065718791}
         reroutePoints: []
-      _direction: 0
+      _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  drawGizmos: 0
-  RotateSpeed: 100
-  RaycastPoint: 1
---- !u!114 &-382123404287919608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8060d29908dca47b3801f03b4390c4f5, type: 3}
-  m_Name: WaitNode
-  m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1512, y: 56}
-  ports:
-    keys:
-    - Input
-    values:
-    - _fieldName: Input
-      _node: {fileID: -382123404287919608}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 4277139291619617382}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  drawGizmos: 0
-  duration: 0.6
+  duration: 0.3
+  resultIsSuccess: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,16 +459,6 @@ MonoBehaviour:
   m_Name: PigSlime-Graph
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 4277139291619617382}
-  - {fileID: -586485321480507153}
-  - {fileID: -382123404287919608}
-  - {fileID: 3216628304543683103}
-  - {fileID: 2654383252210760615}
-  - {fileID: -6616795187971064733}
-  - {fileID: -5517143989110274329}
-  - {fileID: 4936477322922848611}
-  - {fileID: -9114842916488748224}
-  - {fileID: 4222344587171472906}
   - {fileID: 9073978735217047744}
   - {fileID: -4758999649362583935}
   - {fileID: 7868171974826461717}
@@ -593,18 +466,20 @@ MonoBehaviour:
   - {fileID: 391549810568988075}
   - {fileID: 7038658388902649735}
   - {fileID: -1098816724022391780}
-  - {fileID: 3299009108358872686}
-  - {fileID: -774792231852457360}
-  - {fileID: -2151346040958226356}
   - {fileID: 1756833541659174305}
   - {fileID: -4662500234044676406}
   - {fileID: -6339455827977609300}
-  - {fileID: -6831671847471320891}
-  - {fileID: -8349270197754299020}
-  - {fileID: 4958482978067873129}
-  - {fileID: 4602395816212037287}
   - {fileID: 1538673725065967046}
   - {fileID: -6350364619857063972}
+  - {fileID: -4300622734163813809}
+  - {fileID: 503743601091504946}
+  - {fileID: -2319264100647471864}
+  - {fileID: -1060229754876431752}
+  - {fileID: -4488485690065718791}
+  - {fileID: 3939576845817625656}
+  - {fileID: 4442673945507159989}
+  - {fileID: -9103594432427411396}
+  - {fileID: 3769836098051185390}
   FunctionGraph: {fileID: 0}
 --- !u!114 &391549810568988075
 MonoBehaviour:
@@ -652,6 +527,55 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+--- !u!114 &503743601091504946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae7efa0276b74f059acf59fb50be8a3, type: 3}
+  m_Name: Parallel
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1080, y: 312}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 503743601091504946}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 4821114431378865035}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 503743601091504946}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -4300622734163813809}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: 1538673725065967046}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: -1060229754876431752}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
 --- !u!114 &1538673725065967046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,7 +589,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1400, y: 472}
+  position: {x: 1400, y: 664}
   ports:
     keys:
     - Input
@@ -677,7 +601,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: -6831671847471320891}
+        node: {fileID: 503743601091504946}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -692,7 +616,7 @@ MonoBehaviour:
         node: {fileID: -6339455827977609300}
         reroutePoints: []
       - fieldName: Input
-        node: {fileID: -8349270197754299020}
+        node: {fileID: -2319264100647471864}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -711,7 +635,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1064, y: 1128}
+  position: {x: 1080, y: 1176}
   ports:
     keys:
     - Input
@@ -730,7 +654,7 @@ MonoBehaviour:
       _dynamic: 0
   drawGizmos: 0
   duration: 1
---- !u!114 &2654383252210760615
+--- !u!114 &3769836098051185390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -739,64 +663,70 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26cba8e08ba84345873ec8e99c85381, type: 3}
-  m_Name: SetFixedPointAsTarget
+  m_Script: {fileID: 11500000, guid: d02790ac27b7f47c7b29b8e8f1fc31d5, type: 3}
+  m_Name: Jump Forawrd
   m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1512, y: -408}
+  graph: {fileID: 11400000}
+  position: {x: 1080, y: 888}
   ports:
     keys:
     - Input
     values:
     - _fieldName: Input
-      _node: {fileID: 2654383252210760615}
+      _node: {fileID: 3769836098051185390}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 4277139291619617382}
+        node: {fileID: 9073978735217047744}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
---- !u!114 &3216628304543683103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d7f994b233749b9b7d9287572ccf50, type: 3}
-  m_Name: CheckTargetInEyesightNode
-  m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1512, y: -312}
-  ports:
-    keys:
-    - Input
-    values:
-    - _fieldName: Input
-      _node: {fileID: 3216628304543683103}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 4277139291619617382}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  drawGizmos: 0
-  senseRange: 30
-  raycastLayers:
+  forwardSpeed: 4
+  jumpForce: 1
+  jumpForceCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
+  jumpTimer:
+    TargetTime: 1
+    Running: 0
+    ReverseMode: 0
+  LimitJumpHeight:
+    Enable: 0
+    Value: 0
+  landingMoveforawrd: 1
+  extraGravity: 0
+  grounLayer:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &3299009108358872686
+--- !u!114 &3939576845817625656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -805,8 +735,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26cba8e08ba84345873ec8e99c85381, type: 3}
-  m_Name: Set Player As Target
+  m_Script: {fileID: 11500000, guid: 8060d29908dca47b3801f03b4390c4f5, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1080, y: 408}
+  ports:
+    keys:
+    - Input
+    values:
+    - _fieldName: Input
+      _node: {fileID: 3939576845817625656}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 4821114431378865035}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  drawGizmos: 0
+  duration: 2
+--- !u!114 &4442673945507159989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693809905d7e44f52801b7d550899420, type: 3}
+  m_Name: Random Position As Target
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
   position: {x: 1080, y: 632}
@@ -815,163 +777,20 @@ MonoBehaviour:
     - Input
     values:
     - _fieldName: Input
-      _node: {fileID: 3299009108358872686}
+      _node: {fileID: 4442673945507159989}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 4821114431378865035}
+        node: {fileID: 9073978735217047744}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
---- !u!114 &4222344587171472906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7235e711ac764a4eb07025ec4ccff68, type: 3}
-  m_Name: Contact Damage
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1512, y: -56}
-  ports:
-    keys:
-    - Input
-    - Output
-    values:
-    - _fieldName: Input
-      _node: {fileID: 4222344587171472906}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 4277139291619617382}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Output
-      _node: {fileID: 4222344587171472906}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: -9114842916488748224}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  damangeAmount: 7
---- !u!114 &4277139291619617382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b2b96b8cca3437aa3bb08419f0f4af, type: 3}
-  m_Name: SequenceNode
-  m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1208, y: -248}
-  ports:
-    keys:
-    - Input
-    - Output
-    values:
-    - _fieldName: Input
-      _node: {fileID: 4277139291619617382}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Output
-      _node: {fileID: 4277139291619617382}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: 4936477322922848611}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: 2654383252210760615}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: 3216628304543683103}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: -586485321480507153}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: -382123404287919608}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: 4222344587171472906}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
---- !u!114 &4602395816212037287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b2b96b8cca3437aa3bb08419f0f4af, type: 3}
-  m_Name: Sequence
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1080, y: 856}
-  ports:
-    keys:
-    - Input
-    - Output
-    values:
-    - _fieldName: Input
-      _node: {fileID: 4602395816212037287}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 4821114431378865035}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Output
-      _node: {fileID: 4602395816212037287}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: -774792231852457360}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: -2151346040958226356}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
+  startRadius: 8
+  endRadius: 12
 --- !u!114 &4821114431378865035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,93 +834,18 @@ MonoBehaviour:
         node: {fileID: 7868171974826461717}
         reroutePoints: []
       - fieldName: Input
-        node: {fileID: -4662500234044676406}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: -6831671847471320891}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: 3299009108358872686}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: 4958482978067873129}
-        reroutePoints: []
-      - fieldName: Input
-        node: {fileID: 4602395816212037287}
-        reroutePoints: []
-      - fieldName: Input
         node: {fileID: -6350364619857063972}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: 503743601091504946}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: 3939576845817625656}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
---- !u!114 &4936477322922848611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6624b11bc40da4ddca19470312007a70, type: 3}
-  m_Name: AlignRotationNode
-  m_EditorClassIdentifier: 
-  graph: {fileID: 0}
-  position: {x: 1512, y: -504}
-  ports:
-    keys:
-    - Input
-    values:
-    - _fieldName: Input
-      _node: {fileID: 4936477322922848611}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 4277139291619617382}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  drawGizmos: 0
---- !u!114 &4958482978067873129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d7f994b233749b9b7d9287572ccf50, type: 3}
-  m_Name: Check Target In Eyesight
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1080, y: 728}
-  ports:
-    keys:
-    - Input
-    values:
-    - _fieldName: Input
-      _node: {fileID: 4958482978067873129}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 4821114431378865035}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  drawGizmos: 0
-  senseRange: 40
-  raycastLayers:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &7038658388902649735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,7 +920,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 808, y: 1128}
+  position: {x: 808, y: 632}
   ports:
     keys:
     - Input
@@ -1201,6 +945,15 @@ MonoBehaviour:
       connections:
       - fieldName: Input
         node: {fileID: 1756833541659174305}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: 4442673945507159989}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: -9103594432427411396}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: 3769836098051185390}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
