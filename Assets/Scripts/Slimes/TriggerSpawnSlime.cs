@@ -32,8 +32,9 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
     [HideInInspector, SerializeField] private float radius;
     [HideInInspector, SerializeField] private int segmentCount = 1;
 
-
     private Vector3[] _segmentPoints;
+    public event System.Action OnSlimeSpawnedCallback;
+
 
     public void SetSpawnSlimeList(GameObjectList list) => spawnSlimesList = list;
 
@@ -134,6 +135,9 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
                 rigidbody.isKinematic = false;
                 slimeBehaviourTree.enabled = true;
             });
+
+        OnSlimeSpawnedCallback?.Invoke();
+        OnSlimeSpawnedCallback = null;
     }
 
     private IEnumerator DelayExecute(GameObject prefab, Vector3 position, Quaternion rotation, GameObject indicator)

@@ -26,11 +26,14 @@ public class FightWave : MonoBehaviour
         return true;
     }
 
-    public void Spawn()
+    public void StartWave(GameObjectList spawnSlimeList, System.Action onWaveStarted)
     {
         for (int i = 0; i < spawnSlimeTriggers.Length; i++)
         {
-            spawnSlimeTriggers[i].TriggerFire();
+            var trigger = spawnSlimeTriggers[i];
+            trigger.OnSlimeSpawnedCallback += onWaveStarted;
+            trigger.SetSpawnSlimeList(spawnSlimeList);
+            trigger.TriggerFire();
         }
     }
 }

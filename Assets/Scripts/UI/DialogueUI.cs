@@ -10,6 +10,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
 {
     [SerializeField]
     private SpeakerUIReference mainCharacter;
+    [HideInInspector]
     [SerializeField]
     private SpeakerUIReference npc;
 
@@ -56,16 +57,18 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     {
         CleanUpLastNode();
 
-        if (node.Speaker.IsNPC)
-        {
-            npc.ChangeUI(node.Speaker, node.ContentLaguageID, false);
-            mainCharacter.Hide();
-        }
-        else
-        {
-            mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, false);
-            npc.Hide();
-        }
+        mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, false);
+        // npcNameLabel
+        // if (node.Speaker.IsNPC)
+        // {
+        //     npc.ChangeUI(node.Speaker, node.ContentLaguageID, false);
+        //     mainCharacter.Hide();
+        // }
+        // else
+        // {
+        //     mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, false);
+        //     npc.Hide();
+        // }
 
         for (int i = 0; i < node.choices.Length; i++)
         {
@@ -93,16 +96,17 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     {
         CleanUpLastNode();
 
-        if (node.Speaker.IsNPC)
-        {
-            npc.ChangeUI(node.Speaker, node.ContentLaguageID, true);
-            mainCharacter.Hide();
-        }
-        else
-        {
-            mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, true);
-            npc.Hide();
-        }
+        mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, true);
+        // if (node.Speaker.IsNPC)
+        // {
+        //     npc.ChangeUI(node.Speaker, node.ContentLaguageID, true);
+        //     mainCharacter.Hide();
+        // }
+        // else
+        // {
+        //     mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, true);
+        //     npc.Hide();
+        // }
     }
 
     public void OnDialogueEnd()
@@ -138,16 +142,29 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     {
         public GameObject Parent;
         public Image CharacterImage;
+        public Image NameLabelImage;
         public LanguageText NameLanguageText;
         public LanguageText DialogueLanguageText;
-        public GameObject NextDialogueButton;
+        public Image NextDialogueButton;
+
+        [Header("NPC")]
+        public Sprite NpcNameLabel;
+        public Sprite NpcNameNext;
+        [Header("Main Character")]
+        public Sprite MainCharacterNameLabel;
+        public Sprite MainCharacterNext;
 
         public void ChangeUI(Speaker speaker, int dialogueLanguageID, bool showNextButton)
         {
             CharacterImage.sprite = speaker.CharacterSprite;
             NameLanguageText.ChangeId(speaker.NameLanguageID);
             DialogueLanguageText.ChangeId(dialogueLanguageID);
-            NextDialogueButton.SetActive(showNextButton);
+
+            NextDialogueButton.sprite = speaker.IsNPC ? NpcNameNext : MainCharacterNext;
+            NextDialogueButton.gameObject.SetActive(showNextButton);
+
+            NameLabelImage.sprite = speaker.IsNPC ? NpcNameLabel : MainCharacterNameLabel;
+
             Parent.SetActive(true);
         }
 
