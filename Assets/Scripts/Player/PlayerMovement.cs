@@ -5,6 +5,8 @@ using MPack;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private const float LowestY = -10;
+
     [Header("Other components")]
     [SerializeField]
     private InputInterface input;
@@ -28,9 +30,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float walkSpeed;
     [SerializeField]
+    private float turnSpeed;
+
+    [Header("Camera Rotation")]
+    [SerializeField]
     private FloatReference drawBowSlowDown;
     [SerializeField]
-    private float turnSpeed;
+    private float aimSlowDown; 
     [Tooltip("球體旋轉角度, 下面到中間時從0變成360, 所以下會比上多")]
     [SerializeField]
     private float aimDownLimit = 320;
@@ -149,9 +155,16 @@ public class PlayerMovement : MonoBehaviour
         if (!behaviour.CursorFocued)
             return;
 
-        followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.x, Vector3.up);
-
-        followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.y, Vector3.right);
+        if (behaviour.IsDrawingBow)
+        {
+            followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.x * aimSlowDown, Vector3.up);
+            followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.y * aimSlowDown, Vector3.right);
+        }
+        else
+        {
+            followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.x, Vector3.up);
+            followTarget.transform.rotation *= Quaternion.AngleAxis(input.LookAxis.y, Vector3.right);
+        }
 
         Vector3 angles = followTarget.transform.localEulerAngles;
         angles.z = 0;
@@ -242,6 +255,9 @@ public class PlayerMovement : MonoBehaviour
                 _yVelocity += Physics.gravity.y * (1 + extraGravity.Value) * Time.deltaTime;
             else
                 _yVelocity += Physics.gravity.y * Time.deltaTime;
+
+            if (transform.position.y < LowestY)
+                behaviour.InstantDeath();
 
             if (_jumping)
             {

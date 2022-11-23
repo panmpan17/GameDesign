@@ -682,7 +682,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WASD"",
+                    ""name"": ""WASD & Arrows"",
                     ""id"": ""a8ab306c-319e-48bf-a10a-f0f4161254cc"",
                     ""path"": ""Dpad"",
                     ""interactions"": """",
@@ -949,6 +949,17 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""671755ef-a892-4aee-9d85-60600bfbddd0"",
                     ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b2126ff-dc41-4c53-ad00-a857e60487f3"",
+                    ""path"": ""<Keyboard>/rightShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

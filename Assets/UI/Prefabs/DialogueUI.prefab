@@ -770,7 +770,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5754973394242849469}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -860,7 +860,7 @@ MonoBehaviour:
     MainCharacterNameLabel: {fileID: 0}
     MainCharacterNext: {fileID: 0}
   choiceTextPrefab: {fileID: 5754973395863456776}
-  offset: {x: 0, y: -70}
+  offset: {x: 0, y: -75}
   dialogueEndEvent: {fileID: 11400000, guid: 84a6f59297b02472a8eb2953de76e458, type: 2}
   dialogueStartEvent: {fileID: 11400000, guid: 2dc2e6134203247d2ac67c82844b1f6d, type: 2}
 --- !u!1 &5754973394312149207
@@ -1304,7 +1304,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -90.93, y: -84.456}
+  m_SizeDelta: {x: -31.5746, y: -21.9752}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5754973395741245186
 CanvasRenderer:
@@ -1453,8 +1453,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 235}
-  m_SizeDelta: {x: 480, y: 128}
+  m_AnchoredPosition: {x: 0, y: 275}
+  m_SizeDelta: {x: 450, y: 50.5884}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5754973395863456779
 CanvasRenderer:
@@ -1484,7 +1484,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cef4af756efb240ff99fc3bb7bfff864, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a51f193dceeb34d15b0e63a697231fc6, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1493,7 +1493,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 3
+  m_PixelsPerUnitMultiplier: 19.33
 --- !u!114 &5754973395863456780
 MonoBehaviour:
   m_ObjectHideFlags: 0
