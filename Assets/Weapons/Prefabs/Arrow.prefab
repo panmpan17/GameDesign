@@ -223,6 +223,33 @@ MonoBehaviour:
     Running: 0
     ReverseMode: 0
   extraDrawDuration: 0.5
+  gravityScaleCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.9973755
+        value: 0.36790085
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
   particleColor:
     Constant: {r: 0.9056604, g: 0.83293617, b: 0.47419012, a: 0.69803923}
     Variable: {fileID: 0}

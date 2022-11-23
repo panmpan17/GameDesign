@@ -17,6 +17,7 @@ public class StreetFightManager : MonoBehaviour
     [SerializeField]
     private FightWave[] waves;
     private int _waveIndex;
+    private bool _waveStarted;
 
     void Awake()
     {
@@ -26,6 +27,9 @@ public class StreetFightManager : MonoBehaviour
 
     void Update()
     {
+        if (!_waveStarted)
+            return;
+
         bool allSlimesAreDead = spawnedSlimes.AliveCount <= 0;
 
         if (_waveIndex >= waves.Length)
@@ -39,7 +43,8 @@ public class StreetFightManager : MonoBehaviour
 
         if (waves[_waveIndex].CanStart(allSlimesAreDead))
         {
-            waves[_waveIndex].Spawn();
+            waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
+            _waveStarted = false;
             _waveIndex++;
         }
     }
@@ -51,10 +56,16 @@ public class StreetFightManager : MonoBehaviour
         entranceDetect.gameObject.SetActive(false);
         borderWall.SetActive(true);
 
-        waves[_waveIndex].Spawn();
+        waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
+        _waveStarted = false;
         _waveIndex++;
 
         enabled = true;
+    }
+
+    void OnWaveStarted()
+    {
+        _waveStarted = true;
     }
 
 

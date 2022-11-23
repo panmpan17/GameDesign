@@ -27,6 +27,9 @@ public class DroppedItem : MonoBehaviour, IPoolableObj
     private new Rigidbody rigidbody;
     [SerializeField]
     private float velocityMultiply;
+
+    [SerializeField]
+    private Transform rotateTarget;
     [SerializeField]
     private Vector3 spriteRotateSpeed;
 
@@ -59,7 +62,7 @@ public class DroppedItem : MonoBehaviour, IPoolableObj
 
     void FixedUpdate()
     {
-        spriteRenderer.transform.Rotate(spriteRotateSpeed * Time.fixedDeltaTime);
+        rotateTarget.Rotate(spriteRotateSpeed * Time.fixedDeltaTime);
     }
 
     void OnTriggerEnter(Collider otherCollider)

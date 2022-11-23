@@ -5435,11 +5435,12 @@ MonoBehaviour:
   followTarget: {fileID: 2787180225754473550}
   followTargetPointer: {fileID: 11400000, guid: bc106bd3fae424e6a944b21fe6f0f9d7, type: 2}
   walkSpeed: 10
+  turnSpeed: 480
   drawBowSlowDown:
     Constant: 0
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
     UseVariable: 1
-  turnSpeed: 480
+  aimSlowDown: 0.5
   aimDownLimit: 335
   aimUpLimit: 50
   jumpForce: 5

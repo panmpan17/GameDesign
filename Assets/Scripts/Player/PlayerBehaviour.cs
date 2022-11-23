@@ -202,7 +202,7 @@ public class PlayerBehaviour : MonoBehaviour
 #endif
     }
 
-    void OnInteract()
+    public void OnInteract()
     {
         if (!_interactObject)
             return;
@@ -242,6 +242,14 @@ public class PlayerBehaviour : MonoBehaviour
             _handleDeath = true;
             OnDeath?.Invoke();
         }
+    }
+
+    public void InstantDeath()
+    {
+        _health = 0;
+        healthChangeEvent?.Invoke(0);
+        _handleDeath = true;
+        OnDeath?.Invoke();
     }
 
     public void ReviveAtSpawnPoint(PlayerSpawnPoint spawnPoint)
