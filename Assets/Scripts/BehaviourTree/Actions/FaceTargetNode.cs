@@ -34,9 +34,12 @@ namespace XnodeBehaviourTree
 
             Vector3 origin = context.transform.position + (destinationRotation * (Vector3.forward * 0.1f));
 
-            if (RaycastPoint && Physics.Raycast(origin, Vector3.down, out RaycastHit hit, 2, groundLayers))
+            if (RaycastPoint && Physics.Raycast(blackboard.TargetPosition, Vector3.down, out RaycastHit hit, 10, groundLayers))
             {
-                destinationRotation = Quaternion.LookRotation(hit.point - context.transform.position, context.transform.up);
+                if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit2, 10, groundLayers))
+                {
+                    destinationRotation = Quaternion.LookRotation(hit.point - hit2.point, context.transform.up);
+                }
             }
 
             destinationRotation = Quaternion.RotateTowards(context.transform.rotation, destinationRotation, RotateSpeed * Time.deltaTime);
