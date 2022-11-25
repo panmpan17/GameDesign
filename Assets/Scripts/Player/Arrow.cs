@@ -35,6 +35,8 @@ public class Arrow : MonoBehaviour, IPoolableObj
     private Timer ignoreGravityTimer;
     [SerializeField]
     private float extraDrawDuration;
+    [SerializeField]
+    private AnimationCurveReference gravityScaleCurve;
     private float _baseTime;
 
     [SerializeField]
@@ -98,6 +100,9 @@ public class Arrow : MonoBehaviour, IPoolableObj
     {
         if (ignoreGravityTimer.Running)
         {
+            Vector3 desireGravity = Vector3.Lerp(Vector3.zero, Physics.gravity, gravityScaleCurve.Value.Evaluate(ignoreGravityTimer.Progress));
+            rigidbody.velocity += desireGravity * Time.fixedDeltaTime;
+
             if (ignoreGravityTimer.FixedUpdateEnd)
             {
                 ignoreGravityTimer.Running = false;
