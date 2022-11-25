@@ -12,6 +12,15 @@ public class PlayerSpawnPoint : MonoBehaviour
     {
         GameManager.ins.ChangePlayerSpawnPoint(this);
     }
+
+    public void Teleport()
+    {
+        GameObject player = GameObject.Find("Player");
+        GameObject camera = GameObject.Find("Cameras");
+        player.transform.position = transform.position;
+        player.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        camera.transform.position = transform.position;
+    }
 }
 
 #if UNITY_EDITOR

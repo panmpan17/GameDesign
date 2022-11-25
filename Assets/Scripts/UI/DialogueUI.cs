@@ -137,6 +137,11 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         _dialogueGraph.Proccessing();
     }
 
+    void OnDestroy()
+    {
+        dialogueStartEvent.InvokeDialogueGraphEvents -= StartDialogue;
+    }
+
     [System.Serializable]
     public class SpeakerUIReference
     {

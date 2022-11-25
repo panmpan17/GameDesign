@@ -71,4 +71,9 @@ public class BulletBillboards : MonoBehaviour
             bulletTypes[i].Pool.DisableAll();
         }
     }
+
+    void OnDestroy()
+    {
+        playerReviveEvent.InvokeEvents -= ResetBullets;
+    }
 }

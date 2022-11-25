@@ -88,4 +88,9 @@ public class CameraSwitcher : MonoBehaviour
         _currentIndex = cameraIndex;
         s_cameras[_currentIndex]?.Enable();
     }
+
+    void OnDestroy()
+    {
+        player.OnChange -= ChangeCameraTarget;
+    }
 }

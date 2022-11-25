@@ -51,6 +51,12 @@ namespace MPack
             });
         }
 
+        public void Clear()
+        {
+            Pools.Clear();
+            WaitingList.Clear();
+        }
+
         public struct EffectQueue
         {
             public Transform Parent;

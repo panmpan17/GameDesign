@@ -43,5 +43,13 @@ namespace MPack
 
             effectReference.Put(effect);
         }
+
+        void OnDestroy()
+        {
+            for (int i = 0; i < listenEffects.Length; i++)
+            {
+                listenEffects[i].Clear();
+            }
+        }
     }
 }

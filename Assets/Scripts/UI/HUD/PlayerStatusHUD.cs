@@ -58,6 +58,7 @@ public class PlayerStatusHUD : MonoBehaviour
     void OnDestroy()
     {
         inventoryChangeEvent.InvokeIntEvents -= ChangeInventory;
+        aimProgressEvent.InvokeFloatEvents -= ChangeAimProgress;
     }
 
     void ChangeInventory(int count)

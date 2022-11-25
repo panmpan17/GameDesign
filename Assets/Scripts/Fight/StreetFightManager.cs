@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StreetFightManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class StreetFightManager : MonoBehaviour
     private FightWave[] waves;
     private int _waveIndex;
     private bool _waveStarted;
+
+    public UnityEvent OnEndEvent;
 
     void Awake()
     {
@@ -38,6 +41,7 @@ public class StreetFightManager : MonoBehaviour
 
             borderWall.SetActive(false);
             enabled = false;
+            OnEndEvent.Invoke();
             return;
         }
 
@@ -77,14 +81,7 @@ public class StreetFightManager : MonoBehaviour
 
         borderWall.SetActive(false);
 
-        if (spawnedSlimes)
-        {
-            while (spawnedSlimes.List.Count >= 1)
-            {
-                Destroy(spawnedSlimes.List[0]);
-                spawnedSlimes.List.RemoveAt(0);
-            }
-        }
+        spawnedSlimes?.DestroyAll();
 
         _waveIndex = 0;
 
