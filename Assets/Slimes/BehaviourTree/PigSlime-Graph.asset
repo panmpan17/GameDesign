@@ -33,6 +33,51 @@ MonoBehaviour:
   drawGizmos: 0
   RotateSpeed: 300
   RaycastPoint: 0
+--- !u!114 &-7646545575053316610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a694022b644f74889a58d2f860940e8d, type: 3}
+  m_Name: Timeout
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1704, y: 632}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -7646545575053316610}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 1538673725065967046}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -7646545575053316610}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -6339455827977609300}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  duration: 2
+  resultIsSuccess: 1
 --- !u!114 &-6350364619857063972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +122,7 @@ MonoBehaviour:
   m_Name: Jump Forawrd
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1704, y: 552}
+  position: {x: 1992, y: 632}
   ports:
     keys:
     - Input
@@ -88,7 +133,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 1538673725065967046}
+        node: {fileID: -7646545575053316610}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -167,7 +212,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  senseRange: 15
+  senseRange: 50
   raycastLayers:
     serializedVersion: 2
     m_Bits: 1024
@@ -285,7 +330,7 @@ MonoBehaviour:
   drawGizmos: 0
   forwardSpeed: 0
   Timer:
-    TargetTime: 0.3
+    TargetTime: 0.2
     Running: 0
     ReverseMode: 0
   HeightCurve:
@@ -334,7 +379,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1704, y: 440}
+  position: {x: 1704, y: 520}
   ports:
     keys:
     - Input
@@ -352,7 +397,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  duration: 0.3
+  duration: 0.2
 --- !u!114 &-1098816724022391780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +525,7 @@ MonoBehaviour:
   - {fileID: 4442673945507159989}
   - {fileID: -9103594432427411396}
   - {fileID: 3769836098051185390}
+  - {fileID: -7646545575053316610}
   FunctionGraph: {fileID: 0}
 --- !u!114 &391549810568988075
 MonoBehaviour:
@@ -613,10 +659,10 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: -6339455827977609300}
+        node: {fileID: -2319264100647471864}
         reroutePoints: []
       - fieldName: Input
-        node: {fileID: -2319264100647471864}
+        node: {fileID: -7646545575053316610}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
