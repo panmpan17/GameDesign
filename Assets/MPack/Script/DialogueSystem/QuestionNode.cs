@@ -51,7 +51,12 @@ namespace MPack
 
         public void MakeChoice(int choiceIndex)
         {
-            nextNode = (AbstractNode)choices[choiceIndex].port.Connection.node;
+            if (choices[choiceIndex].port.IsConnected)
+            {
+                nextNode = (AbstractNode)choices[choiceIndex].port.Connection.node;
+            }
+            else
+                nextNode = null;
             status = Status.Finished;
         }
 

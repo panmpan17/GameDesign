@@ -31,7 +31,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  senseRange: 15
+  senseRange: 50
   raycastLayers:
     serializedVersion: 2
     m_Bits: 1024
@@ -98,7 +98,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  duration: 1
+  duration: 0.5
 --- !u!114 &-4114043830194167208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  duration: 1
+  duration: 0.5
   resultIsSuccess: 1
 --- !u!114 &-3994944844670787141
 MonoBehaviour:
@@ -979,6 +979,9 @@ MonoBehaviour:
     TargetTime: 0.8
     Running: 0
     ReverseMode: 0
+  LimitJumpHeight:
+    Enable: 0
+    Value: 0
   landingMoveforawrd: 0
   extraGravity: 0
   grounLayer:
@@ -1077,9 +1080,12 @@ MonoBehaviour:
     Variable: {fileID: 0}
     UseVariable: 0
   jumpTimer:
-    TargetTime: 0.8
+    TargetTime: 0.4
     Running: 0
     ReverseMode: 0
+  LimitJumpHeight:
+    Enable: 0
+    Value: 0
   landingMoveforawrd: 0
   extraGravity: 0
   grounLayer:

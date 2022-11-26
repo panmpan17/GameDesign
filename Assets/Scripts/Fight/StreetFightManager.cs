@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StreetFightManager : MonoBehaviour
 {
@@ -19,10 +20,14 @@ public class StreetFightManager : MonoBehaviour
     private int _waveIndex;
     private bool _waveStarted;
 
+    public UnityEvent OnEndEvent;
+
     void Awake()
     {
         borderWall.SetActive(false);
         entranceDetect.OnPlayerEnterEvent += OnPlayerEnterEntrance;
+
+        spawnedSlimes ??= ScriptableObject.CreateInstance<GameObjectList>();
     }
 
     void Update()
@@ -38,6 +43,7 @@ public class StreetFightManager : MonoBehaviour
 
             borderWall.SetActive(false);
             enabled = false;
+            OnEndEvent.Invoke();
             return;
         }
 
@@ -56,8 +62,8 @@ public class StreetFightManager : MonoBehaviour
         entranceDetect.gameObject.SetActive(false);
         borderWall.SetActive(true);
 
-        waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
         _waveStarted = false;
+        waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
         _waveIndex++;
 
         enabled = true;
@@ -77,14 +83,7 @@ public class StreetFightManager : MonoBehaviour
 
         borderWall.SetActive(false);
 
-        if (spawnedSlimes)
-        {
-            while (spawnedSlimes.List.Count >= 1)
-            {
-                Destroy(spawnedSlimes.List[0]);
-                spawnedSlimes.List.RemoveAt(0);
-            }
-        }
+        spawnedSlimes?.DestroyAll();
 
         _waveIndex = 0;
 

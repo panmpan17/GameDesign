@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1869655706922103085
 Transform:
@@ -87,8 +87,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: house9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dea437342672a9644baf422cf8716b86, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dea437342672a9644baf422cf8716b86, type: 3}
+--- !u!1 &5058473411837830623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dea437342672a9644baf422cf8716b86, type: 3}
+  m_PrefabInstance: {fileID: 5400421876572297358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &4268203378706274211
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5058473411837830623}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3934692788261774489, guid: dea437342672a9644baf422cf8716b86, type: 3}
 --- !u!4 &5582385911815634789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dea437342672a9644baf422cf8716b86, type: 3}

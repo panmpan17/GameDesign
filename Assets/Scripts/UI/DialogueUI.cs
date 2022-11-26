@@ -17,6 +17,8 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     [SerializeField]
     private GameObject choiceTextPrefab;
     [SerializeField]
+    private Vector2 firstAnchoredPosition;
+    [SerializeField]
     private Vector2 offset;
     [SerializeField]
     private EventReference dialogueEndEvent;
@@ -70,13 +72,15 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         //     npc.Hide();
         // }
 
-        for (int i = 0; i < node.choices.Length; i++)
+        Vector2 anchoredPosition = firstAnchoredPosition;
+        for (int i = node.choices.Length - 1; i >= 0; i--)
         {
             GameObject newChoiceButton = Instantiate(choiceTextPrefab, choiceTextPrefab.transform.parent);
             newChoiceButton.SetActive(true);
 
             var transform = newChoiceButton.GetComponent<RectTransform>();
-            transform.anchoredPosition += offset * i;
+            transform.anchoredPosition = anchoredPosition;
+            anchoredPosition += offset;
 
             var languageText = newChoiceButton.GetComponentInChildren<LanguageText>();
             languageText.ChangeId(node.choices[i].ContentLaguageID);
@@ -135,6 +139,12 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     public void NextDialogue()
     {
         _dialogueGraph.Proccessing();
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        dialogueStartEvent.InvokeDialogueGraphEvents -= StartDialogue;
     }
 
     [System.Serializable]

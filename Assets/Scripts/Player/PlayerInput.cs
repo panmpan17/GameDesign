@@ -131,5 +131,27 @@ public class PlayerInput : MonoBehaviour, InputInterface
     {
         if (allowToggleConsoleWindow)
             ConsoleWindow.ToggleConsoleWindow();
+
+        if (ConsoleWindow.s_IsActive)
+        {
+            _scheme.Player.Look.Disable();
+            _scheme.Player.Aim.Disable();
+            _scheme.Player.Move.Disable();
+            _scheme.Player.Run.Disable();
+            _scheme.Player.Roll.Disable();
+            _scheme.Player.Jump.Disable();
+            _scheme.Player.Interact.Disable();
+        }
+        else
+        {
+            _scheme.Player.Look.Enable();
+            _scheme.Player.Aim.Enable();
+            _scheme.Player.Move.Enable();
+            _scheme.Player.Run.Enable();
+            _scheme.Player.Roll.Enable();
+            _scheme.Player.Jump.Enable();
+            _scheme.Player.Interact.Enable();
+        }
+        // ConsoleWindow.s_IsActive;
     }
 }

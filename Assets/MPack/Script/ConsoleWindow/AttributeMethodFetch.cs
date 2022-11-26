@@ -38,7 +38,6 @@ namespace MPack
                 ConsoleCommandAttribute commandAttr = (ConsoleCommandAttribute)method.GetCustomAttribute(typeof(ConsoleCommandAttribute), true);
                 if (commandAttr != null)
                 {
-                    Debug.Log(commandAttr.command);
                     CommandMethod commandMethod = new CommandMethod(type, method, commandAttr);
                     AbstractCommandPart[] commandParts;
 

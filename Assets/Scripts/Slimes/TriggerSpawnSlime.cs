@@ -82,7 +82,7 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
 
     void SpawnPrefab(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        if (spawnSlimesList && spawnSlimesList.CountLimit.Enable && spawnSlimesList.List.Count >= spawnSlimesList.CountLimit.Value)
+        if (spawnSlimesList && spawnSlimesList.ReachedLimit)
             return;
 
         GameObject indicator = null;
