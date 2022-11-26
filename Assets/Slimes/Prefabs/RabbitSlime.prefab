@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387602142871391637}
-  m_LocalRotation: {x: -0.03445666, y: -0.0002638139, z: -0.004137628, w: 0.99939764}
-  m_LocalPosition: {x: 0, y: 0.18, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36003d0d25ea44f4dbc6552fbd49f498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 4
-  bulletType: {fileID: 11400000, guid: 3b43d0c35f2ed485fa9150274d1bdb19, type: 2}
+  bulletSpeed: 20
+  bulletType: {fileID: 11400000, guid: 25ca8b11d5074414cac828f4899c1c85, type: 2}
   radius: 0.51
   segmentCount: 8
   audioSource: {fileID: 0}
@@ -61,9 +61,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7172920608396234573}
   - component: {fileID: 3320190342065605966}
-  - component: {fileID: 1382803520882592339}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,34 +135,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1382803520882592339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7088007256538679077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b29ef24570514414bcfaeef8cb3aeab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  sameInterval: 0
-  interval: 0.2
-  keyPoints:
-  - Sprite: {fileID: 1808568613, guid: 9a2469b0b2a724969ae904e6a3641b5e, type: 3}
-    Interval: 2
-  - Sprite: {fileID: 751886507, guid: 9a2469b0b2a724969ae904e6a3641b5e, type: 3}
-    Interval: 0.1
-  - Sprite: {fileID: 1808568613, guid: 9a2469b0b2a724969ae904e6a3641b5e, type: 3}
-    Interval: 3
-  - Sprite: {fileID: 751886507, guid: 9a2469b0b2a724969ae904e6a3641b5e, type: 3}
-    Interval: 0.1
-  - Sprite: {fileID: 1808568613, guid: 9a2469b0b2a724969ae904e6a3641b5e, type: 3}
-    Interval: 0.1
-  - Sprite: {fileID: 751886507, guid: 9a2469b0b2a724969ae904e6a3641b5e, type: 3}
-    Interval: 0.1
 --- !u!1 &7299391971672539431
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +147,7 @@ GameObject:
   - component: {fileID: 7299391971672539434}
   - component: {fileID: 7299391971672539429}
   - component: {fileID: 8934906260930122213}
+  - component: {fileID: 9031535313164564426}
   m_Layer: 8
   m_Name: RabbitSlime
   m_TagString: Slime
@@ -192,8 +164,8 @@ Transform:
   m_GameObject: {fileID: 7299391971672539431}
   m_LocalRotation: {x: 0, y: 0, z: -0, w: -1}
   m_LocalPosition: {x: 12.92, y: 0, z: -7.39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4241388798666736228}
   - {fileID: 72544212059931364}
@@ -228,7 +200,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.42
-  m_Center: {x: 0, y: 0.43, z: 0}
+  m_Center: {x: 0, y: 0.42, z: 0}
 --- !u!114 &8934906260930122213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +234,27 @@ MonoBehaviour:
   impulseSource: {fileID: 0}
   audioSource: {fileID: 0}
   slamSound: {fileID: 0}
+--- !u!114 &9031535313164564426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299391971672539431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad63bbb550704518b9b5e301b82783f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faceSpriteRenderer: {fileID: 3320190342065605966}
+  spriteAnimations:
+  - {fileID: 11400000, guid: f297cffd36eca4b81a7915b7f7ce40c4, type: 2}
+  - {fileID: 11400000, guid: efb964a438aab4ccdac159c418df084d, type: 2}
+  - {fileID: 11400000, guid: 6801ff419922244899c362b43861811f, type: 2}
+  startAnimationIndex:
+    Enable: 1
+    Value: 0
+  randomPlayedIndex: 0000000001000000
 --- !u!1001 &4419942041852011919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291,7 +284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f62f867d6da6416482567a9d1e52795, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.082
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f62f867d6da6416482567a9d1e52795, type: 3}
       propertyPath: m_LocalPosition.z
@@ -407,27 +400,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e78bc6abeda8a40b7aa3a87d9f2b1994, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2121019
+      value: 0.25897643
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e78bc6abeda8a40b7aa3a87d9f2b1994, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2129065
+      value: 0.25995883
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e78bc6abeda8a40b7aa3a87d9f2b1994, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.30711263
+      value: 0.3749845
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e78bc6abeda8a40b7aa3a87d9f2b1994, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0013530105
+      value: 0.00141
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e78bc6abeda8a40b7aa3a87d9f2b1994, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.001783069
+      value: 0.00178
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e78bc6abeda8a40b7aa3a87d9f2b1994, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0007532875
+      value: 0.00075
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e78bc6abeda8a40b7aa3a87d9f2b1994, type: 3}
       propertyPath: m_LocalRotation.w
@@ -501,3 +494,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce2d6a03ff4640a8932414e937af41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffect: {fileID: 0}

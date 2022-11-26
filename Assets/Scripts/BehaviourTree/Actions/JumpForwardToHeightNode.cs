@@ -48,7 +48,7 @@ namespace XnodeBehaviourTree
 
                 if (extraGravity != 0)
                 {
-                    context.rigidbody.velocity += Physics.gravity * extraGravity * Time.deltaTime;
+                    context.rigidbody.velocity += extraGravity * Time.deltaTime * Physics.gravity;
                 }
 
                 return _landed ? State.Success : State.Running;
