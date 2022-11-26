@@ -21,8 +21,6 @@ public class Bow : MonoBehaviour
 
     [SerializeField]
     private float extraAimTime;
-    [SerializeField]
-    private float extraAimArrowExtendDuration;
 
     private int _walkingCameraIndex;
     private int _aimCameraIndex;
