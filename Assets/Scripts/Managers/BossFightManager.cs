@@ -91,14 +91,7 @@ public class BossFightManager : MonoBehaviour
         Destroy(_bossSlime.gameObject);
 
         // Kill all small slime that spawn by boss
-        if (bossSpawnedSlimes)
-        {
-            while (bossSpawnedSlimes.List.Count >= 1)
-            {
-                Destroy(bossSpawnedSlimes.List[0]);
-                bossSpawnedSlimes.List.RemoveAt(0);
-            }
-        }
+        bossSpawnedSlimes?.DestroyAll();
 
         entranceDetect.gameObject.SetActive(true);
     }

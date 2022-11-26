@@ -10,6 +10,8 @@ public class BaseBullet : BulletBehaviour
     private SimpleTimer disapearTimer; 
     [SerializeField]
     private float damage;
+    [SerializeField]
+    private EffectReference shatterEffect;
 
     public event System.Action<Vector3> OnShoot;
 
@@ -28,6 +30,7 @@ public class BaseBullet : BulletBehaviour
         if (!collider.CompareTag(PlayerBehaviour.Tag))
         {
             PutBackToPool();
+            shatterEffect?.AddWaitingList(transform.position, Quaternion.LookRotation(-rigidbody.velocity, Vector3.up));
             return;
         }
 

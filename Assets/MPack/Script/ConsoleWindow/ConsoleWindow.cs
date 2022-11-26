@@ -12,6 +12,7 @@ namespace MPack
     {
         public const string PrefabPathInResources = "ConsoleWindow";
 
+        public static bool s_IsActive = false;
         private static bool loadingPrefab = false;
 
         public static void ToggleConsoleWindow()
@@ -28,10 +29,12 @@ namespace MPack
                     window = Instantiate((ConsoleWindow)request.asset);
                     loadingPrefab = false;
                 };
+                s_IsActive = true;
             }
             else    
             {
                 window.gameObject.SetActive(!window.gameObject.activeSelf);
+                s_IsActive = window.gameObject.activeSelf;
             }
         }
 
@@ -76,6 +79,11 @@ namespace MPack
             DontDestroyOnLoad(gameObject);
         }
 
+        void OnEnable()
+        {
+            EventSystem.current.SetSelectedGameObject(commandInput.gameObject);
+        }
+
         private void Update() {
             // bool enterPressed = Input.GetKeyDown(KeyCode.Return);
             bool enterPressed = Keyboard.current.enterKey.wasPressedThisFrame;
@@ -98,8 +106,7 @@ namespace MPack
         private void InputCommand(string command)
         {
             CommandMethod commandMethod;
-            object[] arguments;
-            if (commandFetcher.FindCommandMatch(command, out commandMethod, out arguments))
+            if (commandFetcher.FindCommandMatch(command, out commandMethod, out object[] arguments))
             {
                 commandMethod.method.Invoke(null, arguments);
             }

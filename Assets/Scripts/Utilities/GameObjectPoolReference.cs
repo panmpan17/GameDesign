@@ -14,26 +14,15 @@ public class GameObjectPoolReference : ScriptableObject
     [System.NonSerialized]
     private GameObjectPrefabPool _pool;
 
-    [System.NonSerialized]
-    private bool _started = false;
-
-    void OnEnable()
+    public void CreatePool()
     {
-        
+        _pool = new GameObjectPrefabPool(
+            Prefab,
+            CreateCollection,
+            CollectionName);
     }
+    public void ClearPool() => _pool = null;
 
-    public GameObject Get()
-    {
-        if (!_started)
-        {
-            _started = true;
-            _pool = new GameObjectPrefabPool(Prefab, CreateCollection, CollectionName);
-        }
-        return _pool.Get();
-    }
-
-    public void Put(GameObject target)
-    {
-        _pool.Put(target);
-    }
+    public GameObject Get() =>_pool.Get();
+    public void Put(GameObject target) => _pool.Put(target);
 }

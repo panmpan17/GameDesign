@@ -14,6 +14,9 @@ public class FightWave : MonoBehaviour
     [SerializeField]
     private TriggerSpawnSlime[] spawnSlimeTriggers;
 
+    [SerializeField]
+    private XnodeBehaviourTree.BehaviourTreeRunner[] slimes;
+
 
     public bool CanStart(bool allSlimesAreDead)
     {
@@ -34,6 +37,17 @@ public class FightWave : MonoBehaviour
             trigger.OnSlimeSpawnedCallback += onWaveStarted;
             trigger.SetSpawnSlimeList(spawnSlimeList);
             trigger.TriggerFire();
+        }
+
+        if (slimes.Length > 0)
+        {
+            foreach (var slime in slimes)
+            {
+                spawnSlimeList.List.Add(slime.gameObject);
+                slime.enabled = true;
+            }
+
+            onWaveStarted?.Invoke();
         }
     }
 }

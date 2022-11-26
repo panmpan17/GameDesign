@@ -26,7 +26,6 @@ public class AmbushPoint : MonoBehaviour
     void Awake()
     {
         spawnSlimes = ScriptableObject.CreateInstance<GameObjectList>();
-        spawnSlimes.List = new List<GameObject>();
 
         for (int i = 0; i < spawnSlimeTriggers.Length; i++)
         {
@@ -47,12 +46,7 @@ public class AmbushPoint : MonoBehaviour
                 return;
 
             _inRange = false;
-            while (spawnSlimes.List.Count > 0)
-            {
-                if (spawnSlimes.List[0])
-                    Destroy(spawnSlimes.List[0]);
-                spawnSlimes.List.RemoveAt(0);
-            }
+            spawnSlimes?.DestroyAll();
         }
         else
         {
