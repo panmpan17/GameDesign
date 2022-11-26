@@ -16,15 +16,10 @@ public class GameObjectList : ScriptableObject
     public int AliveCount {
         get {
             int count = 0;
-            for (int i = 0; i < List.Count; i++)
+            for (int i = List.Count - 1; i >= 0; i--)
             {
-                if (List[i] == null)
-                {
-                    List.RemoveAt(i);
-                    i--;
-                }
-                else
-                    count++;
+                if (List[i] == null) List.RemoveAt(i);
+                else count++;
             }
             return count;
         }

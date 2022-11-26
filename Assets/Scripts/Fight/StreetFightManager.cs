@@ -26,6 +26,8 @@ public class StreetFightManager : MonoBehaviour
     {
         borderWall.SetActive(false);
         entranceDetect.OnPlayerEnterEvent += OnPlayerEnterEntrance;
+
+        spawnedSlimes ??= ScriptableObject.CreateInstance<GameObjectList>();
     }
 
     void Update()
@@ -60,8 +62,8 @@ public class StreetFightManager : MonoBehaviour
         entranceDetect.gameObject.SetActive(false);
         borderWall.SetActive(true);
 
-        waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
         _waveStarted = false;
+        waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
         _waveIndex++;
 
         enabled = true;

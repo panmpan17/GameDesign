@@ -24,10 +24,8 @@ namespace XnodeBehaviourTree
 
             if (context.slimeBehaviour.EyePosition)
             {
-                Debug.DrawLine(context.slimeBehaviour.EyePosition.position, blackboard.TargetPosition, Color.white, 1f);
                 if (Physics.Linecast(context.slimeBehaviour.EyePosition.position, blackboard.TargetPosition, out RaycastHit hit, raycastLayers))
                 {
-                    Debug.Log(hit.collider, hit.collider);
                     return false;
                 }
             }
