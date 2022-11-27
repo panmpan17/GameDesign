@@ -23,6 +23,8 @@ public class GameObjectPoolReference : ScriptableObject
     }
     public void ClearPool() => _pool = null;
 
+    public void PutAllAliveObjects() => _pool.PutAllAliveObjects();
+
     public GameObject Get() =>_pool.Get();
     public void Put(GameObject target) => _pool.Put(target);
 }

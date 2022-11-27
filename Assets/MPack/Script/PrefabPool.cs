@@ -340,5 +340,18 @@ namespace MPack {
                 PutRecursivly(objT.GetChild(0));
             Put(objT.gameObject);
         }
+
+        public void PutAllAliveObjects()
+        {
+            PoolObjs.AddRange(AliveObjs);
+
+            foreach (GameObject aliveObject in AliveObjs)
+            {
+                aliveObject.SetActive(false);
+                aliveObject.transform.SetParent(PoolCollection);
+            }
+
+            AliveObjs.Clear();
+        }
     }
 }

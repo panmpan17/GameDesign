@@ -5,11 +5,15 @@ using MPack;
 
 public class PrefabPoolManager : MonoBehaviour
 {
+    public static PrefabPoolManager ins;
+
     [SerializeField]
     private GameObjectPoolReference[] gameObjectPoolReferences;
 
     void Awake()
     {
+        ins = this;
+
         for (int i = 0; i < gameObjectPoolReferences.Length; i++)
         {
             GameObjectPoolReference poolReference = gameObjectPoolReferences[i];
@@ -22,6 +26,14 @@ public class PrefabPoolManager : MonoBehaviour
         for (int i = 0; i < gameObjectPoolReferences.Length; i++)
         {
             gameObjectPoolReferences[i].ClearPool();
+        }
+    }
+
+    public void PutAllAliveObjects()
+    {
+        for (int i = 0; i < gameObjectPoolReferences.Length; i++)
+        {
+            gameObjectPoolReferences[i].PutAllAliveObjects();
         }
     }
 }

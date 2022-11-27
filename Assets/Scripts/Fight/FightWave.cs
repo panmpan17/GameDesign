@@ -12,10 +12,7 @@ public class FightWave : MonoBehaviour
     private Timer waitTimer;
 
     [SerializeField]
-    private TriggerSpawnSlime[] spawnSlimeTriggers;
-
-    [SerializeField]
-    private XnodeBehaviourTree.BehaviourTreeRunner[] slimes;
+    private AbstractSpawnSlime[] spawnSlimeTriggers;
 
 
     public bool CanStart(bool allSlimesAreDead)
@@ -38,16 +35,11 @@ public class FightWave : MonoBehaviour
             trigger.SetSpawnSlimeList(spawnSlimeList);
             trigger.TriggerFire();
         }
+    }
 
-        if (slimes.Length > 0)
-        {
-            foreach (var slime in slimes)
-            {
-                spawnSlimeList.List.Add(slime.gameObject);
-                slime.enabled = true;
-            }
-
-            onWaveStarted?.Invoke();
-        }
+    public void ResetFight()
+    {
+        foreach (AbstractSpawnSlime trigger in spawnSlimeTriggers)
+            trigger.ResetFight();
     }
 }

@@ -13,6 +13,9 @@ public class StreetFightManager : MonoBehaviour
     [SerializeField]
     private EventReference playerReviveEvent;
     [SerializeField]
+    private BGMClip bgmClip;
+
+    [SerializeField]
     private GameObjectList spawnedSlimes;
 
     [SerializeField]
@@ -41,8 +44,11 @@ public class StreetFightManager : MonoBehaviour
         {
             if (!allSlimesAreDead) return;
 
-            borderWall.SetActive(false);
             enabled = false;
+
+            borderWall.SetActive(false);
+            BGMPlayer.ins.ResetToBaseBGM();
+
             OnEndEvent.Invoke();
             return;
         }
@@ -61,6 +67,7 @@ public class StreetFightManager : MonoBehaviour
 
         entranceDetect.gameObject.SetActive(false);
         borderWall.SetActive(true);
+        BGMPlayer.ins.BlendNewBGM(bgmClip);
 
         _waveStarted = false;
         waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
@@ -81,12 +88,14 @@ public class StreetFightManager : MonoBehaviour
 
         playerReviveEvent.InvokeEvents -= ResetFight;
 
+        entranceDetect.gameObject.SetActive(true);
         borderWall.SetActive(false);
+        BGMPlayer.ins.ResetToBaseBGM();
 
         spawnedSlimes?.DestroyAll();
 
         _waveIndex = 0;
-
-        entranceDetect.gameObject.SetActive(true);
+        foreach (FightWave wave in waves)
+            wave.ResetFight();
     }
 }
