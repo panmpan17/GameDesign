@@ -292,10 +292,21 @@ public class PlayerBehaviour : MonoBehaviour
         FocusCursor();
     }
 
-    public void AddItem(ItemType itemType)
+    public void PickItemUp(ItemType itemType)
     {
-        _itemCount += 1;
-        inventoryEvent.Invoke(_itemCount);
+        if (itemType.HealPoint.Enable)
+        {
+            _health += itemType.HealPoint.Value;
+            if (_health > maxHealth)
+                _health = maxHealth;
+
+            healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
+        }
+        else
+        {
+            _itemCount += 1;
+            inventoryEvent.Invoke(_itemCount);
+        }
     }
 
     void OnDestroy()

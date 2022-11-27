@@ -70,7 +70,7 @@ public class DroppedItem : MonoBehaviour, IPoolableObj
         if (otherCollider.CompareTag(PlayerBehaviour.Tag))
         {
             var playerBehaviour = otherCollider.GetComponent<PlayerBehaviour>();
-            playerBehaviour.AddItem(_itemType);
+            playerBehaviour.PickItemUp(_itemType);
             Pool.Put(this);
         }
     }

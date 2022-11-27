@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MPack;
 
 [CreateAssetMenu(menuName="Game/物品類型")]
 public class ItemType : ScriptableObject
@@ -10,6 +11,8 @@ public class ItemType : ScriptableObject
     public Sprite Sprite;
     [Multiline]
     public string Description;
+
+    public ValueWithEnable<float> HealPoint;
 }
 
 

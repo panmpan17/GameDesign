@@ -230,9 +230,9 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool(AnimKeyDrawingBow, true);
         animator.SetFloat(AnimKeyWalkSpeed, drawBowSlowDown.Value);
 
-        if (_weightTweenRoutine != null)
-            StopCoroutine(_weightTweenRoutine);
-        _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
+        // if (_weightTweenRoutine != null)
+        //     StopCoroutine(_weightTweenRoutine);
+        // _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
 
         audioSource.Play(bowDrawClip);
     }
@@ -243,9 +243,9 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool(AnimKeyDrawingBow, false);
         animator.SetFloat(AnimKeyWalkSpeed, 1);
 
-        if (_weightTweenRoutine != null)
-            StopCoroutine(_weightTweenRoutine);
-        _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
+        // if (_weightTweenRoutine != null)
+        //     StopCoroutine(_weightTweenRoutine);
+        // _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
 
         audioSource.Stop();
     }
@@ -263,7 +263,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.ResetTrigger(AnimKeyRoll);
         animator.SetBool(AnimKeyWalking, false);
         animator.SetBool(AnimKeyDrawingBow, false);
-        rig.weight = 0;
+        // rig.weight = 0;
 
         animator.SetTrigger(AnimKeyDeath);
     }
