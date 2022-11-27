@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
         if (!fireButtonEvent) return;
 #endif
 
-        SceneManager.LoadScene(GameSceneName);
+        LoadScene.ins.Load(GameSceneName);
     }
 
     public void Setting()

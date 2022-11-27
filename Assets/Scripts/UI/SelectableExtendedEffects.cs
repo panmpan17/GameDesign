@@ -21,14 +21,10 @@ public class SelectableExtendedEffects : MonoBehaviour, IPointerEnterHandler, IP
 
     public void OnSelect(BaseEventData eventData)
     {
-        // Debug.Log("on select");
-        // throw new System.NotImplementedException();
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        // Debug.Log("on deselect");
-        // throw new System.NotImplementedException();
     }
 
     public void OnPointerDown(PointerEventData eventData)

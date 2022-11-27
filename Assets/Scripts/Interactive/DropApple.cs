@@ -31,7 +31,6 @@ public class DropApple : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("hit ground");
         onHitGround.Invoke();
     }
 }

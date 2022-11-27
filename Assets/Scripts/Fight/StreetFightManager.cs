@@ -47,7 +47,9 @@ public class StreetFightManager : MonoBehaviour
             enabled = false;
 
             borderWall.SetActive(false);
-            BGMPlayer.ins.ResetToBaseBGM();
+
+            if (bgmClip)
+                BGMPlayer.ins.ResetToBaseBGM();
 
             OnEndEvent.Invoke();
             return;
@@ -67,7 +69,9 @@ public class StreetFightManager : MonoBehaviour
 
         entranceDetect.gameObject.SetActive(false);
         borderWall.SetActive(true);
-        BGMPlayer.ins.BlendNewBGM(bgmClip);
+
+        if (bgmClip)
+            BGMPlayer.ins.BlendNewBGM(bgmClip);
 
         _waveStarted = false;
         waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
@@ -90,7 +94,9 @@ public class StreetFightManager : MonoBehaviour
 
         entranceDetect.gameObject.SetActive(true);
         borderWall.SetActive(false);
-        BGMPlayer.ins.ResetToBaseBGM();
+
+        if (bgmClip)
+            BGMPlayer.ins.ResetToBaseBGM();
 
         spawnedSlimes?.DestroyAll();
 

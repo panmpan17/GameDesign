@@ -44,6 +44,7 @@ public class PauseMenu : AbstractMenu
     {
         Time.timeScale = 1;
         canvas.enabled = false;
+        EventSystem.current.SetSelectedGameObject(null);
         focusEvent.Invoke();
         CloseMenu();
     }
@@ -54,8 +55,14 @@ public class PauseMenu : AbstractMenu
         AbstractMenu.S_OpenMenu("Setting");
     }
 
+    protected override void BackToThisMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(_lastSelected);
+    }
+
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        LoadScene.ins.Load("MainMenu");
+        Time.timeScale = 1;
     }
 }

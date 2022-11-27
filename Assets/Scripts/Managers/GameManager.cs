@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     {
         s_loadPoint = true;
         s_pointIndex = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadScene.ins.Load(SceneManager.GetActiveScene().name);
     }
 
     [ConsoleCommand("load2")]
@@ -73,6 +73,6 @@ public class GameManager : MonoBehaviour
     {
         s_loadPoint = true;
         s_pointIndex = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadScene.ins.Load(SceneManager.GetActiveScene().name);
     }
 }

@@ -15,7 +15,14 @@ public class BGMPlayer : MonoBehaviour
 
     void Awake()
     {
+        if (ins != null)
+        {
+            ins.BlendNewBGM(baseBGMClip);
+            Destroy(gameObject);
+            return;
+        }
         ins = this;
+        DontDestroyOnLoad(gameObject);
         PlayBGM(baseBGMClip, overrideCurrentBGM: true);
     }
 
