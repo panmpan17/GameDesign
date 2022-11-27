@@ -12,7 +12,7 @@ public class FightWave : MonoBehaviour
     private Timer waitTimer;
 
     [SerializeField]
-    private TriggerSpawnSlime[] spawnSlimeTriggers;
+    private AbstractSpawnSlime[] spawnSlimeTriggers;
 
 
     public bool CanStart(bool allSlimesAreDead)
@@ -35,5 +35,11 @@ public class FightWave : MonoBehaviour
             trigger.SetSpawnSlimeList(spawnSlimeList);
             trigger.TriggerFire();
         }
+    }
+
+    public void ResetFight()
+    {
+        foreach (AbstractSpawnSlime trigger in spawnSlimeTriggers)
+            trigger.ResetFight();
     }
 }

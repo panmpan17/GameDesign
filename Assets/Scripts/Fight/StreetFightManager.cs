@@ -82,11 +82,12 @@ public class StreetFightManager : MonoBehaviour
         playerReviveEvent.InvokeEvents -= ResetFight;
 
         borderWall.SetActive(false);
+        entranceDetect.gameObject.SetActive(true);
 
         spawnedSlimes?.DestroyAll();
 
         _waveIndex = 0;
-
-        entranceDetect.gameObject.SetActive(true);
+        foreach (FightWave wave in waves)
+            wave.ResetFight();
     }
 }

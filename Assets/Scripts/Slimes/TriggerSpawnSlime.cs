@@ -4,7 +4,25 @@ using UnityEngine;
 using MPack;
 using DigitalRuby.Tween;
 
-public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
+
+public abstract class AbstractSpawnSlime : MonoBehaviour, ITriggerFire
+{
+    public event System.Action OnSlimeSpawnedCallback;
+    public abstract void SetSpawnSlimeList(GameObjectList list);
+    public abstract void TriggerFire();
+    public abstract void TriggerFireWithParameter(int parameter);
+
+    public virtual void ResetFight() {}
+
+    protected void TriggerOnSlimeSpawnedCallback()
+    {
+        OnSlimeSpawnedCallback?.Invoke();
+        OnSlimeSpawnedCallback = null;
+    }
+}
+
+
+public class TriggerSpawnSlime : AbstractSpawnSlime
 {
     [SerializeField]
     private GameObject[] slimePrefabs;
@@ -33,17 +51,16 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
     [HideInInspector, SerializeField] private int segmentCount = 1;
 
     private Vector3[] _segmentPoints;
-    public event System.Action OnSlimeSpawnedCallback;
 
 
-    public void SetSpawnSlimeList(GameObjectList list) => spawnSlimesList = list;
+    public override void SetSpawnSlimeList(GameObjectList list) => spawnSlimesList = list;
 
-    public void TriggerFire()
+    public override void TriggerFire()
     {
         SpawnPrefabInSegmentPoints();
     }
 
-    public void TriggerFireWithParameter(int parameter)
+    public override void TriggerFireWithParameter(int parameter)
     {
         SpawnPrefabInSegmentPoints(slimePrefabs[parameter]);
     }
@@ -136,8 +153,7 @@ public class TriggerSpawnSlime : MonoBehaviour, ITriggerFire
                 slimeBehaviourTree.enabled = true;
             });
 
-        OnSlimeSpawnedCallback?.Invoke();
-        OnSlimeSpawnedCallback = null;
+        TriggerOnSlimeSpawnedCallback();
     }
 
     private IEnumerator DelayExecute(GameObject prefab, Vector3 position, Quaternion rotation, GameObject indicator)
