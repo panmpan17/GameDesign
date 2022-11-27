@@ -92,6 +92,7 @@ public class BossFightManager : MonoBehaviour
 
         // Kill all small slime that spawn by boss
         bossSpawnedSlimes?.DestroyAll();
+        PrefabPoolManager.ins.PutAllAliveObjects();
 
         entranceDetect.gameObject.SetActive(true);
     }
