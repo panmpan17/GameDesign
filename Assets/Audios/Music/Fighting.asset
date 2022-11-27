@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ff863d612ee42ddbe8f235cfba70ce, type: 3}
+  m_Name: Fighting
+  m_EditorClassIdentifier: 
+  Clip: {fileID: 8300000, guid: 5e0eb125fb00241babece7ba7c292dfe, type: 3}
+  VolumeLevel: 1
+  FadeInTime: 1
+  FadeInCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 11400000, guid: 2ec357f51f9a2422ea56d7fafd9b12bd, type: 2}
+    UseVariable: 1
+  FadeOutTime: 1
+  FadeOutCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 11400000, guid: 2ec357f51f9a2422ea56d7fafd9b12bd, type: 2}
+    UseVariable: 1

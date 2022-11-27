@@ -5,15 +5,23 @@ using Cinemachine;
 
 public class BossFightManager : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerBehaviour player;
+    [Header("Other Refernce")]
     [SerializeField]
     private PlayerDetection entranceDetect;
-
     [SerializeField]
     private CinemachineVirtualCamera lookBossCam;
     [SerializeField]
     private GameObject borderWall;
+    [SerializeField]
+    private BGMClip bgmClip;
+
+    [Header("Player")]
+    [SerializeField]
+    private PlayerBehaviour player;
+    [SerializeField]
+    private EventReference playerReviveEvent;
+
+    [Header("Boss Slime")]
     [SerializeField]
     private Transform bossStartPosition;
     [SerializeField]
@@ -21,8 +29,6 @@ public class BossFightManager : MonoBehaviour
     private XnodeBehaviourTree.BehaviourTreeRunner _bossSlime;
     [SerializeField]
     private EventReference slimeHealthShowEvent;
-    [SerializeField]
-    private EventReference playerReviveEvent;
     [SerializeField]
     private GameObjectList bossSpawnedSlimes;
 
@@ -50,6 +56,8 @@ public class BossFightManager : MonoBehaviour
 
         entranceDetect.gameObject.SetActive(false);
         borderWall.SetActive(true);
+
+        BGMPlayer.ins.BlendNewBGM(bgmClip);
 
         StartCoroutine(Test());
     }
