@@ -46,54 +46,6 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
---- !u!114 &-9090342586331258779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 591cd436ca5a34f9f8b2931171a1f356, type: 3}
-  m_Name: Repeat
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 808, y: -8}
-  ports:
-    keys:
-    - Input
-    - Output
-    values:
-    - _fieldName: Input
-      _node: {fileID: -9090342586331258779}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: -2898427885979692337}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: Output
-      _node: {fileID: -9090342586331258779}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Input
-        node: {fileID: 5876965599486979503}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  repeatLimit:
-    Enable: 0
-    Value: 0
-  restartOnSuccess: 1
-  restartOnFailure: 0
 --- !u!114 &-8628241757850804630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +59,7 @@ MonoBehaviour:
   m_Name: Timeout
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1608, y: 328}
+  position: {x: 1880, y: 328}
   ports:
     keys:
     - Input
@@ -231,7 +183,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1848, y: 328}
+  position: {x: 2120, y: 328}
   ports:
     keys:
     - Input
@@ -277,7 +229,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1848, y: 536}
+  position: {x: 2088, y: 584}
   ports:
     keys:
     - Input
@@ -333,10 +285,10 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: -9090342586331258779}
+        node: {fileID: -9152612533135558553}
         reroutePoints: []
       - fieldName: Input
-        node: {fileID: -9152612533135558553}
+        node: {fileID: 5876965599486979503}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -385,7 +337,7 @@ MonoBehaviour:
   m_Name: Trigger Fire
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1848, y: 664}
+  position: {x: 2088, y: 712}
   ports:
     keys:
     - Input
@@ -422,7 +374,7 @@ MonoBehaviour:
   m_Name: Set Player As Target
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 2088, y: 328}
+  position: {x: 2360, y: 328}
   ports:
     keys:
     - Input
@@ -553,11 +505,12 @@ MonoBehaviour:
   - {fileID: 2475398074606472062}
   - {fileID: -2297450308726859325}
   - {fileID: -2576634530640677020}
-  - {fileID: -9090342586331258779}
   - {fileID: -5295389352569793125}
   - {fileID: 4394002717810070459}
   - {fileID: 4094534407960854513}
   - {fileID: 508479119742486884}
+  - {fileID: 6122201675031266923}
+  - {fileID: 1555009716913085148}
   FunctionGraph: {fileID: 0}
 --- !u!114 &508479119742486884
 MonoBehaviour:
@@ -622,6 +575,39 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
+  RaycastDistance: 3
+--- !u!114 &1555009716913085148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8060d29908dca47b3801f03b4390c4f5, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1336, y: 488}
+  ports:
+    keys:
+    - Input
+    values:
+    - _fieldName: Input
+      _node: {fileID: 1555009716913085148}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 5876965599486979503}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  drawGizmos: 0
+  duration: 2
 --- !u!114 &2475398074606472062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,7 +685,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1608, y: 536}
+  position: {x: 1848, y: 584}
   ports:
     keys:
     - Input
@@ -745,7 +731,7 @@ MonoBehaviour:
   m_Name: Parallel
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1336, y: 328}
+  position: {x: 1592, y: 392}
   ports:
     keys:
     - Input
@@ -757,7 +743,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 5876965599486979503}
+        node: {fileID: 6122201675031266923}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -791,7 +777,7 @@ MonoBehaviour:
   m_Name: Face Target
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 2088, y: 424}
+  position: {x: 2360, y: 424}
   ports:
     keys:
     - Input
@@ -836,7 +822,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: -9090342586331258779}
+        node: {fileID: -2898427885979692337}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -857,12 +843,63 @@ MonoBehaviour:
         node: {fileID: -2027427912928710646}
         reroutePoints: []
       - fieldName: Input
+        node: {fileID: 6122201675031266923}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: 1555009716913085148}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+--- !u!114 &6122201675031266923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591cd436ca5a34f9f8b2931171a1f356, type: 3}
+  m_Name: Repeat
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1336, y: 328}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 6122201675031266923}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 5876965599486979503}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 6122201675031266923}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
         node: {fileID: 4394002717810070459}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+  repeatLimit:
+    Enable: 1
+    Value: 6
+  restartOnSuccess: 1
+  restartOnFailure: 0
 --- !u!114 &8402433913577419248
 MonoBehaviour:
   m_ObjectHideFlags: 0

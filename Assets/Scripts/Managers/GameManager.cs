@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private PlayerBehaviour player;
     [SerializeField]
     private PlayerSpawnPoint spawnPoint;
+
     [SerializeField]
     private float playerReviveTime;
     [SerializeField]
@@ -42,9 +43,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator C_RevivePlayer()
     {
+        DeadMessage.ins.StartFadeIn();
         yield return new WaitForSeconds(playerReviveTime);
         player.ReviveAtSpawnPoint(spawnPoint);
         playerReviveEvent.Invoke();
+
+        DeadMessage.ins.StartFadeOut();
     }
 
     public void ChangePlayerSpawnPoint(PlayerSpawnPoint spawnPoint)
