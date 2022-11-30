@@ -26,8 +26,9 @@ public class PauseMenu : AbstractMenu
         canvas.enabled = false;
     }
 
-    void OnDistroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         pauseEvent.InvokeEvents -= Pause;
         Time.timeScale = 1;
     }
