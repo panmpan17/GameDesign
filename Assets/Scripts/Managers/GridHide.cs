@@ -17,12 +17,10 @@ public class GridHide : MonoBehaviour
     };
 
     [SerializeField]
-    private Transform player;
+    private TransformPointer player;
 
     [SerializeField]
     private Transform treesParent;
-    [SerializeField]
-    private Transform cameraTransform;
     [SerializeField]
     private Vector2Int mapSize;
     [SerializeField]
@@ -54,7 +52,7 @@ public class GridHide : MonoBehaviour
         for (int i = 0; i < sections.Length; i++)
             sections[i].Active = false;
 
-        _playerPositionIndex = GetGirdIndex(GetGridPosition(player.position));
+        _playerPositionIndex = GetGirdIndex(GetGridPosition(player.Target.position));
         Vector2Int centerGridPosition = sections[_playerPositionIndex].GridPosition;
         for (int i = 0; i < GridPositionOffset.Length; i++)
         {
@@ -92,7 +90,7 @@ public class GridHide : MonoBehaviour
 
     void LateUpdate()
     {
-        int newIndex = GetGirdIndex(GetGridPosition(player.position));
+        int newIndex = GetGirdIndex(GetGridPosition(player.Target.position));
 
         if (_playerPositionIndex != newIndex)
         {
