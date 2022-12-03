@@ -89,7 +89,14 @@ public class PlayerAnimation : MonoBehaviour
 
     private Coroutine _weightTweenRoutine;
 
-    public bool IsDrawArrowFullyPlayed => animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1 && !animator.IsInTransition(1);
+    public bool IsDrawArrowFullyPlayed {
+        get {
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(1);
+            if (stateInfo.IsName("DrawBow"))
+                return stateInfo.normalizedTime >= 1;
+            return false;
+        }
+    }
     public float RollAnimationProgress {
         get {
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);

@@ -9,29 +9,16 @@ public class PlayerStatusHUD : MonoBehaviour
 {
     [Header("Aim")]
     [SerializeField]
-    private Image aimPiece1;
-    [SerializeField]
-    private Image aimPiece2;
-    [SerializeField]
-    private Image aimPiece3;
-    [SerializeField]
-    private float pieceMoveAmount;
-    private Vector2 _aimPiecePosition1, _aimPiecePosition2, _aimPiecePosition3;
-    private Vector2 _aimPiecePositionTo1, _aimPiecePositionTo2, _aimPiecePositionTo3;
-
-    [SerializeField]
-    private Color transparent = new Color(1, 1, 1, 0.1f);
-    [SerializeField]
-    private Color beforeFull = new Color(1, 1, 1, 0.7f);
-    [SerializeField]
-    private Color full = new Color(1, 1, 1, 1f);
-    [SerializeField]
-    private Color extraBeforeFull = new Color(1, 1, 1, 1f);
-    [SerializeField]
-    private Color extrafull = new Color(1, 1, 1, 1f);
-
+    private FillBarControl aimProgressBar;
     [SerializeField]
     private EventReference aimProgressEvent;
+
+    [HideInInspector, SerializeField] private Image aimPiece1, aimPiece2, aimPiece3;
+    [HideInInspector, SerializeField] private float pieceMoveAmount;
+    private Vector2 _aimPiecePosition1, _aimPiecePosition2, _aimPiecePosition3;
+    private Vector2 _aimPiecePositionTo1, _aimPiecePositionTo2, _aimPiecePositionTo3;
+    [HideInInspector, SerializeField]
+    private Color transparent = new Color(1, 1, 1, 0.1f), beforeFull = new Color(1, 1, 1, 0.7f), full = new Color(1, 1, 1, 1f), extraBeforeFull = new Color(1, 1, 1, 1f), extrafull = new Color(1, 1, 1, 1f);
 
     [Header("Inventory")]
     [SerializeField]
@@ -67,6 +54,11 @@ public class PlayerStatusHUD : MonoBehaviour
     }
 
     void ChangeAimProgress(float progress)
+    {
+        aimProgressBar.SetFillAmount(progress / 2);
+    }
+
+    private void UpdateOldHUD(float progress)
     {
         Color color;
 

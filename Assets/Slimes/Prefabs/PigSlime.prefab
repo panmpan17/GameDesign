@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 6467346189754202648}
   - component: {fileID: 6467346189754202663}
   - component: {fileID: 3058630968981811234}
+  - component: {fileID: -1583910165092655159}
+  - component: {fileID: 7440337522389718080}
   m_Layer: 8
   m_Name: PigSlime
   m_TagString: Slime
@@ -115,14 +117,51 @@ MonoBehaviour:
   eyePosition: {fileID: 8219256286589062882}
   lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
   healthChangedEvent: {fileID: 0}
-  sinkTimer:
-    From: {x: 0, y: 0, z: 0}
-    To: {x: 0, y: 0, z: 0}
-    Timer:
-      TargetTime: 1
-      Running: 0
-      ReverseMode: 0
-  sinkHeight: 1.8
+  sinkTime: 1
+  sinkHeight: 2
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  impulseSource: {fileID: 0}
+  audioSource: {fileID: 0}
+  slamSound: {fileID: 0}
+--- !u!114 &-1583910165092655159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6467346189754202661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: 308f07ef6cdf34045b3f732371b7b86e, type: 2}
+  sound: {fileID: 0}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7440337522389718080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6467346189754202661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb85f2d5a88d4ff68770edc9aa438c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerFireGroups: []
+  player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  fixedTarget: {fileID: 0}
+  eyePosition: {fileID: 8219256286589062882}
+  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
+  healthChangedEvent: {fileID: 0}
+  sinkTime: 1
+  sinkHeight: 2
   OnDeath:
     m_PersistentCalls:
       m_Calls: []

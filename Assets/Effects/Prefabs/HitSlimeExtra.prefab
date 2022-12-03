@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4364067937176438792}
   - component: {fileID: 4364067937176438793}
   - component: {fileID: 4364067937176438794}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CoreShatter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 0
+  autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -285,8 +285,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.35
-      minScalar: 0.25
+      scalar: 0.55
+      minScalar: 0.45
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -977,7 +977,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 5
+        scalar: 8
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4877,7 +4877,7 @@ GameObject:
   - component: {fileID: 5658584671374276569}
   - component: {fileID: 5658584671374276568}
   - component: {fileID: 5658584671374276571}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Boo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4918,7 +4918,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 0
+  autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -5151,8 +5151,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1.6
+      scalar: 2.8
+      minScalar: 2.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5895,7 +5895,7 @@ ParticleSystem:
           m_RotationOrder: 4
       cycleCount: 1
       repeatInterval: 0.15
-      probability: 0.9
+      probability: 1
   SizeModule:
     enabled: 1
     curve:
@@ -9751,7 +9751,7 @@ GameObject:
   - component: {fileID: 7932624742471057526}
   - component: {fileID: 7932624742471057525}
   - component: {fileID: 7932624742471057524}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9792,7 +9792,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 0
+  autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -9962,8 +9962,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.8}
+      minColor: {r: 1, g: 0.93467605, b: 0.4575472, a: 1}
+      maxColor: {r: 1, g: 0.9956723, b: 0.7028302, a: 0.8}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10025,8 +10025,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 3
+      minScalar: 2.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -14625,7 +14625,7 @@ GameObject:
   - component: {fileID: 7932624742877284877}
   - component: {fileID: 7932624742877284876}
   - component: {fileID: 7932624742877284875}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: HitSlimeExtra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14669,7 +14669,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -18482,11 +18482,6 @@ ParticleSystem:
     enabled: 1
     subEmitters:
     - serializedVersion: 3
-      emitter: {fileID: 4364067937176438793}
-      type: 2
-      properties: 0
-      emitProbability: 1
-    - serializedVersion: 3
       emitter: {fileID: 5658584671374276568}
       type: 0
       properties: 0
@@ -18494,6 +18489,11 @@ ParticleSystem:
     - serializedVersion: 3
       emitter: {fileID: 7932624742471057525}
       type: 0
+      properties: 0
+      emitProbability: 1
+    - serializedVersion: 3
+      emitter: {fileID: 4364067937176438793}
+      type: 2
       properties: 0
       emitProbability: 1
   LightsModule:

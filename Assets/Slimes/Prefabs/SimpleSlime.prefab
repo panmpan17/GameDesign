@@ -90,6 +90,8 @@ GameObject:
   - component: {fileID: 7974710738266924131}
   - component: {fileID: 7974710738266924128}
   - component: {fileID: 8837210711672424159}
+  - component: {fileID: 6614295690929144803}
+  - component: {fileID: 8681783154464948248}
   m_Layer: 8
   m_Name: SimpleSlime
   m_TagString: Slime
@@ -162,13 +164,50 @@ MonoBehaviour:
   eyePosition: {fileID: 0}
   lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
   healthChangedEvent: {fileID: 0}
-  sinkTimer:
-    From: {x: 0, y: 0, z: 0}
-    To: {x: 0, y: 0, z: 0}
-    Timer:
-      TargetTime: 1
-      Running: 0
-      ReverseMode: 0
+  sinkTime: 1
+  sinkHeight: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  impulseSource: {fileID: 0}
+  audioSource: {fileID: 0}
+  slamSound: {fileID: 0}
+--- !u!114 &6614295690929144803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7974710738266924135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: 308f07ef6cdf34045b3f732371b7b86e, type: 2}
+  sound: {fileID: 0}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8681783154464948248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7974710738266924135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb85f2d5a88d4ff68770edc9aa438c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerFireGroups: []
+  player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  fixedTarget: {fileID: 0}
+  eyePosition: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
+  healthChangedEvent: {fileID: 0}
+  sinkTime: 1
   sinkHeight: 1
   OnDeath:
     m_PersistentCalls:
@@ -242,6 +281,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b720d53d025c34f6da9b111626e46ff4, type: 3}
       propertyPath: m_Name
       value: SlimeAnime
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b720d53d025c34f6da9b111626e46ff4, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b720d53d025c34f6da9b111626e46ff4, type: 3}
       propertyPath: m_IsActive
@@ -369,7 +412,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8990898456975107669}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.009

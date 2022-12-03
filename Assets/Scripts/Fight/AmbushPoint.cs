@@ -19,6 +19,10 @@ public class AmbushPoint : MonoBehaviour
     [SerializeField]
     private TransformPointer playerTransform;
 
+    [Header("Colddown")]
+    [SerializeField]
+    private Timer colddownTimer;
+
     private bool _inRange;
 
     private GameObjectList spawnSlimes;
@@ -38,6 +42,8 @@ public class AmbushPoint : MonoBehaviour
         if (!senseTimer.UpdateEnd)
             return;
         senseTimer.Reset();
+
+        // TODO: add colddown time
 
         float sqrMagnitude = (playerTransform.Target.position - transform.position).sqrMagnitude;
         if (_inRange)

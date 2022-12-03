@@ -37,8 +37,11 @@ public class PlayerSpawnPointEditor : Editor
 
             GameObject player = GameObject.Find("Player");
             GameObject camera = GameObject.Find("Cameras");
-            player.transform.position = transform.position;
 
+            Undo.RecordObject(player.transform, "Change Player Position");
+            Undo.RecordObject(camera.transform, "Change Player Position");
+
+            player.transform.position = transform.position;
             player.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
 
             camera.transform.position = transform.position;

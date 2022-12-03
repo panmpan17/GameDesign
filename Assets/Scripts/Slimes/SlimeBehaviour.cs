@@ -2,38 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using TheKiwiCoder;
-using MPack;
 using Cinemachine;
 using DigitalRuby.Tween;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-
-public interface ISlimeBehaviour
+public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
 {
-    Transform EyePosition { get; }
-    Transform FixedTarget { get; }
-    Transform PlayerTarget { get; }
-
-    event System.Action<Collider> OnTriggerEnterEvent;
-    event System.Action<Collision> OnCollisionEnterEvent;
-    event System.Action<Collision> OnCollisionExitEvent;
-
-    void TriggerFire();
-    void TriggerFire(int parameter);
-    void TriggerFireGroup(int groupIndex);
-    void TriggerFireGroup(int groupIndex, int parameter);
-    void TriggerImpluse(float forceSize);
-}
-
-
-public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
-{
-    public const string Tag = "Slime";
-
     private ITriggerFire[] triggerFires;
 
     [SerializeField]
@@ -62,9 +36,7 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
     private float sinkHeight;
     public UnityEvent OnDeath;
 
-    public event System.Action<Collider> OnTriggerEnterEvent;
-    public event System.Action<Collision> OnCollisionEnterEvent;
-    public event System.Action<Collision> OnCollisionExitEvent;
+    public float SinkHeight => sinkHeight;
 
     [Header("Special Effect")]
     [SerializeField]
@@ -75,6 +47,10 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
     private AudioClipSet slamSound;
 
     private SlimeCore[] _cores;
+
+    public event System.Action<Collider> OnTriggerEnterEvent;
+    public event System.Action<Collision> OnCollisionEnterEvent;
+    public event System.Action<Collision> OnCollisionExitEvent;
 
 
     void Awake()
@@ -103,25 +79,6 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
         }
     }
 
-    protected override void Start()
-    {
-#if UNITY_EDITOR
-        if (tree == null)
-        {
-            Debug.LogError("This slime doesn't have behaviour tree", this);
-            enabled = false;
-        }
-#endif
-
-        context = CreateBehaviourTreeContext();
-        tree = tree.Clone();
-        tree.Bind(context);
-    }
-
-    protected override void Update()
-    {
-        tree.Update();
-    }
 
     public void TriggerFire()
     {
@@ -147,14 +104,13 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
         triggerFireGroups[groupIndex].ParameterTriggerAction?.Invoke(parameter);
     }
 
-
     public void TriggerImpluse(float forceSize)
     {
         impulseSource.GenerateImpulse(forceSize);
         audioSource.PlayOneShot(slamSound);
     }
 
-#region Damage, Death, Loot table
+    #region Damage, Death, Loot table
     void OnCoreDamage()
     {
         int aliveCount = UpdateHealth();
@@ -205,8 +161,7 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
             arrows[i].gameObject.SetActive(false);
         }
     }
-#endregion
-
+    #endregion
 
     /// <summary>
     /// Update health
@@ -224,37 +179,7 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
         return aliveCount;
     }
 
-    protected override Context CreateBehaviourTreeContext()
-    {
-        // return Context.Create(this);
-        return Context.Create(gameObject, this);
-    }
-
     void OnColliderEnter(Collider collider) => OnTriggerEnterEvent?.Invoke(collider);
     void OnCollisionEnter(Collision collision) => OnCollisionEnterEvent?.Invoke(collision);
     void OnCollisionExit(Collision collision) => OnCollisionExitEvent?.Invoke(collision);
-}
-
-[System.Serializable]
-public class ITriggerFireGroup
-{
-    public System.Action TriggerAction;
-    public System.Action<int> ParameterTriggerAction;
-    public GameObject GroupGameObjects;
-
-#if UNITY_EDITOR
-    [CustomPropertyDrawer(typeof(ITriggerFireGroup))]
-    public class _Drawer : PropertyDrawer
-    {
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => 20;
-
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            position.height = 18;
-            position.y += 2;
-            SerializedProperty p = property.FindPropertyRelative("GroupGameObjects");
-            EditorGUI.ObjectField(position, p, GUIContent.none);
-        }
-    }
-#endif
 }

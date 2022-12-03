@@ -235,6 +235,8 @@ GameObject:
   - component: {fileID: 3767067126726826446}
   - component: {fileID: 1286024563860637777}
   - component: {fileID: 3345342861678542439}
+  - component: {fileID: -5669791209001328012}
+  - component: {fileID: 1371020172338053826}
   m_Layer: 8
   m_Name: ShotgunSlime
   m_TagString: Slime
@@ -309,13 +311,7 @@ MonoBehaviour:
   eyePosition: {fileID: 0}
   lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
   healthChangedEvent: {fileID: 0}
-  sinkTimer:
-    From: {x: 0, y: 0, z: 0}
-    To: {x: 0, y: 0, z: 0}
-    Timer:
-      TargetTime: 1
-      Running: 0
-      ReverseMode: 0
+  sinkTime: 1
   sinkHeight: 1
   OnDeath:
     m_PersistentCalls:
@@ -344,6 +340,49 @@ MonoBehaviour:
     Enable: 1
     Value: 0
   randomPlayedIndex: 0000000001000000
+--- !u!114 &-5669791209001328012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767067126726826440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: 308f07ef6cdf34045b3f732371b7b86e, type: 2}
+  sound: {fileID: 0}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1371020172338053826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767067126726826440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb85f2d5a88d4ff68770edc9aa438c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerFireGroups: []
+  player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  fixedTarget: {fileID: 0}
+  eyePosition: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
+  healthChangedEvent: {fileID: 0}
+  sinkTime: 1
+  sinkHeight: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  impulseSource: {fileID: 0}
+  audioSource: {fileID: 0}
+  slamSound: {fileID: 0}
 --- !u!1 &3767067127289742526
 GameObject:
   m_ObjectHideFlags: 0

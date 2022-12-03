@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FillBarControl : MonoBehaviour
 {
     [SerializeField]
     private SpriteRenderer fillSpriteRenderer;
+    [SerializeField]
+    private Image image;
     private RectTransform rectTransform;
     private bool _initialize;
     [SerializeField]
@@ -19,8 +22,10 @@ public class FillBarControl : MonoBehaviour
             return;
 
         _initialize = true;
-        if (fillSpriteRenderer != null)
+        if (fillSpriteRenderer)
             _originSize = fillSpriteRenderer.size;
+        if (image)
+        {}
         else
         {
             rectTransform = GetComponent<RectTransform>();
@@ -36,6 +41,12 @@ public class FillBarControl : MonoBehaviour
     {
         if (!_initialize)
             Awake();
+        
+        if (image)
+        {
+            image.fillAmount = amount;
+            return;
+        }
 
         Vector2 newSize = _originSize;
         if (barType == BarType.Horizontal)

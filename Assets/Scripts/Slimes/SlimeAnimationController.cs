@@ -21,7 +21,7 @@ public class SlimeAnimationController : MonoBehaviour
 
     void Start()
     {
-        GetComponent<XnodeBehaviourTree.BehaviourTreeRunner>().OnDeath.AddListener(delegate
+        GetComponent<SlimeBehaviour>().OnDeath.AddListener(delegate
         {
             SwitchToAnimation("Die");
         });

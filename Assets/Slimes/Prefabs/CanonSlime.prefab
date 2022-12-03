@@ -69,6 +69,8 @@ GameObject:
   - component: {fileID: 2396312834613917362}
   - component: {fileID: 9146641011249514849}
   - component: {fileID: 617934199834054629}
+  - component: {fileID: 2786076268866725594}
+  - component: {fileID: 4052525660522500909}
   m_Layer: 8
   m_Name: CanonSlime
   m_TagString: Slime
@@ -155,13 +157,7 @@ MonoBehaviour:
   eyePosition: {fileID: 0}
   lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
   healthChangedEvent: {fileID: 0}
-  sinkTimer:
-    From: {x: 0, y: 0, z: 0}
-    To: {x: 0, y: 0, z: 0}
-    Timer:
-      TargetTime: 1
-      Running: 0
-      ReverseMode: 0
+  sinkTime: 1
   sinkHeight: 1
   OnDeath:
     m_PersistentCalls:
@@ -169,6 +165,49 @@ MonoBehaviour:
   impulseSource: {fileID: 0}
   audioSource: {fileID: 0}
   slamSound: {fileID: 0}
+--- !u!114 &2786076268866725594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2396312834613917260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb85f2d5a88d4ff68770edc9aa438c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerFireGroups: []
+  player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  fixedTarget: {fileID: 0}
+  eyePosition: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
+  healthChangedEvent: {fileID: 0}
+  sinkTime: 1
+  sinkHeight: 1
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  impulseSource: {fileID: 0}
+  audioSource: {fileID: 0}
+  slamSound: {fileID: 0}
+--- !u!114 &4052525660522500909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2396312834613917260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: 308f07ef6cdf34045b3f732371b7b86e, type: 2}
+  sound: {fileID: 0}
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2396312835426479123
 GameObject:
   m_ObjectHideFlags: 0

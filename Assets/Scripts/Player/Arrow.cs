@@ -30,14 +30,8 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
     [Header("Parameter")]
     [SerializeField]
-    private float speed;
-    [SerializeField]
-    private Timer ignoreGravityTimer;
-    [SerializeField]
-    private float extraDrawDuration;
-    [SerializeField]
     private AnimationCurveReference gravityScaleCurve;
-    private float _baseTime;
+    private Timer ignoreGravityTimer;
 
     [SerializeField]
     private ColorReference particleColor;
@@ -52,7 +46,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
         particle.Stop();
         particleMain = particle.main;
 
-        _baseTime = ignoreGravityTimer.TargetTime;
+        // _baseTime = ignoreGravityTimer.TargetTime;
     }
 
     public void DeactivateObj(Transform collectionTransform)
@@ -72,15 +66,15 @@ public class Arrow : MonoBehaviour, IPoolableObj
         rigidbody.velocity = Vector3.zero;
     }
 
-    public void Shoot(Vector3 targetPosition, float extraProgress)
+    public void Shoot(Vector3 velocity, float ignoreGravityDuration, float extraProgress)
     {
         enabled = true;
 
-        ignoreGravityTimer.TargetTime = _baseTime + (extraDrawDuration * extraProgress);
+        ignoreGravityTimer.TargetTime = ignoreGravityDuration;
 
-        transform.rotation = Quaternion.LookRotation(targetPosition - transform.position, transform.up);
+        transform.rotation = Quaternion.LookRotation(velocity, transform.up);
 
-        rigidbody.velocity = transform.forward * speed;
+        rigidbody.velocity = velocity;//transform.forward * speed;
         rigidbody.isKinematic = false;
         trail.emitting = true;
 
@@ -130,23 +124,27 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
     void HandleHit(Transform otherTransform)
     {
-        enabled = false;
-
         var OnArrowHit = otherTransform.GetComponent<OnArrowHit>();
         if (OnArrowHit)
             OnArrowHit.Trigger(transform.position);
 
         if (otherTransform.CompareTag(SlimeBehaviourTreeRunner.Tag))
         {
-            transform.SetParent(otherTransform);
+            enabled = false;
+            rigidbody.useGravity = true;
+            return;
         }
         else if (otherTransform.CompareTag(SlimeCore.Tag))
         {
             transform.SetParent(otherTransform.parent);
-            var slimeCore = otherTransform.GetComponent<SlimeCore>();
-            slimeCore.OnDamage();
 
-            audioSource.Play(hitSound);
+            if (enabled)
+            {
+                var slimeCore = otherTransform.GetComponent<SlimeCore>();
+                slimeCore.OnDamage();
+
+                audioSource.Play(hitSound);
+            }
         }
         else if (otherTransform.CompareTag(InteractiveBase.Tag))
         {
@@ -155,6 +153,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
             gameObject.SetActive(false);
         }
 
+        enabled = false;
         rigidbody.velocity = Vector3.zero;
         rigidbody.isKinematic = true;
 

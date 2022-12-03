@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using MPack;
 using Cinemachine;
 
@@ -19,8 +20,21 @@ public class Bow : MonoBehaviour
     [SerializeField]
     private EventReference aimProgressEvent;
 
+    [Header("Arrow parameter")]
     [SerializeField]
-    private float extraAimTime;
+    private RangeReference arrowSpeed;
+    [SerializeField]
+    private float firstDrawDuration;
+    [SerializeField]
+    private float ignoreGravityTime;
+
+    [SerializeField]
+    [FormerlySerializedAs("extraAimTime")]
+    private float secondDrawDuration;
+    [SerializeField]
+    private float secondDrawExtendIgnoreGravityTime;
+    // [SerializeField]
+    // private 
 
     private int _walkingCameraIndex;
     private int _aimCameraIndex;
@@ -72,10 +86,15 @@ public class Bow : MonoBehaviour
 
         if (isBowFullyDrawed)
         {
-            float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
+            float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / secondDrawDuration, 1);
 
             PreparedArrow.transform.SetParent(null);
-            PreparedArrow.Shoot(rayHitPosition, extraProgress);
+
+            float speed = arrowSpeed.Lerp(extraProgress);
+
+            Vector3 normalizedDelta = (rayHitPosition - PreparedArrow.transform.position).normalized;
+            float ignoreGravityDuration = ignoreGravityTime + (secondDrawExtendIgnoreGravityTime * extraProgress);
+            PreparedArrow.Shoot(normalizedDelta * speed, ignoreGravityDuration, extraProgress);
             PreparedArrow = null;
 
             _playerBehaviour.TriggerBowShoot(extraProgress);
@@ -105,7 +124,7 @@ public class Bow : MonoBehaviour
             CameraSwitcher.ins.SwitchTo(_deepAimCameraIndex);
         }
 
-        float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / extraAimTime, 1);
+        float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / secondDrawDuration, 1);
         aimProgressEvent.Invoke(1 + extraProgress);
     }
 

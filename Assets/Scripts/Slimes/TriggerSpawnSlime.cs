@@ -133,7 +133,7 @@ public class TriggerSpawnSlime : AbstractSpawnSlime
             spawnSlimesList.List.Add(newSlime);
 
         // Slime come to surface animation
-        var slimeBehaviourTree = newSlime.GetComponent<XnodeBehaviourTree.BehaviourTreeRunner>();
+        var slimeBehaviourTree = newSlime.GetComponent<SlimeBehaviour>();
         slimeBehaviourTree.enabled = false;
         var rigidbody = newSlime.GetComponent<Rigidbody>();
         rigidbody.isKinematic = true;
@@ -141,14 +141,16 @@ public class TriggerSpawnSlime : AbstractSpawnSlime
         if (indicator)
             locationIndictePrefab.Put(indicator);
 
-        newSlime.Tween(newSlime, 0, 1, 1f, TweenScaleFunctions.Linear,
+        newSlime.Tween(
+            newSlime,
+            position + Vector3.down * slimeBehaviourTree.SinkHeight,
+            position, 1f, TweenScaleFunctions.Linear,
             (tweenAction) =>
             {
-                newSlime.transform.position = Vector3.Lerp(position + Vector3.down, position, tweenAction.CurrentValue);
+                newSlime.transform.position = tweenAction.CurrentValue;
             },
             (tweenAction) =>
             {
-                newSlime.transform.position = position;
                 rigidbody.isKinematic = false;
                 slimeBehaviourTree.enabled = true;
             });
