@@ -9,74 +9,105 @@ public class PlayerStatusHUD : MonoBehaviour
 {
     [Header("Aim")]
     [SerializeField]
+    private Image aimProgressFrame;
+    [SerializeField]
     private FillBarControl aimProgressBar;
     [SerializeField]
     private EventReference aimProgressEvent;
 
-    [HideInInspector, SerializeField] private Image aimPiece1, aimPiece2, aimPiece3;
-    [HideInInspector, SerializeField] private float pieceMoveAmount;
-    private Vector2 _aimPiecePosition1, _aimPiecePosition2, _aimPiecePosition3;
-    private Vector2 _aimPiecePositionTo1, _aimPiecePositionTo2, _aimPiecePositionTo3;
-    [HideInInspector, SerializeField]
-    private Color transparent = new Color(1, 1, 1, 0.1f), beforeFull = new Color(1, 1, 1, 0.7f), full = new Color(1, 1, 1, 1f), extraBeforeFull = new Color(1, 1, 1, 1f), extrafull = new Color(1, 1, 1, 1f);
+    [SerializeField]
+    private Color aimFrameUnfocusColor;
+    [SerializeField]
+    private Color aimFrameFocusColor;
+
+    [Header("Health")]
+    [SerializeField]
+    private EventReference healthEvent;
+    [SerializeField]
+    private FillBarControl healthFill;
+    [SerializeField]
+    private ShakeTween damageShake;
+    [SerializeField]
+    private ColorTween healShine;
+    [SerializeField]
+    private Timer healAnimateTimer;
+
+    private Coroutine _healAnimation;
+
+    [Header("Upgrades")]
+    [SerializeField]
+    private GameObject firstUpgrade;
 
     [Header("Inventory")]
     [SerializeField]
-    private EventReference inventoryChangeEvent;
+    private EventReference coreChangeEvent;
     [SerializeField]
-    private TextMeshProUGUI itemCountText;
+    private TextMeshProUGUI coreCountText;
+
+    [SerializeField]
+    private EventReference appleChangeEvent;
+    [SerializeField]
+    private TextMeshProUGUI appleCountText;
 
     void Awake()
     {
         aimProgressBar.SetFillAmount(0);
+        healthFill.SetFillAmount(1);
 
-        aimPiece1.color = transparent;
-        aimPiece2.color = transparent;
-        aimPiece3.color = transparent;
-        _aimPiecePosition1 = aimPiece1.rectTransform.anchoredPosition;
-        _aimPiecePosition2 = aimPiece2.rectTransform.anchoredPosition;
-        _aimPiecePosition3 = aimPiece3.rectTransform.anchoredPosition;
-        _aimPiecePositionTo1 = Vector2.MoveTowards(_aimPiecePosition1, Vector2.zero, pieceMoveAmount);
-        _aimPiecePositionTo2 = Vector2.MoveTowards(_aimPiecePosition2, Vector2.zero, pieceMoveAmount);
-        _aimPiecePositionTo3 = Vector2.MoveTowards(_aimPiecePosition3, Vector2.zero, pieceMoveAmount);
-
-        inventoryChangeEvent.InvokeIntEvents += ChangeInventory;
+        coreChangeEvent.InvokeIntEvents += ChangeCoreCount;
+        appleChangeEvent.InvokeIntEvents += ChangeAppleCount;
         aimProgressEvent.InvokeFloatEvents += ChangeAimProgress;
+        healthEvent.InvokeFloatEvents += ChangeHealthAmount;
     }
 
     void OnDestroy()
     {
-        inventoryChangeEvent.InvokeIntEvents -= ChangeInventory;
+        coreChangeEvent.InvokeIntEvents -= ChangeCoreCount;
+        appleChangeEvent.InvokeIntEvents -= ChangeAppleCount;
         aimProgressEvent.InvokeFloatEvents -= ChangeAimProgress;
     }
 
-    void ChangeInventory(int count)
-    {
-        itemCountText.text = count.ToString();
-    }
+    void ChangeCoreCount(int count) => coreCountText.text = count.ToString();
+    void ChangeAppleCount(int count) => appleCountText.text = count.ToString();
 
     void ChangeAimProgress(float progress)
     {
+        aimProgressFrame.color = progress > 0 ? aimFrameFocusColor : aimFrameUnfocusColor;
         aimProgressBar.SetFillAmount(progress / 2);
     }
 
-    private void UpdateOldHUD(float progress)
+    void ChangeHealthAmount(float newAmount)
     {
-        Color color;
+        if (_healAnimation != null)
+            StopCoroutine(_healAnimation);
 
-        if (progress <= 0.99f)
-            color = Color.Lerp(transparent, beforeFull, progress);
-        else if (progress <= 1.99f)
-            color = Color.Lerp(full, extraBeforeFull, Mathf.Max(progress - 1, 0));
-        else
-            color = extrafull;
 
-        aimPiece1.color = color;
-        aimPiece2.color = color;
-        aimPiece3.color = color;
+        if (newAmount > healthFill.Amount)
+        {
+            _healAnimation = StartCoroutine(AnimateHealthHeal(newAmount));
+        }
+        else if (newAmount < healthFill.Amount)
+        {
+            healthFill.SetFillAmount(newAmount);
+            damageShake.Trigger();
+        }
+    }
 
-        aimPiece1.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition1, _aimPiecePositionTo1, progress / 2);
-        aimPiece2.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition2, _aimPiecePositionTo2, progress / 2);
-        aimPiece3.rectTransform.anchoredPosition = Vector2.Lerp(_aimPiecePosition3, _aimPiecePositionTo3, progress / 2);
+    IEnumerator AnimateHealthHeal(float newAmount)
+    {
+        float oldAmount = healthFill.Amount;
+
+        healShine.enabled = true;
+
+        healAnimateTimer.Reset();
+        while (!healAnimateTimer.UpdateEnd)
+        {
+            healthFill.SetFillAmount(Mathf.Lerp(oldAmount, newAmount, healAnimateTimer.Progress));
+            yield return null;
+        }
+        healthFill.SetFillAmount(newAmount);
+
+        healShine.enabled = false;
+        healShine.ResetTween(0);
     }
 }

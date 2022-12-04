@@ -41,7 +41,10 @@ public class GridManager : MonoBehaviour
         ins = this;
         _startPosition = new Vector3(-mapSize.x / 2, 0, -mapSize.y / 2);
         CalculateSections();
+    }
 
+    void Start()
+    {
         _playerPositionIndex = GetGirdIndex(GetGridPosition(player.Target.position));
         Vector2Int centerGridPosition = sections[_playerPositionIndex].GridPosition;
         for (int i = 0; i < GridPositionOffset.Length; i++)

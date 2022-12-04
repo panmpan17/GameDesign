@@ -134,7 +134,7 @@ public class TriggerSpawnSlime : AbstractSpawnSlime
 
         // Slime come to surface animation
         var slimeBehaviourTree = newSlime.GetComponent<SlimeBehaviour>();
-        slimeBehaviourTree.enabled = false;
+        slimeBehaviourTree.DisableTreeRunner();
         var rigidbody = newSlime.GetComponent<Rigidbody>();
         rigidbody.isKinematic = true;
 
@@ -153,7 +153,7 @@ public class TriggerSpawnSlime : AbstractSpawnSlime
             {
                 slimeBehaviourTree.AlignWithGround();
                 rigidbody.isKinematic = false;
-                slimeBehaviourTree.enabled = true;
+                slimeBehaviourTree.EnableTreeRunner();
             });
 
         TriggerOnSlimeSpawnedCallback();

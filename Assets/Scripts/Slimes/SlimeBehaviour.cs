@@ -88,8 +88,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         }
     }
 
-    void OnEnable() => behaviourTreeRunner.enabled = true;
-    void OnDisable() => behaviourTreeRunner.enabled = false;
+    public void EnableTreeRunner() => behaviourTreeRunner.enabled = true;
+    public void DisableTreeRunner() => behaviourTreeRunner.enabled = false;
 
     public void TriggerFire()
     {

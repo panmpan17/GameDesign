@@ -53,8 +53,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private float interactRaycastDistance;
     [SerializeField]
     private EventReference canInteractEvent;
-    // [SerializeField]
-    // private EventReference dialogueEndEvent;
+    [SerializeField]
+    private EventReference dialogueEndEvent;
 
     private GameObject _interactObject;
     private bool LastCanInteract => _interactObject != null;
@@ -62,8 +62,11 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     
     [Header("Inventory")]
     [SerializeField]
-    private EventReference inventoryEvent;
-    private int _itemCount;
+    private EventReference coreEvent;
+    private int _coreCount;
+    [SerializeField]
+    private EventReference appleEvent;
+    private int _appleCount;
 
 #if UNITY_EDITOR
     [Header("Editor Only")]
@@ -103,6 +106,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         animation.OnAimAnimatinoChanged += OnAimProgress;
 
         focusEvent.InvokeEvents += FocusCursor;
+        dialogueEndEvent.InvokeEvents += DialogueUIEnd;
         AbstractMenu.OnFirstMenuOpen += OnFirstMenuOpen;
         AbstractMenu.OnLastMenuClose += OnLastMenuClose;
 
@@ -155,6 +159,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     }
 
 
+#region Input Events
     void OnAimDown()
     {
         if (!CursorFocued)
@@ -228,6 +233,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             OnDrawBowEnd?.Invoke();
         }
     }
+#endregion
+
 
     public void OnDamage(float amount)
     {
@@ -280,6 +287,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         Cursor.lockState = CursorLockMode.None;
     }
 
+
+#region UI events
     void OnFirstMenuOpen(AbstractMenu menu)
     {
         input.Disable();
@@ -291,6 +300,13 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         input.Enable();
         FocusCursor();
     }
+
+    void DialogueUIEnd()
+    {
+        canInteractEvent.Invoke(true);
+    }
+#endregion
+
 
     public void PickItemUp(ItemType itemType)
     {
@@ -304,14 +320,15 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         }
         else
         {
-            _itemCount += 1;
-            inventoryEvent.Invoke(_itemCount);
+            _coreCount += 1;
+            coreEvent.Invoke(_coreCount);
         }
     }
 
     void OnDestroy()
     {
         focusEvent.InvokeEvents -= FocusCursor;
+        dialogueEndEvent.InvokeEvents -= DialogueUIEnd;
         AbstractMenu.OnFirstMenuOpen -= OnFirstMenuOpen;
         AbstractMenu.OnLastMenuClose -= OnLastMenuClose;
     }

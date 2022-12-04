@@ -15,6 +15,9 @@ public class FillBarControl : MonoBehaviour
     private BarType barType;
 
     private Vector2 _originSize;
+    private float _amount;
+
+    public float Amount => _amount;
 
     void Awake()
     {
@@ -41,6 +44,8 @@ public class FillBarControl : MonoBehaviour
     {
         if (!_initialize)
             Awake();
+
+        _amount = amount;
         
         if (image)
         {
