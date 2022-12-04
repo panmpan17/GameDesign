@@ -17,7 +17,7 @@ namespace XnodeBehaviourTree
 
         void Start()
         {
-            TheKiwiCoder.Context context = TheKiwiCoder.Context.Create(gameObject, GetComponent<ISlimeBehaviour>());
+            Context context = Context.Create(gameObject, GetComponent<ISlimeBehaviour>());
             graph = (BehaviourTreeGraph) graph.Copy();
             graph.OnInitial(context);
         }

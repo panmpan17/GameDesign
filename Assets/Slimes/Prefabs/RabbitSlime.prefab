@@ -216,20 +216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000, guid: e2e714443a5e34d50942be6517f109e8, type: 2}
-  triggerFireGroups: []
-  player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
-  fixedTarget: {fileID: 0}
-  eyePosition: {fileID: 0}
-  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
-  healthChangedEvent: {fileID: 0}
-  sinkTime: 1
-  sinkHeight: 1
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  impulseSource: {fileID: 0}
-  audioSource: {fileID: 0}
-  slamSound: {fileID: 0}
 --- !u!114 &9031535313164564426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,12 +266,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb85f2d5a88d4ff68770edc9aa438c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
+  <ArrowBounceOff>k__BackingField: 0
   triggerFireGroups: []
   player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
   fixedTarget: {fileID: 0}
   eyePosition: {fileID: 0}
-  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
   healthChangedEvent: {fileID: 0}
+  groundLayers:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 0
+    Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
+    UseVariable: 1
   sinkTime: 1
   sinkHeight: 1
   OnDeath:

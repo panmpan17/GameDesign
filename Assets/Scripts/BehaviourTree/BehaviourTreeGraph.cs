@@ -17,9 +17,9 @@ namespace XnodeBehaviourTree
         [System.NonSerialized]
         private AbstractBehaviourNode.State _state;
 
-        public void OnInitial(TheKiwiCoder.Context context)
+        public void OnInitial(Context context)
         {
-            TheKiwiCoder.Blackboard blackboard = new TheKiwiCoder.Blackboard();
+            Blackboard blackboard = new Blackboard();
             List<DefineFunctionNode> defineFunctionNodes = new List<DefineFunctionNode>();
 
             if (FunctionGraph)

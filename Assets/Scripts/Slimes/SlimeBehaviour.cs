@@ -4,12 +4,19 @@ using UnityEngine;
 using UnityEngine.Events;
 using Cinemachine;
 using DigitalRuby.Tween;
+using XnodeBehaviourTree;
+using MPack;
 
 
 public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
 {
     private ITriggerFire[] triggerFires;
 
+    [SerializeField]
+    private LootTable lootTable;
+    [field: SerializeField] public bool ArrowBounceOff { get; protected set; }
+
+    [Header("Reference")]
     [SerializeField]
     private ITriggerFireGroup[] triggerFireGroups;
 
@@ -24,10 +31,10 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     public Transform EyePosition => eyePosition;
 
     [SerializeField]
-    private LootTable lootTable;
+    private EventReference healthChangedEvent;
 
     [SerializeField]
-    private EventReference healthChangedEvent;
+    private LayerMaskReference groundLayers;
 
     [Header("Dead Animation")]
     [SerializeField]
@@ -47,6 +54,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     private AudioClipSet slamSound;
 
     private SlimeCore[] _cores;
+    private BehaviourTreeRunner behaviourTreeRunner;
 
     public event System.Action<Collider> OnTriggerEnterEvent;
     public event System.Action<Collision> OnCollisionEnterEvent;
@@ -56,6 +64,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     void Awake()
     {
         triggerFires = GetComponentsInChildren<ITriggerFire>();
+        behaviourTreeRunner = GetComponent<BehaviourTreeRunner>();
 
         for (int i = 0; i < triggerFireGroups.Length; i++)
         {
@@ -79,6 +88,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         }
     }
 
+    void OnEnable() => behaviourTreeRunner.enabled = true;
+    void OnDisable() => behaviourTreeRunner.enabled = false;
 
     public void TriggerFire()
     {
@@ -123,7 +134,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         if (lootTable)
             SpawnLootTable();
 
-        enabled = false;
+        behaviourTreeRunner.enabled = false;
 
         gameObject.Tween(
             gameObject,
@@ -178,6 +189,47 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         healthChangedEvent?.Invoke((float)aliveCount / (float)_cores.Length);
         return aliveCount;
     }
+
+    public void AlignWithGround()
+    {
+        Vector3 higherPosition = transform.position;
+        higherPosition.y += 0.1f;
+        if (Physics.Raycast(higherPosition, Vector3.down, out RaycastHit hit, 3f, groundLayers.Value))
+        {
+            if (Physics.Raycast(higherPosition + transform.forward, Vector3.down, out RaycastHit hit2, 3f, groundLayers.Value))
+            {
+                transform.LookAt(hit2.point, hit.normal);
+            }
+        }
+    }
+
+    public void ShakeArrow(Arrow arrow)
+    {
+        Transform arrowTransform = arrow.transform;
+        Vector3 localPosition = arrowTransform.localPosition;
+
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Update();
+
+        arrow.TrailEmmiting = true;
+        gameObject.Tween(
+            arrowTransform,
+            0, 1, 0.3f, TweenScaleFunctions.Linear,
+            (data) => {
+                if (stopwatch.DeltaTime > 0.08f)
+                {
+                    Vector2 value = Random.insideUnitCircle * Random.Range(0.1f, 0.13f);
+                    arrowTransform.localPosition = localPosition + arrowTransform.TransformDirection(value);
+                    stopwatch.Update();
+                }
+            },
+            (data) => {
+                arrowTransform.localPosition = localPosition;
+                arrow.TrailEmmiting = false;
+            }
+        );
+    }
+
 
     void OnColliderEnter(Collider collider) => OnTriggerEnterEvent?.Invoke(collider);
     void OnCollisionEnter(Collision collision) => OnCollisionEnterEvent?.Invoke(collision);

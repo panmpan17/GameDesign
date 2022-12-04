@@ -12,24 +12,6 @@ using UnityEditor;
 #endif
 
 
-public interface ISlimeBehaviour
-{
-    Transform EyePosition { get; }
-    Transform FixedTarget { get; }
-    Transform PlayerTarget { get; }
-
-    event System.Action<Collider> OnTriggerEnterEvent;
-    event System.Action<Collision> OnCollisionEnterEvent;
-    event System.Action<Collision> OnCollisionExitEvent;
-
-    void TriggerFire();
-    void TriggerFire(int parameter);
-    void TriggerFireGroup(int groupIndex);
-    void TriggerFireGroup(int groupIndex, int parameter);
-    void TriggerImpluse(float forceSize);
-}
-
-
 public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
 {
     public const string Tag = "Slime";
@@ -222,12 +204,6 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
         }
         healthChangedEvent?.Invoke((float)aliveCount / (float)_cores.Length);
         return aliveCount;
-    }
-
-    protected override Context CreateBehaviourTreeContext()
-    {
-        // return Context.Create(this);
-        return Context.Create(gameObject, this);
     }
 
     void OnColliderEnter(Collider collider) => OnTriggerEnterEvent?.Invoke(collider);

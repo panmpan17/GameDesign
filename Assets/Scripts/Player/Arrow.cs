@@ -14,6 +14,8 @@ public class Arrow : MonoBehaviour, IPoolableObj
     [SerializeField]
     private new Rigidbody rigidbody;
     [SerializeField]
+    private new Collider collider;
+    [SerializeField]
     private TrailRenderer trail;
     [SerializeField]
     private ParticleSystem particle;
@@ -37,6 +39,12 @@ public class Arrow : MonoBehaviour, IPoolableObj
     private ColorReference particleColor;
     [SerializeField]
     private ColorReference particleExtraColor;
+
+    public bool TrailEmmiting {
+        get => trail.emitting;
+        set => trail.emitting = value;
+    }
+
 
     public void Instantiate()
     {
@@ -69,6 +77,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
     public void Shoot(Vector3 velocity, float ignoreGravityDuration, float extraProgress)
     {
         enabled = true;
+        collider.enabled = true;
 
         ignoreGravityTimer.TargetTime = ignoreGravityDuration;
 
@@ -130,8 +139,19 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
         if (otherTransform.CompareTag(SlimeBehaviourTreeRunner.Tag))
         {
-            enabled = false;
-            rigidbody.useGravity = true;
+            var slime = otherTransform.GetComponent<SlimeBehaviour>();
+            if (slime.ArrowBounceOff)
+            {
+                enabled = false;
+                rigidbody.useGravity = true;
+            }
+            else
+            {
+                transform.SetParent(otherTransform);
+                StopArrow();
+
+                slime.ShakeArrow(this);
+            }
             return;
         }
         else if (otherTransform.CompareTag(SlimeCore.Tag))
@@ -153,12 +173,18 @@ public class Arrow : MonoBehaviour, IPoolableObj
             gameObject.SetActive(false);
         }
 
+        StopArrow();
+    }
+
+    private void StopArrow()
+    {
         enabled = false;
+        collider.enabled = false;
+        rigidbody.useGravity = false;
         rigidbody.velocity = Vector3.zero;
         rigidbody.isKinematic = true;
 
         trail.emitting = false;
         particle.Stop();
-        rigidbody.useGravity = false;
     }
 }

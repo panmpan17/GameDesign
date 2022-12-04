@@ -28,6 +28,8 @@ public class PlayerStatusHUD : MonoBehaviour
 
     void Awake()
     {
+        aimProgressBar.SetFillAmount(0);
+
         aimPiece1.color = transparent;
         aimPiece2.color = transparent;
         aimPiece3.color = transparent;

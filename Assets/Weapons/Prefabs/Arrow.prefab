@@ -97,8 +97,8 @@ TrailRenderer:
       serializedVersion: 2
       key0: {r: 0.90588236, g: 0.83137256, b: 0.4745098, a: 1}
       key1: {r: 0.90588236, g: 0.83137256, b: 0.4745098, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0.034810126}
+      key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
@@ -112,8 +112,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 38550
-      atime2: 65535
+      atime1: 4626
+      atime2: 45875
       atime3: 65535
       atime4: 0
       atime5: 0
@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4008823716890672473}
+  collider: {fileID: 1301579139043960994}
   trail: {fileID: 941763731}
   particle: {fileID: 2494633608834896899}
   hit: {fileID: 11400000, guid: 7dbaf8a5ec4794f7586838c0af9e173e, type: 2}

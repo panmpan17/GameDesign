@@ -429,29 +429,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000, guid: f73d74a1f36e64d798bca151e48b0b28, type: 2}
-  triggerFireGroups:
-  - GroupGameObjects: {fileID: 7829717878639574994}
-  - GroupGameObjects: {fileID: 2348906323652249775}
-  - GroupGameObjects: {fileID: 7626988030739219233}
-  - GroupGameObjects: {fileID: 1342481693126180226}
-  - GroupGameObjects: {fileID: 3719509313443061215}
-  - GroupGameObjects: {fileID: 6162327203142515146}
-  - GroupGameObjects: {fileID: 4165725683963525871}
-  - GroupGameObjects: {fileID: 2198449064252470859}
-  - GroupGameObjects: {fileID: 1202238698919897576}
-  player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
-  fixedTarget: {fileID: 0}
-  eyePosition: {fileID: 0}
-  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
-  healthChangedEvent: {fileID: 11400000, guid: 223b7a84cb0614b6c93896df7b28d0ab, type: 2}
-  sinkTime: 7
-  sinkHeight: 7
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  impulseSource: {fileID: 311177544891603058}
-  audioSource: {fileID: 4139163584777664057}
-  slamSound: {fileID: 11400000, guid: 1e36996e99dc7483c8cbdd42b2cea282, type: 2}
 --- !u!114 &3229756113135411695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb85f2d5a88d4ff68770edc9aa438c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
+  <ArrowBounceOff>k__BackingField: 1
   triggerFireGroups:
   - GroupGameObjects: {fileID: 7829717878639574994}
   - GroupGameObjects: {fileID: 2348906323652249775}
@@ -494,7 +473,6 @@ MonoBehaviour:
   player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
   fixedTarget: {fileID: 0}
   eyePosition: {fileID: 0}
-  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
   healthChangedEvent: {fileID: 11400000, guid: 223b7a84cb0614b6c93896df7b28d0ab, type: 2}
   sinkTime: 7
   sinkHeight: 7

@@ -16,8 +16,8 @@ namespace XnodeBehaviourTree
 
         [System.NonSerialized] public State state = State.Running;
         [System.NonSerialized] public bool started = false;
-        [System.NonSerialized] public TheKiwiCoder.Context context;
-        [System.NonSerialized] public TheKiwiCoder.Blackboard blackboard;
+        [System.NonSerialized] public Context context;
+        [System.NonSerialized] public Blackboard blackboard;
 
         public State Update()
         {

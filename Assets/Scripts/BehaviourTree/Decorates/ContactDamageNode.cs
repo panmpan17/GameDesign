@@ -12,7 +12,7 @@ namespace XnodeBehaviourTree
         private float damangeAmount;
 
         private bool _damaged;
-        private PlayerBehaviour _playerBehaviour;
+        private ICanBeDamage _playerBehaviour;
 
 
         protected override void OnStart()
@@ -40,16 +40,16 @@ namespace XnodeBehaviourTree
 
         void OnCollisionEnter(Collision collision)
         {
-            if (!_damaged && collision.gameObject.CompareTag(PlayerBehaviour.Tag))
+            if (!_damaged && collision.gameObject.CompareTag("Player"))
             {
-                _playerBehaviour = collision.gameObject.GetComponent<PlayerBehaviour>();
+                _playerBehaviour = collision.gameObject.GetComponent<ICanBeDamage>();
                 _playerBehaviour.OnDamage(damangeAmount);
                 _damaged = true;
             }
         }
         void OnCollisionExit(Collision collision)
         {
-            if (collision.gameObject.CompareTag(PlayerBehaviour.Tag))
+            if (collision.gameObject.CompareTag("Player"))
             {
                 _playerBehaviour = null;
                 context.slimeBehaviour.OnCollisionExitEvent -= OnCollisionExit;

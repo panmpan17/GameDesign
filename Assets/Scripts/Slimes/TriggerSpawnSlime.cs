@@ -151,6 +151,7 @@ public class TriggerSpawnSlime : AbstractSpawnSlime
             },
             (tweenAction) =>
             {
+                slimeBehaviourTree.AlignWithGround();
                 rigidbody.isKinematic = false;
                 slimeBehaviourTree.enabled = true;
             });
