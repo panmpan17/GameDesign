@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 1f64f06455e57462fb6533fcebc6fba4, type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 1c88eb0b0ac8646a2b06a6ac38c85863, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -5116,13 +5116,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1e2e0e5e55344c09d231e19f7a8416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1271038451}
   entranceDetect: {fileID: 1159205085}
   lookBossCam: {fileID: 2009972150}
   borderWall: {fileID: 641298026}
+  bgmClip: {fileID: 0}
+  player: {fileID: 1271038451}
+  playerReviveEvent: {fileID: 0}
   bossStartPosition: {fileID: 445970721}
   bossSlimePrefab: {fileID: 342071698149856546, guid: d69859efe7cf24f0f9158e117b8695ea, type: 3}
   slimeHealthShowEvent: {fileID: 11400000, guid: 33dbc374c89514a30aad4369c02c22bd, type: 2}
+  bossSpawnedSlimes: {fileID: 0}
   startFightImmediately: 0
   overrideBossStartPosition: {fileID: 0}
 --- !u!1001 &33378231
@@ -5652,6 +5655,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3086281305514650933, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
+      propertyPath: near clip plane
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 7328684851369687910, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
       propertyPath: m_Name
       value: Cameras
@@ -8316,7 +8323,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &227498088
 MonoBehaviour:
@@ -14079,11 +14086,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4fa010f5ba6ab4a6f9ea2a8abdb5a5e9, type: 3}
   m_PrefabInstance: {fileID: 581329795}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &583741338 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2388232545571030008, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
-  m_PrefabInstance: {fileID: 1623890923}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &585703079
 PrefabInstance:
@@ -20855,7 +20857,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1057551797
 AudioSource:
@@ -33835,7 +33837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e06f85d0ae0048cfa8904871738f892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 583741338}
+  target: {fileID: 0}
   targetPointer: {fileID: 0}
   updateMode: 0
   updatePosition: 0
@@ -35384,7 +35386,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1639618180
 PrefabInstance:
@@ -37596,7 +37598,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1766353955
 MonoBehaviour:
@@ -37613,6 +37615,8 @@ MonoBehaviour:
   player: {fileID: 1271038451}
   spawnPoint: {fileID: 602848647}
   playerReviveTime: 2
+  playerReviveEvent: {fileID: 0}
+  spawnPoints: []
 --- !u!1001 &1767740415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43038,7 +43042,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2146096774
 MonoBehaviour:

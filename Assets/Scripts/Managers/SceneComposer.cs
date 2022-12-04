@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 #endif
 
 
-[ExecuteAlways]
+[ExecuteInEditMode]
 public class SceneComposer : MonoBehaviour
 {
     [SerializeField]

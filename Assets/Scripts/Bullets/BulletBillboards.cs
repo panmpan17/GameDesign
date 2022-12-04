@@ -8,7 +8,8 @@ public class BulletBillboards : MonoBehaviour
     public static BulletBillboards ins;
 
     [SerializeField]
-    private Transform mainCameraTransform;
+    private TransformPointer cameraTransform;
+    private Transform _mainCameraTransform;
     [SerializeField]
     private BaseBullet bulletPrefab;
     [SerializeField]
@@ -36,8 +37,11 @@ public class BulletBillboards : MonoBehaviour
         CreatePrefabPool();
         playerReviveEvent.InvokeEvents += ResetBullets;
 
-        if (mainCameraTransform == null) mainCameraTransform = Camera.main.transform;
+        cameraTransform.OnChange += ChangeCameraTransform;
+        if (cameraTransform.Target) ChangeCameraTransform(cameraTransform.Target);
     }
+
+    void ChangeCameraTransform(Transform cameraTransform) => _mainCameraTransform = cameraTransform;
 
     void CreatePrefabPool()
     {
@@ -53,7 +57,10 @@ public class BulletBillboards : MonoBehaviour
 
     void LateUpdate()
     {
-        _faceCameraRotation = mainCameraTransform.rotation;
+        if (!_mainCameraTransform)
+            return;
+
+        _faceCameraRotation = _mainCameraTransform.rotation;
 
         for (int i = 0; i < bulletTypes.Length; i++)
         {
@@ -75,5 +82,6 @@ public class BulletBillboards : MonoBehaviour
     void OnDestroy()
     {
         playerReviveEvent.InvokeEvents -= ResetBullets;
+        cameraTransform.OnChange -= ChangeCameraTransform;
     }
 }
