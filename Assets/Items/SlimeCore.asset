@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8032c0415fb1147f59a84777514b9c1d, type: 3}
-  m_Name: TestLoot
+  m_Script: {fileID: 11500000, guid: b78f81b0f8c55458cb6a64460fa6a568, type: 3}
+  m_Name: SlimeCore
   m_EditorClassIdentifier: 
-  LootRules:
-  - Type: {fileID: 11400000, guid: 8533a0b021e964fa084a083bbd0e819e, type: 2}
-    Chance: 1
+  Name: Slime Core
+  Sprite: {fileID: 21300000, guid: 19329fc1607244af681a6faaaaaa280b, type: 3}
+  Description: 
+  HealPoint:
+    Enable: 0
+    Value: 15

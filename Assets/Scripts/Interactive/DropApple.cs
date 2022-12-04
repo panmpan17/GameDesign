@@ -31,6 +31,7 @@ public class DropApple : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        onHitGround.Invoke();
+        if (collision.gameObject.isStatic)
+            onHitGround.Invoke();
     }
 }

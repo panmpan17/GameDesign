@@ -4986,7 +4986,8 @@ MonoBehaviour:
   interactRaycastDistance: 2
   canInteractEvent: {fileID: 11400000, guid: b8fbbb11370b2494f8dd72fc8925e369, type: 2}
   dialogueEndEvent: {fileID: 11400000, guid: 84a6f59297b02472a8eb2953de76e458, type: 2}
-  inventoryEvent: {fileID: 11400000, guid: 99f7d598adae6464e881f9bded09eace, type: 2}
+  coreEvent: {fileID: 11400000, guid: 99f7d598adae6464e881f9bded09eace, type: 2}
+  appleEvent: {fileID: 11400000, guid: 5f34187113ce147099d64a34191c0480, type: 2}
   focusCursorWhenPointerDown: 0
 --- !u!143 &2787180225705632303
 CharacterController:
@@ -5159,15 +5160,8 @@ MonoBehaviour:
   impulseSource: {fileID: 5437307488346284415}
   currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
   aimProgressEvent: {fileID: 11400000, guid: c427ad606924d402f931d4b4052fdfb2, type: 2}
-  arrowSpeed:
-    ConstantMin: 25
-    ConstantMax: 40
-    Variable: {fileID: 0}
-    UseVariable: 0
-  firstDrawDuration: 1
-  ignoreGravityTime: 0.2
-  secondDrawDuration: 1
-  secondDrawExtendIgnoreGravityTime: 0.6
+  bowParameters:
+  - {fileID: 11400000, guid: 4c61e8762956146c1956b3b629893b2f, type: 2}
 --- !u!114 &5437307488346284415
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -140,16 +140,19 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         bool isOverlap = Physics.OverlapSphereNonAlloc(body.position, interactRaycastDistance, _interactColliders, interactLayer) > 0;
         if (isOverlap)
         {
-            // Debug.DrawLine(position1, position2, Color.green, 0.1f);
             if (!LastCanInteract)
             {
-                _interactObject = _interactColliders[0].gameObject;
-                canInteractEvent.Invoke(true);
+                GameObject interactGameObject = _interactColliders[0].gameObject;
+
+                if (interactGameObject.CompareTag("NPC"))
+                {
+                    _interactObject = interactGameObject;
+                    canInteractEvent.Invoke(true);
+                }
             }
         }
         else
         {
-            // Debug.DrawLine(position1, position2, Color.white, 0.1f);
             if (LastCanInteract)
             {
                 _interactObject = null;
@@ -310,20 +313,27 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     public void PickItemUp(ItemType itemType)
     {
-        if (itemType.HealPoint.Enable)
-        {
-            _health += itemType.HealPoint.Value;
-            if (_health > maxHealth)
-                _health = maxHealth;
+        // if (itemType.HealPoint.Enable)
+        // {
+        //     _health += itemType.HealPoint.Value;
+        //     if (_health > maxHealth)
+        //         _health = maxHealth;
 
-            healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
-        }
-        else
-        {
-            _coreCount += 1;
-            coreEvent.Invoke(_coreCount);
-        }
+        //     healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
+        // }
+        // else
+        // {
+        _coreCount += 1;
+        coreEvent.Invoke(_coreCount);
+        // }
     }
+
+    public void UpgradeBow(BowParameter upgradeParameter)
+    {
+        bow.UpgradeBow(upgradeParameter);
+    }
+
+
 
     void OnDestroy()
     {

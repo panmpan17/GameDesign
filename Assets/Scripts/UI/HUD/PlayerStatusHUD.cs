@@ -35,8 +35,10 @@ public class PlayerStatusHUD : MonoBehaviour
     private Coroutine _healAnimation;
 
     [Header("Upgrades")]
+    // [SerializeField]
+    // private GameObject firstUpgrade;
     [SerializeField]
-    private GameObject firstUpgrade;
+    private BowUpgradeUI[] bowUpgradeUIs;
 
     [Header("Inventory")]
     [SerializeField]
@@ -109,5 +111,27 @@ public class PlayerStatusHUD : MonoBehaviour
 
         healShine.enabled = false;
         healShine.ResetTween(0);
+    }
+
+
+    public void UnlockBowUpgrade(BowParameter bowParameter)
+    {
+        for (int i = 0; i < bowUpgradeUIs.Length; i++)
+        {
+            BowUpgradeUI upgradeUI = bowUpgradeUIs[i];
+            if (upgradeUI.Upgrade == bowParameter)
+            {
+                upgradeUI.Icon.color = Color.white;
+                return;
+            }
+        }
+    }
+
+
+    [System.Serializable]
+    public struct BowUpgradeUI
+    {
+        public BowParameter Upgrade;
+        public Image Icon;
     }
 }

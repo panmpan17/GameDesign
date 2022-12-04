@@ -20,21 +20,9 @@ public class Bow : MonoBehaviour
     [SerializeField]
     private EventReference aimProgressEvent;
 
-    [Header("Arrow parameter")]
     [SerializeField]
-    private RangeReference arrowSpeed;
-    [SerializeField]
-    private float firstDrawDuration;
-    [SerializeField]
-    private float ignoreGravityTime;
-
-    [SerializeField]
-    [FormerlySerializedAs("extraAimTime")]
-    private float secondDrawDuration;
-    [SerializeField]
-    private float secondDrawExtendIgnoreGravityTime;
-    // [SerializeField]
-    // private 
+    private List<BowParameter> bowParameters;
+    private BowParameter _currentParameter;
 
     private int _walkingCameraIndex;
     private int _aimCameraIndex;
@@ -54,6 +42,9 @@ public class Bow : MonoBehaviour
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walk");
         _deepAimCameraIndex = CameraSwitcher.GetCameraIndex("DeepAim");
         _aimCameraIndex = CameraSwitcher.GetCameraIndex("Aim");
+
+        _currentParameter = ScriptableObject.CreateInstance<BowParameter>();
+        _currentParameter.CombineParamaters(bowParameters);
     }
 
     public void Setup(PlayerBehaviour playerBehaviour)
@@ -86,14 +77,14 @@ public class Bow : MonoBehaviour
 
         if (isBowFullyDrawed)
         {
-            float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / secondDrawDuration, 1);
+            float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / _currentParameter.SecondDrawDuration, 1);
 
             PreparedArrow.transform.SetParent(null);
 
-            float speed = arrowSpeed.Lerp(extraProgress);
+            float speed = _currentParameter.ArrowSpeed.Lerp(extraProgress);
 
             Vector3 normalizedDelta = (rayHitPosition - PreparedArrow.transform.position).normalized;
-            float ignoreGravityDuration = ignoreGravityTime + (secondDrawExtendIgnoreGravityTime * extraProgress);
+            float ignoreGravityDuration = _currentParameter.IgnoreGravityTime + (_currentParameter.SecondDrawExtendIgnoreGravityTime * extraProgress);
             PreparedArrow.Shoot(normalizedDelta * speed, ignoreGravityDuration, extraProgress);
             PreparedArrow = null;
 
@@ -124,7 +115,7 @@ public class Bow : MonoBehaviour
             CameraSwitcher.ins.SwitchTo(_deepAimCameraIndex);
         }
 
-        float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / secondDrawDuration, 1);
+        float extraProgress = Mathf.Min(_extraAimStopWatch.DeltaTime / _currentParameter.SecondDrawDuration, 1);
         aimProgressEvent.Invoke(1 + extraProgress);
     }
 
@@ -133,5 +124,11 @@ public class Bow : MonoBehaviour
         CameraSwitcher.ins.SwitchTo(_aimCameraIndex);
         yield return new WaitForSeconds(0.1f);
         CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
+    }
+
+    public void UpgradeBow(BowParameter upgradeBowParameter)
+    {
+        bowParameters.Add(upgradeBowParameter);
+        _currentParameter.CombineParamaters(bowParameters);
     }
 }

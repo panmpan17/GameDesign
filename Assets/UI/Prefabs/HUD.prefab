@@ -1072,7 +1072,15 @@ MonoBehaviour:
     TargetTime: 0.4
     Running: 0
     ReverseMode: 0
-  firstUpgrade: {fileID: 6395514227893420043}
+  bowUpgradeUIs:
+  - Upgrade: {fileID: 11400000, guid: cae89168e14384abdbcc88e54c67519d, type: 2}
+    Icon: {fileID: 2431785907039311254}
+  - Upgrade: {fileID: 11400000, guid: 6c43bda683a8e4631b9f7c96c489f00d, type: 2}
+    Icon: {fileID: 5284192146458954910}
+  - Upgrade: {fileID: 11400000, guid: 0b5d5216d8f63433d9a2e652687153af, type: 2}
+    Icon: {fileID: 1258320011900172312}
+  - Upgrade: {fileID: 11400000, guid: 0fce847a014da496f90d5848dd1ab9c7, type: 2}
+    Icon: {fileID: 6330210303532689369}
   coreChangeEvent: {fileID: 11400000, guid: 99f7d598adae6464e881f9bded09eace, type: 2}
   coreCountText: {fileID: 3490682399116465867}
   appleChangeEvent: {fileID: 11400000, guid: 5f34187113ce147099d64a34191c0480, type: 2}
@@ -1785,7 +1793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9137255}
+  m_Color: {r: 0.4117647, g: 0.4117647, b: 0.4117647, a: 0.6431373}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
