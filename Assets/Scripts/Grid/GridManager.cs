@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridHide : MonoBehaviour
+public class GridManager : MonoBehaviour
 {
     private readonly static Vector2Int[] GridPositionOffset = new Vector2Int[] {
         new Vector2Int(-1, -1),
@@ -15,12 +15,11 @@ public class GridHide : MonoBehaviour
         Vector2Int.down,
         new Vector2Int(1, 1),
     };
+    public static GridManager ins;
 
     [SerializeField]
     private TransformPointer player;
 
-    [SerializeField]
-    private Transform treesParent;
     [SerializeField]
     private Vector2Int mapSize;
     [SerializeField]
@@ -35,19 +34,13 @@ public class GridHide : MonoBehaviour
     [SerializeField]
     private bool drawGizmos;
 
-    void Start()
+
+#region Initial Setup
+    void Awake()
     {
+        ins = this;
         _startPosition = new Vector3(-mapSize.x / 2, 0, -mapSize.y / 2);
         CalculateSections();
-
-        for (int i = 0; i < treesParent.childCount; i++)
-        {
-            Transform child = treesParent.GetChild(i);
-            sections[GetGirdIndex(GetGridPosition(child.position))].SetActiveEvent += child.gameObject.SetActive;
-        }
-
-        for (int i = 0; i < sections.Length; i++)
-            sections[i].Active = false;
 
         _playerPositionIndex = GetGirdIndex(GetGridPosition(player.Target.position));
         Vector2Int centerGridPosition = sections[_playerPositionIndex].GridPosition;
@@ -80,10 +73,18 @@ public class GridHide : MonoBehaviour
                     0,
                     z * gridSize.y + (gridSize.y / 2) - (mapSize.y / 2));
 
-                sections[gridIndex++] = new Section{ Center = center, GridPosition=new Vector2Int(x, z) };
+                sections[gridIndex++] = new Section { Center = center, GridPosition = new Vector2Int(x, z) };
             }
         }
     }
+
+    public void RegisterChild(Transform child)
+    {
+        Section section = sections[GetGirdIndex(GetGridPosition(child.position))];
+        section.SetActiveEvent += child.gameObject.SetActive;
+        child.gameObject.SetActive(section.Active);
+    }
+    #endregion
 
     void LateUpdate()
     {
@@ -95,7 +96,7 @@ public class GridHide : MonoBehaviour
         }
     }
 
-    private void SwitchToNewSection(int newIndex)
+    void SwitchToNewSection(int newIndex)
     {
         List<Vector2Int> removePositions = new List<Vector2Int>(9);
 
@@ -130,18 +131,15 @@ public class GridHide : MonoBehaviour
         _playerPositionIndex = newIndex;
     }
 
-    // void SwitchNew
-
+    // public Vector2Int GetGridPosition(Vector3 position) => new Vector2Int(Mathf.FloorToInt(position.x - _startPosition.x / gridSize.x), Mathf.FloorToInt(position.z - _startPosition.z / gridSize.y));
     Vector2Int GetGridPosition(Vector3 position)
     {
         Vector3 delta = position - _startPosition;
         return new Vector2Int(Mathf.FloorToInt(delta.x / gridSize.x), Mathf.FloorToInt(delta.z / gridSize.y));
     }
+    public int GetGirdIndex(Vector2Int gridPosition) => gridPosition.x * _gridCount.y + gridPosition.y;
 
-    int GetGirdIndex(Vector2Int gridPosition)
-    {
-        return gridPosition.x * _gridCount.y + gridPosition.y;
-    }
+
 
     void OnDrawGizmos()
     {
@@ -167,5 +165,24 @@ public class GridHide : MonoBehaviour
             Gizmos.DrawSphere(_startPosition, 0.1f);
         }
     }
+}
 
+
+public class Section
+{
+    public Vector3 Center;
+    public Vector2Int GridPosition;
+    public event System.Action<bool> SetActiveEvent;
+    public bool Active
+    {
+        get => _isActive;
+        set
+        {
+            if (_isActive == value)
+                return;
+            SetActiveEvent?.Invoke(value);
+            _isActive = value;
+        }
+    }
+    private bool _isActive = false;
 }

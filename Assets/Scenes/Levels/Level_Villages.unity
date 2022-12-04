@@ -60073,7 +60073,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1599420581}
-  - component: {fileID: 1599420580}
+  - component: {fileID: 1599420582}
   m_Layer: 0
   m_Name: Enviroments
   m_TagString: Untagged
@@ -60081,24 +60081,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!114 &1599420580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599420579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bc53b7cdeb7949a8b777ed3b85c5ecf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
-  treesParent: {fileID: 1599420581}
-  mapSize: {x: 1000, y: 1000}
-  gridSize: {x: 200, y: 200}
-  count: 0
-  drawGizmos: 1
 --- !u!4 &1599420581
 Transform:
   m_ObjectHideFlags: 0
@@ -61314,6 +61296,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1599420582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599420579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee0b231e09eb402aada146c0bfd5e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1599628489
 PrefabInstance:
   m_ObjectHideFlags: 0
