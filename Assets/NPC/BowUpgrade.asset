@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a313a2d292fab4a17ac2447abc23f1a5, type: 3}
+  m_Name: BowUpgrade
+  m_EditorClassIdentifier: 
+  Merchandises:
+  - RequireCoreCount: 3
+    NameLanguageID: 1204
+    PurchaseLimit:
+      Enable: 1
+      Value: 1
+    DisplayWhenPurchaseLimitReached: 0
+    BowUpgrade: {fileID: 11400000, guid: cae89168e14384abdbcc88e54c67519d, type: 2}
+  - RequireCoreCount: 3
+    NameLanguageID: 1205
+    PurchaseLimit:
+      Enable: 1
+      Value: 1
+    DisplayWhenPurchaseLimitReached: 0
+    BowUpgrade: {fileID: 11400000, guid: 6c43bda683a8e4631b9f7c96c489f00d, type: 2}
+  - RequireCoreCount: 3
+    NameLanguageID: 1206
+    PurchaseLimit:
+      Enable: 1
+      Value: 1
+    DisplayWhenPurchaseLimitReached: 0
+    BowUpgrade: {fileID: 11400000, guid: 0b5d5216d8f63433d9a2e652687153af, type: 2}

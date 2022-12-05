@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: Question
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 56, y: -904}
+  position: {x: 392, y: -1000}
   ports:
     keys:
     - Input
@@ -274,10 +274,7 @@ MonoBehaviour:
       _node: {fileID: -6910456541920026558}
       _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: choice_port_0
-        node: {fileID: 5340400476470885911}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -435,7 +432,7 @@ MonoBehaviour:
   m_Name: Trigger Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 408, y: -808}
+  position: {x: 744, y: -904}
   ports:
     keys:
     - Input
@@ -507,6 +504,49 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   eventReference: {fileID: 11400000, guid: ac507c8cc37504a208ea0603b08529b0, type: 2}
+--- !u!114 &-3886375799334892652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163544339b46c4f4db3181510d0a3975, type: 3}
+  m_Name: Open Merchant
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 24, y: -552}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -3886375799334892652}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: choice_port_0
+        node: {fileID: 5340400476470885911}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -3886375799334892652}
+      _typeQualifiedName: MPack.NodeEmptyIO, MPack, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  Speaker: {fileID: 11400000, guid: 2d17695728f284d43a3e12035f362298, type: 2}
+  ContentLaguageID: 1203
+  Merchant: {fileID: 11400000, guid: 37ffdfdcd023d4e6cb306277c46f0ba2, type: 2}
 --- !u!114 &-2760719994085891191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,7 +630,7 @@ MonoBehaviour:
   m_Name: Trigger Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 408, y: -520}
+  position: {x: 744, y: -616}
   ports:
     keys:
     - Input
@@ -743,6 +783,7 @@ MonoBehaviour:
   - {fileID: -5083444446712909325}
   - {fileID: 3270441517866058799}
   - {fileID: -2526406306936196300}
+  - {fileID: -3886375799334892652}
   variablePairs:
   - keyName: Mission1SpeakTo
     keyType: 2
@@ -939,7 +980,7 @@ MonoBehaviour:
   m_Name: Trigger Event
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 408, y: -648}
+  position: {x: 744, y: -744}
   ports:
     keys:
     - Input
@@ -1092,7 +1133,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: -6910456541920026558}
+        node: {fileID: -3886375799334892652}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -1118,7 +1159,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: -6910456541920026558}
+        node: {fileID: -3886375799334892652}
         reroutePoints: []
       _direction: 1
       _connectionType: 1

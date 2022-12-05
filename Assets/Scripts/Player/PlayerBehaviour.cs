@@ -62,11 +62,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     
     [Header("Inventory")]
     [SerializeField]
-    private EventReference coreEvent;
-    private int _coreCount;
-    [SerializeField]
-    private EventReference appleEvent;
-    private int _appleCount;
+    private Inventory inventory;
 
 #if UNITY_EDITOR
     [Header("Editor Only")]
@@ -323,8 +319,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         // }
         // else
         // {
-        _coreCount += 1;
-        coreEvent.Invoke(_coreCount);
+        inventory.ChangeCoreCount(1);
         // }
     }
 
