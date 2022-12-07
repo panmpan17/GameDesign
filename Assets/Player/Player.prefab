@@ -4914,6 +4914,7 @@ MonoBehaviour:
     Enable: 1
     Value: 0.6
   rollSpeed: 11
+  <rollTime>k__BackingField: 0.8
   rollSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -6311,11 +6312,9 @@ MonoBehaviour:
   animator: {fileID: 4459578040691225489}
   movement: {fileID: 2787180225705632301}
   behaviour: {fileID: 2787180225705632302}
-  rig: {fileID: 0}
   chest: {fileID: 3687132523704977752}
   chestRotationOffsetA: {x: -0.12413069, y: 0.3451792, z: -0.0086831, w: 0.93025136}
   chestRotationOffsetB: {x: -0.12285016, y: 0.26028314, z: -0.019790446, w: 0.9574805}
-  chestRotationOffset: {x: -0.12413069, y: 0.34517923, z: -0.008683097, w: 0.93025136}
   drawBowLeftHandFinalPosition: {fileID: 0}
   drawBowRightHandFinalPosition: {fileID: 0}
   rightHand: {fileID: 4847483462670027996}
@@ -6327,6 +6326,8 @@ MonoBehaviour:
     UseVariable: 1
   stepDustParticle: {fileID: 118747342}
   currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
+  drawBowClip: {fileID: 7400000, guid: 1188f5ec03d9b4b80889953ff78d0d14, type: 2}
+  rollClip: {fileID: 7400000, guid: 09629546077744cf095552aecf3a7864, type: 2}
   audioSource: {fileID: 3379590096474476584}
   oneShotAudioSource: {fileID: 1266135333095596822}
   runClip: {fileID: 11400000, guid: ec1c02d8480e64651969c0f43d92541e, type: 2}

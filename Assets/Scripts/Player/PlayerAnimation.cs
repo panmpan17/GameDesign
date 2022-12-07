@@ -18,6 +18,9 @@ public class PlayerAnimation : MonoBehaviour
 
     private static readonly int AnimNameIdle = Animator.StringToHash("Idle");
     private static readonly int AnimNameEmpty = Animator.StringToHash("Empty");
+
+    private static readonly int DrawBowSpeed = Animator.StringToHash("DrawBowSpeed");
+    private static readonly int RollSpeed = Animator.StringToHash("RollSpeed");
     
     [SerializeField]
     private Animator animator;
@@ -25,20 +28,14 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerMovement movement;
     [SerializeField]
     private PlayerBehaviour behaviour;
-    // [SerializeField]
-    // private CinemachineBlenderSettings cameraBlendSettings;
 
     [Header("Rig reference")]
-    [SerializeField]
-    private Rig rig;
     [SerializeField]
     private Transform chest;
     [SerializeField]
     private Quaternion chestRotationOffsetA;
     [SerializeField]
     private Quaternion chestRotationOffsetB;
-    [SerializeField]
-    private Quaternion chestRotationOffset;
 
     [HideInInspector]
     [SerializeField]
@@ -58,6 +55,12 @@ public class PlayerAnimation : MonoBehaviour
     private ParticleSystem stepDustParticle;
     [SerializeField]
     private TransformPointer currentArrowPointer;
+
+    [Header("Change Animation Speed")]
+    [SerializeField]
+    private AnimationClip drawBowClip;
+    [SerializeField]
+    private AnimationClip rollClip;
 
     [Header("Audio")]
     [SerializeField]
@@ -117,13 +120,16 @@ public class PlayerAnimation : MonoBehaviour
         movement.OnLandEvent += OnLand;
         movement.OnRollEvent += OnRoll;
 
-
-
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
         behaviour.OnBowShoot += OnBowShoot;
         behaviour.OnDeath += OnDeath;
         behaviour.OnRevive += OnRevive;
+
+        float speedMultiplier = rollClip.length / movement.rollTime;
+        animator.SetFloat(RollSpeed, speedMultiplier);
+
+        behaviour.OnBowParameterChanged += ChangeAnimationAccordingToBowParameter;
     }
 
     void LateUpdate()
@@ -192,28 +198,12 @@ public class PlayerAnimation : MonoBehaviour
     {
         Quaternion chestRotation = Quaternion.LookRotation(behaviour.CurrentRayHitPosition - chest.position, transform.up);
         chest.rotation = chestRotation * Quaternion.Lerp(chestRotationOffsetA, chestRotationOffsetB, movement.AngleLerpValue);
-        // chest.rotation = chestRotation * chestRotationOffset;
 
         bow.rotation = Quaternion.LookRotation(bow.position - rightHand.position, transform.up) * bowRotationOffset;
 
         Transform arrow = currentArrowPointer.Target;
         if (arrow)
             arrow.rotation = Quaternion.LookRotation(arrow.position - rightHand.position, arrow.up);
-    }
-
-    void TestRotateChest()
-    {
-        Vector3 hitPosition = behaviour.CurrentRayHitPosition;
-
-        Quaternion chestRotation = Quaternion.LookRotation(hitPosition - chest.position, transform.up);
-        chest.rotation = chestRotation * chestRotationOffset;
-
-        Debug.DrawRay(hitPosition, Vector3.up * 3, Color.white, 0.1f);
-        Debug.DrawLine(chest.position, hitPosition, Color.red, 0.1f);
-
-        Vector3 arrowVector = drawBowLeftHandFinalPosition.position - drawBowRightHandFinalPosition.position;
-        Debug.DrawRay(chest.position, arrowVector * 15, Color.yellow, 0.1f);
-        Debug.DrawRay(drawBowRightHandFinalPosition.position, arrowVector * 15, Color.green, 0.1f);
     }
 
     public void AnimationEvent(string eventName)
@@ -237,10 +227,6 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool(AnimKeyDrawingBow, true);
         animator.SetFloat(AnimKeyWalkSpeed, drawBowSlowDown.Value);
 
-        // if (_weightTweenRoutine != null)
-        //     StopCoroutine(_weightTweenRoutine);
-        // _weightTweenRoutine = StartCoroutine(TweenRigWeight(0, 1, 0.2f));
-
         audioSource.Play(bowDrawClip);
     }
 
@@ -249,10 +235,6 @@ public class PlayerAnimation : MonoBehaviour
         _drawBow = false;
         animator.SetBool(AnimKeyDrawingBow, false);
         animator.SetFloat(AnimKeyWalkSpeed, 1);
-
-        // if (_weightTweenRoutine != null)
-        //     StopCoroutine(_weightTweenRoutine);
-        // _weightTweenRoutine = StartCoroutine(TweenRigWeight(1, 0, 0.2f));
 
         audioSource.Stop();
     }
@@ -270,7 +252,6 @@ public class PlayerAnimation : MonoBehaviour
         animator.ResetTrigger(AnimKeyRoll);
         animator.SetBool(AnimKeyWalking, false);
         animator.SetBool(AnimKeyDrawingBow, false);
-        // rig.weight = 0;
 
         animator.SetTrigger(AnimKeyDeath);
     }
@@ -279,32 +260,12 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator.Play(AnimNameIdle, 0);
         animator.Play(AnimNameEmpty, 1);
+    }
 
-        // animator.ResetTrigger(AnimKeyJump);
-        // animator.ResetTrigger(AnimKeyRejump);
-        // animator.ResetTrigger(AnimKeyEndJump);
-        // animator.ResetTrigger(AnimKeyRoll);
-        // animator.SetBool(AnimKeyWalking, false);
-        // animator.SetBool(AnimKeyDrawingBow, false);
-        // rig.weight = 0;
+    void ChangeAnimationAccordingToBowParameter(BowParameter bowParameter)
+    {
+        float speedMultiplier = drawBowClip.length / bowParameter.FirstDrawDuration;
+        animator.SetFloat(DrawBowSpeed, speedMultiplier);
     }
 #endregion
-
-
-    IEnumerator TweenRigWeight(float fromWeight, float toWeight, float duration)
-    {
-        float timePassed = Mathf.InverseLerp(fromWeight, toWeight, rig.weight) * duration;
-
-        while (true)
-        {
-            yield return null;
-            timePassed += Time.deltaTime;
-            rig.weight = Mathf.Lerp(fromWeight, toWeight, timePassed / duration);
-
-            if (timePassed >= duration)
-                break;
-        }
-
-        _weightTweenRoutine = null;
-    }
 }

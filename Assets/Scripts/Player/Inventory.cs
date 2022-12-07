@@ -17,4 +17,10 @@ public class Inventory : ScriptableObject
         CoreCount += amount;
         CoreEvent.Invoke(CoreCount);
     }
+
+    public void ChangeAppleCount(int amount)
+    {
+        AppleCount += amount;
+        AppleEvent.Invoke(AppleCount);
+    }
 }

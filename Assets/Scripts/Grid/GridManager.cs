@@ -64,6 +64,7 @@ public class GridManager : MonoBehaviour
         if (gridSize.x == 0 || gridSize.y == 0)
             return;
 
+        Vector3 offset = transform.position;
         sections = new Section[Mathf.FloorToInt(_gridCount.x) * Mathf.FloorToInt(_gridCount.y)];
         int gridIndex = 0;
 
@@ -72,9 +73,9 @@ public class GridManager : MonoBehaviour
             for (int z = 0; z < _gridCount.y; z++)
             {
                 Vector3 center = new Vector3(
-                    x * gridSize.x + (gridSize.x / 2) - (mapSize.x / 2),
+                    x * gridSize.x + (gridSize.x / 2) - (mapSize.x / 2) + offset.x,
                     0,
-                    z * gridSize.y + (gridSize.y / 2) - (mapSize.y / 2));
+                    z * gridSize.y + (gridSize.y / 2) - (mapSize.y / 2) + offset.z);
 
                 sections[gridIndex++] = new Section { Center = center, GridPosition = new Vector2Int(x, z) };
             }
@@ -109,6 +110,8 @@ public class GridManager : MonoBehaviour
             removePositions.Add(centerGridPosition + GridPositionOffset[i]);
         }
 
+        if (newIndex < 0 && newIndex >= sections.Length) return;
+
         centerGridPosition = sections[newIndex].GridPosition;
         for (int i = 0; i < GridPositionOffset.Length; i++)
         {
@@ -137,13 +140,13 @@ public class GridManager : MonoBehaviour
     // public Vector2Int GetGridPosition(Vector3 position) => new Vector2Int(Mathf.FloorToInt(position.x - _startPosition.x / gridSize.x), Mathf.FloorToInt(position.z - _startPosition.z / gridSize.y));
     Vector2Int GetGridPosition(Vector3 position)
     {
-        Vector3 delta = position - _startPosition;
+        Vector3 delta = position - _startPosition - transform.position;
         return new Vector2Int(Mathf.FloorToInt(delta.x / gridSize.x), Mathf.FloorToInt(delta.z / gridSize.y));
     }
     public int GetGirdIndex(Vector2Int gridPosition) => gridPosition.x * _gridCount.y + gridPosition.y;
 
 
-
+    void OnValidate() => CalculateSections();
     void OnDrawGizmos()
     {
         if (!drawGizmos)
@@ -166,6 +169,10 @@ public class GridManager : MonoBehaviour
                 }
             }
             Gizmos.DrawSphere(_startPosition, 0.1f);
+        }
+        else
+        {
+            CalculateSections();
         }
     }
 }

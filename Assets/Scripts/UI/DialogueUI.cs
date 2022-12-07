@@ -189,6 +189,10 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
                 GameObject.FindWithTag(PlayerBehaviour.Tag).GetComponent<PlayerBehaviour>().UpgradeBow(merchandise.BowUpgrade);
                 GameObject.Find("HUD").GetComponent<PlayerStatusHUD>().UnlockBowUpgrade(merchandise.BowUpgrade);
             }
+            else
+            {
+                playerInventory.ChangeAppleCount(merchandise.AppleGain);
+            }
             node.Skip();
         }
         _dialogueGraph.Proccessing();

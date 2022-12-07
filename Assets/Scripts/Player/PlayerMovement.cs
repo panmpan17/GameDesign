@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Roll")]
     [SerializeField]
     private float rollSpeed;
+    [field:SerializeField] public float rollTime { get; private set; }
     [SerializeField]
     private AnimationCurve rollSpeedCurve;
     [SerializeField]
