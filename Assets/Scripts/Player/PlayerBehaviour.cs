@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 {
     public const string Tag = "Player";
+    private const string RightClickTag = "RightClickInteractive";
 
     [Header("Other components")]
     private Camera mainCamera;
@@ -135,20 +136,17 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         else
             CurrentRayHitPosition = _currentRay.GetPoint(50);
 
+        UpdateInteractCheck();
+    }
 
+    private void UpdateInteractCheck()
+    {
         bool isOverlap = Physics.OverlapSphereNonAlloc(body.position, interactRaycastDistance, _interactColliders, interactLayer) > 0;
+
         if (isOverlap)
         {
             if (!LastCanInteract)
-            {
-                GameObject interactGameObject = _interactColliders[0].gameObject;
-
-                if (interactGameObject.CompareTag("NPC"))
-                {
-                    _interactObject = interactGameObject;
-                    canInteractEvent.Invoke(true);
-                }
-            }
+                CheckGameObjectIsRightClickInteractable(_interactColliders[0].gameObject);
         }
         else
         {
@@ -160,8 +158,17 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         }
     }
 
+    void CheckGameObjectIsRightClickInteractable(GameObject interactGameObject)
+    {
+        if (!interactGameObject.CompareTag("RightClickInteractive"))
+            return;
 
-#region Input Events
+        _interactObject = interactGameObject;
+        canInteractEvent.Invoke(true);
+    }
+
+
+    #region Input Events
     void OnAimDown()
     {
         if (!CursorFocued)
@@ -214,13 +221,20 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         if (!_interactObject)
             return;
 
-        if (_interactObject.CompareTag("NPC"))
+        if (_interactObject.GetComponent<NPCControl>() is var npc && npc)
         {
-            var npc = _interactObject.GetComponent<NPCControl>();
             npc.StartDialogue();
 
             canInteractEvent?.Invoke(false);
             movement.FaceRotationWithoutRotateFollowTarget(npc.transform.position);
+            return;
+        }
+
+        if (_interactObject.GetComponent<TreasureChest>() is var chest)
+        {
+            chest.Open();
+            canInteractEvent?.Invoke(false);
+            movement.FaceRotationWithoutRotateFollowTarget(chest.transform.position);
         }
     }
 
@@ -312,18 +326,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     public void PickItemUp(ItemType itemType)
     {
-        // if (itemType.HealPoint.Enable)
-        // {
-        //     _health += itemType.HealPoint.Value;
-        //     if (_health > maxHealth)
-        //         _health = maxHealth;
-
-        //     healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
-        // }
-        // else
-        // {
         inventory.ChangeCoreCount(1);
-        // }
     }
 
     public void UpgradeBow(BowParameter upgradeParameter)
