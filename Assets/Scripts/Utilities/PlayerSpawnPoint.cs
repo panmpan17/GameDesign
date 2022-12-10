@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -12,6 +13,8 @@ public class PlayerSpawnPoint : MonoBehaviour
     private string _spawnPointName;
     public string PointName => _spawnPointName;
 
+    public UnityEvent OnChangeTo;
+
     void Awake()
     {
         if (_spawnPointName != "")
@@ -21,6 +24,11 @@ public class PlayerSpawnPoint : MonoBehaviour
     public void ChangeThisToPlayerSpawnPoint()
     {
         GameManager.ins.ChangePlayerSpawnPoint(this);
+    }
+
+    public void OnChangeToSpawnPoint()
+    {
+        OnChangeTo.Invoke();
     }
 
     public void Teleport()

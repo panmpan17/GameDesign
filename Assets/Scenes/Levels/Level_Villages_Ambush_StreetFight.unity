@@ -459,6 +459,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPointName: VillageStart
+  OnChangeTo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &101085609
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +493,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnPlayerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerExit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &101085612
@@ -1782,6 +1788,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPointName: 
+  OnChangeTo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &867537880
 Transform:
   m_ObjectHideFlags: 0
@@ -2878,6 +2887,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnPlayerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1521946243
 Transform:
   m_ObjectHideFlags: 0

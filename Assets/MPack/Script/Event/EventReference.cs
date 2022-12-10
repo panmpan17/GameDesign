@@ -49,6 +49,9 @@ public class EventReference : ScriptableObject
 
     public void Invoke(DialogueGraph dialogueGraph)
     {
+        for (int i = eventDispatchers.Count - 1; i >= 0; i--)
+            eventDispatchers[i].DispatchEvent();
+
         InvokeDialogueGraphEvents?.Invoke(dialogueGraph);
     }
 

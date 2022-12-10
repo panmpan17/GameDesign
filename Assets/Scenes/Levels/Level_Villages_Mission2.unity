@@ -458,6 +458,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnPlayerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &935887834
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -766,6 +769,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c869283d8d84aa3bab623bdcc856e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnPointName: 
+  OnChangeTo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1282562799
 Transform:
   m_ObjectHideFlags: 0

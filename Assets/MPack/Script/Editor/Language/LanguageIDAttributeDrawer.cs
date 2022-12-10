@@ -122,9 +122,9 @@ namespace MPack
             float totalWidth = position.width - 10;
             float y = position.y + 20;
 
-            for (int i = 0; i < s_languageDataReferences.Length; i++)
+            for (int languageIndex = 0; languageIndex < s_languageDataReferences.Length; languageIndex++)
             {
-                LanguageData languageData = s_languageDataReferences[i];
+                LanguageData languageData = s_languageDataReferences[languageIndex];
 
                 Rect languageNameRect = position;
                 languageNameRect.y = y;
@@ -132,41 +132,23 @@ namespace MPack
                 languageNameRect.width = totalWidth * 0.25f;
                 languageNameRect.height = 20;
 
-                y += heights[i];
+                y += heights[languageIndex];
 
                 Rect valueRect = position;
                 valueRect.y = languageNameRect.y + 1;
                 valueRect.x = languageNameRect.x + languageNameRect.width;
                 valueRect.width = totalWidth * 0.75f;
-                valueRect.height = heights[i] - 1;
+                valueRect.height = heights[languageIndex] - 1;
 
                 EditorGUI.LabelField(languageNameRect, languageData.name);
 
 
-                int index = idIndexInLanguage[i];
-                // Debug.LogFormat("{0}: {1}", languageData.name, index);
+                int index = idIndexInLanguage[languageIndex];
                 if (index == -1)
                 {
                     if (GUI.Button(valueRect, "Create"))
                     {
-                        Undo.RecordObject(languageData, "Create language text");
-                        var languageSerializedObject = new SerializedObject(languageData);
-                        languageSerializedObject.Update();
-
-                        LanguageData.IDTextPair[] newTexts = new LanguageData.IDTextPair[languageData.Texts.Length + 1];
-                        for (int e = 0; e < newTexts.Length - 1; e++)
-                            newTexts[e] = languageData.Texts[e];
-
-                        newTexts[newTexts.Length - 1] = new LanguageData.IDTextPair
-                        {
-                            ID = property.intValue,
-                            Text = "",
-                        };
-                        languageData.Texts = newTexts;
-                        idIndexInLanguage[i] = languageData.Texts.Length - 1;
-                        languageSerializedObject.ApplyModifiedProperties();
-                        EditorUtility.SetDirty(languageData);
-                        AssetDatabase.SaveAssetIfDirty(languageData);
+                        CreateIDTextPairInLanguageData(property, languageIndex, languageData);
                     }
                 }
                 else
@@ -175,24 +157,52 @@ namespace MPack
                     string newText = EditorGUI.TextArea(valueRect, languageData.Texts[index].Text);
                     if (EditorGUI.EndChangeCheck())
                     {
-                        Undo.RecordObject(languageData, "Change language text");
-                        var languageSerializedObject = new SerializedObject(languageData);
-                        languageSerializedObject.Update();
-
-                        languageData.Texts[index] = new LanguageData.IDTextPair {
-                            ID = property.intValue,
-                            Text = newText,
-                        };
-
                         int lineCount = newText.Split(
                             new string[] { "\n" }, System.StringSplitOptions.None).Length;
-                        heights[i] = lineCount * 20;
+                        heights[languageIndex] = lineCount * 20;
 
-                        languageSerializedObject.ApplyModifiedProperties();
-                        EditorUtility.SetDirty(languageData);
-                        AssetDatabase.SaveAssetIfDirty(languageData);
+                        ChangeIDTextPairValue(languageData, property.intValue, index, newText);
                     }
                 }
             }
         }
-    }}
+
+        private void ChangeIDTextPairValue(LanguageData languageData, int textId, int indexInLanguageData, string newText)
+        {
+            Undo.RecordObject(languageData, "Change language text");
+            var languageSerializedObject = new SerializedObject(languageData);
+            languageSerializedObject.Update();
+
+            languageData.Texts[indexInLanguageData] = new LanguageData.IDTextPair
+            {
+                ID = textId,
+                Text = newText,
+            };
+
+            languageSerializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(languageData);
+        }
+
+        void CreateIDTextPairInLanguageData(SerializedProperty property, int i, LanguageData languageData)
+        {
+            Undo.RecordObject(languageData, "Create language text");
+            var languageSerializedObject = new SerializedObject(languageData);
+            languageSerializedObject.Update();
+
+            LanguageData.IDTextPair[] newTexts = new LanguageData.IDTextPair[languageData.Texts.Length + 1];
+            for (int e = 0; e < newTexts.Length - 1; e++)
+                newTexts[e] = languageData.Texts[e];
+
+            newTexts[newTexts.Length - 1] = new LanguageData.IDTextPair
+            {
+                ID = property.intValue,
+                Text = "",
+            };
+            languageData.Texts = newTexts;
+            idIndexInLanguage[i] = languageData.Texts.Length - 1;
+            languageSerializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(languageData);
+            AssetDatabase.SaveAssetIfDirty(languageData);
+        }
+    }
+}

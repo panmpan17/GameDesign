@@ -52,16 +52,15 @@ public class GameManager : MonoBehaviour
     public void ChangePlayerSpawnPoint(PlayerSpawnPoint spawnPoint)
     {
         _currentSpawnPoint = spawnPoint;
+        _currentSpawnPoint.OnChangeToSpawnPoint();
     }
 
     public void RegisterSpawnPoint(PlayerSpawnPoint spawnPoint)
     {
-        if (spawnPoint.PointName == "Start")
-        {
-            _currentSpawnPoint = spawnPoint;
-        }
-
         _spawnPoints.Add(spawnPoint);
+
+        if (spawnPoint.PointName == "Start")
+            ChangePlayerSpawnPoint(spawnPoint);
     }
 #endregion
 

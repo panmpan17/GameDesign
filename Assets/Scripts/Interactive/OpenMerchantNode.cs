@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using MPack;
 
+
+[CreateNodeMenu("M Pack/Open Merchant")]
 public class OpenMerchantNode : AbstractNode
 {
     [Input]

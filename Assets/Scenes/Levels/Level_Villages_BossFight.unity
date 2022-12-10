@@ -272,6 +272,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnPlayerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &381422653
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -796,6 +799,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPointName: Boss
+  OnChangeTo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &2049074579
 Transform:
   m_ObjectHideFlags: 0
