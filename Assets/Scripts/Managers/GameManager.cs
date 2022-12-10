@@ -6,34 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager ins;
+    private static GameManager _ins;
+    public static GameManager ins {
+        get {
+            if (!_ins)
+                _ins = GameObject.Find("GameManager").GetComponent<GameManager>();
+            return _ins;
+        }
+    }
 
     [SerializeField]
     private PlayerBehaviour player;
-    [SerializeField]
-    private PlayerSpawnPoint spawnPoint;
+    public PlayerBehaviour Player => player;
+    private PlayerSpawnPoint _currentSpawnPoint;
+    private List<PlayerSpawnPoint> _spawnPoints = new List<PlayerSpawnPoint>();
+
 
     [SerializeField]
     private float playerReviveTime;
     [SerializeField]
     private EventReference playerReviveEvent;
 
-
-    [SerializeField]
-    private PlayerSpawnPoint[] spawnPoints;
-
     void Awake()
     {
-        ins = this;
-
         player.OnDeath += HandlePlayerDeath;
-
-        if (s_loadPoint)
-        {
-            s_loadPoint = false;
-            spawnPoints[s_pointIndex].ChangeThisToPlayerSpawnPoint();
-            spawnPoints[s_pointIndex].Teleport();
-        }
     }
 
     void HandlePlayerDeath()
@@ -45,34 +41,37 @@ public class GameManager : MonoBehaviour
     {
         DeadMessage.ins.StartFadeIn();
         yield return new WaitForSeconds(playerReviveTime);
-        player.ReviveAtSpawnPoint(spawnPoint);
+        player.ReviveAtSpawnPoint(_currentSpawnPoint);
         playerReviveEvent.Invoke();
 
         DeadMessage.ins.StartFadeOut();
     }
 
+
+#region Player spawn point
     public void ChangePlayerSpawnPoint(PlayerSpawnPoint spawnPoint)
     {
-        this.spawnPoint = spawnPoint;
+        _currentSpawnPoint = spawnPoint;
     }
 
-
-    private static bool s_loadPoint = false;
-    private static int s_pointIndex = 0;
-
-    [ConsoleCommand("load1")]
-    public static void LoadPoint1()
+    public void RegisterSpawnPoint(PlayerSpawnPoint spawnPoint)
     {
-        s_loadPoint = true;
-        s_pointIndex = 0;
-        LoadScene.ins.Load(SceneManager.GetActiveScene().name);
+        if (spawnPoint.PointName == "Start")
+        {
+            _currentSpawnPoint = spawnPoint;
+        }
+
+        _spawnPoints.Add(spawnPoint);
     }
+#endregion
 
-    [ConsoleCommand("load2")]
-    public static void LoadPoint2()
+
+    [ConsoleCommand("load name:string")]
+    public static void LoadPoint1(string name)
     {
-        s_loadPoint = true;
-        s_pointIndex = 1;
-        LoadScene.ins.Load(SceneManager.GetActiveScene().name);
+        Debug.Log(name);
+        // s_loadPoint = true;
+        // s_pointIndex = 0;
+        // LoadScene.ins.Load(SceneManager.GetActiveScene().name);
     }
 }

@@ -8,6 +8,16 @@ using UnityEditor;
 
 public class PlayerSpawnPoint : MonoBehaviour
 {
+    [SerializeField]
+    private string _spawnPointName;
+    public string PointName => _spawnPointName;
+
+    void Awake()
+    {
+        if (_spawnPointName != "")
+            GameManager.ins.RegisterSpawnPoint(this);
+    }
+
     public void ChangeThisToPlayerSpawnPoint()
     {
         GameManager.ins.ChangePlayerSpawnPoint(this);

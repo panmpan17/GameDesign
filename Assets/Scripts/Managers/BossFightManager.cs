@@ -17,8 +17,6 @@ public class BossFightManager : MonoBehaviour
 
     [Header("Player")]
     [SerializeField]
-    private PlayerBehaviour player;
-    [SerializeField]
     private EventReference playerReviveEvent;
 
     [Header("Boss Slime")]
@@ -75,7 +73,8 @@ public class BossFightManager : MonoBehaviour
         }
 #endif
 
-        player.Input.Disable();
+        InputInterface playerInput = GameManager.ins.Player.Input;
+        playerInput.Disable();
         CameraSwitcher.ins.SwitchTo("BossLand");
         lookBossCam.LookAt = bossStartPosition;
         yield return new WaitForSeconds(0.5f);
@@ -84,7 +83,7 @@ public class BossFightManager : MonoBehaviour
         lookBossCam.LookAt = _bossSlime.transform;
         yield return new WaitForSeconds(4f);
 
-        player.Input.Enable();
+        playerInput.Enable();
         slimeHealthShowEvent.Invoke(true);
         _bossSlime.UpdateHealth();
         CameraSwitcher.ins.SwitchTo("Walk");
