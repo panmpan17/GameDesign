@@ -45,11 +45,13 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField]
-    private float jumpForce;
-    [SerializeField]
     private Timer waitJumpTimer;
     [SerializeField]
+    private float jumpForce;
+    [SerializeField]
     private Timer jumpHoldTimer;
+    [SerializeField]
+    private AnimationCurveReference jumpForceCurve;
     [SerializeField]
     private ValueWithEnable<float> extraGravity;
 
@@ -267,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (jumpHoldTimer.Running)
                 {
-                    _yVelocity = jumpForce;
+                    _yVelocity = jumpForce * jumpForceCurve.Value.Evaluate(jumpHoldTimer.Progress);
 
                     if (jumpHoldTimer.UpdateEnd)
                         jumpHoldTimer.Running = false;

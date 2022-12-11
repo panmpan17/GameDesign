@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using MPack;
 
 
@@ -19,6 +20,9 @@ public class SimpleTutorialHint : MonoBehaviour
     private GameObject hintGameObject;
     [SerializeField]
     private LanguageText hintText;
+
+    [SerializeField]
+    private Image focusFrame;
 
     private TutorialHint _currentHint;
 
@@ -62,5 +66,26 @@ public class SimpleTutorialHint : MonoBehaviour
 
         _currentHint = null;
         hintGameObject.SetActive(false);
+    }
+
+    public void FocusAtWorldPosition(Vector3 position)
+    {
+        Camera camera = Camera.main;
+        Vector3 viewportPosition = camera.WorldToViewportPoint(position);
+        focusFrame.rectTransform.anchoredPosition = Convert(focusFrame.canvas, viewportPosition);
+        focusFrame.enabled = true;
+    }
+
+    Vector3 Convert(Canvas canvas, Vector3 viewportPosition)
+    {
+        var centerBasedViewPortPosition = viewportPosition - new Vector3(0.5f, 0.5f, 0);
+        var canvasRect = canvas.GetComponent<RectTransform>();
+        var scale = canvasRect.sizeDelta;
+        return Vector3.Scale(centerBasedViewPortPosition, scale);
+    }
+
+    public void CloseFocus()
+    {
+        focusFrame.enabled = false;
     }
 }

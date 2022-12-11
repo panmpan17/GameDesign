@@ -319,7 +319,10 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     void DialogueUIEnd()
     {
-        canInteractEvent.Invoke(true);
+        if (LastCanInteract)
+        {
+            canInteractEvent.Invoke(true);
+        }
     }
 #endregion
 

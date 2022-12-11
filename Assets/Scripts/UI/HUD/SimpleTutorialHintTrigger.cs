@@ -16,4 +16,11 @@ public class SimpleTutorialHintTrigger : MonoBehaviour
     {
         SimpleTutorialHint.ins.CloseHint(hint);
     }
+
+
+
+    public void FocusAtTransform(Transform target)
+    {
+        SimpleTutorialHint.ins.FocusAtWorldPosition(target.position);
+    }
 }

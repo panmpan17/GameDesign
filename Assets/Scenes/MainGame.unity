@@ -623,6 +623,22 @@ PrefabInstance:
       propertyPath: allowToggleConsoleWindow
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2787180225705632301, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
+      propertyPath: extraGravity.Value
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787180225705632301, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
+      propertyPath: jumpForceCurve.Variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
+    - target: {fileID: 2787180225705632301, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
+      propertyPath: jumpHoldTimer.TargetTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787180225705632301, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
+      propertyPath: jumpForceCurve.UseVariable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -661,7 +677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -109.922
+      value: -345.469
       objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -971,6 +987,30 @@ PrefabInstance:
     - target: {fileID: 1761137950223119991, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.3778076
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761137950223119991, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761137950223119991, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761137950223119991, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761137950223119991, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086281305514650933, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
+      propertyPath: field of view
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086281305514650933, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
+      propertyPath: far clip plane
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3086281305514650933, guid: 9dab2a463123d4995bdf4f6d21c236a4, type: 3}
       propertyPath: near clip plane
@@ -1421,6 +1461,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2811801930864468584, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811801930864468584, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811801930864468584, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811801930864468584, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811801930864468584, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811801930864468584, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3490682399321688384, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
       propertyPath: m_Name
       value: HUD
