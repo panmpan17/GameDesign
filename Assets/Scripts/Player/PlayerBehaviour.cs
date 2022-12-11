@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using MPack;
+
 
 public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 {
@@ -39,6 +41,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private float _health;
     [SerializeField]
     private EventReference healthChangeEvent;
+    [SerializeField]
+    private float appleHealPoint;
 
     [Header("Others")]
     [SerializeField]
@@ -65,6 +69,13 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     [Header("Inventory")]
     [SerializeField]
     private Inventory inventory;
+
+#if UNITY_EDITOR
+    [SerializeField]
+    private ValueWithEnable<int> startCoreCount;
+    [SerializeField]
+    private ValueWithEnable<int> startAppleCount;
+#endif
 
 #if UNITY_EDITOR
     [Header("Editor Only")]
@@ -99,6 +110,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         input.OnAimUp += OnAimUp;
         input.OnEscap += OnEscap;
         input.OnInteract += OnInteract;
+        input.OnEatApple += OnEatApple;
 
         movement.OnRollEvent += OnRoll;
         animation.OnAimAnimatinoChanged += OnAimProgress;
@@ -115,6 +127,11 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         feetPointer.Target = feet;
 
         bow.Setup(this);
+
+#if UNITY_EDITOR
+        if (startCoreCount.Enable) inventory.ChangeCoreCount(startCoreCount.Value);
+        if (startAppleCount.Enable) inventory.ChangeAppleCount(startAppleCount.Value);
+#endif
     }
 
     void Start()
@@ -218,6 +235,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     public void OnInteract()
     {
+        if (!CursorFocued)
+            return;
         if (!_interactObject)
             return;
 
@@ -235,6 +254,22 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             chest.Open();
             canInteractEvent?.Invoke(false);
             movement.FaceRotationWithoutRotateFollowTarget(chest.transform.position);
+        }
+    }
+
+    void OnEatApple()
+    {
+        if (!CursorFocued)
+            return;
+
+        if (_health >= maxHealth)
+            return;
+
+        if (inventory.AppleCount >= 1)
+        {
+            inventory.ChangeAppleCount(-1);
+            _health += appleHealPoint;
+            healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
         }
     }
 

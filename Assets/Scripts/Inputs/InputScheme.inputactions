@@ -611,15 +611,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Run",
-                    "type": "Button",
-                    "id": "d9bc7dab-8ea4-4b01-8cc8-81dd449e358a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Escap",
                     "type": "Button",
                     "id": "1dfa8f44-9157-4748-8e17-9c33d2004e00",
@@ -641,6 +632,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "302560b7-a263-41ae-ae3e-a49fd33ceb5c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EatApple",
+                    "type": "Button",
+                    "id": "5930a0dc-99b6-4626-8d1c-031e780ccf55",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1001,28 +1001,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "5b0d1c61-c567-435e-83d0-63d32b55cfaa",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Run",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c15ed0b6-eca4-4cf9-92f1-d76d3acb8d48",
-                    "path": "<HID::Logitech Logitech Dual Action>/button6",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Run",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "One Modifier",
                     "id": "544d802f-e6ea-4b9d-8b55-a5a03049be84",
                     "path": "OneModifier",
@@ -1096,6 +1074,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21160f4c-b0df-401e-9ccf-4630020ad9d5",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25181a8d-7c30-4de4-a79d-c95da177c7af",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EatApple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4fed62d7-d986-41aa-89fb-ab425aa8d52d",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EatApple",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

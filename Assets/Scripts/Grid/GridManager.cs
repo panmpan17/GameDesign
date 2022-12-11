@@ -147,7 +147,7 @@ public class GridManager : MonoBehaviour
 
 
     void OnValidate() => CalculateSections();
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         if (!drawGizmos)
             return;

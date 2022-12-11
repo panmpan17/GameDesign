@@ -22,6 +22,7 @@ public class FakeInput : MonoBehaviour, InputInterface
     public event System.Action OnRoll;
 
     public event System.Action OnInteract;
+    public event System.Action OnEatApple;
 
     public Vector2 MovementAxis { get; private set; }
     public Vector2 LookAxis { get; private set; }
