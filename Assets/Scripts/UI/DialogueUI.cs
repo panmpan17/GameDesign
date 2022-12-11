@@ -187,7 +187,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
             if (merchandise.BowUpgrade)
             {
                 GameObject.FindWithTag(PlayerBehaviour.Tag).GetComponent<PlayerBehaviour>().UpgradeBow(merchandise.BowUpgrade);
-                GameObject.Find("HUD").GetComponent<PlayerStatusHUD>().UnlockBowUpgrade(merchandise.BowUpgrade);
+                // GameObject.Find("HUD").GetComponent<PlayerStatusHUD>().UnlockBowUpgrade(merchandise.BowUpgrade);
             }
             else
             {

@@ -33,20 +33,20 @@ public class OpenMerchantNode : AbstractNode
     }
 
 
-    public void BuyMerchandise(int choiceIndex)
-    {
-        nextNode = GetOutputNode("Output");
-        status = Status.Finished;
+    // public void BuyMerchandise(int choiceIndex)
+    // {
+    //     nextNode = GetOutputNode("Output");
+    //     status = Status.Finished;
 
-        Merchant.Merchandise merchandise = Merchant.Merchandises[choiceIndex];
-        Merchant.BuyCount[choiceIndex]++;
+    //     Merchant.Merchandise merchandise = Merchant.Merchandises[choiceIndex];
+    //     Merchant.BuyCount[choiceIndex]++;
 
-        if (merchandise.BowUpgrade)
-        {
-            GameObject.FindWithTag(PlayerBehaviour.Tag).GetComponent<PlayerBehaviour>().UpgradeBow(merchandise.BowUpgrade);
-            GameObject.Find("HUD").GetComponent<PlayerStatusHUD>().UnlockBowUpgrade(merchandise.BowUpgrade);
-        }
-    }
+    //     if (merchandise.BowUpgrade)
+    //     {
+    //         GameObject.FindWithTag(PlayerBehaviour.Tag).GetComponent<PlayerBehaviour>().UpgradeBow(merchandise.BowUpgrade);
+    //         GameObject.Find("HUD").GetComponent<PlayerStatusHUD>().UnlockBowUpgrade(merchandise.BowUpgrade);
+    //     }
+    // }
 
     public void Skip()
     {

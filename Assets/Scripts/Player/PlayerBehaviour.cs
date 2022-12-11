@@ -23,7 +23,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     [SerializeField]
     private Bow bow;
-    public event System.Action<BowParameter> OnBowParameterChanged;
+    public event System.Action<BowParameter, BowParameter> OnBowParameterChanged;
 
     [Header("Reference")]
     [SerializeField]
@@ -139,7 +139,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         _health = maxHealth;
         healthChangeEvent?.Invoke(1);
 
-        OnBowParameterChanged?.Invoke(bow.CurrentParameter);
+        OnBowParameterChanged?.Invoke(bow.CurrentParameter, bow.CurrentParameter);
 
         FocusCursor();
     }
@@ -373,7 +373,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public void UpgradeBow(BowParameter upgradeParameter)
     {
         bow.UpgradeBow(upgradeParameter);
-        OnBowParameterChanged?.Invoke(bow.CurrentParameter);
+        OnBowParameterChanged?.Invoke(bow.CurrentParameter, upgradeParameter);
     }
 
 

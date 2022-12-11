@@ -262,7 +262,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.Play(AnimNameEmpty, 1);
     }
 
-    void ChangeAnimationAccordingToBowParameter(BowParameter bowParameter)
+    void ChangeAnimationAccordingToBowParameter(BowParameter bowParameter, BowParameter newBowParameter)
     {
         float speedMultiplier = drawBowClip.length / bowParameter.FirstDrawDuration;
         animator.SetFloat(DrawBowSpeed, speedMultiplier);
