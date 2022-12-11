@@ -72,16 +72,8 @@ public class SimpleTutorialHint : MonoBehaviour
     {
         Camera camera = Camera.main;
         Vector3 viewportPosition = camera.WorldToViewportPoint(position);
-        focusFrame.rectTransform.anchoredPosition = Convert(focusFrame.canvas, viewportPosition);
+        focusFrame.rectTransform.anchoredPosition = focusFrame.canvas.ViewportToCanvasAnchoredPoint(viewportPosition);
         focusFrame.enabled = true;
-    }
-
-    Vector3 Convert(Canvas canvas, Vector3 viewportPosition)
-    {
-        var centerBasedViewPortPosition = viewportPosition - new Vector3(0.5f, 0.5f, 0);
-        var canvasRect = canvas.GetComponent<RectTransform>();
-        var scale = canvasRect.sizeDelta;
-        return Vector3.Scale(centerBasedViewPortPosition, scale);
     }
 
     public void CloseFocus()

@@ -269,6 +269,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     public void InstantDeath()
     {
+        if (_handleDeath)
+            return;
+
         _health = 0;
         healthChangeEvent?.Invoke(0);
         _handleDeath = true;

@@ -7,18 +7,21 @@ using Cinemachine;
 
 public class TeachShootSlimeCore : MonoBehaviour
 {
-    [SerializeField]
-    private TriggerSpawnSlime spawnSlimeTrigger;
-    [SerializeField]
-    private Transform pointerArrow;
-    [SerializeField]
-    private string pointSlimeCamera;
-
+    [Header("NPC")]
     [SerializeField]
     private NPCControl npcControl;
     [SerializeField]
     private VariableStorage variableStorage;
 
+    [Header("Spawn slime")]
+    [SerializeField]
+    private TriggerSpawnSlime spawnSlimeTrigger;
+    [SerializeField]
+    private string pointSlimeCamera;
+
+    [Header("Mark Slime Core")]
+    [SerializeField]
+    private Transform arrow;
     [SerializeField]
     private EventReference focusOpenEvent;
     [SerializeField]
@@ -53,13 +56,8 @@ public class TeachShootSlimeCore : MonoBehaviour
         spawnSlimeTrigger.TriggerFire();
         yield return new WaitForSeconds(2);
 
-
-        focusTarget = slimeList.List[0].transform;
-        // SimpleTutorialHint.ins.FocusAtWorldPosition(slimeList.List[0].transform.position);
-
-        // yield return new WaitForSeconds(1.5f);
-
-        // CameraSwitcher.ins.SwitchTo("Walk");
+        var core = slimeList.List[0].GetComponentInChildren<SlimeCore>();
+        focusTarget = core.transform;
 
         variableStorage.Set("TutorialSlimeIsSpawned", true);
         npcControl.StartDialogue();
@@ -68,6 +66,9 @@ public class TeachShootSlimeCore : MonoBehaviour
     void OpenFocusFrame()
     {
         SimpleTutorialHint.ins.FocusAtWorldPosition(focusTarget.position);
+        // pointerArrow.SetTarget(focusTarget);
+        arrow.gameObject.SetActive(true);
+        arrow.position = focusTarget.position;
     }
 
     void CloseFocusFrame()
