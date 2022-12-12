@@ -4901,15 +4901,24 @@ MonoBehaviour:
   aimSlowDown: 0.5
   aimDownLimit: 335
   aimUpLimit: 50
-  jumpForce: 5
   waitJumpTimer:
     TargetTime: 0.5
     Running: 0
     ReverseMode: 0
+  jumpForce: 5
   jumpHoldTimer:
     TargetTime: 0.2
     Running: 0
     ReverseMode: 0
+  jumpForceCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
   extraGravity:
     Enable: 1
     Value: 0.6
@@ -4976,6 +4985,7 @@ MonoBehaviour:
   feet: {fileID: 2787180225705632307}
   maxHealth: 100
   healthChangeEvent: {fileID: 11400000, guid: 17b0e71977e87429b972945c2b722bf1, type: 2}
+  appleHealPoint: 10
   hitLayers:
     serializedVersion: 2
     m_Bits: 5376
@@ -4988,6 +4998,12 @@ MonoBehaviour:
   canInteractEvent: {fileID: 11400000, guid: b8fbbb11370b2494f8dd72fc8925e369, type: 2}
   dialogueEndEvent: {fileID: 11400000, guid: 84a6f59297b02472a8eb2953de76e458, type: 2}
   inventory: {fileID: 11400000, guid: 7db8e84510a234032a71364640969ac4, type: 2}
+  startCoreCount:
+    Enable: 0
+    Value: 0
+  startAppleCount:
+    Enable: 0
+    Value: 0
   focusCursorWhenPointerDown: 0
 --- !u!143 &2787180225705632303
 CharacterController:

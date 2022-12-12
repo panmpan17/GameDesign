@@ -9,29 +9,26 @@ public class PlayerStatusHUD : MonoBehaviour
 {
     [Header("Aim")]
     [SerializeField]
-    private Image aimProgressFrame;
-    [SerializeField]
-    private FillBarControl aimProgressBar;
+    private CanvasGroup aimProgressFrame;
     [SerializeField]
     private Image fill;
     [SerializeField]
     private EventReference aimProgressEvent;
 
     [SerializeField]
-    private Color aimFrameUnfocusColor;
+    private float aimFrameUnfocusAlpha;
     [SerializeField]
-    private Color aimFrameFocusColor;
+    private float aimFrameFocusAlpha;
 
+    [Header("Aim Ring Color")]
     [SerializeField]
     private Image firstAim;
     [SerializeField]
     private Image secondAim;
-
     [SerializeField]
     private Color color1;
     [SerializeField]
     private Color color2;
-
     [SerializeField]
     private float min;
     [SerializeField]
@@ -73,7 +70,6 @@ public class PlayerStatusHUD : MonoBehaviour
 
     void Awake()
     {
-        aimProgressBar.SetFillAmount(0);
         healthFill.SetFillAmount(1);
 
         coreChangeEvent.InvokeIntEvents += ChangeCoreCount;
@@ -87,6 +83,8 @@ public class PlayerStatusHUD : MonoBehaviour
         {
             player.OnBowParameterChanged += UnlockBowUpgrade;
         }
+
+        fill.fillAmount = 0;
     }
 
     void OnDestroy()
@@ -101,8 +99,14 @@ public class PlayerStatusHUD : MonoBehaviour
 
     void ChangeAimProgress(float progress)
     {
-        // aimProgressFrame.color = progress > 0 ? aimFrameFocusColor : aimFrameUnfocusColor;
-        // aimProgressBar.SetFillAmount(progress / 2);
+        if (progress <= 0)
+        {
+            aimProgressFrame.alpha = aimFrameUnfocusAlpha;
+            fill.fillAmount = 0;
+            return;
+        }
+
+        aimProgressFrame.alpha = aimFrameFocusAlpha;
 
         if (progress <= 1)
         {

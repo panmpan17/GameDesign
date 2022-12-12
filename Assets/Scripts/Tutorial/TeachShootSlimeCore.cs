@@ -42,6 +42,7 @@ public class TeachShootSlimeCore : MonoBehaviour
 
     IEnumerator C_TutorialProcess()
     {
+        // TODO: hide interact key prompt
         PlayerBehaviour player = GameManager.ins.Player;
         player.Input.Disable();
 
