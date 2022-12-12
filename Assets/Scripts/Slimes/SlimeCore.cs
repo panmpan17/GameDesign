@@ -12,12 +12,12 @@ public class SlimeCore : MonoBehaviour
     [SerializeField]
     private EffectReference hitEffect;
 
-    public event System.Action OnDamageEvent;
+    public event System.Action<SlimeCore> OnDamageEvent;
 
     public void OnDamage()
     {
         gameObject.SetActive(false);
-        OnDamageEvent?.Invoke();
+        OnDamageEvent?.Invoke(this);
 
         if (hitEffect)
             hitEffect.AddWaitingList(transform.position, Quaternion.identity);

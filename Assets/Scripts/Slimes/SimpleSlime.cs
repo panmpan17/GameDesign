@@ -58,11 +58,11 @@ public class SimpleSlime : MonoBehaviour
 
     void Awake()
     {
-        _cores = GetComponentsInChildren<SlimeCore>();
-        for (int i = 0; i < _cores.Length; i++)
-        {
-            _cores[i].OnDamageEvent += OnCoreDamage;
-        }
+        // _cores = GetComponentsInChildren<SlimeCore>();
+        // for (int i = 0; i < _cores.Length; i++)
+        // {
+        //     _cores[i].OnDamageEvent += OnCoreDamage;
+        // }
 
         _jumpWaitTimer = new Timer(jumpWaitTimeRange.PickRandomNumber());
     }

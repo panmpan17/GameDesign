@@ -1376,6 +1376,7 @@ MonoBehaviour:
   healthChangeEvent: {fileID: 11400000, guid: 223b7a84cb0614b6c93896df7b28d0ab, type: 2}
   healthBar: {fileID: 7672894786899804680}
   barControl: {fileID: 870133452908602938}
+  shakeTween: {fileID: 1184597767255761295}
 --- !u!114 &1073871755936625941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,6 +1529,16 @@ MonoBehaviour:
     ReverseMode: 0
   shakeSize: {x: 0, y: 6, z: 0}
   anchorMode: 1
+  shakeSizeUseCurve: 0
+  sizeCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
 --- !u!1 &4514729163592868091
 GameObject:
   m_ObjectHideFlags: 0
@@ -2969,6 +2980,7 @@ GameObject:
   - component: {fileID: 2769018037731198934}
   - component: {fileID: 3862421774093929690}
   - component: {fileID: 8287864330135237043}
+  - component: {fileID: 1184597767255761295}
   m_Layer: 5
   m_Name: BossHealthBar
   m_TagString: Untagged
@@ -3035,6 +3047,56 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 30
+--- !u!114 &1184597767255761295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7672894786899804680}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7bc84b28d6642799c815bc6a8acc68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration:
+    TargetTime: 0.8
+    Running: 0
+    ReverseMode: 0
+  interval:
+    TargetTime: 0.01
+    Running: 0
+    ReverseMode: 0
+  shakeSize: {x: 15, y: 30, z: 0}
+  anchorMode: 1
+  shakeSizeUseCurve: 1
+  sizeCurve:
+    Constant:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0.06505188
+        outSlope: -0.06505188
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.0759124
+      - serializedVersion: 3
+        time: 1
+        value: 0.52368164
+        inSlope: -1.5593776
+        outSlope: -1.5593776
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.07445264
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Variable: {fileID: 0}
+    UseVariable: 0
 --- !u!1 &8111733869799117172
 GameObject:
   m_ObjectHideFlags: 0

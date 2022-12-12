@@ -12,7 +12,7 @@ namespace XnodeBehaviourTree
         [Input]
         public BehaviourPort Input;
 
-        [Output]
+        [Output(connectionType: ConnectionType.Override)]
         public BehaviourPort Output;
 
         [System.NonSerialized] public AbstractBehaviourNode _child;

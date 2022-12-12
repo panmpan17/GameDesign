@@ -27,6 +27,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private EventReference playerReviveEvent;
 
+
+#if UNITY_EDITOR
+    [Header("Editor Only")]
+    [SerializeField]
+    private bool overrideStartPoint;
+    [SerializeField]
+    private string startPointName;
+#endif
+
     void Awake()
     {
         player.OnDeath += HandlePlayerDeath;
@@ -59,6 +68,14 @@ public class GameManager : MonoBehaviour
     {
         _spawnPoints.Add(spawnPoint);
 
+#if UNITY_EDITOR
+        if (overrideStartPoint)
+        {
+            if (spawnPoint.PointName == startPointName)
+                ChangePlayerSpawnPoint(spawnPoint);
+            return;
+        }
+#endif
         if (spawnPoint.PointName == "Start")
             ChangePlayerSpawnPoint(spawnPoint);
     }

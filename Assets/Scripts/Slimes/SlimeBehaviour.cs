@@ -60,6 +60,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     public event System.Action<Collision> OnCollisionEnterEvent;
     public event System.Action<Collision> OnCollisionExitEvent;
 
+    public event System.Action<SlimeCore> OnCoreDamagedEvent;
+
 
     void Awake()
     {
@@ -122,11 +124,16 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     }
 
     #region Damage, Death, Loot table
-    void OnCoreDamage()
+    void OnCoreDamage(SlimeCore damagedCore)
     {
         int aliveCount = UpdateHealth();
         if (aliveCount <= 0)
+        {
             HandleDeath();
+            return;
+        }
+
+        OnCoreDamagedEvent?.Invoke(damagedCore);
     }
 
     void HandleDeath()

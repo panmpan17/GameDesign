@@ -135,6 +135,12 @@ public class Arrow : MonoBehaviour, IPoolableObj
     {
         otherTransform.GetComponent<OnArrowHit>()?.Trigger(transform.position);
 
+        if (otherTransform.CompareTag(ArrowBounceOff.Tag))
+        {
+            BounceOffArrow();
+            return;
+        }
+
         if (otherTransform.CompareTag(SlimeBehaviourTreeRunner.Tag))
         {
             OnHitSlimeBody(otherTransform);
@@ -155,13 +161,18 @@ public class Arrow : MonoBehaviour, IPoolableObj
         StopArrow();
     }
 
+    void BounceOffArrow()
+    {
+        enabled = false;
+        rigidbody.useGravity = true;
+    }
+
     void OnHitSlimeBody(Transform otherTransform)
     {
         var slime = otherTransform.GetComponent<SlimeBehaviour>();
         if (slime.ArrowBounceOff)
         {
-            enabled = false;
-            rigidbody.useGravity = true;
+            BounceOffArrow();
             return;
         }
 
