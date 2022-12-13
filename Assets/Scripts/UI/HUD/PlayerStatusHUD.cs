@@ -85,6 +85,8 @@ public class PlayerStatusHUD : MonoBehaviour
         }
 
         fill.fillAmount = 0;
+
+        aimProgressFrame.alpha = aimFrameUnfocusAlpha;
     }
 
     void OnDestroy()
