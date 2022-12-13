@@ -9,53 +9,92 @@ public class SelectableExtendedEffects : MonoBehaviour, IPointerEnterHandler, IP
     [SerializeField]
     private GraphicTargetManipulate[] graphicTargetManipulates;
 
+    private Color[] originalColors;
+    private bool _isSelected;
+    private bool _isHovered;
+    private bool _isPressed;
+
     void Awake()
     {
-        foreach (GraphicTargetManipulate graphicTarget in graphicTargetManipulates)
+        originalColors = new Color[graphicTargetManipulates.Length];
+        for (int i = 0; i < graphicTargetManipulates.Length; i++)
         {
+            GraphicTargetManipulate graphicTarget = graphicTargetManipulates[i];
             if (graphicTarget.ActivateWhenHovered)
                 graphicTarget.Graphic.enabled = false;
+
+            originalColors[i] = graphicTarget.Graphic.color;
         }
     }
 
 
     public void OnSelect(BaseEventData eventData)
     {
+        _isSelected = true;
+        UpdateGraphic();
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
+        _isSelected = false;
+        UpdateGraphic();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        // throw new System.NotImplementedException();
+        _isPressed = true;
+        UpdateGraphic();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        foreach (GraphicTargetManipulate graphicTarget in graphicTargetManipulates)
-        {
-            if (graphicTarget.ActivateWhenHovered)
-                graphicTarget.Graphic.enabled = true;
-        }
-        // throw new System.NotImplementedException();
+        _isHovered = true;
+        UpdateGraphic();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-
-        foreach (GraphicTargetManipulate graphicTarget in graphicTargetManipulates)
-        {
-            if (graphicTarget.ActivateWhenHovered)
-                graphicTarget.Graphic.enabled = false;
-        }
-        // throw new System.NotImplementedException();
+        _isHovered = false;
+        UpdateGraphic();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        // throw new System.NotImplementedException();
+        _isPressed = false;
+        UpdateGraphic();
+    }
+
+    void UpdateGraphic()
+    {
+        for (int i = 0; i < graphicTargetManipulates.Length; i++)
+        {
+            GraphicTargetManipulate graphicTarget = graphicTargetManipulates[i];
+
+            if (graphicTarget.ActivateWhenHovered)
+                graphicTarget.Graphic.enabled = _isHovered;
+            if (!graphicTarget.Graphic.enabled)
+                continue;
+
+            if (graphicTarget.ChangeColorWhenPressed && _isPressed)
+            {
+                graphicTarget.Graphic.color = graphicTarget.PressedColor;
+                continue;
+            }
+
+            if (graphicTarget.ChangeColorWhenHovered && _isHovered)
+            {
+                graphicTarget.Graphic.color = graphicTarget.HoveredColor;
+                continue;
+            }
+
+            if (graphicTarget.ChangeColorWhenHovered && _isSelected)
+            {
+                graphicTarget.Graphic.color = graphicTarget.SelectedColor;
+                continue;
+            }
+
+            graphicTarget.Graphic.color = originalColors[i];
+        }
     }
 
 
@@ -65,5 +104,13 @@ public class SelectableExtendedEffects : MonoBehaviour, IPointerEnterHandler, IP
         public Graphic Graphic;
 
         public bool ActivateWhenHovered;
+        public bool ChangeColorWhenHovered;
+        public Color HoveredColor;
+
+        public bool ChangeColorWhenPressed;
+        public Color PressedColor;
+
+        public bool ChangeColorWhenSelected;
+        public Color SelectedColor;
     }
 }

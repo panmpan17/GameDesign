@@ -6,10 +6,10 @@ using MPack;
 public class LanguageAssign : MonoBehaviour
 {
     public static LanguageAssign ins;
+    private static int s_currentIndex = 0;
 
     [SerializeField]
     private LanguageData[] languages;
-    private int _currentIndex;
 
     void Awake()
     {
@@ -20,26 +20,26 @@ public class LanguageAssign : MonoBehaviour
         }
 
         ins = this;
-        LanguageMgr.AssignLanguageData(languages[0]);
+        LanguageMgr.AssignLanguageData(languages[s_currentIndex]);
     }
 
     public void NextLanguage()
     {
-        if (++_currentIndex >= languages.Length)
+        if (++s_currentIndex >= languages.Length)
         {
-            _currentIndex = 0;
+            s_currentIndex = 0;
         }
 
-        LanguageMgr.AssignLanguageData(languages[_currentIndex]);
+        LanguageMgr.AssignLanguageData(languages[s_currentIndex]);
     }
 
     public void PreviousLanguage()
     {
-        if (--_currentIndex < 0)
+        if (--s_currentIndex < 0)
         {
-            _currentIndex = languages.Length - 1;
+            s_currentIndex = languages.Length - 1;
         }
 
-        LanguageMgr.AssignLanguageData(languages[_currentIndex]);
+        LanguageMgr.AssignLanguageData(languages[s_currentIndex]);
     }
 }
