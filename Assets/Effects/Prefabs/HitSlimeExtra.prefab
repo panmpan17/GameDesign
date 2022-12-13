@@ -10025,8 +10025,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4
-      minScalar: 3.5
+      scalar: 4.8
+      minScalar: 4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10782,22 +10782,13 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 0.52597046
           inSlope: 2
           outSlope: 2
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
-        - serializedVersion: 3
-          time: 0.34607667
-          value: 0.8222544
-          inSlope: 0.77451324
-          outSlope: 0.77451324
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
           value: 1
@@ -18493,7 +18484,7 @@ ParticleSystem:
       emitProbability: 1
     - serializedVersion: 3
       emitter: {fileID: 4364067937176438793}
-      type: 2
+      type: 0
       properties: 0
       emitProbability: 1
   LightsModule:

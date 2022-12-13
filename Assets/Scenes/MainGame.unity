@@ -771,22 +771,6 @@ PrefabInstance:
       propertyPath: allowToggleConsoleWindow
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2787180225705632301, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
-      propertyPath: extraGravity.Value
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2787180225705632301, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
-      propertyPath: jumpForceCurve.Variable
-      value: 
-      objectReference: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
-    - target: {fileID: 2787180225705632301, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
-      propertyPath: jumpHoldTimer.TargetTime
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2787180225705632301, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
-      propertyPath: jumpForceCurve.UseVariable
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632302, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: startCoreCount.Value
       value: 10
@@ -809,15 +793,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -712.63
+      value: 70.7
       objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.77
+      value: 80.949
       objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 759.66
+      value: -313.8
       objectReference: {fileID: 0}
     - target: {fileID: 2787180225705632307, guid: 130c9fe058d1f43c4b53b0ff04bf1fd5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1943,6 +1927,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: aimFrameFocusAlpha
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 314014385853459440, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: aimFrameUnfocusAlpha
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2811801930864468584, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -2062,6 +2054,30 @@ PrefabInstance:
     - target: {fileID: 3490682399321688412, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311496862253162536, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311496862253162536, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 4311496862253162536, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018607249658211961, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.93333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018607249658211961, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018607249658211961, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.93333334
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a21012b9dbcf74aadbb99de3bb98b39e, type: 3}

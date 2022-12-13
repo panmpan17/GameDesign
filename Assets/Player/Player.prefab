@@ -4907,7 +4907,7 @@ MonoBehaviour:
     ReverseMode: 0
   jumpForce: 5
   jumpHoldTimer:
-    TargetTime: 0.2
+    TargetTime: 0.25
     Running: 0
     ReverseMode: 0
   jumpForceCurve:
@@ -4917,11 +4917,11 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    Variable: {fileID: 0}
-    UseVariable: 0
+    Variable: {fileID: 11400000, guid: 78e2a0aa8975147afa012a53c22e43b5, type: 2}
+    UseVariable: 1
   extraGravity:
     Enable: 1
-    Value: 0.6
+    Value: 2.5
   rollSpeed: 11
   <rollTime>k__BackingField: 0.8
   rollSpeedCurve:

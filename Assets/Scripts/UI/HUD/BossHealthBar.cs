@@ -30,9 +30,12 @@ public class BossHealthBar : MonoBehaviour
         healthChangeEvent.InvokeFloatEvents -= BossHealthChanged;
     }
 
-    void BossHealthChanged(float amount)
+    void BossHealthChanged(float newAmount)
     {
-        barControl.SetFillAmount(amount);
-        shakeTween.Trigger();
+        if (barControl.Amount > newAmount)
+        {
+            shakeTween.Trigger();
+        }
+        barControl.SetFillAmount(newAmount);
     }
 }

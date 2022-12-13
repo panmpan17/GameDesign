@@ -143,6 +143,15 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
 
         behaviourTreeRunner.enabled = false;
 
+        StartCoroutine(DelayDeathAnimation());
+    }
+
+    IEnumerator DelayDeathAnimation()
+    {
+        OnDeath?.Invoke();
+
+        yield return new WaitForSeconds(0.6f);
+
         gameObject.Tween(
             gameObject,
             transform.position,
@@ -151,8 +160,6 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
             TweenScaleFunctions.Linear,
             (action) => transform.position = action.CurrentValue,
             (action) => Destroy(gameObject));
-
-        OnDeath?.Invoke();
     }
 
     void SpawnLootTable()
