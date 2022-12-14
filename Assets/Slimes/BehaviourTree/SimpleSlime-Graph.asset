@@ -20,7 +20,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -8178062295190391772}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -52,15 +52,25 @@ MonoBehaviour:
   ports:
     keys:
     - Input
+    - duration
     values:
     - _fieldName: Input
       _node: {fileID: -7819487993475108235}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
         node: {fileID: -1393111378612696310}
         reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: duration
+      _node: {fileID: -7819487993475108235}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -84,15 +94,25 @@ MonoBehaviour:
   ports:
     keys:
     - Input
+    - duration
     values:
     - _fieldName: Input
       _node: {fileID: -7403836097788168784}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
         node: {fileID: -1942725931742520887}
         reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: duration
+      _node: {fileID: -7403836097788168784}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -120,7 +140,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -4114043830194167208}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -132,14 +152,14 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: -4114043830194167208}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
         node: {fileID: -2512404125227428807}
         reroutePoints: []
       _direction: 1
-      _connectionType: 0
+      _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
   duration: 0.5
@@ -164,7 +184,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -3994944844670787141}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -198,7 +218,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -3134761488293361800}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -210,7 +230,7 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: -3134761488293361800}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -244,7 +264,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -2512404125227428807}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -256,7 +276,7 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: -2512404125227428807}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -289,7 +309,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -2012735506154305370}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -321,7 +341,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -1942725931742520887}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -333,7 +353,7 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: -1942725931742520887}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -367,7 +387,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -1393111378612696310}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -379,7 +399,7 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: -1393111378612696310}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -405,14 +425,14 @@ MonoBehaviour:
   m_Name: Align Rotation
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1096, y: -8}
+  position: {x: 1096, y: -24}
   ports:
     keys:
     - Input
     values:
     - _fieldName: Input
       _node: {fileID: -1135427166039016538}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -423,6 +443,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
+  RaycastDistance: 3
 --- !u!114 &-436230661830764811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,7 +465,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -436230661830764811}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -456,14 +477,14 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: -436230661830764811}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
         node: {fileID: -3134761488293361800}
         reroutePoints: []
       _direction: 1
-      _connectionType: 0
+      _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
   duration: 1
@@ -489,7 +510,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: -380776673201835846}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -501,7 +522,7 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: -380776673201835846}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -552,6 +573,7 @@ MonoBehaviour:
   - {fileID: -2012735506154305370}
   - {fileID: 1437098275938645884}
   - {fileID: 2912626486050766916}
+  - {fileID: 6074638301582694730}
   FunctionGraph: {fileID: 0}
 --- !u!114 &242762268889541461
 MonoBehaviour:
@@ -574,7 +596,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 242762268889541461}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -586,7 +608,7 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: 242762268889541461}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -622,7 +644,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 1437098275938645884}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -654,7 +676,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 1600809344376497510}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -666,14 +688,14 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: 1600809344376497510}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
         node: {fileID: -380776673201835846}
         reroutePoints: []
       _direction: 1
-      _connectionType: 0
+      _connectionType: 1
       _typeConstraint: 0
       _dynamic: 0
   repeatLimit:
@@ -701,7 +723,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 2113511305107047818}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -734,7 +756,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 2912626486050766916}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -771,7 +793,7 @@ MonoBehaviour:
     values:
     - _fieldName: Output
       _node: {fileID: 4031477337329942825}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -802,7 +824,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 4064761815141260828}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -814,7 +836,7 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: 4064761815141260828}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -856,7 +878,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 4415591222567358230}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -890,7 +912,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 5043519547884151832}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -902,7 +924,7 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: Output
       _node: {fileID: 5043519547884151832}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
@@ -915,6 +937,42 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+--- !u!114 &6074638301582694730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beebfa65bb5b34a28874c31b9cd270d0, type: 3}
+  m_Name: Random Range
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 808, y: 424}
+  ports:
+    keys:
+    - Output
+    values:
+    - _fieldName: Output
+      _node: {fileID: 6074638301582694730}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: duration
+        node: {fileID: 6346255395425783312}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Range:
+    ConstantMin: 0.7
+    ConstantMax: 0.9
+    Variable: {fileID: 0}
+    UseVariable: 0
+  Output: 0
 --- !u!114 &6259466595050011158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,7 +993,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 6259466595050011158}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
@@ -1004,14 +1062,27 @@ MonoBehaviour:
   ports:
     keys:
     - Input
+    - duration
     values:
     - _fieldName: Input
       _node: {fileID: 6346255395425783312}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
         node: {fileID: 4064761815141260828}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: duration
+      _node: {fileID: 6346255395425783312}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: Output
+        node: {fileID: 6074638301582694730}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -1039,7 +1110,7 @@ MonoBehaviour:
     values:
     - _fieldName: Input
       _node: {fileID: 7084027746508531292}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, Assembly-CSharp, Version=0.0.0.0,
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
