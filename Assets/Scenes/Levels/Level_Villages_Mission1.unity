@@ -810,6 +810,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1440066921}
+        m_TargetAssemblyTypeName: NPCControl, Assembly-CSharp
+        m_MethodName: RegisterMarker
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   FloatEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -847,6 +859,9 @@ MonoBehaviour:
   playerFeetPointer: {fileID: 11400000, guid: d078023746b8f4112adc4bdd062eb354, type: 2}
   dialogueGraph: {fileID: 11400000, guid: fbcd0061fbdea4073a4b23bd2141b76d, type: 2}
   startDialogueEvent: {fileID: 11400000, guid: 2dc2e6134203247d2ac67c82844b1f6d, type: 2}
+  minimapMarker: {fileID: 11400000, guid: 028614439381e4503b2cd9f509999da5, type: 2}
+  registerMarkerOnStart: 0
+  registerMarkerOnFirstConversation: 0
 --- !u!1001 &1494285273
 PrefabInstance:
   m_ObjectHideFlags: 0

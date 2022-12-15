@@ -667,6 +667,15 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnlargeMinimap"",
+                    ""type"": ""Button"",
+                    ""id"": ""09df7c6a-f9f9-46a7-a28d-e0ec30f7e886"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1131,6 +1140,28 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""action"": ""EatApple"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""754a56b8-87fb-4005-82b2-203383eee58c"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnlargeMinimap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bd7df1f-2eff-460f-a225-fb9432e481d8"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnlargeMinimap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1160,6 +1191,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         m_Player_ToggleConsoleWindow = m_Player.FindAction("ToggleConsoleWindow", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_EatApple = m_Player.FindAction("EatApple", throwIfNotFound: true);
+        m_Player_EnlargeMinimap = m_Player.FindAction("EnlargeMinimap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1333,6 +1365,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ToggleConsoleWindow;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_EatApple;
+    private readonly InputAction m_Player_EnlargeMinimap;
     public struct PlayerActions
     {
         private @InputScheme m_Wrapper;
@@ -1346,6 +1379,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         public InputAction @ToggleConsoleWindow => m_Wrapper.m_Player_ToggleConsoleWindow;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @EatApple => m_Wrapper.m_Player_EatApple;
+        public InputAction @EnlargeMinimap => m_Wrapper.m_Player_EnlargeMinimap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1382,6 +1416,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @EatApple.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEatApple;
                 @EatApple.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEatApple;
                 @EatApple.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEatApple;
+                @EnlargeMinimap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnlargeMinimap;
+                @EnlargeMinimap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnlargeMinimap;
+                @EnlargeMinimap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnlargeMinimap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1413,6 +1450,9 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @EatApple.started += instance.OnEatApple;
                 @EatApple.performed += instance.OnEatApple;
                 @EatApple.canceled += instance.OnEatApple;
+                @EnlargeMinimap.started += instance.OnEnlargeMinimap;
+                @EnlargeMinimap.performed += instance.OnEnlargeMinimap;
+                @EnlargeMinimap.canceled += instance.OnEnlargeMinimap;
             }
         }
     }
@@ -1441,5 +1481,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         void OnToggleConsoleWindow(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnEatApple(InputAction.CallbackContext context);
+        void OnEnlargeMinimap(InputAction.CallbackContext context);
     }
 }

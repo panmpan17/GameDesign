@@ -19,6 +19,9 @@ public interface InputInterface
     event System.Action OnInteract;
     event System.Action OnEatApple;
 
+    event System.Action OnMinimapEnlargeDown;
+    event System.Action OnMinimapEnlargeUp;
+
     Vector2 MovementAxis { get; }
     Vector2 LookAxis { get; }
     bool HasMovementAxis { get; }
@@ -54,6 +57,9 @@ public class PlayerInput : MonoBehaviour, InputInterface
     public event System.Action OnInteract;
     public event System.Action OnEatApple;
 
+    public event System.Action OnMinimapEnlargeDown;
+    public event System.Action OnMinimapEnlargeUp;
+
 
     public Vector2 MovementAxis { get; private set; }
     public Vector2 LookAxis { get; private set; }
@@ -86,6 +92,9 @@ public class PlayerInput : MonoBehaviour, InputInterface
 
         _scheme.Player.Interact.performed += OnInteractPerformed;
         _scheme.Player.EatApple.performed += OnEatApplePerformed;
+
+        _scheme.Player.EnlargeMinimap.performed += OnMinimapEnlargePerformed;
+        _scheme.Player.EnlargeMinimap.canceled += OnMinimapEnlargeCanceled;
 
         _scheme.Player.ToggleConsoleWindow.performed += OnToggleConsoleWindow;
     }
@@ -129,8 +138,10 @@ public class PlayerInput : MonoBehaviour, InputInterface
     void OnRollPerformed(CallbackContext callbackContext) => OnRoll?.Invoke();
 
     void OnInteractPerformed(CallbackContext callbackContext) => OnInteract?.Invoke();
-
     void OnEatApplePerformed(CallbackContext callbackContext) => OnEatApple?.Invoke();
+
+    void OnMinimapEnlargePerformed(CallbackContext callbackContext) => OnMinimapEnlargeDown?.Invoke();
+    void OnMinimapEnlargeCanceled(CallbackContext callbackContext) => OnMinimapEnlargeUp?.Invoke();
 
     void OnToggleConsoleWindow(CallbackContext callbackContext)
     {

@@ -51,6 +51,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private EventReference pauseEvent;
     [SerializeField]
     private EventReference focusEvent;
+    [SerializeField]
+    private EventReference enlargeMinimapEvent;
 
     [Header("Interact")]
     [SerializeField]
@@ -111,6 +113,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         input.OnEscap += OnEscap;
         input.OnInteract += OnInteract;
         input.OnEatApple += OnEatApple;
+        input.OnMinimapEnlargeDown += OnEnlargeMinimap;
+        input.OnMinimapEnlargeUp += OnShrinkMinimap;
+        // inpu
 
         movement.OnRollEvent += OnRoll;
         animation.OnAimAnimatinoChanged += OnAimProgress;
@@ -249,11 +254,17 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             return;
         }
 
-        if (_interactObject.GetComponent<TreasureChest>() is var chest)
+        if (_interactObject.GetComponent<TreasureChest>() is var chest && chest)
         {
             chest.Open();
             canInteractEvent?.Invoke(false);
             movement.FaceRotationWithoutRotateFollowTarget(chest.transform.position);
+        }
+
+        if (_interactObject.GetComponent<PortalGate>() is var portal && portal)
+        {
+            InstantTeleportTo(portal.Teleport());
+            canInteractEvent?.Invoke(false);
         }
     }
 
@@ -275,6 +286,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     void OnRoll()
     {
+        if (!CursorFocued)
+            return;
+
         if (IsDrawingBow)
         {
             IsDrawingBow = false;
@@ -283,6 +297,21 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
             OnDrawBowEnd?.Invoke();
         }
+    }
+
+    void OnEnlargeMinimap()
+    {
+        if (!CursorFocued)
+            return;
+
+        enlargeMinimapEvent.Invoke(true);
+    }
+    void OnShrinkMinimap()
+    {
+        if (!CursorFocued)
+            return;
+
+        enlargeMinimapEvent.Invoke(false);
     }
 #endregion
 
@@ -320,14 +349,18 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         _health = maxHealth;
         healthChangeEvent?.Invoke(1f);
 
+        InstantTeleportTo(spawnPoint.transform.position);
+        OnRevive?.Invoke();
+    }
+
+    public void InstantTeleportTo(Vector3 position)
+    {
         movement.CharacterController.enabled = false;
-        transform.position = spawnPoint.transform.position;
+        transform.position = position;
         movement.CharacterController.enabled = true;
 
         CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
         CameraSwitcher.GetCamera(_walkingCameraIndex).CancelDamping();
-
-        OnRevive?.Invoke();
     }
 
     public void FocusCursor()

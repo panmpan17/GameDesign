@@ -24,6 +24,9 @@ public class FakeInput : MonoBehaviour, InputInterface
     public event System.Action OnInteract;
     public event System.Action OnEatApple;
 
+    public event System.Action OnMinimapEnlargeDown;
+    public event System.Action OnMinimapEnlargeUp;
+
     public Vector2 MovementAxis { get; private set; }
     public Vector2 LookAxis { get; private set; }
     public bool HasMovementAxis => MovementAxis.sqrMagnitude > 0.01f;

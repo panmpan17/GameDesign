@@ -645,6 +645,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EnlargeMinimap",
+                    "type": "Button",
+                    "id": "09df7c6a-f9f9-46a7-a28d-e0ec30f7e886",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1107,6 +1116,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "EatApple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "754a56b8-87fb-4005-82b2-203383eee58c",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnlargeMinimap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9bd7df1f-2eff-460f-a225-fb9432e481d8",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnlargeMinimap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
