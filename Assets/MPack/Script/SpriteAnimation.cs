@@ -10,8 +10,17 @@ namespace MPack
     public class SpriteAnimation : ScriptableObject
     {
         public string AnimatinName;
+
         public bool IsLoop;
+        public WrapMode EndWrapMode;
+
         public ValueWithEnable<float> SameInterval;
         public SpriteSheetAnimator.KeyPoint[] KeyPoints;
+
+        public enum WrapMode {
+            LoopItSelf,
+            LoopDestinateAnimations,
+            Hold
+        }
     }
 }
