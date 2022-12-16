@@ -20,7 +20,7 @@ public class SelectableExtendedEffects : MonoBehaviour, IPointerEnterHandler, IP
         for (int i = 0; i < graphicTargetManipulates.Length; i++)
         {
             GraphicTargetManipulate graphicTarget = graphicTargetManipulates[i];
-            if (graphicTarget.ActivateWhenHovered)
+            if (graphicTarget.ActivateWhenHovered || graphicTarget.ActivateWhenSelected)
                 graphicTarget.Graphic.enabled = false;
 
             originalColors[i] = graphicTarget.Graphic.color;
@@ -70,8 +70,13 @@ public class SelectableExtendedEffects : MonoBehaviour, IPointerEnterHandler, IP
         {
             GraphicTargetManipulate graphicTarget = graphicTargetManipulates[i];
 
-            if (graphicTarget.ActivateWhenHovered)
+            if (graphicTarget.ActivateWhenHovered && graphicTarget.ActivateWhenSelected)
+                graphicTarget.Graphic.enabled = _isHovered || _isSelected;
+            else if (graphicTarget.ActivateWhenHovered)
                 graphicTarget.Graphic.enabled = _isHovered;
+            else if (graphicTarget.ActivateWhenSelected)
+                graphicTarget.Graphic.enabled = _isSelected;
+
             if (!graphicTarget.Graphic.enabled)
                 continue;
 
@@ -87,7 +92,7 @@ public class SelectableExtendedEffects : MonoBehaviour, IPointerEnterHandler, IP
                 continue;
             }
 
-            if (graphicTarget.ChangeColorWhenHovered && _isSelected)
+            if (graphicTarget.ChangeColorWhenSelected && _isSelected)
             {
                 graphicTarget.Graphic.color = graphicTarget.SelectedColor;
                 continue;
@@ -110,6 +115,7 @@ public class SelectableExtendedEffects : MonoBehaviour, IPointerEnterHandler, IP
         public bool ChangeColorWhenPressed;
         public Color PressedColor;
 
+        public bool ActivateWhenSelected;
         public bool ChangeColorWhenSelected;
         public Color SelectedColor;
     }

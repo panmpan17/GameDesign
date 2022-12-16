@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
+// using UnityEngine.InputSystem.Utilities;
 using MPack;
 using TMPro;
 
@@ -169,6 +171,8 @@ public class SettingMenu : AbstractMenu
                 currentResolutionIndex = i;
         }
 
+        windowTypeText.ChangeId(Screen.fullScreen ? fullscreenLanguageID : windowedLanguageID);
+
         ApplyQualityText();
     }
 
@@ -228,11 +232,15 @@ public class SettingMenu : AbstractMenu
         {
             windowTypeText.ChangeId(windowedLanguageID);
             Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.Windowed);
+
+            GetComponent<InputSystemUIInputModule>().move.action.Reset();
         }
         else
         {
             windowTypeText.ChangeId(fullscreenLanguageID);
             Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow);
+
+            GetComponent<InputSystemUIInputModule>().move.action.Reset();
         }
     }
 #endregion

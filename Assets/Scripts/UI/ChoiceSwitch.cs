@@ -7,6 +7,11 @@ using UnityEngine.UI;
 using DigitalRuby.Tween;
 using MPack;
 
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.UI;
+#endif
+
 public class ChoiceSwitch : Selectable
 {
     [SerializeField]
@@ -26,6 +31,8 @@ public class ChoiceSwitch : Selectable
     public UnityEvent rightEvent;
 
     private Stopwatch _changeResolutionColddown;
+
+    private FloatTween _fadeTween;
 
     protected override void Start()
     {
@@ -69,8 +76,9 @@ public class ChoiceSwitch : Selectable
 
         if (hideLeftRight)
         {
-            FloatTween tween = gameObject.Tween("OnSelect", 0, 1, tweenTime, TweenScaleFunctions.CubicEaseIn, ChangeArrowAlpha);
-            tween.TimeFunc = TweenFactory.TimeFuncUnscaledDeltaTimeFunc;
+            if (_fadeTween != null) CancelFadePreviousTween();
+            _fadeTween = gameObject.Tween(gameObject.name + "OnSelect", 0, 1, tweenTime, TweenScaleFunctions.CubicEaseIn, ChangeArrowAlpha, delegate { _fadeTween = null; });
+            _fadeTween.TimeFunc = TweenFactory.TimeFuncUnscaledDeltaTimeFunc;
         }
     }
 
@@ -80,8 +88,9 @@ public class ChoiceSwitch : Selectable
 
         if (hideLeftRight)
         {
-            FloatTween tween = gameObject.Tween("OnDeselect", 1, 0, tweenTime, TweenScaleFunctions.CubicEaseIn, ChangeArrowAlpha);
-            tween.TimeFunc = TweenFactory.TimeFuncUnscaledDeltaTimeFunc;
+            if (_fadeTween != null) CancelFadePreviousTween();
+            _fadeTween = gameObject.Tween(gameObject.name + "OnDeselect", 1, 0, tweenTime, TweenScaleFunctions.CubicEaseIn, ChangeArrowAlpha, delegate { _fadeTween = null; });
+            _fadeTween.TimeFunc = TweenFactory.TimeFuncUnscaledDeltaTimeFunc;
         }
     }
 
@@ -90,7 +99,7 @@ public class ChoiceSwitch : Selectable
         if (_changeResolutionColddown.DeltaTime < 0.4f)
             return;
 
-        _changeResolutionColddown = new Stopwatch();
+        _changeResolutionColddown.Update();
         switch (eventData.moveDir)
         {
             case MoveDirection.Left:
@@ -110,15 +119,17 @@ public class ChoiceSwitch : Selectable
 
     public void SwitchRight()
     {
-        FloatTween tween = gameObject.Tween("Right", 0, 1, tweenTime, TweenScaleFunctions.QuarticEaseOut, ChangeRightArrowPosition, ResetRightArrowPosition);
-        tween.TimeFunc = TweenFactory.TimeFuncUnscaledDeltaTimeFunc;
+        if (_fadeTween != null) CancelFadePreviousTween();
+        _fadeTween = gameObject.Tween(gameObject.name + "Right", 0, 1, tweenTime, TweenScaleFunctions.QuarticEaseOut, ChangeRightArrowPosition, ResetRightArrowPosition);
+        _fadeTween.TimeFunc = TweenFactory.TimeFuncUnscaledDeltaTimeFunc;
         rightEvent.Invoke();
     }
 
     public void SwitchLeft()
     {
-        FloatTween tween = gameObject.Tween("Left", 0, 1, tweenTime, TweenScaleFunctions.QuarticEaseOut, ChangeLeftArrowPosition, ResetLeftArrowPosition);
-        tween.TimeFunc = TweenFactory.TimeFuncUnscaledDeltaTimeFunc;
+        if (_fadeTween != null) CancelFadePreviousTween();
+        _fadeTween = gameObject.Tween(gameObject.name + "Left", 0, 1, tweenTime, TweenScaleFunctions.QuarticEaseOut, ChangeLeftArrowPosition, ResetLeftArrowPosition);
+        _fadeTween.TimeFunc = TweenFactory.TimeFuncUnscaledDeltaTimeFunc;
         leftEvent.Invoke();
     }
 
@@ -146,10 +157,50 @@ public class ChoiceSwitch : Selectable
     void ChangeRightArrowPosition(ITween<float> eventData)
     {
         right.rectTransform.anchoredPosition = Vector2.Lerp(rightAnchorPosition, rightAnchorPosition + anchorOffset, eventData.CurrentValue);
+        _fadeTween = null;
     }
 
     void ResetRightArrowPosition(ITween<float> eventData)
     {
         right.rectTransform.anchoredPosition = rightAnchorPosition;
+        _fadeTween = null;
+    }
+
+    void CancelFadePreviousTween()
+    {
+        _fadeTween.Stop(TweenStopBehavior.Complete);
     }
 }
+
+#if UNITY_EDITOR
+[CanEditMultipleObjects]
+[CustomEditor(typeof(ChoiceSwitch))]
+public class ChoiceSwitchEditor : SelectableEditor
+{
+    private SerializedProperty hideLeftRight, left, right, anchorOffset, tweenTime;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        hideLeftRight = serializedObject.FindProperty("hideLeftRight");
+        left = serializedObject.FindProperty("left");
+        right = serializedObject.FindProperty("right");
+        anchorOffset = serializedObject.FindProperty("anchorOffset");
+        tweenTime = serializedObject.FindProperty("tweenTime");
+    }
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        EditorGUILayout.PropertyField(hideLeftRight);
+        EditorGUILayout.PropertyField(left);
+        EditorGUILayout.PropertyField(right);
+        EditorGUILayout.PropertyField(anchorOffset);
+        EditorGUILayout.PropertyField(tweenTime);
+
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+#endif

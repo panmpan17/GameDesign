@@ -1711,12 +1711,13 @@ MonoBehaviour:
   graphicTargetManipulates:
   - Graphic: {fileID: 7407994249989676045}
     ActivateWhenHovered: 1
-    ChangeColorWhenHovered: 0
-    HoveredColor: {r: 0, g: 0, b: 0, a: 0}
+    ChangeColorWhenHovered: 1
+    HoveredColor: {r: 1, g: 1, b: 1, a: 1}
     ChangeColorWhenPressed: 0
     PressedColor: {r: 0, g: 0, b: 0, a: 0}
-    ChangeColorWhenSelected: 0
-    SelectedColor: {r: 0, g: 0, b: 0, a: 0}
+    ActivateWhenSelected: 1
+    ChangeColorWhenSelected: 1
+    SelectedColor: {r: 1, g: 1, b: 1, a: 0.4}
 --- !u!1 &6118117474280591869
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : AbstractMenu
 {
     public string GameSceneName;
+
+    private GameObject _lastSelected;
     
 #if UNITY_EDITOR
     [SerializeField]
     private bool fireButtonEvent;
 #endif
+
+    void Start()
+    {
+        OpenMenu();
+    }
 
     public void StartGame()
     {
@@ -28,7 +36,13 @@ public class MainMenu : MonoBehaviour
         if (!fireButtonEvent) return;
 #endif
 
+        _lastSelected = EventSystem.current.currentSelectedGameObject;
         AbstractMenu.S_OpenMenu("Setting");
+    }
+
+    protected override void BackToThisMenu()
+    {
+        EventSystem.current.SetSelectedGameObject(_lastSelected);
     }
 
     public void Exit()

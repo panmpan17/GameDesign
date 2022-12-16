@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using MPack;
 using TMPro;
 
@@ -94,6 +95,8 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
 
             _aliveChoices.Add(newChoiceButton);
         }
+
+        EventSystem.current.SetSelectedGameObject(_aliveChoices[_aliveChoices.Count - 1]);
     }
 
     public void ChangeToDialogue(DialogueNode node)
@@ -130,6 +133,8 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
             InstantiateMerchantButton(node, merchandise, anchoredPosition, i);
             anchoredPosition += offset;
         }
+
+        EventSystem.current.SetSelectedGameObject(_aliveChoices[_aliveChoices.Count - 1]);
     }
 
     private void InstantiateMerchantButton(OpenMerchantNode node, Merchant.Merchandise merchandise, Vector2 anchoredPosition, int i)
@@ -232,8 +237,12 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
             NameLanguageText.ChangeId(speaker.NameLanguageID);
             DialogueLanguageText.ChangeId(dialogueLanguageID);
 
-            NextDialogueButton.sprite = speaker.IsNPC ? NpcNameNext : MainCharacterNext;
             NextDialogueButton.gameObject.SetActive(showNextButton);
+            if (showNextButton)
+            {
+                NextDialogueButton.sprite = speaker.IsNPC ? NpcNameNext : MainCharacterNext;
+                EventSystem.current.SetSelectedGameObject(NextDialogueButton.gameObject);
+            }
 
             NameLabelImage.sprite = speaker.IsNPC ? NpcNameLabel : MainCharacterNameLabel;
 
