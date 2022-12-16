@@ -740,6 +740,9 @@ MonoBehaviour:
   playerFeetPointer: {fileID: 11400000, guid: d078023746b8f4112adc4bdd062eb354, type: 2}
   dialogueGraph: {fileID: 11400000, guid: a64b3005e9b7744309022d5a68b9c7b9, type: 2}
   startDialogueEvent: {fileID: 11400000, guid: 2dc2e6134203247d2ac67c82844b1f6d, type: 2}
+  minimapMarker: {fileID: 0}
+  registerMarkerOnStart: 0
+  registerMarkerOnFirstConversation: 0
 --- !u!1 &1282562797
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,6 +852,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 012a4fa160abf4ef2bde235d4f81d619, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 012a4fa160abf4ef2bde235d4f81d619, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 012a4fa160abf4ef2bde235d4f81d619, type: 3}
