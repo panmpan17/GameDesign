@@ -148,7 +148,7 @@ namespace MPack
             }
         }
 
-        [MenuItem("Assets/Create/Dialogue Graph", false, 0)]
+        [MenuItem("Assets/Create/MPack/Dialogue/Graph", false, 0)]
         public static void CreateAsset()
         {
             DialogueGraph asset = ScriptableObject.CreateInstance<DialogueGraph>();

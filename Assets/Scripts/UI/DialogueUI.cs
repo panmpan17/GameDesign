@@ -74,29 +74,50 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, false);
 
         Vector2 anchoredPosition = firstAnchoredPosition;
+        Button lastButton = null;
         for (int i = node.choices.Length - 1; i >= 0; i--)
         {
-            GameObject newChoiceButton = Instantiate(choiceTextPrefab, choiceTextPrefab.transform.parent);
-            newChoiceButton.SetActive(true);
-
-            var transform = newChoiceButton.GetComponent<RectTransform>();
-            transform.anchoredPosition = anchoredPosition;
+            Button newButton = InstantiateQuestionButton(node, anchoredPosition, i);
             anchoredPosition += offset;
 
-            var languageText = newChoiceButton.GetComponentInChildren<LanguageText>();
-            languageText.ChangeId(node.choices[i].ContentLaguageID);
-
-            var button = newChoiceButton.GetComponent<Button>();
-            int index = i;
-            button.onClick.AddListener(delegate
+            if (lastButton)
             {
-                ChoiceButtonClicked(node, index);
-            });
+                Navigation navigation = newButton.navigation;
+                navigation.selectOnDown = lastButton;
+                newButton.navigation = navigation;
 
-            _aliveChoices.Add(newChoiceButton);
+                navigation = lastButton.navigation;
+                navigation.selectOnUp = newButton;
+                lastButton.navigation = navigation;
+            }
+
+            lastButton = newButton;
         }
 
         EventSystem.current.SetSelectedGameObject(_aliveChoices[_aliveChoices.Count - 1]);
+    }
+
+    Button InstantiateQuestionButton(QuestionNode node, Vector2 anchoredPosition, int i)
+    {
+        GameObject newChoiceButton = Instantiate(choiceTextPrefab, choiceTextPrefab.transform.parent);
+        newChoiceButton.SetActive(true);
+
+        var transform = newChoiceButton.GetComponent<RectTransform>();
+        transform.anchoredPosition = anchoredPosition;
+
+        var languageText = newChoiceButton.GetComponentInChildren<LanguageText>();
+        languageText.ChangeId(node.choices[i].ContentLaguageID);
+
+        var button = newChoiceButton.GetComponent<Button>();
+        int index = i;
+        button.onClick.AddListener(delegate
+        {
+            ChoiceButtonClicked(node, index);
+        });
+
+        _aliveChoices.Add(newChoiceButton);
+
+        return button;
     }
 
     public void ChangeToDialogue(DialogueNode node)
@@ -110,16 +131,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         CleanUpLastNode();
         mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, false);
 
-
-        GameObject newChoiceButton = Instantiate(choiceTextPrefab, choiceTextPrefab.transform.parent);
-        newChoiceButton.SetActive(true);
-
-        newChoiceButton.GetComponent<RectTransform>().anchoredPosition = firstAnchoredPosition;
-        newChoiceButton.GetComponentInChildren<LanguageText>().ChangeId(merchantNoThanksLanguageID);
-        newChoiceButton.GetComponent<Button>().onClick.AddListener(delegate { ChoiceButtonClicked(node, -1); });
-
-        _aliveChoices.Add(newChoiceButton);
-
+        Button lastButton = InstantiateMerchantRejectButton(node);
 
         Merchant merchant = node.Merchant;
 
@@ -130,26 +142,59 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
 
             if (merchant.CheckMerchandiseLimitReached(i)) continue;
 
-            InstantiateMerchantButton(node, merchandise, anchoredPosition, i);
+            Button newButton = InstantiateMerchantButton(node, merchandise, anchoredPosition, i);
+
+            Navigation navigation = newButton.navigation;
+            navigation.selectOnDown = lastButton;
+            newButton.navigation = navigation;
+
+            navigation = lastButton.navigation;
+            navigation.selectOnUp = newButton;
+            lastButton.navigation = navigation;
+
+            lastButton = newButton;
+
             anchoredPosition += offset;
         }
 
         EventSystem.current.SetSelectedGameObject(_aliveChoices[_aliveChoices.Count - 1]);
     }
 
-    private void InstantiateMerchantButton(OpenMerchantNode node, Merchant.Merchandise merchandise, Vector2 anchoredPosition, int i)
+    Button InstantiateMerchantRejectButton(OpenMerchantNode node)
+    {
+        GameObject newChoiceButton = Instantiate(choiceTextPrefab, choiceTextPrefab.transform.parent);
+        newChoiceButton.SetActive(true);
+
+        newChoiceButton.GetComponent<RectTransform>().anchoredPosition = firstAnchoredPosition;
+        newChoiceButton.GetComponentInChildren<LanguageText>().ChangeId(merchantNoThanksLanguageID);
+        var button = newChoiceButton.GetComponent<Button>();
+        button.onClick.AddListener(delegate { ChoiceButtonClicked(node, -1); });
+
+        _aliveChoices.Add(newChoiceButton);
+        return button;
+    }
+
+    Button InstantiateMerchantButton(OpenMerchantNode node, Merchant.Merchandise merchandise, Vector2 anchoredPosition, int i)
     {
         GameObject newChoiceButton = Instantiate(choiceTextPrefab, choiceTextPrefab.transform.parent);
         newChoiceButton.SetActive(true);
 
         newChoiceButton.GetComponent<RectTransform>().anchoredPosition = anchoredPosition;
-        newChoiceButton.GetComponentInChildren<LanguageText>().ChangeId(merchandise.NameLanguageID);
+
+        var languageText = newChoiceButton.GetComponentInChildren<LanguageText>();
+        languageText.SetupLanguageProcesor(
+            (text, textMeshPro, textMeshProUGUI) => string.Format("{0}: {1}<sprite=0>", text, merchandise.RequireCoreCount));
+        languageText.ChangeId(merchandise.NameLanguageID);
+
+        // : 3 < sprite = 0 >
 
         var button = newChoiceButton.GetComponent<Button>();
         button.interactable = playerInventory.CoreCount >= merchandise.RequireCoreCount;
         button.onClick.AddListener(delegate { ChoiceButtonClicked(node, i); });
 
         _aliveChoices.Add(newChoiceButton);
+
+        return button;
     }
     #endregion
 
