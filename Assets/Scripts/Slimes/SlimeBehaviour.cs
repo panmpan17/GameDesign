@@ -38,6 +38,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
 
     [Header("Dead Animation")]
     [SerializeField]
+    private float coreDamagedImpulseForce;
+    [SerializeField]
     private float sinkTime;
     [SerializeField]
     private float sinkHeight;
@@ -67,6 +69,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     {
         triggerFires = GetComponentsInChildren<ITriggerFire>();
         behaviourTreeRunner = GetComponent<BehaviourTreeRunner>();
+        impulseSource ??= GetComponent<CinemachineImpulseSource>();
 
         for (int i = 0; i < triggerFireGroups.Length; i++)
         {
@@ -126,6 +129,11 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     #region Damage, Death, Loot table
     void OnCoreDamage(SlimeCore damagedCore)
     {
+        if (impulseSource && coreDamagedImpulseForce > 0)
+            impulseSource.GenerateImpulse(coreDamagedImpulseForce);
+
+        StartCoroutine(PauseGame());
+
         int aliveCount = UpdateHealth();
         if (aliveCount <= 0)
         {
@@ -242,6 +250,15 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
                 arrow.TrailEmmiting = false;
             }
         );
+    }
+
+
+    IEnumerator PauseGame()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(0.08f);
+        // yield return null;
+        Time.timeScale = 1;
     }
 
 

@@ -62,32 +62,31 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private AnimationClip rollClip;
 
-    [Header("Audio")]
-    [SerializeField]
-    private AudioSource audioSource;
-    [SerializeField]
-    private AudioSource oneShotAudioSource;
-    [SerializeField]
-    private AudioClipSet runClip;
-    [SerializeField]
-    private AudioClipSet walkClip;
-    [SerializeField]
-    private AudioClipSet bowDrawClip;
-    [SerializeField]
-    private AudioClipSet bowShootClip;
-    [SerializeField]
-    private RangeReference bowShootVolumeRange;
-    [SerializeField]
-    private AudioClipSet jumpClip;
-    [SerializeField]
-    private AudioClipSet landClip;
+    // [Header("Audio")]
+    // [SerializeField]
+    // private AudioSource audioSource;
+    // [SerializeField]
+    // private AudioSource oneShotAudioSource;
+    // [SerializeField]
+    // private AudioClipSet runClip;
+    // [SerializeField]
+    // private AudioClipSet walkClip;
+    // [SerializeField]
+    // private AudioClipSet bowDrawClip;
+    // [SerializeField]
+    // private AudioClipSet bowShootClip;
+    // [SerializeField]
+    // private RangeReference bowShootVolumeRange;
+    // [SerializeField]
+    // private AudioClipSet jumpClip;
+    // [SerializeField]
+    // private AudioClipSet landClip;
 
     [Header("Editor only")]
     [SerializeField]
     private LayerMask groundLayers;
 
     private bool _walking = false;
-
     private bool _drawBow = false;
 
     private Coroutine _weightTweenRoutine;
@@ -110,6 +109,7 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     public event System.Action<float> OnAimAnimatinoChanged;
+    public event System.Action<string> OnAnimationEventCalled;
 
 
     void Awake()
@@ -122,7 +122,6 @@ public class PlayerAnimation : MonoBehaviour
 
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
-        behaviour.OnBowShoot += OnBowShoot;
         behaviour.OnDeath += OnDeath;
         behaviour.OnRevive += OnRevive;
 
@@ -162,7 +161,6 @@ public class PlayerAnimation : MonoBehaviour
     void OnJump()
     {
         stepDustParticle.Stop();
-        oneShotAudioSource.PlayOneShot(jumpClip);
         animator.ResetTrigger(AnimKeyEndJump);
         animator.SetTrigger(AnimKeyJump);
     }
@@ -184,7 +182,6 @@ public class PlayerAnimation : MonoBehaviour
     {
         // TODO: player land animation
         if (movement.IsWalking) stepDustParticle.Play();
-        oneShotAudioSource.PlayOneShot(landClip);
     }
 
     void OnRoll()
@@ -208,15 +205,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void AnimationEvent(string eventName)
     {
-        switch (eventName)
-        {
-            case "RunStep":
-                oneShotAudioSource.PlayOneShot(runClip);
-                break;
-            case "WalkStep":
-                oneShotAudioSource.PlayOneShot(walkClip);
-                break;
-        }
+        OnAnimationEventCalled?.Invoke(eventName);
     }
 
 
@@ -226,8 +215,6 @@ public class PlayerAnimation : MonoBehaviour
         _drawBow = true;
         animator.SetBool(AnimKeyDrawingBow, true);
         animator.SetFloat(AnimKeyWalkSpeed, drawBowSlowDown.Value);
-
-        audioSource.Play(bowDrawClip);
     }
 
     void OnDrawBowEnd()
@@ -235,13 +222,6 @@ public class PlayerAnimation : MonoBehaviour
         _drawBow = false;
         animator.SetBool(AnimKeyDrawingBow, false);
         animator.SetFloat(AnimKeyWalkSpeed, 1);
-
-        audioSource.Stop();
-    }
-
-    void OnBowShoot(float extraDrawProgress)
-    {
-        oneShotAudioSource.PlayOneShot(bowShootClip, volume: bowShootVolumeRange.Lerp(extraDrawProgress));
     }
 
     void OnDeath()

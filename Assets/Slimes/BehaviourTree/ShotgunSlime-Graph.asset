@@ -124,7 +124,10 @@ MonoBehaviour:
       _node: {fileID: -7348158734750532616}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Output
+        node: {fileID: 8402433913577419248}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -982,7 +985,10 @@ MonoBehaviour:
       _node: {fileID: 8402433913577419248}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Input
+        node: {fileID: -7348158734750532616}
+        reroutePoints: []
       _direction: 1
       _connectionType: 1
       _typeConstraint: 0

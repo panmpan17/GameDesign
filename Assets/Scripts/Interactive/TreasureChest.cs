@@ -25,9 +25,6 @@ public class TreasureChest : MonoBehaviour
             playerInventory.ChangeAppleCount(appleGain.Value);
         if (coreGain.Enable)
             playerInventory.ChangeCoreCount(coreGain.Value);
-        
-        Debug.Log(playerInventory.AppleCount);
-        Debug.Log(playerInventory.CoreCount);
 
         gameObject.SetActive(false);
     }

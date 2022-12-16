@@ -1155,7 +1155,7 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9bd7df1f-2eff-460f-a225-fb9432e481d8"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -88,6 +88,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
     public event System.Action<float> OnBowShoot;
+    public event System.Action OnPickItem;
 
     public event System.Action OnDeath;
     public event System.Action OnRevive;
@@ -296,6 +297,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
             CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
             OnDrawBowEnd?.Invoke();
+            bow.OnAimProgress(0);
         }
     }
 
@@ -401,6 +403,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public void PickItemUp(ItemType itemType)
     {
         inventory.ChangeCoreCount(1);
+        OnPickItem?.Invoke();
     }
 
     public void UpgradeBow(BowParameter upgradeParameter)

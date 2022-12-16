@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: Run Forward
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 2248, y: 216}
+  position: {x: 2264, y: 24}
   ports:
     keys:
     - Input
@@ -702,6 +702,41 @@ MonoBehaviour:
       _dynamic: 0
   duration: 0.3
   resultIsSuccess: 1
+--- !u!114 &-361728101714261848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e140f02eedf149cf9eedebbc328bd30, type: 3}
+  m_Name: Animator Control
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 2344, y: 280}
+  ports:
+    keys:
+    - Input
+    values:
+    - _fieldName: Input
+      _node: {fileID: -361728101714261848}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: OnContactOutput
+        node: {fileID: 2305381317746243755}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  drawGizmos: 0
+  TriggerName: 
+  BooleanName: 
+  BooleanValue: 0
+  SpriteAnimationName: Hurt
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +782,7 @@ MonoBehaviour:
   - {fileID: -5819909911509026724}
   - {fileID: 5248212496866438844}
   - {fileID: 1838540239774653268}
+  - {fileID: -361728101714261848}
   FunctionGraph: {fileID: 0}
 --- !u!114 &391549810568988075
 MonoBehaviour:
@@ -878,6 +914,7 @@ MonoBehaviour:
     keys:
     - Input
     - Output
+    - OnContactOutput
     values:
     - _fieldName: Input
       _node: {fileID: 2305381317746243755}
@@ -898,6 +935,18 @@ MonoBehaviour:
       connections:
       - fieldName: Input
         node: {fileID: -4484153963644643497}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: OnContactOutput
+      _node: {fileID: 2305381317746243755}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -361728101714261848}
         reroutePoints: []
       _direction: 1
       _connectionType: 1

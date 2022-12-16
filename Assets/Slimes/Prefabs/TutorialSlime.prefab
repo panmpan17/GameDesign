@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 6614295690929144803}
   - component: {fileID: 8681783154464948248}
   - component: {fileID: 5826395179283832155}
+  - component: {fileID: 70356941018453405}
   m_Layer: 8
   m_Name: TutorialSlime
   m_TagString: Slime
@@ -154,6 +155,7 @@ MonoBehaviour:
       m_Bits: 0
     Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
     UseVariable: 1
+  coreDamagedImpulseForce: 1
   sinkTime: 1
   sinkHeight: 1
   OnDeath:
@@ -171,7 +173,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  impulseSource: {fileID: 0}
+  impulseSource: {fileID: 70356941018453405}
   audioSource: {fileID: 0}
   slamSound: {fileID: 0}
 --- !u!114 &5826395179283832155
@@ -187,6 +189,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventReference: {fileID: 11400000, guid: 028be6c1f8d7a42749433f7f9cfbb5a7, type: 2}
+--- !u!114 &70356941018453405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7974710738266924135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0.24, z: 0}
 --- !u!1001 &7654421821232241214
 PrefabInstance:
   m_ObjectHideFlags: 0

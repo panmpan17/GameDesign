@@ -5602,7 +5602,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.73260057, g: 0.93949544, b: 0.9528302, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -5687,12 +5687,13 @@ MonoBehaviour:
   graphicTargetManipulates:
   - Graphic: {fileID: 1976838508}
     ActivateWhenHovered: 1
-    ChangeColorWhenHovered: 0
-    HoveredColor: {r: 0, g: 0, b: 0, a: 0}
+    ChangeColorWhenHovered: 1
+    HoveredColor: {r: 1, g: 1, b: 1, a: 1}
     ChangeColorWhenPressed: 0
     PressedColor: {r: 0, g: 0, b: 0, a: 0}
-    ChangeColorWhenSelected: 0
-    SelectedColor: {r: 0, g: 0, b: 0, a: 0}
+    ActivateWhenSelected: 1
+    ChangeColorWhenSelected: 1
+    SelectedColor: {r: 0.84313726, g: 1, b: 0.99607843, a: 0.80784315}
 --- !u!1 &471071170
 GameObject:
   m_ObjectHideFlags: 0
@@ -6052,6 +6053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435ef2a60d114aed975616fe4b9f881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuName: Main
   GameSceneName: MainGame
   fireButtonEvent: 1
 --- !u!95 &495194892
@@ -6152,7 +6154,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.73260057, g: 0.93949544, b: 0.9528302, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -6237,12 +6239,13 @@ MonoBehaviour:
   graphicTargetManipulates:
   - Graphic: {fileID: 1385814828}
     ActivateWhenHovered: 1
-    ChangeColorWhenHovered: 0
-    HoveredColor: {r: 0, g: 0, b: 0, a: 0}
+    ChangeColorWhenHovered: 1
+    HoveredColor: {r: 1, g: 1, b: 1, a: 1}
     ChangeColorWhenPressed: 0
     PressedColor: {r: 0, g: 0, b: 0, a: 0}
-    ChangeColorWhenSelected: 0
-    SelectedColor: {r: 0, g: 0, b: 0, a: 0}
+    ActivateWhenSelected: 1
+    ChangeColorWhenSelected: 1
+    SelectedColor: {r: 0.84313726, g: 1, b: 0.99607843, a: 0.80784315}
 --- !u!1 &677937318
 GameObject:
   m_ObjectHideFlags: 0
@@ -16815,7 +16818,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.73260057, g: 0.93949544, b: 0.9528302, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -16900,12 +16903,13 @@ MonoBehaviour:
   graphicTargetManipulates:
   - Graphic: {fileID: 1479622108}
     ActivateWhenHovered: 1
-    ChangeColorWhenHovered: 0
-    HoveredColor: {r: 0, g: 0, b: 0, a: 0}
+    ChangeColorWhenHovered: 1
+    HoveredColor: {r: 1, g: 1, b: 1, a: 1}
     ChangeColorWhenPressed: 0
     PressedColor: {r: 0, g: 0, b: 0, a: 0}
-    ChangeColorWhenSelected: 0
-    SelectedColor: {r: 0, g: 0, b: 0, a: 0}
+    ActivateWhenSelected: 1
+    ChangeColorWhenSelected: 1
+    SelectedColor: {r: 0.84313726, g: 1, b: 0.99607843, a: 0.80784315}
 --- !u!1 &1802864292
 GameObject:
   m_ObjectHideFlags: 0
@@ -17245,7 +17249,7 @@ MonoBehaviour:
   m_ScrollWheelAction: {fileID: -3892982341714635675, guid: 9d5a49eea6ca24c5fac47b1f3ff7bd76, type: 3}
   m_TrackedDevicePositionAction: {fileID: 2534872059054245777, guid: 9d5a49eea6ca24c5fac47b1f3ff7bd76, type: 3}
   m_TrackedDeviceOrientationAction: {fileID: -8498200188605416678, guid: 9d5a49eea6ca24c5fac47b1f3ff7bd76, type: 3}
-  m_DeselectOnBackgroundClick: 1
+  m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
 --- !u!114 &1913938716
 MonoBehaviour:
@@ -17259,7 +17263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 515559122}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1913938717

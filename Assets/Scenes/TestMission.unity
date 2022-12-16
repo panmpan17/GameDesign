@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_ScrollWheelAction: {fileID: -3892982341714635675, guid: 9d5a49eea6ca24c5fac47b1f3ff7bd76, type: 3}
   m_TrackedDevicePositionAction: {fileID: 2534872059054245777, guid: 9d5a49eea6ca24c5fac47b1f3ff7bd76, type: 3}
   m_TrackedDeviceOrientationAction: {fileID: -8498200188605416678, guid: 9d5a49eea6ca24c5fac47b1f3ff7bd76, type: 3}
-  m_DeselectOnBackgroundClick: 1
+  m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
 --- !u!114 &1565534588
 MonoBehaviour:
@@ -1523,7 +1523,7 @@ GameObject:
   - component: {fileID: 1983959643}
   m_Layer: 12
   m_Name: Villiager
-  m_TagString: NPC
+  m_TagString: RightClickInteractive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1559,6 +1559,9 @@ MonoBehaviour:
   playerFeetPointer: {fileID: 11400000, guid: d078023746b8f4112adc4bdd062eb354, type: 2}
   dialogueGraph: {fileID: 11400000, guid: fbcd0061fbdea4073a4b23bd2141b76d, type: 2}
   startDialogueEvent: {fileID: 11400000, guid: 2dc2e6134203247d2ac67c82844b1f6d, type: 2}
+  minimapMarker: {fileID: 0}
+  registerMarkerOnStart: 0
+  registerMarkerOnFirstConversation: 0
 --- !u!65 &1983959642
 BoxCollider:
   m_ObjectHideFlags: 0

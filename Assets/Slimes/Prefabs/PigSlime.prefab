@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: -1583910165092655159}
   - component: {fileID: 7440337522389718080}
   - component: {fileID: 1152564502613251129}
+  - component: {fileID: -4118977265821363543}
   m_Layer: 8
   m_Name: PigSlime
   m_TagString: Slime
@@ -154,12 +155,13 @@ MonoBehaviour:
       m_Bits: 0
     Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
     UseVariable: 1
+  coreDamagedImpulseForce: 1
   sinkTime: 1
   sinkHeight: 2
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
-  impulseSource: {fileID: 0}
+  impulseSource: {fileID: -4118977265821363543}
   audioSource: {fileID: 0}
   slamSound: {fileID: 0}
 --- !u!114 &1152564502613251129
@@ -188,6 +190,59 @@ MonoBehaviour:
     Enable: 1
     Value: 0
   randomPlayedIndex: 0000000001000000
+--- !u!114 &-4118977265821363543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6467346189754202661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0.3, z: 0}
 --- !u!1 &6467346190588093823
 GameObject:
   m_ObjectHideFlags: 0
