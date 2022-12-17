@@ -78,11 +78,11 @@ public class SlimeBehaviourTreeRunner : BehaviourTreeRunner, ISlimeBehaviour
             }
         }
 
-        _cores = GetComponentsInChildren<SlimeCore>();
-        for (int i = 0; i < _cores.Length; i++)
-        {
-            _cores[i].OnDamageEvent += OnCoreDamage;
-        }
+        // _cores = GetComponentsInChildren<SlimeCore>();
+        // for (int i = 0; i < _cores.Length; i++)
+        // {
+        //     _cores[i].OnDamageEvent += OnCoreDamage;
+        // }
     }
 
     protected override void Start()

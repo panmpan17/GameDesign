@@ -23,6 +23,7 @@ public class Bow : MonoBehaviour
     [SerializeField]
     private List<BowParameter> bowParameters;
     private BowParameter _currentParameter;
+    public BowParameter CurrentParameter => _currentParameter;
 
     private int _walkingCameraIndex;
     private int _aimCameraIndex;

@@ -17,15 +17,14 @@ namespace XnodeBehaviourTree
         [System.NonSerialized]
         private AbstractBehaviourNode.State _state;
 
-        public void OnInitial(Context context)
+        public void OnInitial(Context context, Blackboard blackboard)
         {
-            Blackboard blackboard = new Blackboard();
             List<DefineFunctionNode> defineFunctionNodes = new List<DefineFunctionNode>();
 
             if (FunctionGraph)
             {
                 BehaviourTreeGraph cloneFunctionGraph = (BehaviourTreeGraph)FunctionGraph.Copy();
-                cloneFunctionGraph.OnInitial(context);
+                cloneFunctionGraph.OnInitial(context, blackboard);
 
                 for (int i = 0; i < cloneFunctionGraph.nodes.Count; i++)
                 {

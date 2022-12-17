@@ -8,6 +8,7 @@ namespace XnodeBehaviourTree
         public Transform transform;
         public ISlimeBehaviour slimeBehaviour;
         public Animator animator;
+        public IAnimationPlayer animationPlayer;
 
         public Rigidbody rigidbody => _rigidobdy == null ? gameObject.GetComponent<Rigidbody>() : _rigidobdy;
         private Rigidbody _rigidobdy;
@@ -21,6 +22,7 @@ namespace XnodeBehaviourTree
                 transform = gameObject.transform,
                 slimeBehaviour = _slimeBehaviour,
                 animator = gameObject.GetComponentInChildren<Animator>(),
+                animationPlayer = gameObject.GetComponent<IAnimationPlayer>(),
             };
 
             return context;

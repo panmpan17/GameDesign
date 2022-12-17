@@ -272,6 +272,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnPlayerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &381422653
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -283,7 +286,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 54
+  m_Radius: 53
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &381422654
 Transform:
@@ -324,7 +327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678263501}
   m_LocalRotation: {x: -0, y: -0.9812165, z: -0, w: 0.19291008}
-  m_LocalPosition: {x: -4.2, y: 1, z: 38.2}
+  m_LocalPosition: {x: -4.2, y: 2.98, z: 38.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -549,7 +552,6 @@ MonoBehaviour:
   lookBossCam: {fileID: 970644342}
   borderWall: {fileID: 1188386026}
   bgmClip: {fileID: 11400000, guid: 7a839db522c944e76b8e338a7236744b, type: 2}
-  player: {fileID: 0}
   playerReviveEvent: {fileID: 11400000, guid: 38ebdf30b21884f6790139f4d491254f, type: 2}
   bossStartPosition: {fileID: 678263502}
   bossSlimePrefab: {fileID: 342071698149856546, guid: d69859efe7cf24f0f9158e117b8695ea, type: 3}
@@ -670,6 +672,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 012a4fa160abf4ef2bde235d4f81d619, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 012a4fa160abf4ef2bde235d4f81d619, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 012a4fa160abf4ef2bde235d4f81d619, type: 3}
@@ -796,6 +802,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c869283d8d84aa3bab623bdcc856e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnPointName: Boss
+  OnChangeTo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &2049074579
 Transform:
   m_ObjectHideFlags: 0

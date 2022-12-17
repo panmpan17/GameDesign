@@ -661,7 +661,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 10
     angle: 80
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -748,7 +748,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.0001
+      value: 1.19
       mode: 0
       spread: 0
       speed:
@@ -3986,8 +3986,8 @@ ParticleSystem:
     lifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
-      minScalar: 0.3
+      scalar: 0.6
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5035,8 +5035,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 38
-      minScalar: 30
+      scalar: 42
+      minScalar: 38
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5151,8 +5151,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2.8
-      minScalar: 2.2
+      scalar: 3.8
+      minScalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9963,7 +9963,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 2
       minColor: {r: 1, g: 0.93467605, b: 0.4575472, a: 1}
-      maxColor: {r: 1, g: 0.9956723, b: 0.7028302, a: 0.8}
+      maxColor: {r: 1, g: 0.9956723, b: 0.7028302, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10025,8 +10025,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 2.5
+      scalar: 4.8
+      minScalar: 4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10782,30 +10782,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 2
-          outSlope: 2
+          value: 0.87345886
+          inSlope: 0.60447073
+          outSlope: 0.60447073
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.34607667
-          value: 0.8222544
-          inSlope: 0.77451324
-          outSlope: 0.77451324
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.24127907
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 0
-          outSlope: 0
+          inSlope: -0.33204585
+          outSlope: -0.33204585
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.116279066
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -18493,7 +18484,7 @@ ParticleSystem:
       emitProbability: 1
     - serializedVersion: 3
       emitter: {fileID: 4364067937176438793}
-      type: 2
+      type: 0
       properties: 0
       emitProbability: 1
   LightsModule:

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using MPack;
+
 
 public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 {
     public const string Tag = "Player";
+    private const string RightClickTag = "RightClickInteractive";
 
     [Header("Other components")]
     private Camera mainCamera;
@@ -20,6 +23,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     [SerializeField]
     private Bow bow;
+    public event System.Action<BowParameter, BowParameter> OnBowParameterChanged;
 
     [Header("Reference")]
     [SerializeField]
@@ -37,6 +41,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private float _health;
     [SerializeField]
     private EventReference healthChangeEvent;
+    [SerializeField]
+    private float appleHealPoint;
 
     [Header("Others")]
     [SerializeField]
@@ -45,6 +51,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private EventReference pauseEvent;
     [SerializeField]
     private EventReference focusEvent;
+    [SerializeField]
+    private EventReference enlargeMinimapEvent;
 
     [Header("Interact")]
     [SerializeField]
@@ -65,6 +73,13 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private Inventory inventory;
 
 #if UNITY_EDITOR
+    [SerializeField]
+    private ValueWithEnable<int> startCoreCount;
+    [SerializeField]
+    private ValueWithEnable<int> startAppleCount;
+#endif
+
+#if UNITY_EDITOR
     [Header("Editor Only")]
     [SerializeField]
     private bool focusCursorWhenPointerDown;
@@ -73,6 +88,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
     public event System.Action<float> OnBowShoot;
+    public event System.Action OnPickItem;
 
     public event System.Action OnDeath;
     public event System.Action OnRevive;
@@ -97,6 +113,10 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         input.OnAimUp += OnAimUp;
         input.OnEscap += OnEscap;
         input.OnInteract += OnInteract;
+        input.OnEatApple += OnEatApple;
+        input.OnMinimapEnlargeDown += OnEnlargeMinimap;
+        input.OnMinimapEnlargeUp += OnShrinkMinimap;
+        // inpu
 
         movement.OnRollEvent += OnRoll;
         animation.OnAimAnimatinoChanged += OnAimProgress;
@@ -113,12 +133,19 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         feetPointer.Target = feet;
 
         bow.Setup(this);
+
+#if UNITY_EDITOR
+        if (startCoreCount.Enable) inventory.ChangeCoreCount(startCoreCount.Value);
+        if (startAppleCount.Enable) inventory.ChangeAppleCount(startAppleCount.Value);
+#endif
     }
 
     void Start()
     {
         _health = maxHealth;
         healthChangeEvent?.Invoke(1);
+
+        OnBowParameterChanged?.Invoke(bow.CurrentParameter, bow.CurrentParameter);
 
         FocusCursor();
     }
@@ -132,20 +159,17 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         else
             CurrentRayHitPosition = _currentRay.GetPoint(50);
 
+        UpdateInteractCheck();
+    }
 
+    private void UpdateInteractCheck()
+    {
         bool isOverlap = Physics.OverlapSphereNonAlloc(body.position, interactRaycastDistance, _interactColliders, interactLayer) > 0;
+
         if (isOverlap)
         {
             if (!LastCanInteract)
-            {
-                GameObject interactGameObject = _interactColliders[0].gameObject;
-
-                if (interactGameObject.CompareTag("NPC"))
-                {
-                    _interactObject = interactGameObject;
-                    canInteractEvent.Invoke(true);
-                }
-            }
+                CheckGameObjectIsRightClickInteractable(_interactColliders[0].gameObject);
         }
         else
         {
@@ -157,8 +181,17 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         }
     }
 
+    void CheckGameObjectIsRightClickInteractable(GameObject interactGameObject)
+    {
+        if (!interactGameObject.CompareTag("RightClickInteractive"))
+            return;
 
-#region Input Events
+        _interactObject = interactGameObject;
+        canInteractEvent.Invoke(true);
+    }
+
+
+    #region Input Events
     void OnAimDown()
     {
         if (!CursorFocued)
@@ -208,21 +241,55 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     public void OnInteract()
     {
+        if (!CursorFocued)
+            return;
         if (!_interactObject)
             return;
 
-        if (_interactObject.CompareTag("NPC"))
+        if (_interactObject.GetComponent<NPCControl>() is var npc && npc)
         {
-            var npc = _interactObject.GetComponent<NPCControl>();
             npc.StartDialogue();
 
             canInteractEvent?.Invoke(false);
             movement.FaceRotationWithoutRotateFollowTarget(npc.transform.position);
+            return;
+        }
+
+        if (_interactObject.GetComponent<TreasureChest>() is var chest && chest)
+        {
+            chest.Open();
+            canInteractEvent?.Invoke(false);
+            movement.FaceRotationWithoutRotateFollowTarget(chest.transform.position);
+        }
+
+        if (_interactObject.GetComponent<PortalGate>() is var portal && portal)
+        {
+            InstantTeleportTo(portal.Teleport());
+            canInteractEvent?.Invoke(false);
+        }
+    }
+
+    void OnEatApple()
+    {
+        if (!CursorFocued)
+            return;
+
+        if (_health >= maxHealth)
+            return;
+
+        if (inventory.AppleCount >= 1)
+        {
+            inventory.ChangeAppleCount(-1);
+            _health += appleHealPoint;
+            healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
         }
     }
 
     void OnRoll()
     {
+        if (!CursorFocued)
+            return;
+
         if (IsDrawingBow)
         {
             IsDrawingBow = false;
@@ -230,7 +297,23 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
             CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
             OnDrawBowEnd?.Invoke();
+            bow.OnAimProgress(0);
         }
+    }
+
+    void OnEnlargeMinimap()
+    {
+        if (!CursorFocued)
+            return;
+
+        enlargeMinimapEvent.Invoke(true);
+    }
+    void OnShrinkMinimap()
+    {
+        if (!CursorFocued)
+            return;
+
+        enlargeMinimapEvent.Invoke(false);
     }
 #endregion
 
@@ -252,6 +335,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     public void InstantDeath()
     {
+        if (_handleDeath)
+            return;
+
         _health = 0;
         healthChangeEvent?.Invoke(0);
         _handleDeath = true;
@@ -265,14 +351,18 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         _health = maxHealth;
         healthChangeEvent?.Invoke(1f);
 
+        InstantTeleportTo(spawnPoint.transform.position);
+        OnRevive?.Invoke();
+    }
+
+    public void InstantTeleportTo(Vector3 position)
+    {
         movement.CharacterController.enabled = false;
-        transform.position = spawnPoint.transform.position;
+        transform.position = position;
         movement.CharacterController.enabled = true;
 
         CameraSwitcher.ins.SwitchTo(_walkingCameraIndex);
         CameraSwitcher.GetCamera(_walkingCameraIndex).CancelDamping();
-
-        OnRevive?.Invoke();
     }
 
     public void FocusCursor()
@@ -302,30 +392,24 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     void DialogueUIEnd()
     {
-        canInteractEvent.Invoke(true);
+        if (LastCanInteract)
+        {
+            canInteractEvent.Invoke(true);
+        }
     }
 #endregion
 
 
     public void PickItemUp(ItemType itemType)
     {
-        // if (itemType.HealPoint.Enable)
-        // {
-        //     _health += itemType.HealPoint.Value;
-        //     if (_health > maxHealth)
-        //         _health = maxHealth;
-
-        //     healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
-        // }
-        // else
-        // {
         inventory.ChangeCoreCount(1);
-        // }
+        OnPickItem?.Invoke();
     }
 
     public void UpgradeBow(BowParameter upgradeParameter)
     {
         bow.UpgradeBow(upgradeParameter);
+        OnBowParameterChanged?.Invoke(bow.CurrentParameter, upgradeParameter);
     }
 
 

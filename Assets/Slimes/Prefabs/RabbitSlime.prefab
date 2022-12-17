@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 9031535313164564426}
   - component: {fileID: 2022786529228075856}
   - component: {fileID: 432010325908876845}
+  - component: {fileID: -735177882439893368}
   m_Layer: 8
   m_Name: RabbitSlime
   m_TagString: Slime
@@ -266,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb85f2d5a88d4ff68770edc9aa438c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootTable: {fileID: 11400000, guid: d16e87f23afda48f2b5ff5c755065893, type: 2}
+  lootTable: {fileID: 11400000, guid: 9ee4d11b9d08b4912b322bd3b1fdf783, type: 2}
   <ArrowBounceOff>k__BackingField: 0
   triggerFireGroups: []
   player: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
@@ -279,14 +280,68 @@ MonoBehaviour:
       m_Bits: 0
     Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
     UseVariable: 1
+  coreDamagedImpulseForce: 1
   sinkTime: 1
   sinkHeight: 1
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
-  impulseSource: {fileID: 0}
+  impulseSource: {fileID: -735177882439893368}
   audioSource: {fileID: 0}
   slamSound: {fileID: 0}
+--- !u!114 &-735177882439893368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299391971672539431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0.24, z: 0}
 --- !u!1001 &4419942041852011919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -549,7 +604,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6083404271864575730}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.009

@@ -4,21 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using MPack;
 using TMPro;
+using DigitalRuby.Tween;
 
 public class PlayerStatusHUD : MonoBehaviour
 {
     [Header("Aim")]
     [SerializeField]
-    private Image aimProgressFrame;
+    private CanvasGroup aimProgressFrame;
     [SerializeField]
-    private FillBarControl aimProgressBar;
+    private Image fill;
     [SerializeField]
     private EventReference aimProgressEvent;
 
     [SerializeField]
-    private Color aimFrameUnfocusColor;
+    private float aimFrameUnfocusAlpha;
     [SerializeField]
-    private Color aimFrameFocusColor;
+    private float aimFrameFocusAlpha;
+
+    [Header("Aim Ring Color")]
+    [SerializeField]
+    private Image firstAim;
+    [SerializeField]
+    private Image secondAim;
+    [SerializeField]
+    private Color color1;
+    [SerializeField]
+    private Color color2;
+    [SerializeField]
+    private float min;
+    [SerializeField]
+    private float max;
+    [SerializeField]
+    private AnimationCurve curve;
+    private float _firstAimPercentage;
 
     [Header("Health")]
     [SerializeField]
@@ -42,24 +60,54 @@ public class PlayerStatusHUD : MonoBehaviour
 
     [Header("Inventory")]
     [SerializeField]
+    private float countTextJumpTime = 0.28f;
+    [SerializeField]
+    private Vector2 countTextJumpDelta;
+    [SerializeField]
+    private Color countTextJumpingColor;
+
+    [Space(5)]
+    [SerializeField]
     private EventReference coreChangeEvent;
     [SerializeField]
+    private RectTransform coreCountRectTransform;
+    [SerializeField]
     private TextMeshProUGUI coreCountText;
+    private int _coreCount;
+    private Vector2 _coreCountAnchoredPosition;
 
+    [Space(5)]
     [SerializeField]
     private EventReference appleChangeEvent;
     [SerializeField]
+    private RectTransform appleCountRectTransform;
+    [SerializeField]
     private TextMeshProUGUI appleCountText;
+    private int _appleCount;
+    private Vector2 _appleCountAnchoredPosition;
 
     void Awake()
     {
-        aimProgressBar.SetFillAmount(0);
         healthFill.SetFillAmount(1);
+
+        _coreCountAnchoredPosition = coreCountRectTransform.anchoredPosition;
+        _appleCountAnchoredPosition = appleCountRectTransform.anchoredPosition;
 
         coreChangeEvent.InvokeIntEvents += ChangeCoreCount;
         appleChangeEvent.InvokeIntEvents += ChangeAppleCount;
         aimProgressEvent.InvokeFloatEvents += ChangeAimProgress;
         healthEvent.InvokeFloatEvents += ChangeHealthAmount;
+
+        // TODO: bad
+        var player = GameObject.FindWithTag(PlayerBehaviour.Tag).GetComponent<PlayerBehaviour>();
+        if (player)
+        {
+            player.OnBowParameterChanged += UnlockBowUpgrade;
+        }
+
+        fill.fillAmount = 0;
+
+        aimProgressFrame.alpha = aimFrameUnfocusAlpha;
     }
 
     void OnDestroy()
@@ -69,13 +117,67 @@ public class PlayerStatusHUD : MonoBehaviour
         aimProgressEvent.InvokeFloatEvents -= ChangeAimProgress;
     }
 
-    void ChangeCoreCount(int count) => coreCountText.text = count.ToString();
-    void ChangeAppleCount(int count) => appleCountText.text = count.ToString();
+    void ChangeCoreCount(int count)
+    {
+        if (count > _coreCount)
+        {
+            coreCountText.color = countTextJumpingColor;
+            gameObject.Tween(
+                "CoreCountTextJump",
+                _coreCountAnchoredPosition, _coreCountAnchoredPosition + countTextJumpDelta,
+                countTextJumpTime, TweenScaleFunctions.QuarticEaseOut,
+                (tweenData) => coreCountRectTransform.anchoredPosition = tweenData.CurrentValue,
+                (tweenData) => {
+                    coreCountRectTransform.anchoredPosition = _coreCountAnchoredPosition;
+                    coreCountText.color = Color.white;
+                });
+        }
+
+        _coreCount = count;
+        coreCountText.text = count.ToString();
+    }
+    void ChangeAppleCount(int count)
+    {
+        if (count > _appleCount)
+        {
+            appleCountText.color = countTextJumpingColor;
+            gameObject.Tween(
+                "AppleCountTextJump",
+                _appleCountAnchoredPosition, _appleCountAnchoredPosition + countTextJumpDelta,
+                countTextJumpTime, TweenScaleFunctions.QuarticEaseOut,
+                (tweenData) => appleCountRectTransform.anchoredPosition = tweenData.CurrentValue,
+                (tweenData) => {
+                    appleCountRectTransform.anchoredPosition = _appleCountAnchoredPosition;
+                    appleCountText.color = Color.white;
+                });
+        }
+
+        _appleCount = count;
+        appleCountText.text = count.ToString();
+    }
 
     void ChangeAimProgress(float progress)
     {
-        aimProgressFrame.color = progress > 0 ? aimFrameFocusColor : aimFrameUnfocusColor;
-        aimProgressBar.SetFillAmount(progress / 2);
+        if (progress <= 0)
+        {
+            aimProgressFrame.alpha = aimFrameUnfocusAlpha;
+            fill.fillAmount = 0;
+            return;
+        }
+
+        aimProgressFrame.alpha = aimFrameFocusAlpha;
+
+        if (progress <= 1)
+        {
+            fill.fillAmount = Mathf.Lerp(0, _firstAimPercentage, progress);
+            fill.color = firstAim.color;
+        }
+        else
+        {
+            float progressMinus1 = progress - 1;
+            fill.fillAmount = Mathf.Lerp(_firstAimPercentage, 1, progressMinus1);
+            fill.color = Color.Lerp(color1, color2, progressMinus1);
+        }
     }
 
     void ChangeHealthAmount(float newAmount)
@@ -114,17 +216,32 @@ public class PlayerStatusHUD : MonoBehaviour
     }
 
 
-    public void UnlockBowUpgrade(BowParameter bowParameter)
+    public void UnlockBowUpgrade(BowParameter bowParameter, BowParameter newBowParameter)
     {
+        SetAimDuration(bowParameter.FirstDrawDuration, bowParameter.SecondDrawDuration);
+
         for (int i = 0; i < bowUpgradeUIs.Length; i++)
         {
             BowUpgradeUI upgradeUI = bowUpgradeUIs[i];
-            if (upgradeUI.Upgrade == bowParameter)
+            if (upgradeUI.Upgrade == newBowParameter)
             {
                 upgradeUI.Icon.color = Color.white;
                 return;
             }
         }
+    }
+
+
+    void SetAimDuration(float firstAimDuration, float secondAimDuration)
+    {
+        float total = firstAimDuration + secondAimDuration;
+        _firstAimPercentage = firstAimDuration / total;
+        float secondPercentage = secondAimDuration / total;
+        firstAim.fillAmount = _firstAimPercentage;
+        secondAim.fillAmount = secondPercentage;
+        secondAim.transform.rotation = Quaternion.Euler(0, 0, _firstAimPercentage * -360);
+
+        secondAim.material.SetFloat("_Degree", Mathf.Lerp(min, max, curve.Evaluate(secondPercentage)));
     }
 
 

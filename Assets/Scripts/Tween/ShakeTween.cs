@@ -14,6 +14,11 @@ public class ShakeTween : MonoBehaviour
     [SerializeField]
     private bool anchorMode;
 
+    [SerializeField]
+    private bool shakeSizeUseCurve;
+    [SerializeField]
+    private AnimationCurveReference sizeCurve;
+
     private RectTransform _rectTransform;
     private Vector2 _originAnchoredPosition;
     private Vector3 _originPosition;
@@ -42,10 +47,14 @@ public class ShakeTween : MonoBehaviour
             return;
         }
 
+        Vector3 _shakeSize = shakeSize;
+        if (shakeSizeUseCurve)
+            _shakeSize *= sizeCurve.Evaluate(duration.Progress);
+
         Vector3 delta = new Vector3(
-            Random.Range(-shakeSize.x, shakeSize.x),
-            Random.Range(-shakeSize.y, shakeSize.y),
-            Random.Range(-shakeSize.z, shakeSize.z));
+            Random.Range(-_shakeSize.x, _shakeSize.x),
+            Random.Range(-_shakeSize.y, _shakeSize.y),
+            Random.Range(-_shakeSize.z, _shakeSize.z));
 
         if (anchorMode) _rectTransform.anchoredPosition = _originAnchoredPosition + (Vector2)delta;
         else transform.position = _originPosition + delta;

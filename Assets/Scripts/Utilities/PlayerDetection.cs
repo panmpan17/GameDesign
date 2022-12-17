@@ -7,6 +7,8 @@ public class PlayerDetection : MonoBehaviour
 {
     [SerializeField]
     private UnityEvent OnPlayerEnter;
+    [SerializeField]
+    private UnityEvent OnPlayerExit;
 
     public event System.Action OnPlayerEnterEvent;
 
@@ -16,6 +18,14 @@ public class PlayerDetection : MonoBehaviour
         {
             OnPlayerEnterEvent?.Invoke();
             OnPlayerEnter.Invoke();
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag(PlayerBehaviour.Tag))
+        {
+            OnPlayerExit.Invoke();
         }
     }
 }

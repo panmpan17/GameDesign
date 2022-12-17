@@ -23,5 +23,16 @@ namespace MPack
 #endif
             }
         }
+
+        public float Evaluate(float time)
+        {
+#if UNITY_EDITOR
+            if (UseVariable)
+                return Variable ? Variable.Value.Evaluate(time) : throw new System.NullReferenceException("Use Varible but varible not exist");
+            return Constant.Evaluate(time);
+#else
+            return UseVariable ? Variable.Value.Evaluate(time) : Constant.Evaluate(time);
+#endif
+        }
     }
 }

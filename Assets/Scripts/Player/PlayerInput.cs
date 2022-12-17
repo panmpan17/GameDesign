@@ -17,6 +17,10 @@ public interface InputInterface
     event System.Action OnRoll;
 
     event System.Action OnInteract;
+    event System.Action OnEatApple;
+
+    event System.Action OnMinimapEnlargeDown;
+    event System.Action OnMinimapEnlargeUp;
 
     Vector2 MovementAxis { get; }
     Vector2 LookAxis { get; }
@@ -51,6 +55,10 @@ public class PlayerInput : MonoBehaviour, InputInterface
     public event System.Action OnRoll;
 
     public event System.Action OnInteract;
+    public event System.Action OnEatApple;
+
+    public event System.Action OnMinimapEnlargeDown;
+    public event System.Action OnMinimapEnlargeUp;
 
 
     public Vector2 MovementAxis { get; private set; }
@@ -83,6 +91,10 @@ public class PlayerInput : MonoBehaviour, InputInterface
         _scheme.Player.Roll.performed += OnRollPerformed;
 
         _scheme.Player.Interact.performed += OnInteractPerformed;
+        _scheme.Player.EatApple.performed += OnEatApplePerformed;
+
+        _scheme.Player.EnlargeMinimap.performed += OnMinimapEnlargePerformed;
+        _scheme.Player.EnlargeMinimap.canceled += OnMinimapEnlargeCanceled;
 
         _scheme.Player.ToggleConsoleWindow.performed += OnToggleConsoleWindow;
     }
@@ -126,6 +138,10 @@ public class PlayerInput : MonoBehaviour, InputInterface
     void OnRollPerformed(CallbackContext callbackContext) => OnRoll?.Invoke();
 
     void OnInteractPerformed(CallbackContext callbackContext) => OnInteract?.Invoke();
+    void OnEatApplePerformed(CallbackContext callbackContext) => OnEatApple?.Invoke();
+
+    void OnMinimapEnlargePerformed(CallbackContext callbackContext) => OnMinimapEnlargeDown?.Invoke();
+    void OnMinimapEnlargeCanceled(CallbackContext callbackContext) => OnMinimapEnlargeUp?.Invoke();
 
     void OnToggleConsoleWindow(CallbackContext callbackContext)
     {
@@ -137,7 +153,7 @@ public class PlayerInput : MonoBehaviour, InputInterface
             _scheme.Player.Look.Disable();
             _scheme.Player.Aim.Disable();
             _scheme.Player.Move.Disable();
-            _scheme.Player.Run.Disable();
+            _scheme.Player.EatApple.Disable();
             _scheme.Player.Roll.Disable();
             _scheme.Player.Jump.Disable();
             _scheme.Player.Interact.Disable();
@@ -147,7 +163,7 @@ public class PlayerInput : MonoBehaviour, InputInterface
             _scheme.Player.Look.Enable();
             _scheme.Player.Aim.Enable();
             _scheme.Player.Move.Enable();
-            _scheme.Player.Run.Enable();
+            _scheme.Player.EatApple.Enable();
             _scheme.Player.Roll.Enable();
             _scheme.Player.Jump.Enable();
             _scheme.Player.Interact.Enable();

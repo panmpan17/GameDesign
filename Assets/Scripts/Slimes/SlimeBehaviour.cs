@@ -38,6 +38,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
 
     [Header("Dead Animation")]
     [SerializeField]
+    private float coreDamagedImpulseForce;
+    [SerializeField]
     private float sinkTime;
     [SerializeField]
     private float sinkHeight;
@@ -60,11 +62,14 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     public event System.Action<Collision> OnCollisionEnterEvent;
     public event System.Action<Collision> OnCollisionExitEvent;
 
+    public event System.Action<SlimeCore> OnCoreDamagedEvent;
+
 
     void Awake()
     {
         triggerFires = GetComponentsInChildren<ITriggerFire>();
         behaviourTreeRunner = GetComponent<BehaviourTreeRunner>();
+        impulseSource ??= GetComponent<CinemachineImpulseSource>();
 
         for (int i = 0; i < triggerFireGroups.Length; i++)
         {
@@ -122,11 +127,21 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     }
 
     #region Damage, Death, Loot table
-    void OnCoreDamage()
+    void OnCoreDamage(SlimeCore damagedCore)
     {
+        if (impulseSource && coreDamagedImpulseForce > 0)
+            impulseSource.GenerateImpulse(coreDamagedImpulseForce);
+
+        StartCoroutine(PauseGame());
+
         int aliveCount = UpdateHealth();
         if (aliveCount <= 0)
+        {
             HandleDeath();
+            return;
+        }
+
+        OnCoreDamagedEvent?.Invoke(damagedCore);
     }
 
     void HandleDeath()
@@ -136,6 +151,15 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
 
         behaviourTreeRunner.enabled = false;
 
+        StartCoroutine(DelayDeathAnimation());
+    }
+
+    IEnumerator DelayDeathAnimation()
+    {
+        OnDeath?.Invoke();
+
+        yield return new WaitForSeconds(0.6f);
+
         gameObject.Tween(
             gameObject,
             transform.position,
@@ -144,8 +168,6 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
             TweenScaleFunctions.Linear,
             (action) => transform.position = action.CurrentValue,
             (action) => Destroy(gameObject));
-
-        OnDeath?.Invoke();
     }
 
     void SpawnLootTable()
@@ -228,6 +250,15 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
                 arrow.TrailEmmiting = false;
             }
         );
+    }
+
+
+    IEnumerator PauseGame()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(0.08f);
+        // yield return null;
+        Time.timeScale = 1;
     }
 
 

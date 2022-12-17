@@ -133,38 +133,23 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
     void HandleHit(Transform otherTransform)
     {
-        var OnArrowHit = otherTransform.GetComponent<OnArrowHit>();
-        if (OnArrowHit)
-            OnArrowHit.Trigger(transform.position);
+        otherTransform.GetComponent<OnArrowHit>()?.Trigger(transform.position);
+
+        if (otherTransform.CompareTag(ArrowBounceOff.Tag))
+        {
+            BounceOffArrow();
+            return;
+        }
 
         if (otherTransform.CompareTag(SlimeBehaviourTreeRunner.Tag))
         {
-            var slime = otherTransform.GetComponent<SlimeBehaviour>();
-            if (slime.ArrowBounceOff)
-            {
-                enabled = false;
-                rigidbody.useGravity = true;
-            }
-            else
-            {
-                transform.SetParent(otherTransform);
-                StopArrow();
-
-                slime.ShakeArrow(this);
-            }
+            OnHitSlimeBody(otherTransform);
             return;
         }
-        else if (otherTransform.CompareTag(SlimeCore.Tag))
+
+        if (otherTransform.CompareTag(SlimeCore.Tag))
         {
-            transform.SetParent(otherTransform.parent);
-
-            if (enabled)
-            {
-                var slimeCore = otherTransform.GetComponent<SlimeCore>();
-                slimeCore.OnDamage();
-
-                audioSource.Play(hitSound);
-            }
+            OnHitSlimeCore(otherTransform);
         }
         else if (otherTransform.CompareTag(InteractiveBase.Tag))
         {
@@ -176,7 +161,41 @@ public class Arrow : MonoBehaviour, IPoolableObj
         StopArrow();
     }
 
-    private void StopArrow()
+    void BounceOffArrow()
+    {
+        enabled = false;
+        rigidbody.useGravity = true;
+    }
+
+    void OnHitSlimeBody(Transform otherTransform)
+    {
+        var slime = otherTransform.GetComponent<SlimeBehaviour>();
+        if (slime.ArrowBounceOff)
+        {
+            BounceOffArrow();
+            return;
+        }
+
+        transform.SetParent(otherTransform);
+        StopArrow();
+
+        slime.ShakeArrow(this);
+    }
+
+    void OnHitSlimeCore(Transform otherTransform)
+    {
+        transform.SetParent(otherTransform.parent);
+
+        if (!enabled)
+            return;
+
+        var slimeCore = otherTransform.GetComponent<SlimeCore>();
+        slimeCore.OnDamage();
+        audioSource.Play(hitSound);
+    }
+
+
+    void StopArrow()
     {
         enabled = false;
         collider.enabled = false;

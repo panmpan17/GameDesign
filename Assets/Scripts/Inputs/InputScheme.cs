@@ -633,15 +633,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Run"",
-                    ""type"": ""Button"",
-                    ""id"": ""d9bc7dab-8ea4-4b01-8cc8-81dd449e358a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Escap"",
                     ""type"": ""Button"",
                     ""id"": ""1dfa8f44-9157-4748-8e17-9c33d2004e00"",
@@ -663,6 +654,24 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""302560b7-a263-41ae-ae3e-a49fd33ceb5c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EatApple"",
+                    ""type"": ""Button"",
+                    ""id"": ""5930a0dc-99b6-4626-8d1c-031e780ccf55"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnlargeMinimap"",
+                    ""type"": ""Button"",
+                    ""id"": ""09df7c6a-f9f9-46a7-a28d-e0ec30f7e886"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1023,28 +1032,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""5b0d1c61-c567-435e-83d0-63d32b55cfaa"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Run"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c15ed0b6-eca4-4cf9-92f1-d76d3acb8d48"",
-                    ""path"": ""<HID::Logitech Logitech Dual Action>/button6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Run"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""One Modifier"",
                     ""id"": ""544d802f-e6ea-4b9d-8b55-a5a03049be84"",
                     ""path"": ""OneModifier"",
@@ -1120,6 +1107,61 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21160f4c-b0df-401e-9ccf-4630020ad9d5"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25181a8d-7c30-4de4-a79d-c95da177c7af"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EatApple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4fed62d7-d986-41aa-89fb-ab425aa8d52d"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EatApple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""754a56b8-87fb-4005-82b2-203383eee58c"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnlargeMinimap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bd7df1f-2eff-460f-a225-fb9432e481d8"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnlargeMinimap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1145,10 +1187,11 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
-        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Escap = m_Player.FindAction("Escap", throwIfNotFound: true);
         m_Player_ToggleConsoleWindow = m_Player.FindAction("ToggleConsoleWindow", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_EatApple = m_Player.FindAction("EatApple", throwIfNotFound: true);
+        m_Player_EnlargeMinimap = m_Player.FindAction("EnlargeMinimap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1318,10 +1361,11 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Roll;
-    private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Escap;
     private readonly InputAction m_Player_ToggleConsoleWindow;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_EatApple;
+    private readonly InputAction m_Player_EnlargeMinimap;
     public struct PlayerActions
     {
         private @InputScheme m_Wrapper;
@@ -1331,10 +1375,11 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
-        public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Escap => m_Wrapper.m_Player_Escap;
         public InputAction @ToggleConsoleWindow => m_Wrapper.m_Player_ToggleConsoleWindow;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @EatApple => m_Wrapper.m_Player_EatApple;
+        public InputAction @EnlargeMinimap => m_Wrapper.m_Player_EnlargeMinimap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1359,9 +1404,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @Roll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
                 @Roll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
                 @Roll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
-                @Run.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
-                @Run.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
-                @Run.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRun;
                 @Escap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
                 @Escap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
                 @Escap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscap;
@@ -1371,6 +1413,12 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @EatApple.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEatApple;
+                @EatApple.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEatApple;
+                @EatApple.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEatApple;
+                @EnlargeMinimap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnlargeMinimap;
+                @EnlargeMinimap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnlargeMinimap;
+                @EnlargeMinimap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnlargeMinimap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1390,9 +1438,6 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @Roll.started += instance.OnRoll;
                 @Roll.performed += instance.OnRoll;
                 @Roll.canceled += instance.OnRoll;
-                @Run.started += instance.OnRun;
-                @Run.performed += instance.OnRun;
-                @Run.canceled += instance.OnRun;
                 @Escap.started += instance.OnEscap;
                 @Escap.performed += instance.OnEscap;
                 @Escap.canceled += instance.OnEscap;
@@ -1402,6 +1447,12 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @EatApple.started += instance.OnEatApple;
+                @EatApple.performed += instance.OnEatApple;
+                @EatApple.canceled += instance.OnEatApple;
+                @EnlargeMinimap.started += instance.OnEnlargeMinimap;
+                @EnlargeMinimap.performed += instance.OnEnlargeMinimap;
+                @EnlargeMinimap.canceled += instance.OnEnlargeMinimap;
             }
         }
     }
@@ -1426,9 +1477,10 @@ public partial class @InputScheme : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
         void OnEscap(InputAction.CallbackContext context);
         void OnToggleConsoleWindow(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnEatApple(InputAction.CallbackContext context);
+        void OnEnlargeMinimap(InputAction.CallbackContext context);
     }
 }

@@ -179,7 +179,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6118827799262238147
 PrefabInstance:
@@ -194,15 +194,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72bf5e629496b42fc8d51d340c0acb08, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3129684
+      value: 2.183335
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72bf5e629496b42fc8d51d340c0acb08, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.3129684
+      value: 2.183335
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72bf5e629496b42fc8d51d340c0acb08, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.0833688
+      value: 4.7119765
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72bf5e629496b42fc8d51d340c0acb08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72bf5e629496b42fc8d51d340c0acb08, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72bf5e629496b42fc8d51d340c0acb08, type: 3}
       propertyPath: m_LocalPosition.z
@@ -300,8 +300,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  startPosition: {x: 0, y: 0, z: 0}
-  endPosition: {x: 0, y: 0.15, z: 0}
+  startPosition: {x: 0, y: 0.2, z: 0}
+  endPosition: {x: 0, y: 0.35, z: 0}
   timer:
     TargetTime: 0.5
     Running: 0

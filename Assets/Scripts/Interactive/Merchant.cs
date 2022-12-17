@@ -36,5 +36,6 @@ public class Merchant : ScriptableObject
 
         [Header("Return")]
         public BowParameter BowUpgrade;
+        public int AppleGain;
     }
 }

@@ -21,6 +21,8 @@ public class AmbushPoint : MonoBehaviour
 
     [Header("Colddown")]
     [SerializeField]
+    private bool hasColddown;
+    [SerializeField]
     private Timer colddownTimer;
 
     private bool _inRange;
@@ -35,10 +37,19 @@ public class AmbushPoint : MonoBehaviour
         {
             spawnSlimeTriggers[i].SetSpawnSlimeList(spawnSlimes);
         }
+
+        colddownTimer.Running = false;
     }
 
     void Update()
     {
+        if (colddownTimer.Running)
+        {
+            if (colddownTimer.UpdateEnd)
+                colddownTimer.Running = false;
+            return;
+        }
+
         if (!senseTimer.UpdateEnd)
             return;
         senseTimer.Reset();
@@ -52,6 +63,11 @@ public class AmbushPoint : MonoBehaviour
                 return;
 
             _inRange = false;
+
+            if (hasColddown && spawnSlimes.AliveCount <= 0)
+            {
+                colddownTimer.Reset();
+            }
             spawnSlimes?.DestroyAll();
         }
         else

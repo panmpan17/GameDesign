@@ -221,5 +221,28 @@ namespace MPack {
             EditorGUILayout.EndScrollView();
         }
 
+
+        [MenuItem("MPack/Sort Language File", true)]
+        public static bool ValidateSortLanguageFile()
+        {
+            UnityEngine.Object _object = Selection.activeObject;
+            if (!_object)
+                return false;
+
+            if (!(_object is LanguageData))
+                return false;
+
+            return true;
+        }
+
+        [MenuItem("MPack/Sort Language File")]
+        public static void SortLanguageFile()
+        {
+            LanguageData data = (LanguageData) Selection.activeObject;
+
+            System.Array.Sort(data.Texts, (pair1, pair2) => {
+                return pair1.ID - pair2.ID;
+            });
+        }
     }
 }

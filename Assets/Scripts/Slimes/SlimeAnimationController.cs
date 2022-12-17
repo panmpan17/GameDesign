@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MPack;
+using XnodeBehaviourTree;
 
 
-public class SlimeAnimationController : MonoBehaviour
+public class SlimeAnimationController : MonoBehaviour, IAnimationPlayer
 {
     [SerializeField]
     private SpriteRenderer faceSpriteRenderer;
@@ -44,20 +45,32 @@ public class SlimeAnimationController : MonoBehaviour
             SpriteAnimation animation = spriteAnimations[_animationIndex];
             if (++_ainmationKeyIndex >= animation.KeyPoints.Length)
             {
-                if (!animation.IsLoop)
-                {
-                    enabled = false;
-                    return;
-                }
-
-                _animationIndex = randomPlayedIndex[Random.Range(0, randomPlayedIndex.Length)];
-                animation = spriteAnimations[_animationIndex];
-                _ainmationKeyIndex = 0;
+                HandleAnimationEnd(animation);
+                return;
             }
 
             faceSpriteRenderer.sprite = animation.KeyPoints[_ainmationKeyIndex].Sprite;
             _timer.TargetTime = animation.KeyPoints[_ainmationKeyIndex].Interval;
         }
+    }
+
+    void HandleAnimationEnd(SpriteAnimation animation)
+    {
+        switch (animation.EndWrapMode)
+        {
+            case SpriteAnimation.WrapMode.Hold:
+                enabled = false;
+                return;
+
+            case SpriteAnimation.WrapMode.LoopDestinateAnimations:
+                _animationIndex = randomPlayedIndex[Random.Range(0, randomPlayedIndex.Length)];
+                animation = spriteAnimations[_animationIndex];
+                break;
+        }
+
+        _ainmationKeyIndex = 0;
+        faceSpriteRenderer.sprite = animation.KeyPoints[_ainmationKeyIndex].Sprite;
+        _timer.TargetTime = animation.KeyPoints[_ainmationKeyIndex].Interval;
     }
 
     public void SwitchToAnimation(int index)
@@ -81,5 +94,10 @@ public class SlimeAnimationController : MonoBehaviour
             SwitchToAnimation(i);
             break;
         }
+    }
+
+    public void PlayAnimation(string animationName)
+    {
+        SwitchToAnimation(animationName);
     }
 }
