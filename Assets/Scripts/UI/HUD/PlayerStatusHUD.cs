@@ -60,6 +60,8 @@ public class PlayerStatusHUD : MonoBehaviour
 
     [Header("Inventory")]
     [SerializeField]
+    private Inventory inventory;
+    [SerializeField]
     private float countTextJumpTime = 0.28f;
     [SerializeField]
     private Vector2 countTextJumpDelta;
@@ -67,8 +69,6 @@ public class PlayerStatusHUD : MonoBehaviour
     private Color countTextJumpingColor;
 
     [Space(5)]
-    [SerializeField]
-    private EventReference coreChangeEvent;
     [SerializeField]
     private RectTransform coreCountRectTransform;
     [SerializeField]
@@ -78,13 +78,16 @@ public class PlayerStatusHUD : MonoBehaviour
 
     [Space(5)]
     [SerializeField]
-    private EventReference appleChangeEvent;
-    [SerializeField]
     private RectTransform appleCountRectTransform;
     [SerializeField]
     private TextMeshProUGUI appleCountText;
     private int _appleCount;
     private Vector2 _appleCountAnchoredPosition;
+
+    [Space(5)]
+    [SerializeField]
+    private GameObject hasFlowerIcon;
+    // private everefe
 
     void Awake()
     {
@@ -93,8 +96,12 @@ public class PlayerStatusHUD : MonoBehaviour
         _coreCountAnchoredPosition = coreCountRectTransform.anchoredPosition;
         _appleCountAnchoredPosition = appleCountRectTransform.anchoredPosition;
 
-        coreChangeEvent.InvokeIntEvents += ChangeCoreCount;
-        appleChangeEvent.InvokeIntEvents += ChangeAppleCount;
+        inventory.CoreEvent.InvokeIntEvents += ChangeCoreCount;
+        inventory.AppleEvent.InvokeIntEvents += ChangeAppleCount;
+        inventory.FlowerEvent.InvokeBoolEvents += ChangeHaveFlower;
+
+        hasFlowerIcon.SetActive(false);
+
         aimProgressEvent.InvokeFloatEvents += ChangeAimProgress;
         healthEvent.InvokeFloatEvents += ChangeHealthAmount;
 
@@ -110,8 +117,9 @@ public class PlayerStatusHUD : MonoBehaviour
 
     void OnDestroy()
     {
-        coreChangeEvent.InvokeIntEvents -= ChangeCoreCount;
-        appleChangeEvent.InvokeIntEvents -= ChangeAppleCount;
+        inventory.CoreEvent.InvokeIntEvents -= ChangeCoreCount;
+        inventory.AppleEvent.InvokeIntEvents -= ChangeAppleCount;
+        inventory.FlowerEvent.InvokeBoolEvents -= ChangeHaveFlower;
         aimProgressEvent.InvokeFloatEvents -= ChangeAimProgress;
     }
 
@@ -193,6 +201,11 @@ public class PlayerStatusHUD : MonoBehaviour
             healthFill.SetFillAmount(newAmount);
             damageShake.Trigger();
         }
+    }
+
+    void ChangeHaveFlower(bool hasFlower)
+    {
+        hasFlowerIcon.SetActive(hasFlower);
     }
 
     IEnumerator AnimateHealthHeal(float newAmount)

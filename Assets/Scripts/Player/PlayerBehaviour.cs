@@ -192,7 +192,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     }
 
 
-    #region Input Events
+#region Input Events
     void OnAimDown()
     {
         if (!CursorFocued)
@@ -256,17 +256,23 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             return;
         }
 
-        if (_interactObject.GetComponent<TreasureChest>() is var chest && chest)
+        else if (_interactObject.GetComponent<TreasureChest>() is var chest && chest)
         {
             chest.Open();
             canInteractEvent?.Invoke(false);
             movement.FaceRotationWithoutRotateFollowTarget(chest.transform.position);
         }
 
-        if (_interactObject.GetComponent<PortalGate>() is var portal && portal)
+        else if (_interactObject.GetComponent<PortalGate>() is var portal && portal)
         {
             InstantTeleportTo(portal.Teleport());
             canInteractEvent?.Invoke(false);
+        }
+
+        else if (_interactObject.GetComponent<PickupFlower>() is var flower && flower)
+        {
+            flower.Pickup();
+            inventory.FlowerEvent.Invoke(true);
         }
     }
 

@@ -153,7 +153,7 @@ namespace MPack
         {
             DialogueGraph asset = ScriptableObject.CreateInstance<DialogueGraph>();
 
-            AssetDatabase.CreateAsset(asset, "Assets/NewDialogueGraph.asset");
+            AssetDatabase.CreateAsset(asset, "Assets/New Dialogue Graph.asset");
             AssetDatabase.SaveAssets();
 
             asset.OnCreated();

@@ -8,9 +8,12 @@ public class Inventory : ScriptableObject
     [System.NonSerialized]
     public int CoreCount;
     public EventReference CoreEvent;
+
     [System.NonSerialized]
     public int AppleCount;
     public EventReference AppleEvent;
+
+    public EventReference FlowerEvent;
 
     public void ChangeCoreCount(int amount)
     {

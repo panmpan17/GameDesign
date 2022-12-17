@@ -181,12 +181,12 @@ namespace MPack {
         }
 
         private void OnGUI() {
-            // addAlphabet = EditorGUILayout.Toggle("Auto Include alphabet", addAlphabet);
-            // addNumber = EditorGUILayout.Toggle("Auto Include number", addNumber);
-            // addSymbol = EditorGUILayout.Toggle("Audo Include symbol", addSymbol);
-            // if (GUILayout.Button("Scan Text in Every LanguageData")) {
-            //     ScanTextInEveryLanguageData();
-            // }
+            addAlphabet = EditorGUILayout.Toggle("Auto Include alphabet", addAlphabet);
+            addNumber = EditorGUILayout.Toggle("Auto Include number", addNumber);
+            addSymbol = EditorGUILayout.Toggle("Audo Include symbol", addSymbol);
+            if (GUILayout.Button("Scan Text in Every LanguageData")) {
+                ScanTextInEveryLanguageData();
+            }
 
 
             m_displayLanguage = EditorGUILayout.MaskField(
