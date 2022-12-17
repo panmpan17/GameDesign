@@ -7,6 +7,9 @@ using Cinemachine;
 
 public class TeachShootSlimeCore : MonoBehaviour
 {
+    [SerializeField]
+    private EventReference interactKeyHideEvent;
+
     [Header("NPC")]
     [SerializeField]
     private NPCControl npcControl;
@@ -42,9 +45,12 @@ public class TeachShootSlimeCore : MonoBehaviour
 
     IEnumerator C_TutorialProcess()
     {
-        // TODO: hide interact key prompt
         PlayerBehaviour player = GameManager.ins.Player;
         player.Input.Disable();
+        interactKeyHideEvent.Invoke(false);
+        yield return new WaitForEndOfFrame();
+        player.Input.Disable();
+        interactKeyHideEvent.Invoke(false);
 
         GameObjectList slimeList = ScriptableObject.CreateInstance<GameObjectList>();
         slimeList.List = new List<GameObject>();

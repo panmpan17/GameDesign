@@ -13,17 +13,19 @@ MonoBehaviour:
   m_Name: AppleMerchant
   m_EditorClassIdentifier: 
   Merchandises:
-  - RequireCoreCount: 4
+  - RequireCoreCount: 5
     NameLanguageID: 1266
     PurchaseLimit:
       Enable: 0
       Value: 0
     DisplayWhenPurchaseLimitReached: 0
     BowUpgrade: {fileID: 0}
-  - RequireCoreCount: 10
+    AppleGain: 1
+  - RequireCoreCount: 13
     NameLanguageID: 1267
     PurchaseLimit:
       Enable: 0
       Value: 0
     DisplayWhenPurchaseLimitReached: 0
     BowUpgrade: {fileID: 0}
+    AppleGain: 3

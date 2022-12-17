@@ -174,13 +174,90 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50544314}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -690.3, y: 23.8, z: -126.5}
+  m_LocalPosition: {x: -691.13, y: 18.2, z: -123.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2043335680}
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &96621826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 96621829}
+  - component: {fileID: 96621827}
+  - component: {fileID: 96621828}
+  m_Layer: 0
+  m_Name: SpawnSlimes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &96621827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96621826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefabs:
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
+  locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
+  delay: 1
+  spawnCount: 2
+  spawnSlimesList: {fileID: 0}
+  spawnPointProvider: {fileID: 96621828}
+  spawnAtRaycastPoint: 1
+  raycastDistance: 3
+  groundLayer:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 1024
+    Variable: {fileID: 0}
+    UseVariable: 0
+  radius: 0
+  segmentCount: 1
+--- !u!114 &96621828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96621826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7
+  segmentCount: 10
+  drawGizmos: 1
+--- !u!4 &96621829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96621826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2131111737}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &135991462
 GameObject:
@@ -506,6 +583,65 @@ Transform:
   m_Father: {fileID: 693116351}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &385114850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 385114852}
+  - component: {fileID: 385114851}
+  m_Layer: 0
+  m_Name: Rabbit-Ambush (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &385114851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385114850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd131b101e19418f8cdccd73b5f7e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnSlimeTriggers:
+  - {fileID: 712007470}
+  spawnRadius: 90
+  despawnRadius: 110
+  senseTimer:
+    TargetTime: 1
+    Running: 0
+    ReverseMode: 0
+  playerTransform: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  hasColddown: 1
+  colddownTimer:
+    TargetTime: 30
+    Running: 0
+    ReverseMode: 0
+--- !u!4 &385114852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385114850}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -586.5, y: 29.13, z: 226.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 712007472}
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &387102424
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,6 +719,83 @@ Transform:
   m_Father: {fileID: 2041015163}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &428124038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 428124041}
+  - component: {fileID: 428124039}
+  - component: {fileID: 428124040}
+  m_Layer: 0
+  m_Name: SpawnSlimes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &428124039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428124038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefabs:
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
+  locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
+  delay: 1
+  spawnCount: 2
+  spawnSlimesList: {fileID: 0}
+  spawnPointProvider: {fileID: 428124040}
+  spawnAtRaycastPoint: 1
+  raycastDistance: 3
+  groundLayer:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 1024
+    Variable: {fileID: 0}
+    UseVariable: 0
+  radius: 0
+  segmentCount: 1
+--- !u!114 &428124040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428124038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7
+  segmentCount: 10
+  drawGizmos: 1
+--- !u!4 &428124041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428124038}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1827094967}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &462091120
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +847,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462091120}
   m_LocalRotation: {x: -0.09704251, y: 0.0023790414, z: 0.024392353, w: 0.9949785}
-  m_LocalPosition: {x: -562.4, y: 27.93, z: 225.5}
+  m_LocalPosition: {x: -560.5, y: 26.6, z: 218.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -969,7 +1182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slimePrefabs:
-  - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 2
   spawnCount: 1
@@ -1151,6 +1364,83 @@ Transform:
   m_Father: {fileID: 1926959972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &712007469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712007472}
+  - component: {fileID: 712007470}
+  - component: {fileID: 712007471}
+  m_Layer: 0
+  m_Name: SpawnSlimes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &712007470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712007469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefabs:
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
+  locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
+  delay: 1
+  spawnCount: 1
+  spawnSlimesList: {fileID: 0}
+  spawnPointProvider: {fileID: 712007471}
+  spawnAtRaycastPoint: 1
+  raycastDistance: 3
+  groundLayer:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 1024
+    Variable: {fileID: 0}
+    UseVariable: 0
+  radius: 0
+  segmentCount: 1
+--- !u!114 &712007471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712007469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7
+  segmentCount: 10
+  drawGizmos: 1
+--- !u!4 &712007472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712007469}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 385114852}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &899386093
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,6 +1493,71 @@ Transform:
   m_Father: {fileID: 1298990132}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &913866178
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -413.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 29.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 218.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9969461
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.048148412
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0029659728
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.06141251
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -5.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -7.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: coreGain.Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: appleGain.Enable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352036, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_Name
+      value: TreasureChest (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
 --- !u!1 &994887341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,6 +1665,83 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -6.123, y: 0, z: 0}
+--- !u!1 &1086876071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1086876074}
+  - component: {fileID: 1086876072}
+  - component: {fileID: 1086876073}
+  m_Layer: 0
+  m_Name: SpawnSlimes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1086876072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086876071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefabs:
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
+  locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
+  delay: 1
+  spawnCount: 2
+  spawnSlimesList: {fileID: 0}
+  spawnPointProvider: {fileID: 1086876073}
+  spawnAtRaycastPoint: 1
+  raycastDistance: 3
+  groundLayer:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 1024
+    Variable: {fileID: 0}
+    UseVariable: 0
+  radius: 0
+  segmentCount: 1
+--- !u!114 &1086876073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086876071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7
+  segmentCount: 10
+  drawGizmos: 1
+--- !u!4 &1086876074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086876071}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1471499288}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1108494812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,7 +1776,7 @@ MonoBehaviour:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 1
-  spawnCount: 2
+  spawnCount: 1
   spawnSlimesList: {fileID: 0}
   spawnPointProvider: {fileID: 1108494814}
   spawnAtRaycastPoint: 1
@@ -1445,6 +1877,83 @@ Transform:
   - {fileID: 1821987055}
   m_Father: {fileID: 0}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1235850404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1235850407}
+  - component: {fileID: 1235850405}
+  - component: {fileID: 1235850406}
+  m_Layer: 0
+  m_Name: SpawnSlimes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1235850405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235850404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefabs:
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
+  locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
+  delay: 1
+  spawnCount: 1
+  spawnSlimesList: {fileID: 0}
+  spawnPointProvider: {fileID: 1235850406}
+  spawnAtRaycastPoint: 1
+  raycastDistance: 3
+  groundLayer:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 1024
+    Variable: {fileID: 0}
+    UseVariable: 0
+  radius: 0
+  segmentCount: 1
+--- !u!114 &1235850406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235850404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7
+  segmentCount: 10
+  drawGizmos: 1
+--- !u!4 &1235850407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235850404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1627924129}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1281165488
 GameObject:
@@ -1904,6 +2413,83 @@ Transform:
   m_Father: {fileID: 1298990132}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1423883668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1423883671}
+  - component: {fileID: 1423883669}
+  - component: {fileID: 1423883670}
+  m_Layer: 0
+  m_Name: SpawnSlimes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1423883669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423883668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefabs:
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
+  locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
+  delay: 1
+  spawnCount: 1
+  spawnSlimesList: {fileID: 0}
+  spawnPointProvider: {fileID: 1423883670}
+  spawnAtRaycastPoint: 1
+  raycastDistance: 3
+  groundLayer:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 1024
+    Variable: {fileID: 0}
+    UseVariable: 0
+  radius: 0
+  segmentCount: 1
+--- !u!114 &1423883670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423883668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7
+  segmentCount: 10
+  drawGizmos: 1
+--- !u!4 &1423883671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423883668}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1465410443}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1427601804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,6 +2566,124 @@ Transform:
   m_Children: []
   m_Father: {fileID: 135991464}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1465410441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1465410443}
+  - component: {fileID: 1465410442}
+  m_Layer: 0
+  m_Name: Rabbit-Ambush (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1465410442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465410441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd131b101e19418f8cdccd73b5f7e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnSlimeTriggers:
+  - {fileID: 1423883669}
+  spawnRadius: 90
+  despawnRadius: 110
+  senseTimer:
+    TargetTime: 1
+    Running: 0
+    ReverseMode: 0
+  playerTransform: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  hasColddown: 1
+  colddownTimer:
+    TargetTime: 30
+    Running: 0
+    ReverseMode: 0
+--- !u!4 &1465410443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465410441}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -413.5, y: 29.13, z: 110.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1423883671}
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1471499286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1471499288}
+  - component: {fileID: 1471499287}
+  m_Layer: 0
+  m_Name: Rabbit-Ambush (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1471499287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471499286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd131b101e19418f8cdccd73b5f7e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnSlimeTriggers:
+  - {fileID: 1086876072}
+  spawnRadius: 90
+  despawnRadius: 110
+  senseTimer:
+    TargetTime: 1
+    Running: 0
+    ReverseMode: 0
+  playerTransform: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  hasColddown: 1
+  colddownTimer:
+    TargetTime: 30
+    Running: 0
+    ReverseMode: 0
+--- !u!4 &1471499288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471499286}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -661.5, y: 29.13, z: 29.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1086876074}
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1481310276
 GameObject:
@@ -2274,7 +2978,7 @@ MonoBehaviour:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 1
-  spawnCount: 2
+  spawnCount: 1
   spawnSlimesList: {fileID: 0}
   spawnPointProvider: {fileID: 1525731192}
   spawnAtRaycastPoint: 1
@@ -2445,6 +3149,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1693105426}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1627924127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1627924129}
+  - component: {fileID: 1627924128}
+  m_Layer: 0
+  m_Name: Rabbit-Ambush (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1627924128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627924127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd131b101e19418f8cdccd73b5f7e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnSlimeTriggers:
+  - {fileID: 1235850405}
+  spawnRadius: 90
+  despawnRadius: 110
+  senseTimer:
+    TargetTime: 1
+    Running: 0
+    ReverseMode: 0
+  playerTransform: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  hasColddown: 1
+  colddownTimer:
+    TargetTime: 30
+    Running: 0
+    ReverseMode: 0
+--- !u!4 &1627924129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627924127}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -453.4, y: 29.13, z: 181.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1235850407}
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1693105424
 GameObject:
@@ -2699,6 +3462,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1192647765}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1827094965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1827094967}
+  - component: {fileID: 1827094966}
+  m_Layer: 0
+  m_Name: Rabbit-Ambush (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1827094966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827094965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd131b101e19418f8cdccd73b5f7e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnSlimeTriggers:
+  - {fileID: 428124039}
+  spawnRadius: 90
+  despawnRadius: 110
+  senseTimer:
+    TargetTime: 1
+    Running: 0
+    ReverseMode: 0
+  playerTransform: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  hasColddown: 1
+  colddownTimer:
+    TargetTime: 30
+    Running: 0
+    ReverseMode: 0
+--- !u!4 &1827094967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827094965}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -729.3, y: 29.13, z: 3.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 428124041}
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1906377669
 GameObject:
@@ -3089,4 +3911,63 @@ Transform:
   - {fileID: 1331582293}
   m_Father: {fileID: 0}
   m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2131111735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2131111737}
+  - component: {fileID: 2131111736}
+  m_Layer: 0
+  m_Name: Rabbit-Ambush (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2131111736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131111735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd131b101e19418f8cdccd73b5f7e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnSlimeTriggers:
+  - {fileID: 96621827}
+  spawnRadius: 90
+  despawnRadius: 110
+  senseTimer:
+    TargetTime: 1
+    Running: 0
+    ReverseMode: 0
+  playerTransform: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  hasColddown: 1
+  colddownTimer:
+    TargetTime: 30
+    Running: 0
+    ReverseMode: 0
+--- !u!4 &2131111737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131111735}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -792.8, y: 29.13, z: 34.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 96621829}
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

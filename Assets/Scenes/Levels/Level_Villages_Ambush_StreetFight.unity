@@ -1944,7 +1944,7 @@ MonoBehaviour:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 2
-  spawnCount: 2
+  spawnCount: 1
   spawnSlimesList: {fileID: 11400000, guid: c3331f2e1288b475bbcc0efcf807ef63, type: 2}
   spawnPointProvider: {fileID: 945291849}
   spawnAtRaycastPoint: 1
@@ -2318,6 +2318,7 @@ MonoBehaviour:
     ReverseMode: 0
   spawnSlimeTriggers:
   - {fileID: 1036775172}
+  - {fileID: 1447055152}
 --- !u!4 &1182973196
 Transform:
   m_ObjectHideFlags: 0
@@ -2331,6 +2332,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1036775174}
+  - {fileID: 1447055154}
   m_Father: {fileID: 205229282}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2650,6 +2652,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 945291850}
+  - {fileID: 1451605960}
   m_Father: {fileID: 160338483}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -2.414, y: -14.857, z: -9.024}
@@ -2898,6 +2901,160 @@ Transform:
   m_Father: {fileID: 1971687255}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1447055151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1447055154}
+  - component: {fileID: 1447055152}
+  - component: {fileID: 1447055153}
+  m_Layer: 0
+  m_Name: Spawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1447055152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447055151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefabs:
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
+  locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
+  delay: 2
+  spawnCount: 3
+  spawnSlimesList: {fileID: 11400000, guid: c3331f2e1288b475bbcc0efcf807ef63, type: 2}
+  spawnPointProvider: {fileID: 1447055153}
+  spawnAtRaycastPoint: 1
+  raycastDistance: 10
+  groundLayer:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 0
+    Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
+    UseVariable: 1
+  radius: 16
+  segmentCount: 16
+--- !u!114 &1447055153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447055151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7.17
+  segmentCount: 16
+  drawGizmos: 1
+--- !u!4 &1447055154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447055151}
+  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1182973196}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
+--- !u!1 &1451605959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1451605960}
+  - component: {fileID: 1451605962}
+  - component: {fileID: 1451605961}
+  m_Layer: 0
+  m_Name: Spawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1451605960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451605959}
+  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1367520254}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
+--- !u!114 &1451605961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451605959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b916dc34a9ac4b71936c3e2c0ec5765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 7.17
+  segmentCount: 16
+  drawGizmos: 1
+--- !u!114 &1451605962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451605959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86be63dea14c4aababe82690e0409c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimePrefabs:
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
+  locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
+  delay: 2
+  spawnCount: 2
+  spawnSlimesList: {fileID: 11400000, guid: c3331f2e1288b475bbcc0efcf807ef63, type: 2}
+  spawnPointProvider: {fileID: 1451605961}
+  spawnAtRaycastPoint: 1
+  raycastDistance: 10
+  groundLayer:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 0
+    Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
+    UseVariable: 1
+  radius: 16
+  segmentCount: 16
 --- !u!1 &1458411873
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,7 +3163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slimePrefabs:
-  - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
+  - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 2
   spawnCount: 2
