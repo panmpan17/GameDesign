@@ -34,13 +34,19 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
 
     public void TriggerFire()
     {
+        audioSource.Play(sound);
+        StartCoroutine(C_ShootBullet());
+    }
+
+    IEnumerator C_ShootBullet(int loopCap=15)
+    {
+        int loopCount = 0;
         BulletBehaviour bullet;
         Vector3 position = transform.position;
         for (int i = 0; i < _segmentPoints.Length; i++)
         {
             bullet = bulletType.Pool.Get();
 
-            // Vector3 position = transform.TransformPoint(_segmentPoints[i].LocalPosition);
             Vector3 worldDirection = transform.TransformDirection(_segmentPoints[i]);
 
             if (bulletType.UseBillboardRotate)
@@ -49,9 +55,13 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
                 bullet.transform.position = position + worldDirection * radius;
 
             bullet.Shoot(worldDirection * bulletSpeed);
-        }
 
-        audioSource.Play(sound);
+            if (++loopCount > loopCap)
+            {
+                loopCount = 0;
+                yield return null;
+            }
+        }
     }
 
     public void TriggerFireWithParameter(int parameter)

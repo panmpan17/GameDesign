@@ -34,24 +34,24 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
         var canonShell = bulletType.Pool.Get();
         canonShell.Shoot(physicSimulate);
 
-        if (locationIndictePrefab && ForecastHitPosition(out RaycastHit hit))
+        if (locationIndictePrefab)
         {
-            GameObject indicator = locationIndictePrefab.Get();
-            indicator.transform.SetPositionAndRotation(hit.point + hit.normal * 0.05f, Quaternion.LookRotation(hit.normal, Vector3.up));
-
-            if (canonShell is CanonShell)
-                ((CanonShell)canonShell).OnCollide += delegate { locationIndictePrefab.Put(indicator); };
+            StartCoroutine(C_ForecastHitPosition(canonShell));
         }
     }
 
     public void TriggerFireWithParameter(int parameter)
     { }
 
-    bool ForecastHitPosition(out RaycastHit hit, int maxTryTime=100)
+    IEnumerator C_ForecastHitPosition(BulletBehaviour canonShell, int maxTryTime=100)
     {
         physicSimulate.SetPositionAndVelocity(transform.position, startForce * transform.forward);
 
         Vector3 lastPosition = physicSimulate.Position;
+        bool isHit = false;
+        RaycastHit hit = new RaycastHit();
+        int loopCap = 0;
+
         for (int i = 0; i < maxTryTime; i++)
         {
             physicSimulate.Update(deltaTime);
@@ -59,14 +59,26 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
             Vector3 newPosition = physicSimulate.Position;
             if (Physics.Linecast(lastPosition, newPosition, out RaycastHit hit2, hitLayers))
             {
+                isHit = true;
                 hit = hit2;
-                return true;
+                break;
             }
             lastPosition = newPosition;
-        }
 
-        hit = new RaycastHit();
-        return false;
+            if (++loopCap > 10)
+            {
+                loopCap = 0;
+                yield return null;
+            }
+        }
+        if (!isHit)
+            yield break;
+
+        GameObject indicator = locationIndictePrefab.Get();
+        indicator.transform.SetPositionAndRotation(hit.point + hit.normal * 0.05f, Quaternion.LookRotation(hit.normal, Vector3.up));
+
+        if (canonShell is CanonShell)
+            ((CanonShell)canonShell).OnCollide += delegate { locationIndictePrefab.Put(indicator); };
     }
 
     void CloseLocationIndicate(GameObject locationIndicate)

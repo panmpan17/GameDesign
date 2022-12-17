@@ -112,11 +112,11 @@ public class BossSlime : MonoBehaviour
         Quaternion rotation = _transform.rotation;
         _transform.SetParent(null, true);
 
-        var collider = _rigidbody.GetComponent<MeshCollider>();
-        if (collider) collider.convex = true;
-        else
+        if (_rigidbody.GetComponent<Collider>() is var collider && collider)
         {
-            _rigidbody.GetComponent<Collider>().isTrigger = false;
+            collider.enabled = true;
+            collider.isTrigger = false;
+            if (collider is MeshCollider) ((MeshCollider)collider).convex = true;
         }
 
         _rigidbody.isKinematic = false;

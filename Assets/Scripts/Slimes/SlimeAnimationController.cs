@@ -22,11 +22,6 @@ public class SlimeAnimationController : MonoBehaviour, IAnimationPlayer
 
     void Start()
     {
-        GetComponent<SlimeBehaviour>().OnDeath.AddListener(delegate
-        {
-            SwitchToAnimation("Die");
-        });
-
         if (!startAnimationIndex.Enable)
         {
             enabled = false;

@@ -56,7 +56,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     private AudioClipSet slamSound;
 
     private SlimeCore[] _cores;
-    private BehaviourTreeRunner behaviourTreeRunner;
+    private BehaviourTreeRunner _behaviourTreeRunner;
+    private SlimeAnimationController _animationController;
 
     public event System.Action<Collider> OnTriggerEnterEvent;
     public event System.Action<Collision> OnCollisionEnterEvent;
@@ -68,7 +69,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     void Awake()
     {
         triggerFires = GetComponentsInChildren<ITriggerFire>();
-        behaviourTreeRunner = GetComponent<BehaviourTreeRunner>();
+        _behaviourTreeRunner = GetComponent<BehaviourTreeRunner>();
+        _animationController = GetComponent<SlimeAnimationController>();
         impulseSource ??= GetComponent<CinemachineImpulseSource>();
 
         for (int i = 0; i < triggerFireGroups.Length; i++)
@@ -93,8 +95,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         }
     }
 
-    public void EnableTreeRunner() => behaviourTreeRunner.enabled = true;
-    public void DisableTreeRunner() => behaviourTreeRunner.enabled = false;
+    public void EnableTreeRunner() => _behaviourTreeRunner.enabled = true;
+    public void DisableTreeRunner() => _behaviourTreeRunner.enabled = false;
 
     public void TriggerFire()
     {
@@ -133,6 +135,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
             impulseSource.GenerateImpulse(coreDamagedImpulseForce);
 
         StartCoroutine(PauseGame());
+        _animationController?.SwitchToAnimation("Hurt");
 
         int aliveCount = UpdateHealth();
         if (aliveCount <= 0)
@@ -149,16 +152,18 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         if (lootTable)
             SpawnLootTable();
 
-        behaviourTreeRunner.enabled = false;
+        _behaviourTreeRunner.enabled = false;
 
         StartCoroutine(DelayDeathAnimation());
     }
 
     IEnumerator DelayDeathAnimation()
     {
-        OnDeath?.Invoke();
+        OnDeath.Invoke();
 
         yield return new WaitForSeconds(0.6f);
+
+        _animationController?.SwitchToAnimation("Die");
 
         gameObject.Tween(
             gameObject,
