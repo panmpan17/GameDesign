@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7523202643e4278b1bb7733c4492c6, type: 3}
-  m_Name: BowBase
+  m_Name: BowUpgrade_2
   m_EditorClassIdentifier: 
   ArrowSpeed:
-    ConstantMin: 15
-    ConstantMax: 30
+    ConstantMin: 0
+    ConstantMax: 0
     Variable: {fileID: 0}
     UseVariable: 0
-  FirstDrawDuration: 1
-  IgnoreGravityTime: 0.4
-  SecondDrawDuration: 1.5
-  SecondDrawExtendIgnoreGravityTime: 0.4
+  FirstDrawDuration: 0
+  IgnoreGravityTime: 0
+  SecondDrawDuration: -1
+  SecondDrawExtendIgnoreGravityTime: 0
