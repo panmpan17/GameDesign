@@ -208,6 +208,7 @@ MonoBehaviour:
   TriggerName: 
   BooleanName: Breathing
   BooleanValue: 0
+  SpriteAnimationName: 
 --- !u!114 &-7466535776946751012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +284,7 @@ MonoBehaviour:
   ports:
     keys:
     - Input
+    - duration
     values:
     - _fieldName: Input
       _node: {fileID: -6842836807827531984}
@@ -292,6 +294,15 @@ MonoBehaviour:
       - fieldName: Output
         node: {fileID: -8643773538168663574}
         reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: duration
+      _node: {fileID: -6842836807827531984}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -342,7 +353,7 @@ MonoBehaviour:
   m_Name: Animator Control
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1624, y: 1208}
+  position: {x: 1624, y: 1144}
   ports:
     keys:
     - Input
@@ -363,6 +374,7 @@ MonoBehaviour:
   TriggerName: 
   BooleanName: Breathing
   BooleanValue: 1
+  SpriteAnimationName: 
 --- !u!114 &-5548888821831093527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +519,7 @@ MonoBehaviour:
   ports:
     keys:
     - Input
+    - duration
     values:
     - _fieldName: Input
       _node: {fileID: -4594338539556295542}
@@ -516,6 +529,15 @@ MonoBehaviour:
       - fieldName: Output
         node: {fileID: -3292187352649425832}
         reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: duration
+      _node: {fileID: -4594338539556295542}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -1325,6 +1347,7 @@ MonoBehaviour:
   ports:
     keys:
     - Input
+    - duration
     values:
     - _fieldName: Input
       _node: {fileID: 1457275112241532145}
@@ -1334,6 +1357,15 @@ MonoBehaviour:
       - fieldName: Output
         node: {fileID: -4179363767040440870}
         reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: duration
+      _node: {fileID: 1457275112241532145}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -1715,6 +1747,7 @@ MonoBehaviour:
   ports:
     keys:
     - Input
+    - duration
     values:
     - _fieldName: Input
       _node: {fileID: 4741730290751982369}
@@ -1728,8 +1761,17 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+    - _fieldName: duration
+      _node: {fileID: 4741730290751982369}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
   drawGizmos: 0
-  duration: 6
+  duration: 3.3
 --- !u!114 &4934463089731208885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2125,6 +2167,7 @@ MonoBehaviour:
   ports:
     keys:
     - Input
+    - duration
     values:
     - _fieldName: Input
       _node: {fileID: 7734212592977256018}
@@ -2134,6 +2177,15 @@ MonoBehaviour:
       - fieldName: Output
         node: {fileID: -29865802181749230}
         reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: duration
+      _node: {fileID: 7734212592977256018}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0

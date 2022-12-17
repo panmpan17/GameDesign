@@ -207,6 +207,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             return;
         }
 
+        if (movement.IsRolling)
+            return;
+
         IsDrawingBow = true;
 
         bow.OnAimDown();

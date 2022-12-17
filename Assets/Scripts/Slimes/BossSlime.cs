@@ -36,6 +36,9 @@ public class BossSlime : MonoBehaviour
         _slimeBehaviour.OnCoreDamagedEvent += OnCoreDamaged;
 
         _behaviourTreeRunner = GetComponent<BehaviourTreeRunner>();
+
+        foreach (SlimeCore core in stage2Cores) core.enabled = false;
+        foreach (SlimeCore core in stage3Cores) core.enabled = false;
     }
 
     void OnCoreDamaged(SlimeCore slimeCore)
@@ -51,7 +54,10 @@ public class BossSlime : MonoBehaviour
                 }
 
                 if (allDestoried)
+                {
                     ReleaseObject(stage1EndCloseObjects);
+                    foreach (SlimeCore core in stage2Cores) core.enabled = true;
+                }
                 break;
 
             case 1:
@@ -62,7 +68,10 @@ public class BossSlime : MonoBehaviour
                 }
 
                 if (allDestoried)
+                {
                     ReleaseObject(stage2EndCloseObjects);
+                    foreach (SlimeCore core in stage3Cores) core.enabled = true;
+                }
                 break;
 
             case 2:

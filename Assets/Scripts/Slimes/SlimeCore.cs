@@ -16,6 +16,9 @@ public class SlimeCore : MonoBehaviour
 
     public void OnDamage()
     {
+        if (!enabled)
+            return;
+
         gameObject.SetActive(false);
         OnDamageEvent?.Invoke(this);
 
