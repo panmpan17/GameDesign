@@ -4,26 +4,26 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-[RequireComponent(typeof(InteractiveBase)), RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class DropApple : MonoBehaviour
 {
     [SerializeField]
+    private AudioClipSet dropGroundSound;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
     private UnityEvent onHitGround;
 
-    private InteractiveBase _interactiveBase;
     private Rigidbody _rigidbody;
 
     void Awake()
     {
-        _interactiveBase = GetComponent<InteractiveBase>();
-        _interactiveBase.OnArrowHit.AddListener(OnArrowHit);
-
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.isKinematic = true;
         _rigidbody.useGravity = false;
     }
 
-    void OnArrowHit()
+    public void OnArrowHit()
     {
         _rigidbody.isKinematic = false;
         _rigidbody.useGravity = true;
@@ -32,6 +32,9 @@ public class DropApple : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.isStatic)
+        {
             onHitGround.Invoke();
+            audioSource.Play(dropGroundSound);
+        }
     }
 }

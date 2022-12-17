@@ -24,6 +24,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     [SerializeField]
     private Bow bow;
     public event System.Action<BowParameter, BowParameter> OnBowParameterChanged;
+    public event System.Action OnBowUpgrade;
 
     [Header("Reference")]
     [SerializeField]
@@ -410,6 +411,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     {
         bow.UpgradeBow(upgradeParameter);
         OnBowParameterChanged?.Invoke(bow.CurrentParameter, upgradeParameter);
+        OnBowUpgrade?.Invoke();
     }
 
 

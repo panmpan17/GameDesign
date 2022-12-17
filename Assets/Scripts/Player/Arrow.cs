@@ -133,7 +133,12 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
     void HandleHit(Transform otherTransform)
     {
-        otherTransform.GetComponent<OnArrowHit>()?.Trigger(transform.position);
+        if (otherTransform.GetComponent<OnArrowHit>() is var arrowHit && arrowHit)
+        {
+            arrowHit.Trigger(transform.position);
+            if (arrowHit)
+                transform.SetParent(otherTransform);
+        }
 
         if (otherTransform.CompareTag(ArrowBounceOff.Tag))
         {
@@ -150,12 +155,6 @@ public class Arrow : MonoBehaviour, IPoolableObj
         if (otherTransform.CompareTag(SlimeCore.Tag))
         {
             OnHitSlimeCore(otherTransform);
-        }
-        else if (otherTransform.CompareTag(InteractiveBase.Tag))
-        {
-            var interactive = otherTransform.GetComponent<InteractiveBase>();
-            interactive.ArrowHit();
-            gameObject.SetActive(false);
         }
 
         StopArrow();

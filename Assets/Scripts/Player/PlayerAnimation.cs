@@ -55,32 +55,14 @@ public class PlayerAnimation : MonoBehaviour
     private ParticleSystem stepDustParticle;
     [SerializeField]
     private TransformPointer currentArrowPointer;
+    [SerializeField]
+    private EffectReference levelUpEffect;
 
     [Header("Change Animation Speed")]
     [SerializeField]
     private AnimationClip drawBowClip;
     [SerializeField]
     private AnimationClip rollClip;
-
-    // [Header("Audio")]
-    // [SerializeField]
-    // private AudioSource audioSource;
-    // [SerializeField]
-    // private AudioSource oneShotAudioSource;
-    // [SerializeField]
-    // private AudioClipSet runClip;
-    // [SerializeField]
-    // private AudioClipSet walkClip;
-    // [SerializeField]
-    // private AudioClipSet bowDrawClip;
-    // [SerializeField]
-    // private AudioClipSet bowShootClip;
-    // [SerializeField]
-    // private RangeReference bowShootVolumeRange;
-    // [SerializeField]
-    // private AudioClipSet jumpClip;
-    // [SerializeField]
-    // private AudioClipSet landClip;
 
     [Header("Editor only")]
     [SerializeField]
@@ -124,6 +106,7 @@ public class PlayerAnimation : MonoBehaviour
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
         behaviour.OnDeath += OnDeath;
         behaviour.OnRevive += OnRevive;
+        behaviour.OnBowUpgrade += OnBowUpgrade;
 
         float speedMultiplier = rollClip.length / movement.rollTime;
         animator.SetFloat(RollSpeed, speedMultiplier);
@@ -246,6 +229,17 @@ public class PlayerAnimation : MonoBehaviour
     {
         float speedMultiplier = drawBowClip.length / bowParameter.FirstDrawDuration;
         animator.SetFloat(DrawBowSpeed, speedMultiplier);
+    }
+
+    void OnBowUpgrade()
+    {
+        levelUpEffect.AddWaitingList(new EffectReference.EffectQueue
+        {
+            Parent = transform,
+            Position = transform.position,
+            Rotation = transform.rotation,
+            UseScaleTime = true,
+        });
     }
 #endregion
 }

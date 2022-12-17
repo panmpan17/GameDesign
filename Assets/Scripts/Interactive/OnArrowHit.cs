@@ -10,6 +10,10 @@ public class OnArrowHit : MonoBehaviour
     private EffectReference effect;
     [SerializeField]
     private AudioClipSet sound;
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [field: SerializeField] public bool SetParent { get; protected set; }
 
     public UnityEvent OnTrigger;
 
@@ -18,7 +22,13 @@ public class OnArrowHit : MonoBehaviour
         if (effect)
             effect.AddWaitingList(arrowPosition, Quaternion.identity);
         if (sound)
-            AudioClipSetExtension.PlayClipAtPoint(sound, transform.position);
+        {
+            if (audioSource)
+                audioSource.Play(sound);
+            else
+                AudioClipSetExtension.PlayClipAtPoint(sound, transform.position);
+        }
+
         OnTrigger.Invoke();
     }
 }

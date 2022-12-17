@@ -99,11 +99,9 @@ public class PlayerStatusHUD : MonoBehaviour
         healthEvent.InvokeFloatEvents += ChangeHealthAmount;
 
         // TODO: bad
-        var player = GameObject.FindWithTag(PlayerBehaviour.Tag).GetComponent<PlayerBehaviour>();
-        if (player)
-        {
+        if ((GameObject.FindWithTag(PlayerBehaviour.Tag) is var playerGameObject) && playerGameObject &&
+            (playerGameObject.GetComponent<PlayerBehaviour>() is var player) && player)
             player.OnBowParameterChanged += UnlockBowUpgrade;
-        }
 
         fill.fillAmount = 0;
 

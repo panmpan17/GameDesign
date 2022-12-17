@@ -35,6 +35,8 @@ public class PlayerSound : MonoBehaviour
     private AudioClipSet landClip;
     [SerializeField]
     private AudioClipSet pickItemClip;
+    [SerializeField]
+    private AudioClipSet levelUpClip;
 
 
     void Awake()
@@ -46,6 +48,7 @@ public class PlayerSound : MonoBehaviour
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
         behaviour.OnBowShoot += OnBowShoot;
         behaviour.OnPickItem += OnPickItem;
+        behaviour.OnBowUpgrade += OnBowUpgrade;
 
         animation.OnAnimationEventCalled += OnAnimationEvent;
     }
@@ -73,4 +76,6 @@ public class PlayerSound : MonoBehaviour
     void OnBowShoot(float extraDrawProgress) => oneShotAudioSource.PlayOneShot(bowShootClip, volume: bowShootVolumeRange.Lerp(extraDrawProgress));
     
     void OnPickItem() => oneShotAudioSource.PlayOneShot(pickItemClip);
+
+    void OnBowUpgrade() => oneShotAudioSource.PlayOneShot(levelUpClip);
 }

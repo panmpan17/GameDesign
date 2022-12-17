@@ -205,6 +205,8 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         _dialogueGraph = null;
         _canvas.enabled = false;
         dialogueEndEvent?.Invoke();
+
+        EventSystem.current.SetSelectedGameObject(null);
         CloseMenu();
     }
 
