@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
 
 
 public class MainMenu : AbstractMenu
 {
     public string GameSceneName;
+
+    [SerializeField]
+    private PlayableDirector cutscene;
 
     private GameObject _lastSelected;
     
@@ -27,6 +32,14 @@ public class MainMenu : AbstractMenu
         if (!fireButtonEvent) return;
 #endif
 
+        cutscene.gameObject.SetActive(true);
+        StartCoroutine(C_DelayLoadScene());
+        // cutscene.stopped += OnCutSceneFinished;
+    }
+
+    IEnumerator C_DelayLoadScene()
+    {
+        yield return new WaitForSeconds((float)cutscene.duration);
         LoadScene.ins.Load(GameSceneName);
     }
 
