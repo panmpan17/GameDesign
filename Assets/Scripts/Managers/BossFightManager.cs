@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using XnodeBehaviourTree;
 
 public class BossFightManager : MonoBehaviour
 {
@@ -44,7 +42,13 @@ public class BossFightManager : MonoBehaviour
 
     // TODO: Cutscene, able to skip when player is dead or skip all cutscene
 
-    // TODO: If player win, then what?
+    [Header("Cutscene")]
+    [SerializeField]
+    private GameObject endingCutscene;
+    [SerializeField]
+    private float endingCutsceneDelay;
+    [SerializeField]
+    private float cutsceneDuration;
 
 
     void Awake()
@@ -103,7 +107,9 @@ public class BossFightManager : MonoBehaviour
 
         playerInput.Enable();
         slimeHealthShowEvent.Invoke(true);
-        bossSlime.GetComponent<SlimeBehaviour>().UpdateHealth();
+        var slimeBehaviour = bossSlime.GetComponent<SlimeBehaviour>();
+        slimeBehaviour.UpdateHealth();
+        slimeBehaviour.OnDeath.AddListener(OnBossDeath);
     }
 
     void ResetBossFight()
@@ -126,5 +132,22 @@ public class BossFightManager : MonoBehaviour
         AudioVolumeControl.ins.FadeInEnvironmentVolume();
 
         DroppedItem.Pool.PutAllAliveObjects();
+    }
+
+    void OnBossDeath()
+    {
+        StartCoroutine(StartEnding());
+    }
+
+    IEnumerator StartEnding()
+    {
+        GameManager.ins.Player.SetInvincible(true);
+        yield return new WaitForSeconds(endingCutsceneDelay);
+        Time.timeScale = 0;
+        Instantiate(endingCutscene);
+
+        yield return new WaitForSecondsRealtime(cutsceneDuration);
+        LoadScene.ins.Load("MainMenu");
+        Time.timeScale = 1;
     }
 }

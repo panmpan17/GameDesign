@@ -367,7 +367,7 @@ MonoBehaviour:
     UseVariable: 0
   coreDamagedImpulseForce: 1
   sinkTime: 7
-  sinkHeight: 7
+  sinkHeight: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -407,6 +407,13 @@ MonoBehaviour:
   - {fileID: 713406749834932552}
   - {fileID: 1197079591976935009}
   layer: 0
+  groundLayers:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 0
+    Variable: {fileID: 0}
+    UseVariable: 0
+  jumpForwardNode: {fileID: 0}
 --- !u!114 &2550801854346598230
 MonoBehaviour:
   m_ObjectHideFlags: 0

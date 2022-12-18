@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Random Select
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1672, y: 1176}
+  position: {x: 1672, y: 1320}
   ports:
     keys:
     - Input
@@ -109,6 +109,12 @@ MonoBehaviour:
       - fieldName: Input
         node: {fileID: -5033436865902452365}
         reroutePoints: []
+      - fieldName: Input
+        node: {fileID: 2781903586112913070}
+        reroutePoints: []
+      - fieldName: Input
+        node: {fileID: -7149731486331718970}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
@@ -190,7 +196,7 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 568}
+  position: {x: 1432, y: 712}
   ports:
     keys:
     - Input
@@ -222,7 +228,7 @@ MonoBehaviour:
       _dynamic: 0
   repeatLimit:
     Enable: 1
-    Value: 12
+    Value: 6
   restartOnSuccess: 1
   restartOnFailure: 0
 --- !u!114 &-7820633034913409630
@@ -238,7 +244,7 @@ MonoBehaviour:
   m_Name: Random Select
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1672, y: 568}
+  position: {x: 1672, y: 712}
   ports:
     keys:
     - Input
@@ -316,7 +322,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1912, y: 1176}
+  position: {x: 1912, y: 1320}
   ports:
     keys:
     - Input
@@ -335,6 +341,38 @@ MonoBehaviour:
       _dynamic: 0
   drawGizmos: 0
   FunctionName: 1A
+--- !u!114 &-7149731486331718970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820df2988b7a547fc88c368fa0774dd5, type: 3}
+  m_Name: Call Function
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1432, y: 1928}
+  ports:
+    keys:
+    - Input
+    values:
+    - _fieldName: Input
+      _node: {fileID: -7149731486331718970}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: -8910824645904027774}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  drawGizmos: 0
+  FunctionName: ShortBreathing
 --- !u!114 &-6927812415048194533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +415,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1912, y: 1288}
+  position: {x: 1912, y: 1432}
   ports:
     keys:
     - Input
@@ -599,7 +637,7 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 1176}
+  position: {x: 1432, y: 1320}
   ports:
     keys:
     - Input
@@ -631,7 +669,7 @@ MonoBehaviour:
       _dynamic: 0
   repeatLimit:
     Enable: 1
-    Value: 12
+    Value: 5
   restartOnSuccess: 1
   restartOnFailure: 0
 --- !u!114 &-5033436865902452365
@@ -647,7 +685,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 1672}
+  position: {x: 1432, y: 1816}
   ports:
     keys:
     - Input
@@ -679,7 +717,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 1560}
+  position: {x: 1432, y: 1704}
   ports:
     keys:
     - Input
@@ -711,7 +749,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 520}
+  position: {x: 1432, y: 584}
   ports:
     keys:
     - Input
@@ -775,7 +813,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 728}
+  position: {x: 1432, y: 872}
   ports:
     keys:
     - Input
@@ -807,7 +845,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 952}
+  position: {x: 1432, y: 1096}
   ports:
     keys:
     - Input
@@ -839,7 +877,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 840}
+  position: {x: 1432, y: 984}
   ports:
     keys:
     - Input
@@ -871,7 +909,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 1336}
+  position: {x: 1432, y: 1480}
   ports:
     keys:
     - Input
@@ -1165,7 +1203,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: 1448}
+  position: {x: 1432, y: 1592}
   ports:
     keys:
     - Input
@@ -1428,7 +1466,6 @@ MonoBehaviour:
   - {fileID: 9097761059472609833}
   - {fileID: 6013211938411179162}
   - {fileID: 2457830044352231740}
-  - {fileID: 5115852137523392336}
   - {fileID: -687283854226504165}
   - {fileID: 6057260848575160763}
   - {fileID: -2675373256861976099}
@@ -1436,6 +1473,8 @@ MonoBehaviour:
   - {fileID: 572683692966047779}
   - {fileID: -4923961336316402649}
   - {fileID: 741696241632222817}
+  - {fileID: 2781903586112913070}
+  - {fileID: -7149731486331718970}
   FunctionGraph: {fileID: 11400000, guid: 458cd8dc7f287492f8e8a2e34c94e8fa, type: 2}
 --- !u!114 &285964506121341042
 MonoBehaviour:
@@ -1611,7 +1650,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1912, y: 568}
+  position: {x: 1912, y: 712}
   ports:
     keys:
     - Input
@@ -1675,7 +1714,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1912, y: 680}
+  position: {x: 1912, y: 824}
   ports:
     keys:
     - Input
@@ -1878,6 +1917,38 @@ MonoBehaviour:
       _dynamic: 0
   drawGizmos: 0
   duration: 1.4
+--- !u!114 &2781903586112913070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820df2988b7a547fc88c368fa0774dd5, type: 3}
+  m_Name: Call Function
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1432, y: 1208}
+  ports:
+    keys:
+    - Input
+    values:
+    - _fieldName: Input
+      _node: {fileID: 2781903586112913070}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: -8910824645904027774}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  drawGizmos: 0
+  FunctionName: ShortBreathing
 --- !u!114 &2904676478662052808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2185,45 +2256,6 @@ MonoBehaviour:
       _dynamic: 0
   drawGizmos: 0
   FunctionName: 3C
---- !u!114 &5115852137523392336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8060d29908dca47b3801f03b4390c4f5, type: 3}
-  m_Name: Wait
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 1432, y: 1064}
-  ports:
-    keys:
-    - Input
-    - duration
-    values:
-    - _fieldName: Input
-      _node: {fileID: 5115852137523392336}
-      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: duration
-      _node: {fileID: 5115852137523392336}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  drawGizmos: 0
-  duration: 2
 --- !u!114 &5431235032585736449
 MonoBehaviour:
   m_ObjectHideFlags: 0

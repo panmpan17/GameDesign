@@ -97,11 +97,12 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public bool CursorFocued { get; protected set; }
     public bool IsDrawingBow { get; private set; }
     public bool IsDead => _handleDeath;
-    public bool CanDamage => !Movement.IsRolling && !_handleDeath;
+    public bool CanDamage => !Movement.IsRolling && !_handleDeath && !_invincible;
 
     private int _walkingCameraIndex;
 
     private bool _handleDeath = false;
+    private bool _invincible = false;
 
     private Ray _currentRay;
     public Vector3 CurrentRayHitPosition { get; private set; }
@@ -413,6 +414,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 #endregion
 
 
+#region Game Item Interact
     public void PickItemUp(ItemType itemType)
     {
         inventory.ChangeCoreCount(1);
@@ -425,8 +427,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         OnBowParameterChanged?.Invoke(bow.CurrentParameter, upgradeParameter);
         OnBowUpgrade?.Invoke();
     }
+#endregion
 
-
+    public void SetInvincible(bool status) => _invincible = status;
 
     void OnDestroy()
     {

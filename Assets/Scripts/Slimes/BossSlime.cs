@@ -159,6 +159,11 @@ public class BossSlime : MonoBehaviour
     public void AwakeFromSleep()
     {
         _animator.SwitchToAnimation("Blink1");
+
+        _slimeBehaviour.OnBounceOffEvent -= OnArrowBounceOff;
+
+        foreach (var bounceOff in bounceOffs) bounceOff.OnBounceOffEvent -= OnArrowBounceOff;
+        bounceOffs = null;
     }
 
     public IEnumerator RotateAndJump(Vector3 position)
@@ -201,7 +206,6 @@ public class BossSlime : MonoBehaviour
             state = node.Update();
             yield return null;
         }
-        Debug.Log(state);
     }
 
     public void EnableBehaviourTreeRuner()
