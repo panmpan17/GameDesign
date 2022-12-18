@@ -25,11 +25,6 @@ public class Arrow : MonoBehaviour, IPoolableObj
     [SerializeField]
     private EffectReference hit;
 
-    [SerializeField]
-    private AudioSource audioSource;
-    [SerializeField]
-    private AudioClipSet hitSound;
-
     [Header("Parameter")]
     [SerializeField]
     private AnimationCurveReference gravityScaleCurve;
@@ -39,6 +34,14 @@ public class Arrow : MonoBehaviour, IPoolableObj
     private ColorReference particleColor;
     [SerializeField]
     private ColorReference particleExtraColor;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClipSet bounceOffSound;
+    [SerializeField]
+    private AudioClipSet bodyHit;
 
     public bool TrailEmmiting {
         get => trail.emitting;
@@ -72,6 +75,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
         gameObject.SetActive(true);
         rigidbody.isKinematic = true;
         rigidbody.velocity = Vector3.zero;
+        audioSource.Stop();
     }
 
     public void Shoot(Vector3 velocity, float ignoreGravityDuration, float extraProgress)
@@ -136,13 +140,18 @@ public class Arrow : MonoBehaviour, IPoolableObj
         if (otherTransform.GetComponent<OnArrowHit>() is var arrowHit && arrowHit)
         {
             arrowHit.Trigger(transform.position);
-            if (arrowHit)
+            if (arrowHit.SetParent)
+            {
                 transform.SetParent(otherTransform);
+                StopArrow();
+                return;
+            }
         }
 
         if (otherTransform.CompareTag(ArrowBounceOff.Tag))
         {
-            BounceOffArrow();
+            var bounceOff = otherTransform.GetComponent<ArrowBounceOff>();
+            BounceOffArrow(bounceOff);
             return;
         }
 
@@ -155,15 +164,27 @@ public class Arrow : MonoBehaviour, IPoolableObj
         if (otherTransform.CompareTag(SlimeCore.Tag))
         {
             OnHitSlimeCore(otherTransform);
+            return;
         }
 
         StopArrow();
     }
 
-    void BounceOffArrow()
+    void BounceOffArrow(ArrowBounceOff bounceOff=null)
     {
         enabled = false;
         rigidbody.useGravity = true;
+
+        AudioSource _audioSource = audioSource;
+        AudioClipSet sound = bounceOffSound;
+
+        if (bounceOff)
+        {
+            if (bounceOff.audioSource) _audioSource = bounceOff.audioSource;
+            if (bounceOff.bounceSound) sound = bounceOff.bounceSound;
+        }
+
+        _audioSource.Play(sound);
     }
 
     void OnHitSlimeBody(Transform otherTransform)
@@ -179,6 +200,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
         StopArrow();
 
         slime.ShakeArrow(this);
+        audioSource.Play(bodyHit);
     }
 
     void OnHitSlimeCore(Transform otherTransform)
@@ -190,7 +212,8 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
         var slimeCore = otherTransform.GetComponent<SlimeCore>();
         slimeCore.OnDamage();
-        audioSource.Play(hitSound);
+
+        StopArrow();
     }
 
 

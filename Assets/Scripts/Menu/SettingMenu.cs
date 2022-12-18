@@ -11,10 +11,6 @@ using TMPro;
 
 public class SettingMenu : AbstractMenu
 {
-    private const string MainVolume = "MainVolume";
-    private const string MusicVolume = "MusicVolume";
-    private const string SFXVolume = "SFXVolume";
-
     [SerializeField]
     private GameObject firstSelected;
 
@@ -41,17 +37,6 @@ public class SettingMenu : AbstractMenu
     private Slider musicVolumeSlider;
     [SerializeField]
     private Slider sfxVolumeSlider;
-
-    [SerializeField]
-    private AnimationCurveReference volumeCurve;
-    [SerializeField]
-    private AnimationCurveReference inverseVolumeCurve;
-    [SerializeField]
-    private RangeReference volumeRange;
-
-    private float _mainVolume;
-    private float _musicVolume;
-    private float _sfxVolume;
 
     [Header("Display")]
     [SerializeField]
@@ -108,7 +93,7 @@ public class SettingMenu : AbstractMenu
     void BindUI()
     {
         mainVolumeSlider.onValueChanged.AddListener(OnMainVolumeChanged);
-        musicVolumeSlider.onValueChanged.AddListener(OnMuscVolumeChanged);
+        musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
         sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
 
         languageSwitch.leftEvent.AddListener(OnLanguageLeft);
@@ -142,24 +127,9 @@ public class SettingMenu : AbstractMenu
         ySensityInevert.SetIsOnWithoutNotify(ySensity.Value < 0);
 
 
-        if (audioMixer.GetFloat(MainVolume, out float mainVolume))
-        {
-            mainVolumeSlider.SetValueWithoutNotify(
-                inverseVolumeCurve.Value.Evaluate(volumeRange.InverseLerp(mainVolume)));
-            _mainVolume = mainVolume;
-        }
-        if (audioMixer.GetFloat(MusicVolume, out float musicVolume))
-        {
-            musicVolumeSlider.SetValueWithoutNotify(
-                inverseVolumeCurve.Value.Evaluate(volumeRange.InverseLerp(musicVolume)));
-            _musicVolume = musicVolume;
-        }
-        if (audioMixer.GetFloat(SFXVolume, out float sfxVolume))
-        {
-            sfxVolumeSlider.SetValueWithoutNotify(
-                inverseVolumeCurve.Value.Evaluate(volumeRange.InverseLerp(sfxVolume)));
-            _sfxVolume = sfxVolume;
-        }
+        mainVolumeSlider.SetValueWithoutNotify(AudioVolumeControl.ins.MainVolumeSliderValue);
+        musicVolumeSlider.SetValueWithoutNotify(AudioVolumeControl.ins.MusicVolumeSliderValue);
+        sfxVolumeSlider.SetValueWithoutNotify(AudioVolumeControl.ins.SFXVolumeSliderValue);
 
 
         float width = Screen.width;
@@ -180,15 +150,15 @@ public class SettingMenu : AbstractMenu
 #region Audio
     void OnMainVolumeChanged(float volumePercentage)
     {
-        audioMixer.SetFloat(MainVolume, volumeRange.Lerp(volumeCurve.Value.Evaluate(volumePercentage)));
+        AudioVolumeControl.ins.MainVolumeSliderValue = volumePercentage;
     }
-    void OnMuscVolumeChanged(float volumePercentage)
+    void OnMusicVolumeChanged(float volumePercentage)
     {
-        audioMixer.SetFloat(MusicVolume, volumeRange.Lerp(volumeCurve.Value.Evaluate(volumePercentage)));
+        AudioVolumeControl.ins.MusicVolumeSliderValue = volumePercentage;
     }
     void OnSFXVolumeChanged(float volumePercentage)
     {
-        audioMixer.SetFloat(SFXVolume, volumeRange.Lerp(volumeCurve.Value.Evaluate(volumePercentage)));
+        AudioVolumeControl.ins.SFXVolumeSliderValue = volumePercentage;
     }
 #endregion
 
@@ -279,15 +249,15 @@ public class SettingMenu : AbstractMenu
 
     public void Cancel()
     {
-        audioMixer.SetFloat(MainVolume, _mainVolume);
-        audioMixer.SetFloat(MusicVolume, _musicVolume);
-        audioMixer.SetFloat(SFXVolume, _sfxVolume);
+        AudioVolumeControl.ins.ReloadSoundVolumeFromPreference();
         enabled = _canvas.enabled = false;
         CloseMenu();
     }
 
     public void Save()
     {
+        AudioVolumeControl.ins.SaveVolumeToPreference();
+
         xSensity.Value = xSensityInevert.isOn ? -xSensitySlider.value : xSensitySlider.value;
         ySensity.Value = ySensityInevert.isOn ? -ySensitySlider.value : ySensitySlider.value;
 

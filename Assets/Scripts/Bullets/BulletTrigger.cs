@@ -15,6 +15,10 @@ public class BulletTrigger : MonoBehaviour, ITriggerFire
     private float bulletSpeed;
     [SerializeField]
     private BulletType bulletType;
+    [SerializeField]
+    private AudioClipSet shootSound;
+    [SerializeField]
+    private AudioSource audioSource;
 
     public void TriggerFire()
     {
@@ -24,6 +28,8 @@ public class BulletTrigger : MonoBehaviour, ITriggerFire
         else
             bullet.transform.position = transform.position;
         bullet.Shoot(transform.forward * bulletSpeed);
+
+        audioSource?.Play(shootSound);
         // BulletBillboards.ins.FireBullet(transform.position, transform.forward * bulletSpeed);
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Audio;
 
 public class StreetFightManager : MonoBehaviour
 {
@@ -43,15 +44,7 @@ public class StreetFightManager : MonoBehaviour
         if (_waveIndex >= waves.Length)
         {
             if (!allSlimesAreDead) return;
-
-            enabled = false;
-
-            borderWall.SetActive(false);
-
-            if (bgmClip)
-                BGMPlayer.ins.ResetToBaseBGM();
-
-            OnEndEvent.Invoke();
+            OnFinished();
             return;
         }
 
@@ -73,6 +66,8 @@ public class StreetFightManager : MonoBehaviour
         if (bgmClip)
             BGMPlayer.ins.BlendNewBGM(bgmClip);
 
+        AudioVolumeControl.ins.FadeOutEnvironmentVolume();
+
         _waveStarted = false;
         waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
         _waveIndex++;
@@ -86,6 +81,20 @@ public class StreetFightManager : MonoBehaviour
     }
 
 
+    void OnFinished()
+    {
+        enabled = false;
+
+        borderWall.SetActive(false);
+
+        if (bgmClip)
+            BGMPlayer.ins.ResetToBaseBGM();
+
+        AudioVolumeControl.ins.FadeInEnvironmentVolume();
+
+        OnEndEvent.Invoke();
+    }
+
     void ResetFight()
     {
         enabled = false;
@@ -97,6 +106,8 @@ public class StreetFightManager : MonoBehaviour
 
         if (bgmClip)
             BGMPlayer.ins.ResetToBaseBGM();
+
+        AudioVolumeControl.ins.FadeInEnvironmentVolume();
 
         spawnedSlimes?.DestroyAll();
 

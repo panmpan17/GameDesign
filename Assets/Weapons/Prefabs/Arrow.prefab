@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 1301579139043960994}
   - component: {fileID: 4008823716890672473}
   - component: {fileID: -474245263327700704}
-  - component: {fileID: 8414424168082500705}
+  - component: {fileID: 6143134266637802778}
   m_Layer: 7
   m_Name: Arrow
   m_TagString: Untagged
@@ -215,8 +215,6 @@ MonoBehaviour:
   trail: {fileID: 941763731}
   particle: {fileID: 2494633608834896899}
   hit: {fileID: 11400000, guid: 7dbaf8a5ec4794f7586838c0af9e173e, type: 2}
-  audioSource: {fileID: 8414424168082500705}
-  hitSound: {fileID: 11400000, guid: 7b307aa4124764b37bfd89eba55ccdb8, type: 2}
   gravityScaleCurve:
     Constant:
       serializedVersion: 2
@@ -252,7 +250,10 @@ MonoBehaviour:
     Constant: {r: 0.9254902, g: 0.568979, b: 0.10196076, a: 1}
     Variable: {fileID: 0}
     UseVariable: 0
---- !u!82 &8414424168082500705
+  audioSource: {fileID: 6143134266637802778}
+  bounceOffSound: {fileID: 11400000, guid: b7be6d09c3f894898af842f18442c495, type: 2}
+  bodyHit: {fileID: 11400000, guid: bcecb671b14c54fb19a226b104da64de, type: 2}
+--- !u!82 &6143134266637802778
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,9 +274,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 100
+  MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -291,15 +292,6 @@ AudioSource:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8132619
-      value: 0.35555476
-      inSlope: -1.6857272
-      outSlope: -1.6857272
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.51561934
     - serializedVersion: 3
       time: 1
       value: 0
@@ -317,7 +309,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -642,8 +634,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.13
-      minScalar: 0.08
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1224,7 +1216,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 30
       minScalar: 10
       maxCurve:
         serializedVersion: 2

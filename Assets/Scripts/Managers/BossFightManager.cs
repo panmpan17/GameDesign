@@ -57,11 +57,13 @@ public class BossFightManager : MonoBehaviour
 
         BGMPlayer.ins.BlendNewBGM(bgmClip);
 
-        StartCoroutine(Test());
+        StartCoroutine(C_BossEnterEvent());
     }
 
-    IEnumerator Test()
+    IEnumerator C_BossEnterEvent()
     {
+        AudioVolumeControl.ins.FadeOutEnvironmentVolume();
+
 #if UNITY_EDITOR
         if (startFightImmediately) {
             _bossSlime = Instantiate(
@@ -102,5 +104,8 @@ public class BossFightManager : MonoBehaviour
         PrefabPoolManager.ins.PutAllAliveObjects();
 
         entranceDetect.gameObject.SetActive(true);
+
+        BGMPlayer.ins.ResetToBaseBGM();
+        AudioVolumeControl.ins.FadeInEnvironmentVolume();
     }
 }

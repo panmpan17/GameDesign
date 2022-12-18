@@ -22,7 +22,6 @@ public class SlimeCore : MonoBehaviour
         gameObject.SetActive(false);
         OnDamageEvent?.Invoke(this);
 
-        if (hitEffect)
-            hitEffect.AddWaitingList(transform.position, Quaternion.identity);
+        hitEffect?.AddWaitingList(transform.position, Quaternion.identity);
     }
 }

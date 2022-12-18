@@ -36,6 +36,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     [SerializeField]
     private LayerMaskReference groundLayers;
 
+
     [Header("Dead Animation")]
     [SerializeField]
     private float coreDamagedImpulseForce;
@@ -54,6 +55,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private AudioClipSet slamSound;
+    [SerializeField]
+    private AudioClipSet hitSound;
 
     private SlimeCore[] _cores;
     private BehaviourTreeRunner _behaviourTreeRunner;
@@ -136,6 +139,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
 
         StartCoroutine(PauseGame());
         _animationController?.SwitchToAnimation("Hurt");
+        audioSource.Play(hitSound);
 
         int aliveCount = UpdateHealth();
         if (aliveCount <= 0)
