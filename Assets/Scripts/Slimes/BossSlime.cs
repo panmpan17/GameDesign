@@ -24,22 +24,36 @@ public class BossSlime : MonoBehaviour
     [SerializeField]
     [Layer]
     private int layer;
+    [SerializeField]
+    private LayerMaskReference groundLayers;
+
+    [SerializeField]
+    private JumpForawrdNode jumpForwardNode;
 
     private int _stage = 0;
 
     private SlimeBehaviour _slimeBehaviour;
     private BehaviourTreeRunner _behaviourTreeRunner;
+    private SlimeAnimationController _animator;
+
+    private ArrowBounceOff[] bounceOffs;
 
     void Awake()
     {
         _slimeBehaviour = GetComponent<SlimeBehaviour>();
-        _slimeBehaviour.OnCoreDamagedEvent += OnCoreDamaged;
-
         _behaviourTreeRunner = GetComponent<BehaviourTreeRunner>();
+        _animator = GetComponent<SlimeAnimationController>();
+
+        _slimeBehaviour.OnCoreDamagedEvent += OnCoreDamaged;
+        _slimeBehaviour.OnBounceOffEvent += OnArrowBounceOff;
+
+        bounceOffs = GetComponentsInChildren<ArrowBounceOff>();
+        foreach (var bounceOff in bounceOffs) bounceOff.OnBounceOffEvent += OnArrowBounceOff;
 
         foreach (SlimeCore core in stage2Cores) core.enabled = false;
         foreach (SlimeCore core in stage3Cores) core.enabled = false;
     }
+
 
     void OnCoreDamaged(SlimeCore slimeCore)
     {
@@ -140,4 +154,65 @@ public class BossSlime : MonoBehaviour
     {
         _slimeBehaviour.OnCoreDamagedEvent -= OnCoreDamaged;
     }
+
+#region Boss open scene
+    public void AwakeFromSleep()
+    {
+        _animator.SwitchToAnimation("Blink1");
+    }
+
+    public IEnumerator RotateAndJump(Vector3 position)
+    {
+        yield return StartCoroutine(RotateToFacePosition(position));
+        yield return StartCoroutine(Jump());
+    }
+
+    IEnumerator RotateToFacePosition(Vector3 position)
+    {
+        Quaternion destinationRotation = Quaternion.LookRotation(
+            position - transform.position, transform.up);
+
+        Vector3 origin = transform.position + (destinationRotation * (Vector3.forward * 0.1f));
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, 2, groundLayers.Value))
+        {
+            destinationRotation = Quaternion.LookRotation(hit.point - transform.position, transform.up);
+        }
+
+        while (true)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, destinationRotation, 100 * Time.deltaTime);
+            float angleDifference = Quaternion.Angle(transform.rotation, destinationRotation);
+            yield return null;
+
+            if (angleDifference < 0.01f)
+                break;
+        }
+    }
+
+    IEnumerator Jump()
+    {
+        Context context = Context.Create(gameObject, _slimeBehaviour);
+        JumpForawrdNode node = (JumpForawrdNode)jumpForwardNode.Clone();
+        node.context = context;
+        AbstractBehaviourNode.State state = node.Update();
+
+        while (state == AbstractBehaviourNode.State.Running)
+        {
+            state = node.Update();
+            yield return null;
+        }
+        Debug.Log(state);
+    }
+
+    public void EnableBehaviourTreeRuner()
+    {
+        _behaviourTreeRunner.enabled = true;
+    }
+
+    void OnArrowBounceOff()
+    {
+        _animator.SwitchToAnimation("SleepAwake");
+        _animator.SetOneTimeDestinateAnimation("Sleep");
+    }
+#endregion
 }

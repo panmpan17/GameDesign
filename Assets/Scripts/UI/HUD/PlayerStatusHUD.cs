@@ -8,6 +8,9 @@ using DigitalRuby.Tween;
 
 public class PlayerStatusHUD : MonoBehaviour
 {
+    [SerializeField]
+    private CanvasGroup canvasGroup;
+
     [Header("Aim")]
     [SerializeField]
     private CanvasGroup aimProgressFrame;
@@ -253,6 +256,17 @@ public class PlayerStatusHUD : MonoBehaviour
         secondAim.transform.rotation = Quaternion.Euler(0, 0, _firstAimPercentage * -360);
 
         secondAim.material.SetFloat("_Degree", Mathf.Lerp(min, max, curve.Evaluate(secondPercentage)));
+    }
+
+
+    public void FadeOut(float duration)
+    {
+        gameObject.Tween("HUDFade", 1, 0, duration, TweenScaleFunctions.CubicEaseIn, (tweenData) => canvasGroup.alpha = tweenData.CurrentValue);
+    }
+
+    public void FadeIn(float duration)
+    {
+        gameObject.Tween("HUDFade", 0, 1, duration, TweenScaleFunctions.CubicEaseIn, (tweenData) => canvasGroup.alpha = tweenData.CurrentValue);
     }
 
 

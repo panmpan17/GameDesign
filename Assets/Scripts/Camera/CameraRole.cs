@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 [RequireComponent(typeof(CinemachineVirtualCamera))]
 public class CameraRole : MonoBehaviour
@@ -44,4 +48,20 @@ public class CameraRole : MonoBehaviour
         yield return null;
         follow.Damping = originalDamping;
     }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(CameraRole))]
+public class CameraRoleEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        if (EditorApplication.isPlaying && GUILayout.Button("Switch"))
+        {
+            CameraSwitcher.ins.SwitchTo(((CameraRole)target).cameraName);
+        }
+    }
+}
+#endif
 }

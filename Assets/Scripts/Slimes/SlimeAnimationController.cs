@@ -20,6 +20,8 @@ public class SlimeAnimationController : MonoBehaviour, IAnimationPlayer
     private int _ainmationKeyIndex;
     private Timer _timer;
 
+    private string _tempDestinateAnimation;
+
     void Start()
     {
         if (!startAnimationIndex.Enable)
@@ -58,6 +60,13 @@ public class SlimeAnimationController : MonoBehaviour, IAnimationPlayer
                 return;
 
             case SpriteAnimation.WrapMode.LoopDestinateAnimations:
+                if (_tempDestinateAnimation != "")
+                {
+                    SwitchToAnimation(_tempDestinateAnimation);
+                    _tempDestinateAnimation = "";
+                    return;
+                }
+
                 _animationIndex = randomPlayedIndex[Random.Range(0, randomPlayedIndex.Length)];
                 animation = spriteAnimations[_animationIndex];
                 break;
@@ -94,5 +103,10 @@ public class SlimeAnimationController : MonoBehaviour, IAnimationPlayer
     public void PlayAnimation(string animationName)
     {
         SwitchToAnimation(animationName);
+    }
+
+    public void SetOneTimeDestinateAnimation(string animationName)
+    {
+        _tempDestinateAnimation = animationName;
     }
 }

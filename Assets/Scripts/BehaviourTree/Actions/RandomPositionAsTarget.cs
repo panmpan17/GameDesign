@@ -24,7 +24,7 @@ namespace XnodeBehaviourTree
             Vector2 value = Random.insideUnitCircle;
             value.Normalize();
             value *= Random.Range(startRadius, endRadius);
-            blackboard.TargetPosition = context.transform.position + new Vector3(value.x, 0, value.y);
+            blackboard.TargetPosition = context.transform.position + new Vector3(value.x, 0.5f, value.y);
             return State.Success;
         }
 

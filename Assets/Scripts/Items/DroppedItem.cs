@@ -33,6 +33,11 @@ public class DroppedItem : MonoBehaviour, IPoolableObj
     [SerializeField]
     private Vector3 spriteRotateSpeed;
 
+    [SerializeField]
+    private float delayPutIntoPool = 120;
+    private WaitForSeconds _delayWait;
+    private Coroutine _putIntoPoolDelay;
+
     private ItemType _itemType;
 
     public void Setup(ItemType itemType)
@@ -42,17 +47,25 @@ public class DroppedItem : MonoBehaviour, IPoolableObj
         Vector3 velocity = Random.onUnitSphere;
         if (velocity.y < 0) velocity.y = -velocity.y;
         rigidbody.velocity = velocity * velocityMultiply;
+
+        _putIntoPoolDelay = StartCoroutine(DelayPutIntoPool());
     }
 
 
     public void DeactivateObj(Transform collectionTransform)
     {
+        if (_putIntoPoolDelay != null)
+        {
+            StopCoroutine(_putIntoPoolDelay);
+            _putIntoPoolDelay = null;
+        }
         gameObject.SetActive(false);
         transform.SetParent(collectionTransform);
     }
 
     public void Instantiate()
     {
+        _delayWait = new WaitForSeconds(delayPutIntoPool);
     }
 
     public void Reinstantiate()
@@ -73,5 +86,12 @@ public class DroppedItem : MonoBehaviour, IPoolableObj
             playerBehaviour.PickItemUp(_itemType);
             Pool.Put(this);
         }
+    }
+
+    IEnumerator DelayPutIntoPool()
+    {
+        yield return _delayWait;
+        _putIntoPoolDelay = null;
+        Pool.Put(this);
     }
 }

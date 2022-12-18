@@ -350,6 +350,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
         _health = 0;
         healthChangeEvent?.Invoke(0);
+
         _handleDeath = true;
         OnDeath?.Invoke();
     }
@@ -363,6 +364,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
         InstantTeleportTo(spawnPoint.transform.position);
         OnRevive?.Invoke();
+
+        bow.DisableAllArrows();
     }
 
     public void InstantTeleportTo(Vector3 position)

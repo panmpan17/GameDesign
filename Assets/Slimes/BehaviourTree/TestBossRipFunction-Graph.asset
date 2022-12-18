@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -2920}
+  position: {x: 1432, y: -2984}
   ports:
     keys:
     - Input
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -1688}
+  position: {x: 1432, y: -1752}
   ports:
     keys:
     - Input
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: -2472}
+  position: {x: 1432, y: -2536}
   ports:
     keys:
     - Input
@@ -556,7 +556,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  duration: 5
+  duration: 1.4
 --- !u!114 &-5990706299593055939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,7 +729,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  FunctionName: Breathing
+  FunctionName: ShortBreathing
 --- !u!114 &-4782380516606620540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,7 +981,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -2808}
+  position: {x: 1432, y: -2872}
   ports:
     keys:
     - Input
@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -2248}
+  position: {x: 1432, y: -2312}
   ports:
     keys:
     - Input
@@ -1435,6 +1435,7 @@ MonoBehaviour:
   - {fileID: -3413802044324894011}
   - {fileID: 572683692966047779}
   - {fileID: -4923961336316402649}
+  - {fileID: 741696241632222817}
   FunctionGraph: {fileID: 11400000, guid: 458cd8dc7f287492f8e8a2e34c94e8fa, type: 2}
 --- !u!114 &285964506121341042
 MonoBehaviour:
@@ -1449,7 +1450,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: -1912}
+  position: {x: 1800, y: -1832}
   ports:
     keys:
     - Input
@@ -1459,10 +1460,7 @@ MonoBehaviour:
       _node: {fileID: 285964506121341042}
       _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: Output
-        node: {fileID: 3129543628020384959}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -1491,7 +1489,7 @@ MonoBehaviour:
   m_Name: Call Function
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1432, y: -1064}
+  position: {x: 1464, y: -1080}
   ports:
     keys:
     - Input
@@ -1568,6 +1566,38 @@ MonoBehaviour:
       _dynamic: 0
   drawGizmos: 0
   FunctionName: 1A
+--- !u!114 &741696241632222817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820df2988b7a547fc88c368fa0774dd5, type: 3}
+  m_Name: Call Function
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1480, y: -1976}
+  ports:
+    keys:
+    - Input
+    values:
+    - _fieldName: Input
+      _node: {fileID: 741696241632222817}
+      _typeQualifiedName: XnodeBehaviourTree.BehaviourPort, NewAssembly, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 3129543628020384959}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  drawGizmos: 0
+  FunctionName: ShortBreathing
 --- !u!114 &822066598446704164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1755,7 +1785,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -1576}
+  position: {x: 1432, y: -1640}
   ports:
     keys:
     - Input
@@ -1847,7 +1877,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  duration: 5
+  duration: 1.4
 --- !u!114 &2904676478662052808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1890,7 +1920,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -2360}
+  position: {x: 1432, y: -2424}
   ports:
     keys:
     - Input
@@ -1922,7 +1952,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -1240}
+  position: {x: 1432, y: -1304}
   ports:
     keys:
     - Input
@@ -2036,10 +2066,10 @@ MonoBehaviour:
         node: {fileID: -5998220139069626543}
         reroutePoints: []
       - fieldName: Input
-        node: {fileID: 285964506121341042}
+        node: {fileID: 572683692966047779}
         reroutePoints: []
       - fieldName: Input
-        node: {fileID: 572683692966047779}
+        node: {fileID: 741696241632222817}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -2058,7 +2088,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -1352}
+  position: {x: 1432, y: -1416}
   ports:
     keys:
     - Input
@@ -2207,7 +2237,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -1128}
+  position: {x: 1432, y: -1192}
   ports:
     keys:
     - Input
@@ -2268,7 +2298,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -1464}
+  position: {x: 1432, y: -1528}
   ports:
     keys:
     - Input
@@ -2430,7 +2460,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -2024}
+  position: {x: 1432, y: -2088}
   ports:
     keys:
     - Input
@@ -2462,7 +2492,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -2584}
+  position: {x: 1432, y: -2648}
   ports:
     keys:
     - Input
@@ -2542,7 +2572,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -1800}
+  position: {x: 1432, y: -1864}
   ports:
     keys:
     - Input
@@ -2574,7 +2604,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -2136}
+  position: {x: 1432, y: -2200}
   ports:
     keys:
     - Input
@@ -2688,7 +2718,7 @@ MonoBehaviour:
   m_Name: CallFunctionNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 1432, y: -2696}
+  position: {x: 1432, y: -2760}
   ports:
     keys:
     - Input
@@ -2748,4 +2778,4 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  duration: 5
+  duration: 1.4

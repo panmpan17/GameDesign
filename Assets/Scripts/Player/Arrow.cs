@@ -151,6 +151,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
         if (otherTransform.CompareTag(ArrowBounceOff.Tag))
         {
             var bounceOff = otherTransform.GetComponent<ArrowBounceOff>();
+            bounceOff?.OnBounceOff();
             BounceOffArrow(bounceOff);
             return;
         }
@@ -192,6 +193,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
         var slime = otherTransform.GetComponent<SlimeBehaviour>();
         if (slime.ArrowBounceOff)
         {
+            slime.OnBounceOff();
             BounceOffArrow();
             return;
         }

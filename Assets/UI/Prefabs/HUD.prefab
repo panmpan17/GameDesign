@@ -648,7 +648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -597.76416, y: 358}
+  m_AnchoredPosition: {x: -591.9, y: 358}
   m_SizeDelta: {x: 107.271545, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3013969191041746821
@@ -1171,8 +1171,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22.89386, y: -0.000030517578}
-  m_SizeDelta: {x: 54.9431, y: 50}
+  m_AnchoredPosition: {x: 23.846, y: -0.000030517578}
+  m_SizeDelta: {x: 56.846, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3490682399116465866
 CanvasRenderer:
@@ -1202,7 +1202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 130
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a7921be7171634ea2ae4da771d893dcd, type: 2}
   m_sharedMaterial: {fileID: 2332566346792011982, guid: a7921be7171634ea2ae4da771d893dcd, type: 2}
@@ -1229,12 +1229,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
+  m_fontSize: 28.7
   m_fontSizeBase: 35
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 28
+  m_fontSizeMax: 36
   m_fontStyle: 9
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -1286,6 +1286,7 @@ GameObject:
   - component: {fileID: 7028978162704471429}
   - component: {fileID: 1073871755936625941}
   - component: {fileID: 3768148832651977431}
+  - component: {fileID: 4251545378195432671}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -1386,6 +1387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ccfa06b41e945afa22d426a6163f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 4251545378195432671}
   aimProgressFrame: {fileID: 7869448799750501597}
   fill: {fileID: 4311496862253162536}
   aimProgressEvent: {fileID: 11400000, guid: c427ad606924d402f931d4b4052fdfb2, type: 2}
@@ -1523,6 +1525,18 @@ MonoBehaviour:
   hintGameObject: {fileID: 5551217710811170105}
   hintText: {fileID: 3366946473394416192}
   focusFrame: {fileID: 51149835416577693}
+--- !u!225 &4251545378195432671
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3490682399321688384}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &3490682399741015423
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,4 +8,8 @@ public class ArrowBounceOff : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClipSet bounceSound;
+
+    public event System.Action OnBounceOffEvent;
+
+    public void OnBounceOff() => OnBounceOffEvent?.Invoke();
 }

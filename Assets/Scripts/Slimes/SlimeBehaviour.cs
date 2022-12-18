@@ -67,6 +67,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     public event System.Action<Collision> OnCollisionExitEvent;
 
     public event System.Action<SlimeCore> OnCoreDamagedEvent;
+    public event System.Action OnBounceOffEvent;
 
 
     void Awake()
@@ -132,6 +133,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     }
 
     #region Damage, Death, Loot table
+    public void OnBounceOff() => OnBounceOffEvent?.Invoke();
+
     void OnCoreDamage(SlimeCore damagedCore)
     {
         if (impulseSource && coreDamagedImpulseForce > 0)

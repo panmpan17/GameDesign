@@ -6,6 +6,7 @@ using MPack;
 
 namespace XnodeBehaviourTree
 {
+    [CreateAssetMenu(menuName="Game/BehaviourTree/Jump Forward To Height")]
     [CreateNodeMenu("BehaviourTree/Action/Jump Forward To Height")]
     public class JumpForwardToHeightNode : ActionNode
     {

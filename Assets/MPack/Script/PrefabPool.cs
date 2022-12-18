@@ -108,6 +108,16 @@ namespace MPack {
             AliveObjs.Remove(component);
             PoolObjs.Add(component);
         }
+
+        public void PutAllAliveObjects()
+        {
+            foreach (T component in AliveObjs)
+            {
+                component.DeactivateObj(PoolCollection);
+                PoolObjs.Add(component);
+            }
+            AliveObjs.Clear();
+        }
     }
 
 

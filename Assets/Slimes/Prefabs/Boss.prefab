@@ -421,6 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceSpriteRenderer: {fileID: 2559236950738323607}
   spriteAnimations:
+  - {fileID: 11400000, guid: 16b892b9697364cceb28c3d4dc0569cd, type: 2}
   - {fileID: 11400000, guid: 77711a453e95340ecb626697156da4a0, type: 2}
   - {fileID: 11400000, guid: 840bca886670241b893e9404f7630b96, type: 2}
   - {fileID: 11400000, guid: acaef7c24a75c476fa7a8558e55de3f9, type: 2}
@@ -431,10 +432,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d7a7789134e3046d6a35e506cfab8128, type: 2}
   - {fileID: 11400000, guid: 7877a95087cc54517b8318ee02544feb, type: 2}
   - {fileID: 11400000, guid: 5f248e5eb791842b298999610dc91d11, type: 2}
+  - {fileID: 11400000, guid: 45212bd20e48048719aa4595349490a6, type: 2}
   startAnimationIndex:
     Enable: 1
     Value: 0
-  randomPlayedIndex: 0000000001000000
+  randomPlayedIndex: 0100000002000000
 --- !u!1 &630944156197811101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,6 +1846,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BounceOff
       objectReference: {fileID: 0}
+    - target: {fileID: -4936958031159619820, guid: c880697fb3256485e8d1440c55643379, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -4936958031159619820, guid: c880697fb3256485e8d1440c55643379, type: 3}
+      propertyPath: m_TagString
+      value: BounceOff
+      objectReference: {fileID: 0}
     - target: {fileID: -4456228002323309924, guid: c880697fb3256485e8d1440c55643379, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -70.07866
@@ -1988,6 +1998,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0038432565
   m_Center: {x: -0.000000003870643, y: -0.0011366943, z: 0.0000826188}
+--- !u!114 &623997462689857238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500735954393108591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0043e8c4d636d4456908d1be20f9a34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 4139163584777664057}
+  bounceSound: {fileID: 11400000, guid: b7be6d09c3f894898af842f18442c495, type: 2}
 --- !u!114 &5605370528305120913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2091,6 +2115,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c880697fb3256485e8d1440c55643379, type: 3}
   m_PrefabInstance: {fileID: 2129135582692078402}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2805834221593656406 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4936958031159619820, guid: c880697fb3256485e8d1440c55643379, type: 3}
+  m_PrefabInstance: {fileID: 2129135582692078402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &7602343013813946941
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2805834221593656406}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7172113867198030327, guid: c880697fb3256485e8d1440c55643379, type: 3}
+--- !u!114 &6407049363332285386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2805834221593656406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0043e8c4d636d4456908d1be20f9a34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  bounceSound: {fileID: 11400000, guid: b7be6d09c3f894898af842f18442c495, type: 2}
 --- !u!1 &3752976796177996863 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6225816318827270275, guid: c880697fb3256485e8d1440c55643379, type: 3}
@@ -2125,6 +2182,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0038432567
   m_Center: {x: -0.0000000029054446, y: -0.0011366943, z: 0.000082618}
+--- !u!114 &1349356139511260416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3752976796177996863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0043e8c4d636d4456908d1be20f9a34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 4139163584777664057}
+  bounceSound: {fileID: 11400000, guid: b7be6d09c3f894898af842f18442c495, type: 2}
 --- !u!114 &4471584341416464068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2198,46 +2269,20 @@ MonoBehaviour:
   OnTrigger:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &5767288841443091750 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5586067919521666660, guid: c880697fb3256485e8d1440c55643379, type: 3}
-  m_PrefabInstance: {fileID: 2129135582692078402}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &9145521158587717757
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5767288841443091750}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &1752141509193761611
+--- !u!114 &7997851426869672861
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5767288841443091750}
+  m_GameObject: {fileID: 4668023144201441936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Script: {fileID: 11500000, guid: 0043e8c4d636d4456908d1be20f9a34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 11400000, guid: 308f07ef6cdf34045b3f732371b7b86e, type: 2}
-  sound: {fileID: 0}
-  audioSource: {fileID: 0}
-  <SetParent>k__BackingField: 0
-  OnTrigger:
-    m_PersistentCalls:
-      m_Calls: []
+  audioSource: {fileID: 4139163584777664057}
+  bounceSound: {fileID: 11400000, guid: b7be6d09c3f894898af842f18442c495, type: 2}
 --- !u!1 &6623102566628886905 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5072681805038352955, guid: c880697fb3256485e8d1440c55643379, type: 3}

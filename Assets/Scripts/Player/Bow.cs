@@ -11,8 +11,7 @@ public class Bow : MonoBehaviour
     private Transform arrowPlacePoint;
     [SerializeField]
     private Arrow arrowPrefab;
-    [SerializeField]
-    private LimitedPrefabPool<Arrow> arrowPrefabPool;
+    private LimitedPrefabPool<Arrow> _arrowPrefabPool;
     [SerializeField]
     private CinemachineImpulseSource impulseSource;
     [SerializeField]
@@ -38,7 +37,7 @@ public class Bow : MonoBehaviour
 
     void Awake()
     {
-        arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");
+        _arrowPrefabPool = new LimitedPrefabPool<Arrow>(arrowPrefab, 10, true, "Arrows (Pool)");
 
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walk");
         _deepAimCameraIndex = CameraSwitcher.GetCameraIndex("DeepAim");
@@ -57,7 +56,7 @@ public class Bow : MonoBehaviour
     {
         if (PreparedArrow == null)
         {
-            PreparedArrow = arrowPrefabPool.Get();
+            PreparedArrow = _arrowPrefabPool.Get();
             Transform arrowTransform = PreparedArrow.transform;
             arrowTransform.SetParent(arrowPlacePoint);
             arrowTransform.localPosition = Vector3.zero;
@@ -131,5 +130,10 @@ public class Bow : MonoBehaviour
     {
         bowParameters.Add(upgradeBowParameter);
         _currentParameter.CombineParamaters(bowParameters);
+    }
+
+    public void DisableAllArrows()
+    {
+        _arrowPrefabPool.DisableAll();
     }
 }
