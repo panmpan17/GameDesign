@@ -51,6 +51,6 @@ public static class AudioClipSetExtension
 
     public static void PlayClipAtPoint(AudioClipSet clipSet, Vector3 position, float volume=1)
     {
-        AudioSource.PlayClipAtPoint(clipSet.ChooseOneClip(), position, volume);
+        AudioSource.PlayClipAtPoint(clipSet.ChooseOneClip(), position, clipSet.Volume * volume);
     }
 }

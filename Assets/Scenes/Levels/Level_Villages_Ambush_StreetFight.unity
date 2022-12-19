@@ -495,7 +495,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnPlayerEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 74547430}
+        m_TargetAssemblyTypeName: PlayerSpawnPoint, Assembly-CSharp
+        m_MethodName: ChangeThisToPlayerSpawnPoint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPlayerExit:
     m_PersistentCalls:
       m_Calls: []
@@ -899,7 +911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -422.37
+      value: -433.2
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -907,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -304.15
+      value: -294
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352034, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -981,7 +993,7 @@ MonoBehaviour:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 1
-  spawnCount: 3
+  spawnCount: 2
   spawnSlimesList: {fileID: 0}
   spawnPointProvider: {fileID: 318126000}
   spawnAtRaycastPoint: 1
@@ -2239,7 +2251,7 @@ MonoBehaviour:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 2
-  spawnCount: 3
+  spawnCount: 2
   spawnSlimesList: {fileID: 11400000, guid: c3331f2e1288b475bbcc0efcf807ef63, type: 2}
   spawnPointProvider: {fileID: 1036775173}
   spawnAtRaycastPoint: 1
@@ -2367,7 +2379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitForPreviousWave: 1
   waitTimer:
-    TargetTime: 6
+    TargetTime: 3
     Running: 0
     ReverseMode: 0
   spawnSlimeTriggers:
@@ -2935,7 +2947,7 @@ MonoBehaviour:
   - {fileID: 7299391971672539431, guid: 735fed105220e4fb3af845ab9e1d4561, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 2
-  spawnCount: 3
+  spawnCount: 2
   spawnSlimesList: {fileID: 11400000, guid: c3331f2e1288b475bbcc0efcf807ef63, type: 2}
   spawnPointProvider: {fileID: 1447055153}
   spawnAtRaycastPoint: 1
@@ -4104,8 +4116,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278192914
-  m_fontColor: {r: 0.071, g: 0.042930234, b: 0.0016511637, a: 1}
+    rgba: 4294111986
+  m_fontColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4470,7 +4482,7 @@ MonoBehaviour:
   - {fileID: 3767067126726826440, guid: e4ee99d31a5b145bda13c1eae93d3ee2, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 1
-  spawnCount: 3
+  spawnCount: 1
   spawnSlimesList: {fileID: 0}
   spawnPointProvider: {fileID: 1995964958}
   spawnAtRaycastPoint: 1
@@ -4621,7 +4633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitForPreviousWave: 1
   waitTimer:
-    TargetTime: 8
+    TargetTime: 3
     Running: 0
     ReverseMode: 0
   spawnSlimeTriggers:
@@ -4753,7 +4765,7 @@ MonoBehaviour:
   - {fileID: 7974710738266924135, guid: db0695b05708042fa9f0e7a6b451bc9c, type: 3}
   locationIndictePrefab: {fileID: 11400000, guid: 13c8579da41a34104aa5b53181d140ff, type: 2}
   delay: 1
-  spawnCount: 3
+  spawnCount: 1
   spawnSlimesList: {fileID: 0}
   spawnPointProvider: {fileID: 2144107103}
   spawnAtRaycastPoint: 1

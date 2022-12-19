@@ -213,6 +213,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  groundLayer: 10
 --- !u!54 &305316344
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1111,6 +1112,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5130611033420021944, guid: 994fd151daf3b419fa817d0f3dcd32da, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7306367029879751293, guid: 994fd151daf3b419fa817d0f3dcd32da, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

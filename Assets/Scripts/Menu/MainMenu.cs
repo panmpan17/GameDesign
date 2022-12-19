@@ -15,11 +15,6 @@ public class MainMenu : AbstractMenu
     private PlayableDirector cutscene;
 
     private GameObject _lastSelected;
-    
-#if UNITY_EDITOR
-    [SerializeField]
-    private bool fireButtonEvent;
-#endif
 
     void Start()
     {
@@ -28,10 +23,8 @@ public class MainMenu : AbstractMenu
 
     public void StartGame()
     {
-#if UNITY_EDITOR
-        if (!fireButtonEvent) return;
-#endif
-
+        GetComponent<Animator>().enabled = false;
+        GetComponent<Canvas>().enabled = false;
         cutscene.gameObject.SetActive(true);
         StartCoroutine(C_DelayLoadScene());
         // cutscene.stopped += OnCutSceneFinished;
@@ -45,10 +38,6 @@ public class MainMenu : AbstractMenu
 
     public void Setting()
     {
-#if UNITY_EDITOR
-        if (!fireButtonEvent) return;
-#endif
-
         _lastSelected = EventSystem.current.currentSelectedGameObject;
         AbstractMenu.S_OpenMenu("Setting");
     }
@@ -62,7 +51,6 @@ public class MainMenu : AbstractMenu
     {
 
 #if UNITY_EDITOR
-        if (!fireButtonEvent) return;
         UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();

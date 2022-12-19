@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7614466458795622912}
-  - component: {fileID: 2014510780453949563}
-  - component: {fileID: 8375153250287700977}
   m_Layer: 10
   m_Name: Tree5
   m_TagString: Untagged
@@ -34,36 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2014510780453949563
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757825207235309343}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.1053329, y: 1.9949771, z: 14.014006}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8375153250287700977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757825207235309343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effect: {fileID: 11400000, guid: ae54869e5009e41f596e962b37c47e7c, type: 2}
-  sound: {fileID: 0}
-  OnTrigger:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &9196078891726701520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +97,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09babf3faf1ad4246b504fe8776c42e6, type: 3}
+--- !u!1 &8313188436959542913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 09babf3faf1ad4246b504fe8776c42e6, type: 3}
+  m_PrefabInstance: {fileID: 9196078891726701520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &124104908755876571
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313188436959542913}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.019498773, y: 0.019009897, z: 0.02000753}
+  m_Center: {x: 4.656613e-10, y: 0.0004951609, z: -0.000002338085}
+--- !u!114 &7196544120636521245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313188436959542913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: ae54869e5009e41f596e962b37c47e7c, type: 2}
+  sound: {fileID: 11400000, guid: 4f2037ee5156b49399671118fbb7f90a, type: 2}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8653016297319949371 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 09babf3faf1ad4246b504fe8776c42e6, type: 3}

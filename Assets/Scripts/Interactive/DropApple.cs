@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MPack;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -13,6 +14,10 @@ public class DropApple : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private UnityEvent onHitGround;
+
+    [SerializeField]
+    [Layer]
+    private int groundLayer;
 
     private Rigidbody _rigidbody;
 
@@ -31,7 +36,7 @@ public class DropApple : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.isStatic)
+        if (collision.gameObject.layer == groundLayer)
         {
             onHitGround.Invoke();
             audioSource.Play(dropGroundSound);

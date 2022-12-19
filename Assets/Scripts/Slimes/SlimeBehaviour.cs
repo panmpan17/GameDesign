@@ -69,6 +69,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     public event System.Action<SlimeCore> OnCoreDamagedEvent;
     public event System.Action OnBounceOffEvent;
 
+    private Vector3Tween _emergeTween;
+
 
     void Awake()
     {
@@ -166,6 +168,11 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
 
     IEnumerator DelayDeathAnimation()
     {
+        if (_emergeTween != null)
+        {
+            _emergeTween.Stop(TweenStopBehavior.DoNotModify);
+            _emergeTween = null;
+        }
         OnDeath.Invoke();
 
         yield return new WaitForSeconds(0.6f);
@@ -264,6 +271,24 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         );
     }
 
+    public void EmergeFromTheGround(Vector3 position)
+    {
+        _emergeTween = gameObject.Tween(
+            gameObject,
+            position - new Vector3(0, SinkHeight, 0),
+            position, sinkTime, TweenScaleFunctions.Linear,
+            (tweenAction) =>
+            {
+                transform.position = tweenAction.CurrentValue;
+            },
+            (tweenAction) =>
+            {
+                AlignWithGround();
+                GetComponent<Rigidbody>().isKinematic = false;
+                EnableTreeRunner();
+                _emergeTween = null;
+            });
+    }
 
     IEnumerator PauseGame()
     {

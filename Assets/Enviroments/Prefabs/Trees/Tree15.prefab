@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7956835475156373015}
-  - component: {fileID: -5528155884897397612}
-  - component: {fileID: -4283084348901055915}
   m_Layer: 10
   m_Name: Tree15
   m_TagString: Untagged
@@ -34,36 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &-5528155884897397612
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7809181730547439189}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.3377285, y: 18.277832, z: 2.6793053}
-  m_Center: {x: 0, y: 8.638916, z: 0}
---- !u!114 &-4283084348901055915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7809181730547439189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effect: {fileID: 11400000, guid: ae54869e5009e41f596e962b37c47e7c, type: 2}
-  sound: {fileID: 0}
-  OnTrigger:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &8261004399300140793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,3 +102,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1ecf64023197f423db4d5299095f0538, type: 3}
   m_PrefabInstance: {fileID: 8261004399300140793}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9107846807004930984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1ecf64023197f423db4d5299095f0538, type: 3}
+  m_PrefabInstance: {fileID: 8261004399300140793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &5130611033420021944
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9107846807004930984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8745870710598771637, guid: 1ecf64023197f423db4d5299095f0538, type: 3}
+--- !u!114 &2788512867622369856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9107846807004930984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: ae54869e5009e41f596e962b37c47e7c, type: 2}
+  sound: {fileID: 11400000, guid: 4f2037ee5156b49399671118fbb7f90a, type: 2}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []

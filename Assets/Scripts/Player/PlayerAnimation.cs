@@ -233,11 +233,12 @@ public class PlayerAnimation : MonoBehaviour
 
     void OnBowUpgrade()
     {
+        Transform _transform = movement.transform;
         levelUpEffect.AddWaitingList(new EffectReference.EffectQueue
         {
-            Parent = transform,
-            Position = transform.position,
-            Rotation = transform.rotation,
+            Parent = _transform,
+            Position = _transform.position,
+            Rotation = _transform.rotation,
             UseScaleTime = true,
         });
     }

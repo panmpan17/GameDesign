@@ -6,6 +6,13 @@ Shader "Unlit/CircularAimCursoe"
         _Color1 ("Color 1", Color) = (1, 0, 0, 1)
         _Color2 ("Color 2", Color) = (1, 1, 0, 1)
         _Degree ("Degree", Range(0.0, 20.0)) = 2
+
+        _StencilComp ("Stencil Comparison", Float) = 8
+        _Stencil ("Stencil ID", Float) = 0
+        _StencilOp ("Stencil Operation", Float) = 0
+        _StencilWriteMask ("Stencil Write Mask", Float) = 255
+        _StencilReadMask ("Stencil Read Mask", Float) = 255
+        _ColorMask ("Color Mask", Float) = 15
     }
     SubShader
     {

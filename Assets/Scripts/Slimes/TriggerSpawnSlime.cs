@@ -133,28 +133,14 @@ public class TriggerSpawnSlime : AbstractSpawnSlime
             spawnSlimesList.List.Add(newSlime);
 
         // Slime come to surface animation
-        var slimeBehaviourTree = newSlime.GetComponent<SlimeBehaviour>();
-        slimeBehaviourTree.DisableTreeRunner();
-        var rigidbody = newSlime.GetComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
+        var slimeBehaviour = newSlime.GetComponent<SlimeBehaviour>();
+        slimeBehaviour.DisableTreeRunner();
+        newSlime.GetComponent<Rigidbody>().isKinematic = true;
 
         if (indicator)
             locationIndictePrefab.Put(indicator);
 
-        newSlime.Tween(
-            newSlime,
-            position + Vector3.down * slimeBehaviourTree.SinkHeight,
-            position, 1f, TweenScaleFunctions.Linear,
-            (tweenAction) =>
-            {
-                newSlime.transform.position = tweenAction.CurrentValue;
-            },
-            (tweenAction) =>
-            {
-                slimeBehaviourTree.AlignWithGround();
-                rigidbody.isKinematic = false;
-                slimeBehaviourTree.EnableTreeRunner();
-            });
+        slimeBehaviour.EmergeFromTheGround(position);
 
         TriggerOnSlimeSpawnedCallback();
     }
