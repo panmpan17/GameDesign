@@ -40,8 +40,6 @@ public class Arrow : MonoBehaviour, IPoolableObj
     private AudioSource audioSource;
     [SerializeField]
     private AudioClipSet bounceOffSound;
-    [SerializeField]
-    private AudioClipSet bodyHit;
 
     public bool TrailEmmiting {
         get => trail.emitting;
@@ -150,9 +148,14 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
         if (otherTransform.CompareTag(ArrowBounceOff.Tag))
         {
-            var bounceOff = otherTransform.GetComponent<ArrowBounceOff>();
-            bounceOff?.OnBounceOff();
-            BounceOffArrow(bounceOff);
+            bool playBounceOffSound = false;
+
+            if (otherTransform.GetComponent<ArrowBounceOff>() is var bounceOff && bounceOff)
+            {
+                bounceOff.OnBounceOff();
+                playBounceOffSound = bounceOff.TryPlayBounceSound();
+            }
+            BounceOffArrow(playBounceOffSound);
             return;
         }
 
@@ -171,21 +174,13 @@ public class Arrow : MonoBehaviour, IPoolableObj
         StopArrow();
     }
 
-    void BounceOffArrow(ArrowBounceOff bounceOff=null)
+    void BounceOffArrow(bool playBounceOffSound)
     {
         enabled = false;
         rigidbody.useGravity = true;
 
-        AudioSource _audioSource = audioSource;
-        AudioClipSet sound = bounceOffSound;
-
-        if (bounceOff)
-        {
-            if (bounceOff.audioSource) _audioSource = bounceOff.audioSource;
-            if (bounceOff.bounceSound) sound = bounceOff.bounceSound;
-        }
-
-        _audioSource.Play(sound);
+        if (playBounceOffSound)
+            audioSource.Play(bounceOffSound);
     }
 
     void OnHitSlimeBody(Transform otherTransform)
@@ -194,15 +189,14 @@ public class Arrow : MonoBehaviour, IPoolableObj
         if (slime.ArrowBounceOff)
         {
             slime.OnBounceOff();
-            BounceOffArrow();
+            BounceOffArrow(false);
             return;
         }
 
         transform.SetParent(otherTransform);
         StopArrow();
 
-        slime.ShakeArrow(this);
-        audioSource.Play(bodyHit);
+        slime.OnArrowHitBody(this);
     }
 
     void OnHitSlimeCore(Transform otherTransform)

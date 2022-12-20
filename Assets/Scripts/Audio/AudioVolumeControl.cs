@@ -23,7 +23,11 @@ public class AudioVolumeControl : MonoBehaviour
     private AudioMixer audioMixer;
 
     [SerializeField]
-    private RangeReference volumeRange;
+    private RangeReference mainVolumeRange;
+    [SerializeField]
+    private RangeReference musicVolumeRange;
+    [SerializeField]
+    private RangeReference SFXVolumeRange;
     [SerializeField]
     private AnimationCurveReference volumeCurve;
 
@@ -61,9 +65,9 @@ public class AudioVolumeControl : MonoBehaviour
     }
     private float _sfxVolumeSliderValue;
 
-    public float MainVolume => volumeRange.Lerp(volumeCurve.Evaluate(_mainVolumeSliderValue));
-    public float MusicVolume => volumeRange.Lerp(volumeCurve.Evaluate(_musicVolumeSliderValue));
-    public float SFXVolume => volumeRange.Lerp(volumeCurve.Evaluate(_sfxVolumeSliderValue));
+    public float MainVolume => mainVolumeRange.Lerp(volumeCurve.Evaluate(_mainVolumeSliderValue));
+    public float MusicVolume => musicVolumeRange.Lerp(volumeCurve.Evaluate(_musicVolumeSliderValue));
+    public float SFXVolume => SFXVolumeRange.Lerp(volumeCurve.Evaluate(_sfxVolumeSliderValue));
 
     private float _originalEnviromentVolume;
 #endregion

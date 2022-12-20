@@ -41,12 +41,17 @@ public static class AudioClipSetExtension
     {
         if (!clipSet)
             return;
+        Debug.Log(clipSet);
         if (audioSource.isPlaying)
+        {
             audioSource.Stop();
+            Debug.Log("stop", audioSource);
+        }
 
         audioSource.clip = clipSet.ChooseOneClip();
         audioSource.volume = clipSet.Volume;
         audioSource.Play();
+        Debug.Log("play", audioSource);
     }
 
     public static void PlayClipAtPoint(AudioClipSet clipSet, Vector3 position, float volume=1)

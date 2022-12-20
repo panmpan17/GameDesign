@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Cinemachine;
 using DigitalRuby.Tween;
 using XnodeBehaviourTree;
@@ -51,12 +52,17 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     [Header("Special Effect")]
     [SerializeField]
     private CinemachineImpulseSource impulseSource;
+
+    [Header("Sound Effect")]
     [SerializeField]
     private AudioSource audioSource;
     [SerializeField]
     private AudioClipSet slamSound;
     [SerializeField]
-    private AudioClipSet hitSound;
+    [FormerlySerializedAs("hitSound")]
+    private AudioClipSet hitCoreSound;
+    [SerializeField]
+    private AudioClipSet hitBodySound;
 
     private SlimeCore[] _cores;
     private BehaviourTreeRunner _behaviourTreeRunner;
@@ -104,6 +110,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     public void EnableTreeRunner() => _behaviourTreeRunner.enabled = true;
     public void DisableTreeRunner() => _behaviourTreeRunner.enabled = false;
 
+#region Behaviour Tree Action
     public void TriggerFire()
     {
         for (int i = 0; i < triggerFires.Length; i++)
@@ -133,18 +140,18 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         impulseSource.GenerateImpulse(forceSize);
         audioSource.PlayOneShot(slamSound);
     }
+#endregion
 
-    #region Damage, Death, Loot table
-    public void OnBounceOff() => OnBounceOffEvent?.Invoke();
 
+#region Damage, Death, Loot table
     void OnCoreDamage(SlimeCore damagedCore)
     {
         if (impulseSource && coreDamagedImpulseForce > 0)
             impulseSource.GenerateImpulse(coreDamagedImpulseForce);
 
-        StartCoroutine(PauseGame());
+        StartCoroutine(C_CoreDamagedPause());
         _animationController?.SwitchToAnimation("Hurt");
-        audioSource.Play(hitSound);
+        audioSource.Play(hitCoreSound);
 
         int aliveCount = UpdateHealth();
         if (aliveCount <= 0)
@@ -154,6 +161,14 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         }
 
         OnCoreDamagedEvent?.Invoke(damagedCore);
+    }
+
+    IEnumerator C_CoreDamagedPause()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(0.08f);
+        // yield return null;
+        Time.timeScale = 1;
     }
 
     void HandleDeath()
@@ -213,7 +228,7 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
             arrows[i].gameObject.SetActive(false);
         }
     }
-    #endregion
+#endregion
 
     /// <summary>
     /// Update health
@@ -244,33 +259,6 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         }
     }
 
-    public void ShakeArrow(Arrow arrow)
-    {
-        Transform arrowTransform = arrow.transform;
-        Vector3 localPosition = arrowTransform.localPosition;
-
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Update();
-
-        arrow.TrailEmmiting = true;
-        gameObject.Tween(
-            arrowTransform,
-            0, 1, 0.3f, TweenScaleFunctions.Linear,
-            (data) => {
-                if (stopwatch.DeltaTime > 0.08f)
-                {
-                    Vector2 value = Random.insideUnitCircle * Random.Range(0.1f, 0.13f);
-                    arrowTransform.localPosition = localPosition + arrowTransform.TransformDirection(value);
-                    stopwatch.Update();
-                }
-            },
-            (data) => {
-                arrowTransform.localPosition = localPosition;
-                arrow.TrailEmmiting = false;
-            }
-        );
-    }
-
     public void EmergeFromTheGround(Vector3 position)
     {
         _emergeTween = gameObject.Tween(
@@ -290,16 +278,49 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
             });
     }
 
-    IEnumerator PauseGame()
+#region Arrow shoot event
+    public void OnBounceOff()
     {
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(0.08f);
-        // yield return null;
-        Time.timeScale = 1;
+        audioSource.Play(hitBodySound);
+        OnBounceOffEvent?.Invoke();
     }
 
+    public void OnArrowHitBody(Arrow arrow)
+    {
+        Transform arrowTransform = arrow.transform;
+        Vector3 localPosition = arrowTransform.localPosition;
 
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Update();
+
+        arrow.TrailEmmiting = true;
+        audioSource.Play(hitBodySound);
+
+        gameObject.Tween(
+            arrowTransform,
+            0, 1, 0.3f, TweenScaleFunctions.Linear,
+            (data) =>
+            {
+                if (stopwatch.DeltaTime > 0.08f)
+                {
+                    Vector2 value = Random.insideUnitCircle * Random.Range(0.1f, 0.13f);
+                    arrowTransform.localPosition = localPosition + arrowTransform.TransformDirection(value);
+                    stopwatch.Update();
+                }
+            },
+            (data) =>
+            {
+                arrowTransform.localPosition = localPosition;
+                arrow.TrailEmmiting = false;
+            }
+        );
+    }
+#endregion
+
+
+#region Physic event
     void OnColliderEnter(Collider collider) => OnTriggerEnterEvent?.Invoke(collider);
     void OnCollisionEnter(Collision collision) => OnCollisionEnterEvent?.Invoke(collision);
     void OnCollisionExit(Collision collision) => OnCollisionExitEvent?.Invoke(collision);
+#endregion
 }

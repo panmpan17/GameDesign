@@ -12,4 +12,13 @@ public class ArrowBounceOff : MonoBehaviour
     public event System.Action OnBounceOffEvent;
 
     public void OnBounceOff() => OnBounceOffEvent?.Invoke();
+
+    public bool TryPlayBounceSound()
+    {
+        if (!audioSource || !bounceSound)
+            return false;
+
+        audioSource.Play(bounceSound);
+        return true;
+    }
 }

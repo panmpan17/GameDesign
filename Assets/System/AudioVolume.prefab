@@ -45,9 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: f1cca4b424ccb4cf8ac42c626a5dd9e9, type: 2}
-  volumeRange:
+  mainVolumeRange:
     ConstantMin: -80
-    ConstantMax: -4
+    ConstantMax: 0
+    Variable: {fileID: 0}
+    UseVariable: 0
+  musicVolumeRange:
+    ConstantMin: -80
+    ConstantMax: -5
+    Variable: {fileID: 0}
+    UseVariable: 0
+  SFXVolumeRange:
+    ConstantMin: -80
+    ConstantMax: 0
     Variable: {fileID: 0}
     UseVariable: 0
   volumeCurve:
