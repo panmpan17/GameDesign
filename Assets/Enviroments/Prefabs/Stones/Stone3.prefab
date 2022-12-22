@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 11400000, guid: bd9cde04e49a44a23a6972008064c4a6, type: 2}
   sound: {fileID: 0}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
   OnTrigger:
     m_PersistentCalls:
       m_Calls: []
@@ -139,9 +141,28 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2469269939308826856, guid: 9dc4f9febb6e74ccd90f85bbd5471a1e, type: 3}
+--- !u!114 &4258078795809959972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8232083347488344960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: bd9cde04e49a44a23a6972008064c4a6, type: 2}
+  sound: {fileID: 11400000, guid: fb3a16b1a184a4032926e2ee6cc10856, type: 2}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8752161609696399674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9dc4f9febb6e74ccd90f85bbd5471a1e, type: 3}

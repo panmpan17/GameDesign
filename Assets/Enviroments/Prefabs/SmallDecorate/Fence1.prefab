@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6297896185444925896}
   - component: {fileID: 6544633742690864954}
+  - component: {fileID: 6701848310298476909}
   m_Layer: 10
   m_Name: Fence1
   m_TagString: Untagged
@@ -46,6 +47,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.3788314, y: 3.1190307, z: 0.75388587}
   m_Center: {x: 0, y: -2.3370517e-14, z: 0.12305702}
+--- !u!114 &6701848310298476909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251150180359191710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: b575b4b88978b470ba4d550684c168bc, type: 2}
+  sound: {fileID: 11400000, guid: 4810d12837dfe4cc5b56e839c4af0e1e, type: 2}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &7528861846851503001
 PrefabInstance:
   m_ObjectHideFlags: 0

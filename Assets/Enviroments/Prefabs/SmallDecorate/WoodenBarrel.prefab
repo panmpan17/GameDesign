@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 836911391191544147}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WoodenBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +96,10 @@ PrefabInstance:
       value: woodbarrel
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e283330de2b224f8d872217790417b61, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e283330de2b224f8d872217790417b61, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -106,3 +110,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e283330de2b224f8d872217790417b61, type: 3}
   m_PrefabInstance: {fileID: 38651107244265254}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &885020187004596855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e283330de2b224f8d872217790417b61, type: 3}
+  m_PrefabInstance: {fileID: 38651107244265254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &3809645490674719360
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885020187004596855}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8380539089273305372, guid: e283330de2b224f8d872217790417b61, type: 3}
+--- !u!114 &1998373195721295103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885020187004596855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: b575b4b88978b470ba4d550684c168bc, type: 2}
+  sound: {fileID: 11400000, guid: 4810d12837dfe4cc5b56e839c4af0e1e, type: 2}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []

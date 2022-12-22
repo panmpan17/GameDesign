@@ -9,7 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2192211736794902614}
-  m_Layer: 0
+  - component: {fileID: 2753019992765511955}
+  - component: {fileID: 6244587320756665099}
+  - component: {fileID: 4405700973446760871}
+  - component: {fileID: 8382847285308158895}
+  m_Layer: 10
   m_Name: sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +36,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2753019992765511955
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3353189229910188300}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5.9312177, z: 1}
+  m_Center: {x: 0, y: 0.09207654, z: 0}
+--- !u!65 &6244587320756665099
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3353189229910188300}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7161522, y: 2.2890737, z: 1}
+  m_Center: {x: -2.0768409, y: 1.8722259, z: 0}
+--- !u!65 &4405700973446760871
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3353189229910188300}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5115373, y: 1.0818462, z: 1}
+  m_Center: {x: -1.1560739, y: 2.3326092, z: 0}
+--- !u!114 &8382847285308158895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3353189229910188300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: b575b4b88978b470ba4d550684c168bc, type: 2}
+  sound: {fileID: 11400000, guid: 4810d12837dfe4cc5b56e839c4af0e1e, type: 2}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3531885168577403741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102,6 +164,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 631f73d1946dfbc44952cce9b941be72, type: 3}
       propertyPath: m_Name
       value: sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 631f73d1946dfbc44952cce9b941be72, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 631f73d1946dfbc44952cce9b941be72, type: 3}
       propertyPath: m_StaticEditorFlags

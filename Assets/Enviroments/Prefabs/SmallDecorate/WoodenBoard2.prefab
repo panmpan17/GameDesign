@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2458390938694989879
+--- !u!1 &1715789302800384804
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,36 +8,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7474199574253527880}
+  - component: {fileID: 9070520794277582348}
   m_Layer: 0
   m_Name: WoodenBoard2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!4 &7474199574253527880
+--- !u!4 &9070520794277582348
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2458390938694989879}
+  m_GameObject: {fileID: 1715789302800384804}
   m_LocalRotation: {x: -0.37682304, y: -0.5329352, z: 0.75614345, w: 0.047240797}
   m_LocalPosition: {x: 216.6249, y: -19.148327, z: 157.70041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8388872910798877894}
+  - {fileID: 7556808236055590472}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &8350230105593549613
+--- !u!1001 &8022481524004458915
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 7474199574253527880}
+    m_TransformParent: {fileID: 9070520794277582348}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
       propertyPath: m_RootOrder
@@ -45,23 +45,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 83.14406
+      value: 26.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 83.14404
+      value: 26.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 35.75105
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.332985
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 92.57158
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -68.72119
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -91,14 +95,60 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
       propertyPath: m_Name
       value: WoodenBoard2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
---- !u!4 &8388872910798877894 stripped
+--- !u!1 &7175638974430883058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
+  m_PrefabInstance: {fileID: 8022481524004458915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &211193060488462877
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175638974430883058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4784847665495494590, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
+--- !u!114 &1009829005526689187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175638974430883058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: b575b4b88978b470ba4d550684c168bc, type: 2}
+  sound: {fileID: 11400000, guid: 4810d12837dfe4cc5b56e839c4af0e1e, type: 2}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &7556808236055590472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e38a3fb06f0ba584c84111e40917b57b, type: 3}
-  m_PrefabInstance: {fileID: 8350230105593549613}
+  m_PrefabInstance: {fileID: 8022481524004458915}
   m_PrefabAsset: {fileID: 0}
