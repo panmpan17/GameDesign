@@ -47,4 +47,12 @@ public class NPCControl : MonoBehaviour
 
         MinimapControl.ins.Register(transform.position, minimapMarker);
     }
+
+    public void UnregisterMarker()
+    {
+        if (!minimapMarker)
+            return;
+
+        MinimapControl.ins.UnregisterMarker(minimapMarker);
+    }
 }

@@ -29,6 +29,7 @@ public class MinimapControl : MonoBehaviour
     [Header("Marker")]
     [SerializeField]
     private SpriteRenderer iconPrefab;
+    private List<SpriteRenderer> _markers = new List<SpriteRenderer>(10);
 
     void Awake()
     {
@@ -54,5 +55,19 @@ public class MinimapControl : MonoBehaviour
         newSpriteRenderer.transform.position = position;
 
         newSpriteRenderer.gameObject.SetActive(true);
+
+        _markers.Add(newSpriteRenderer);
+    }
+
+    public void UnregisterMarker(MinimapMarker marker)
+    {
+        foreach (SpriteRenderer spriteRenderer in _markers)
+        {
+            if (spriteRenderer.sprite == marker.Icon)
+            {
+                Destroy(spriteRenderer.gameObject);
+                return;
+            }
+        }
     }
 }

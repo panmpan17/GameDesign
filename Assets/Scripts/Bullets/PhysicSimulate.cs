@@ -30,4 +30,18 @@ public struct PhysicSimulate
         _velocity += (_accelerateion * deltaTime) / Mass;
         _position += _velocity * deltaTime;
     }
+
+    public PhysicSimulate Clone()
+    {
+        var newPhsysimulate = new PhysicSimulate {
+            Mass = Mass,
+            Gravity = Gravity,
+        };
+
+        newPhsysimulate._position = _position;
+        newPhsysimulate._accelerateion = _accelerateion;
+        newPhsysimulate._velocity = _velocity;
+
+        return newPhsysimulate;
+    }
 }

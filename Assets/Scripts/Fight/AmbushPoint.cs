@@ -7,7 +7,7 @@ using MPack;
 public class AmbushPoint : MonoBehaviour
 {
     [SerializeField]
-    private TriggerSpawnSlime[] spawnSlimeTriggers;
+    private AbstractSpawnSlime[] spawnSlimeTriggers;
 
     [Header("Sense Player")]
     [SerializeField]
@@ -54,7 +54,6 @@ public class AmbushPoint : MonoBehaviour
             return;
         senseTimer.Reset();
 
-        // TODO: add colddown time
 
         float sqrMagnitude = (playerTransform.Target.position - transform.position).sqrMagnitude;
         if (_inRange)
@@ -65,8 +64,11 @@ public class AmbushPoint : MonoBehaviour
             _inRange = false;
 
             if (hasColddown && spawnSlimes.AliveCount <= 0)
-            {
                 colddownTimer.Reset();
+
+            for (int i = 0; i < spawnSlimeTriggers.Length; i++)
+            {
+                spawnSlimeTriggers[i].ResetFight();
             }
             spawnSlimes?.DestroyAll();
         }

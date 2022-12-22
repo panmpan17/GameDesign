@@ -45,6 +45,7 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
 
     IEnumerator C_ForecastHitPosition(BulletBehaviour canonShell, int maxTryTime=100)
     {
+        var physicSimulate = this.physicSimulate.Clone();
         physicSimulate.SetPositionAndVelocity(transform.position, startForce * transform.forward);
 
         Vector3 lastPosition = physicSimulate.Position;
