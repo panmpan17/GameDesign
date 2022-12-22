@@ -14,6 +14,12 @@ public class BowParameter : ScriptableObject
     public float SecondDrawDuration;
     public float SecondDrawExtendIgnoreGravityTime;
 
+    [Header("UI")]
+    [LauguageID]
+    public int AquireAnnounceNameID;
+    public Sprite Icon;
+
+
     public void CombineParamaters(IEnumerable<BowParameter> parameters)
     {
         if (ArrowSpeed.UseVariable)

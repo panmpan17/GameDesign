@@ -10,8 +10,6 @@ public class TreasureChest : MonoBehaviour
     [SerializeField]
     private ValueWithEnable<int> coreGain;
     [SerializeField]
-    private Inventory playerInventory;
-    [SerializeField]
     private Animator animator;
 
     private bool _opened;
@@ -31,15 +29,13 @@ public class TreasureChest : MonoBehaviour
         animator.enabled = true;
 
         WaitForSeconds miliSecond = new WaitForSeconds(0.1f);
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0)
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
         {
             yield return miliSecond;
         }
 
-        // TODO: Show inventory UI
-        if (appleGain.Enable)
-            playerInventory.ChangeAppleCount(appleGain.Value);
-        if (coreGain.Enable)
-            playerInventory.ChangeCoreCount(coreGain.Value);
+        int appleAmount = appleGain.Enable ? appleGain.Value : 0;
+        int coreAmount = coreGain.Enable ? coreGain.Value : 0;
+        InventoryGainUI.ins.ShowInventoryGain(appleAmount, coreAmount);
     }
 }

@@ -13,6 +13,10 @@ public class MainMenu : AbstractMenu
 
     [SerializeField]
     private PlayableDirector cutscene;
+    [SerializeField]
+    private GameObject creditMenu;
+    [SerializeField]
+    private GameObject creditCloseButton;
 
     private GameObject _lastSelected;
 
@@ -55,5 +59,17 @@ public class MainMenu : AbstractMenu
 #else
         Application.Quit();
 #endif
+    }
+
+    public void OpenCredit()
+    {
+        creditMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(creditCloseButton);
+    }
+
+    public void CloseCredit(GameObject backToButton)
+    {
+        creditMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(backToButton);
     }
 }

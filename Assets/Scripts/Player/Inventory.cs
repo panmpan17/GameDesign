@@ -17,12 +17,14 @@ public class Inventory : ScriptableObject
 
     public void ChangeCoreCount(int amount)
     {
+        if (amount == 0) return;
         CoreCount += amount;
         CoreEvent.Invoke(CoreCount);
     }
 
     public void ChangeAppleCount(int amount)
     {
+        if (amount == 0) return;
         AppleCount += amount;
         AppleEvent.Invoke(AppleCount);
     }

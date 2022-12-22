@@ -11,7 +11,7 @@ public class TriggerPlayerEvent : MonoBehaviour
 
     public void UpgradeBow()
     {
-        GameObject.FindWithTag(PlayerBehaviour.Tag).GetComponent<PlayerBehaviour>().UpgradeBow(bowUpgrade);
+        InventoryGainUI.ins.ShowBowUpgrade(bowUpgrade, GameManager.ins.Player.UpgradeBow);
     }
 
     public void AddApple(int count)

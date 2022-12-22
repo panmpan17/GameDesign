@@ -14,6 +14,8 @@ public class DropApple : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private UnityEvent onHitGround;
+    [SerializeField]
+    private GameObject ignoreCase;
 
     [SerializeField]
     [Layer]
@@ -36,7 +38,7 @@ public class DropApple : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == groundLayer)
+        if (collision.gameObject.layer == groundLayer && collision.gameObject != ignoreCase)
         {
             onHitGround.Invoke();
             audioSource.Play(dropGroundSound);

@@ -238,7 +238,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
 
             if (merchandise.BowUpgrade)
             {
-                GameObject.FindWithTag(PlayerBehaviour.Tag).GetComponent<PlayerBehaviour>().UpgradeBow(merchandise.BowUpgrade);
+                InventoryGainUI.ins.ShowBowUpgrade(merchandise.BowUpgrade, GameManager.ins.Player.UpgradeBow);
             }
             else
             {
