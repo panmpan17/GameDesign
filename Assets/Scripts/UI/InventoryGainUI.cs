@@ -79,6 +79,9 @@ public class InventoryGainUI : MonoBehaviour
         upgradeTitleLanguage.ChangeId(bowUpgrade.AquireAnnounceNameID);
         upgradeRectTransform.gameObject.SetActive(true);
 
+        appleGain.gameObject.SetActive(false);
+        coreGain.gameObject.SetActive(false);
+
         StartCoroutine(C_StartFade(bowUpgrade, completeAction));
     }
 

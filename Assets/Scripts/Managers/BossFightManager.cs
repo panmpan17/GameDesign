@@ -88,7 +88,7 @@ public class BossFightManager : MonoBehaviour
         yield return new WaitForSeconds(switchCameraWait);
 
         bossSlime.AwakeFromSleep();
-        // yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.8f);
         yield return StartCoroutine(bossSlime.RotateAndJump(GameManager.ins.Player.transform.position));
 
         impulseSource.GenerateImpulse();
