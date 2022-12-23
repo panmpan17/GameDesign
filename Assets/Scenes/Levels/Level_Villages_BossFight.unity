@@ -227,6 +227,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7928818987766200682, guid: 29593d973aecf2c4da598a33fb2e96fd, type: 3}
+--- !u!114 &130412490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130412485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cb0beb6d66249249152fa45835fb19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 11400000, guid: ec954a04c0efa4cf3befa45e57c41a45, type: 2}
 --- !u!1 &381422651
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +865,7 @@ MonoBehaviour:
   endingCutscene: {fileID: 6166585403753725780, guid: d8ffdc296d6a3418cbfe5bca83cd86fc, type: 3}
   endingCutsceneDelay: 3
   cutsceneDuration: 18
-  bossInstantDeath: 0
+  bossInstantDeath: 1
 --- !u!4 &1185037622
 Transform:
   m_ObjectHideFlags: 0

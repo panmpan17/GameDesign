@@ -64,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Timer waitRollTimer;
 
+    private bool _rolling = false;
+    private Vector3 _rollDirection = Vector3.zero;
+    public bool IsRolling => _rolling;
+
     [Header("Slope Sliding")]
     [SerializeField]
     private bool willSlopSliding;
@@ -89,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
     public event System.Action OnJumpEvent;
     /// <summary>
-    /// If rejump, jump end waont be called
+    /// If rejump, jump end wont be called
     /// </summary>
     public event System.Action OnJumpEndEvent;
     public event System.Action OnRejumpEvent;
@@ -107,10 +111,6 @@ public class PlayerMovement : MonoBehaviour
     private bool _walking = false;
     private bool _jumping = false;
     private bool _liftFromGround = false;
-
-    private bool _rolling = false;
-    private Vector3 _rollDirection = Vector3.zero;
-    public bool IsRolling => _rolling;
 
     public bool IsWalking => _walking;
     public float AngleLerpValue { get; private set; }
@@ -137,11 +137,13 @@ public class PlayerMovement : MonoBehaviour
 #region  Update
     void Update()
     {
+        HandleAimRotation();
+
         if (_rolling)
             HandleRolling();
         else
         {
-            HandleAimRotation();
+            // HandleAimRotation();
             HandleWalking();
         }
 

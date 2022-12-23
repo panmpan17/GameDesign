@@ -58,6 +58,16 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private EffectReference levelUpEffect;
 
+    [SerializeField]
+    private Timer hurtShowTimer;
+    [SerializeField]
+    [ColorUsage(false, true)]
+    private Color emissionColor;
+    private Color zeroEmissionColor = Color.black;
+    private SkinnedMeshRenderer[] skinnedMeshRenderers;
+    private MaterialPropertyBlock block;
+    private Coroutine _showHurtColorCoroutine;
+
     [Header("Change Animation Speed")]
     [SerializeField]
     private AnimationClip drawBowClip;
@@ -72,6 +82,7 @@ public class PlayerAnimation : MonoBehaviour
     private bool _drawBow = false;
 
     private Coroutine _weightTweenRoutine;
+
 
     public bool IsDrawArrowFullyPlayed {
         get {
@@ -96,6 +107,16 @@ public class PlayerAnimation : MonoBehaviour
 
     void Awake()
     {
+        BindPlayerEvent();
+
+        float speedMultiplier = rollClip.length / movement.rollTime;
+        animator.SetFloat(RollSpeed, speedMultiplier);
+
+        GetSkinMaterials();
+    }
+
+    void BindPlayerEvent()
+    {
         movement.OnJumpEvent += OnJump;
         movement.OnJumpEndEvent += OnJumpEnd;
         movement.OnRejumpEvent += OnRejump;
@@ -104,17 +125,28 @@ public class PlayerAnimation : MonoBehaviour
 
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
-
         behaviour.OnHurt += OnHurt;
         behaviour.OnDeath += OnDeath;
         behaviour.OnRevive += OnRevive;
-
         behaviour.OnBowUpgrade += OnBowUpgrade;
-
-        float speedMultiplier = rollClip.length / movement.rollTime;
-        animator.SetFloat(RollSpeed, speedMultiplier);
-
         behaviour.OnBowParameterChanged += ChangeAnimationAccordingToBowParameter;
+    }
+
+    void GetSkinMaterials()
+    {
+        skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+
+        block = new MaterialPropertyBlock();
+        // block.SetColor("_EmissionColor", zeroEmissionColor);
+        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMeshRenderers[i].SetPropertyBlock(block);
+            foreach (Material material in skinnedMeshRenderers[i].materials)
+            {
+                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.None;
+                material.EnableKeyword("_EMISSION");
+            }
+        }
     }
 
     void LateUpdate()
@@ -211,7 +243,42 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     void OnHurt()
-    {}
+    {
+        if (_showHurtColorCoroutine != null)
+        {
+            StopCoroutine(_showHurtColorCoroutine);
+        }
+        _showHurtColorCoroutine = StartCoroutine(C_ShowHurtColor());
+    }
+
+    IEnumerator C_ShowHurtColor()
+    {
+        hurtShowTimer.Reset();
+        block.SetColor("_EmissionColor", emissionColor);
+        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMeshRenderers[i].SetPropertyBlock(block);
+        }
+
+        while (!hurtShowTimer.UpdateEnd)
+        {
+            yield return null;
+
+            block.SetColor("_EmissionColor", Color.Lerp(emissionColor, zeroEmissionColor, hurtShowTimer.Progress));
+            for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+            {
+                skinnedMeshRenderers[i].SetPropertyBlock(block);
+            }
+        }
+
+
+        block.SetColor("_EmissionColor", zeroEmissionColor);
+        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMeshRenderers[i].SetPropertyBlock(block);
+        }
+        _showHurtColorCoroutine = null;
+    }
 
     void OnDeath()
     {

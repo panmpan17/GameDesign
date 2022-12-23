@@ -21,10 +21,15 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public InputInterface Input => input;
     public PlayerMovement Movement => movement;
 
+    [Header("Bow")]
     [SerializeField]
     private Bow bow;
     public event System.Action<BowParameter, BowParameter> OnBowParameterChanged;
     public event System.Action OnBowUpgrade;
+    [SerializeField]
+    private float waitShootTime;
+    private bool _waitShoot;
+    private Stopwatch _waitShootStopwatch;
 
     [Header("Reference")]
     [SerializeField]
@@ -122,6 +127,9 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         // inpu
 
         movement.OnRollEvent += OnRoll;
+        movement.OnRollEndEvent += OnRollEnd;
+        // movement.OnJumpEndEvent += OnJumpEnd;
+
         animation.OnAimAnimatinoChanged += OnAimProgress;
 
         focusEvent.InvokeEvents += FocusCursor;
@@ -210,7 +218,11 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         }
 
         if (movement.IsRolling)
+        {
+            _waitShoot = true;
+            _waitShootStopwatch.Update();
             return;
+        }
 
         IsDrawingBow = true;
 
@@ -220,6 +232,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     void OnAimUp()
     {
+        _waitShoot = false;
         if (!CursorFocued || !IsDrawingBow)
             return;
 
@@ -297,6 +310,23 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         }
     }
 
+    void OnEnlargeMinimap()
+    {
+        if (!CursorFocued)
+            return;
+
+        enlargeMinimapEvent.Invoke(true);
+    }
+    void OnShrinkMinimap()
+    {
+        if (!CursorFocued)
+            return;
+
+        enlargeMinimapEvent.Invoke(false);
+    }
+#endregion
+
+#region Movement Event
     void OnRoll()
     {
         if (!CursorFocued)
@@ -313,20 +343,20 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         }
     }
 
-    void OnEnlargeMinimap()
+    void OnRollEnd()
     {
-        if (!CursorFocued)
-            return;
+        if (_waitShoot && _waitShootStopwatch.DeltaTime < waitShootTime)
+        {
+            _waitShoot = false;
+            IsDrawingBow = true;
 
-        enlargeMinimapEvent.Invoke(true);
+            bow.OnAimDown();
+            OnDrawBow?.Invoke();
+        }
     }
-    void OnShrinkMinimap()
-    {
-        if (!CursorFocued)
-            return;
 
-        enlargeMinimapEvent.Invoke(false);
-    }
+    // void OnJumpEnd()
+    // {}
 #endregion
 
 

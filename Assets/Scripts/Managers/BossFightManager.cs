@@ -159,11 +159,16 @@ public class BossFightManager : MonoBehaviour
     {
         GameManager.ins.Player.SetInvincible(true);
         yield return new WaitForSeconds(endingCutsceneDelay);
-        Time.timeScale = 0;
+
+        GameManager.ins.Player.Input.Disable();
+        
+        // GameManager.ins.Player.enabled = false;
+
+        // Time.timeScale = 1;
         GameObject ending = Instantiate(endingCutscene);
 
-        yield return new WaitForSecondsRealtime(cutsceneDuration);
+        yield return new WaitForSeconds(cutsceneDuration);
         LoadScene.ins.Load("MainMenu");
-        Time.timeScale = 1;
+        // Time.timeScale = 1;
     }
 }

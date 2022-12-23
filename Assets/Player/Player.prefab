@@ -5141,6 +5141,7 @@ MonoBehaviour:
   movement: {fileID: 2787180225705632301}
   animation: {fileID: 4057677663369091111}
   bow: {fileID: 5260637637954937081}
+  waitShootTime: 0.4
   bodyPointer: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
   feetPointer: {fileID: 11400000, guid: d078023746b8f4112adc4bdd062eb354, type: 2}
   body: {fileID: 3063964680199003412}
@@ -6410,6 +6411,11 @@ MonoBehaviour:
   stepDustParticle: {fileID: 118747342}
   currentArrowPointer: {fileID: 11400000, guid: 2b3847b086ac14f11b518da69d75a5f2, type: 2}
   levelUpEffect: {fileID: 11400000, guid: 69cea980b825043bcaefbb89c74db4bc, type: 2}
+  hurtShowTimer:
+    TargetTime: 0.5
+    Running: 0
+    ReverseMode: 0
+  emissionColor: {r: 1.4980392, g: 0, b: 0, a: 0}
   drawBowClip: {fileID: 7400000, guid: 1188f5ec03d9b4b80889953ff78d0d14, type: 2}
   rollClip: {fileID: 7400000, guid: 09629546077744cf095552aecf3a7864, type: 2}
   groundLayers:
