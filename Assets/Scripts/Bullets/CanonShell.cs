@@ -14,6 +14,11 @@ public class CanonShell : BulletBehaviour
     [SerializeField]
     private float explosionRadius;
 
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClipSet explosionSound;
+
     private Vector3 _extraGravity;
 
     public event System.Action OnCollide;
@@ -41,6 +46,7 @@ public class CanonShell : BulletBehaviour
 
         OnCollide?.Invoke();
         OnCollide = null;
+        audioSource.Play(explosionSound);
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.isKinematic = true;

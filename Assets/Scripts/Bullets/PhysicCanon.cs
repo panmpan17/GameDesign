@@ -23,6 +23,12 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
     [SerializeField]
     private LayerMask hitLayers;
 
+    [Header("Audio")]
+    [SerializeField]
+    private AudioClipSet shootSound;
+    [SerializeField]
+    private AudioSource audioSource;
+
     [Header("Editor Only")]
     [SerializeField]
     private bool drawDizmos;
@@ -33,6 +39,8 @@ public class PhysicCanon : MonoBehaviour, ITriggerFire
         physicSimulate.Update(Time.fixedDeltaTime);
         var canonShell = bulletType.Pool.Get();
         canonShell.Shoot(physicSimulate);
+
+        audioSource?.Play(shootSound);
 
         if (locationIndictePrefab)
         {

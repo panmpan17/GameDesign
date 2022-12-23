@@ -91,6 +91,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public event System.Action<float> OnBowShoot;
     public event System.Action OnPickItem;
 
+    public event System.Action OnHurt;
     public event System.Action OnDeath;
     public event System.Action OnRevive;
 
@@ -337,11 +338,14 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
         healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
 
-        if (_health <= 0)
+        if (_health > 0)
         {
-            _handleDeath = true;
-            OnDeath?.Invoke();
+            OnHurt.Invoke();
+            return;
         }
+
+        _handleDeath = true;
+        OnDeath?.Invoke();
     }
 
     public void InstantDeath()

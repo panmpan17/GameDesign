@@ -12,6 +12,11 @@ public class TreasureChest : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClipSet openSound;
+
     private bool _opened;
 
     public void Open()
@@ -27,6 +32,9 @@ public class TreasureChest : MonoBehaviour
     public IEnumerator C_Animate()
     {
         animator.enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+        audioSource.Play(openSound);
 
         WaitForSeconds miliSecond = new WaitForSeconds(0.1f);
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)

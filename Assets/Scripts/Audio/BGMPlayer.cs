@@ -7,6 +7,8 @@ public class BGMPlayer : MonoBehaviour
     public static BGMPlayer ins;
 
     [SerializeField]
+    private bool isBaseBGM;
+    [SerializeField]
     private BGMClip baseBGMClip;
     [SerializeField]
     private AudioSource track1;
@@ -17,6 +19,8 @@ public class BGMPlayer : MonoBehaviour
     {
         if (ins != null)
         {
+            if (isBaseBGM)
+                ins.baseBGMClip = baseBGMClip;
             ins.BlendNewBGM(baseBGMClip);
             Destroy(gameObject);
             return;
@@ -92,7 +96,7 @@ public class BGMPlayer : MonoBehaviour
         while (time < fadeTime)
         {
             yield return null;
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             src.volume = Mathf.Lerp(originVolume, targetVolume, volumeCurve.Evaluate(time / fadeTime));
         }
 

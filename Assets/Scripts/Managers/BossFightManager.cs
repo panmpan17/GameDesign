@@ -50,6 +50,11 @@ public class BossFightManager : MonoBehaviour
     [SerializeField]
     private float cutsceneDuration;
 
+#if UNITY_EDITOR
+    [Header("Editor Only")]
+    [SerializeField]
+    private bool bossInstantDeath;
+#endif
 
     void Awake()
     {
@@ -91,6 +96,9 @@ public class BossFightManager : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         yield return StartCoroutine(bossSlime.RotateAndJump(GameManager.ins.Player.transform.position));
 
+        var slimeBehaviour = bossSlime.GetComponent<SlimeBehaviour>();
+
+        slimeBehaviour.TriggerImpluse(0.1f);
         impulseSource.GenerateImpulse();
         yield return new WaitForSeconds(switchBackCameraDelay);
 
@@ -107,9 +115,17 @@ public class BossFightManager : MonoBehaviour
 
         playerInput.Enable();
         slimeHealthShowEvent.Invoke(true);
-        var slimeBehaviour = bossSlime.GetComponent<SlimeBehaviour>();
+
         slimeBehaviour.UpdateHealth();
         slimeBehaviour.OnDeath.AddListener(OnBossDeath);
+
+#if UNITY_EDITOR
+        if (bossInstantDeath)
+        {
+            slimeBehaviour.DisableTreeRunner();
+            OnBossDeath();
+        }
+#endif
     }
 
     void ResetBossFight()
@@ -144,7 +160,7 @@ public class BossFightManager : MonoBehaviour
         GameManager.ins.Player.SetInvincible(true);
         yield return new WaitForSeconds(endingCutsceneDelay);
         Time.timeScale = 0;
-        Instantiate(endingCutscene);
+        GameObject ending = Instantiate(endingCutscene);
 
         yield return new WaitForSecondsRealtime(cutsceneDuration);
         LoadScene.ins.Load("MainMenu");

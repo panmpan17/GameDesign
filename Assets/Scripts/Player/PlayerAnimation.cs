@@ -104,8 +104,11 @@ public class PlayerAnimation : MonoBehaviour
 
         behaviour.OnDrawBow += OnDrawBow;
         behaviour.OnDrawBowEnd += OnDrawBowEnd;
+
+        behaviour.OnHurt += OnHurt;
         behaviour.OnDeath += OnDeath;
         behaviour.OnRevive += OnRevive;
+
         behaviour.OnBowUpgrade += OnBowUpgrade;
 
         float speedMultiplier = rollClip.length / movement.rollTime;
@@ -206,6 +209,9 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool(AnimKeyDrawingBow, false);
         animator.SetFloat(AnimKeyWalkSpeed, 1);
     }
+
+    void OnHurt()
+    {}
 
     void OnDeath()
     {

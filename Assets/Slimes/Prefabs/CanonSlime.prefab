@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2396312834371023825}
   - component: {fileID: 2396312834371023824}
   m_Layer: 7
-  m_Name: Canon
+  m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +55,8 @@ MonoBehaviour:
   hitLayers:
     serializedVersion: 2
     m_Bits: 1024
+  shootSound: {fileID: 11400000, guid: 34dc209261ff74bdd8e6d9a9767b9a34, type: 2}
+  audioSource: {fileID: 8540017626227711993}
   drawDizmos: 1
 --- !u!1 &2396312834613917260
 GameObject:
