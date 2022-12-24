@@ -68,9 +68,9 @@ public class InventoryGainUI : MonoBehaviour
         upgradeTitleLanguage.SetupLanguageProcesor(UpgradeTitleTextChanged);
     }
 
-    public void ShowBowUpgrade(BowParameter bowUpgrade, System.Action<BowParameter> completeAction)
+    public void ShowBowUpgrade(BowParameter bowUpgrade)
     {
-        Time.timeScale = 0;
+        PauseTimeTrack.Pause(this);
         _canvas.enabled = animator.enabled = true;
 
         titleLanguageText.ChangeId(upgradeGetTitle);
@@ -82,12 +82,12 @@ public class InventoryGainUI : MonoBehaviour
         appleGain.gameObject.SetActive(false);
         coreGain.gameObject.SetActive(false);
 
-        StartCoroutine(C_StartFade(bowUpgrade, completeAction));
+        StartCoroutine(C_StartFade(bowUpgrade));
     }
 
     public void ShowInventoryGain(int appleGainAmount, int coreGainAmount)
     {
-        Time.timeScale = 0;
+        PauseTimeTrack.Pause(this);
         _canvas.enabled = animator.enabled = true;
 
         titleLanguageText.ChangeId(treasureOpenTitle);
@@ -125,7 +125,7 @@ public class InventoryGainUI : MonoBehaviour
     }
 
 
-    IEnumerator C_StartFade(BowParameter bowParameter, System.Action<BowParameter> completeAction)
+    IEnumerator C_StartFade(BowParameter bowParameter)
     {
         animator.Play(FadeInHashKey);
         yield return new WaitForSecondsRealtime(waitDuration);
@@ -133,8 +133,8 @@ public class InventoryGainUI : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.8f);
         _canvas.enabled = animator.enabled = false;
 
-        Time.timeScale = 1;
-        completeAction?.Invoke(bowParameter);
+        PauseTimeTrack.Unpause(this);
+        GameManager.ins.Player.UpgradeBow(bowParameter);
     }
 
     IEnumerator C_StartFade(int appleAmount, int coreAmount)
@@ -145,7 +145,7 @@ public class InventoryGainUI : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.8f);
         _canvas.enabled = animator.enabled = false;
 
-        Time.timeScale = 1;
+        PauseTimeTrack.Unpause(this);
         playerInventory.ChangeAppleCount(appleAmount);
         playerInventory.ChangeCoreCount(coreAmount);
     }

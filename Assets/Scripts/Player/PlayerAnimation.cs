@@ -92,14 +92,6 @@ public class PlayerAnimation : MonoBehaviour
             return false;
         }
     }
-    public float RollAnimationProgress {
-        get {
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("Roll"))
-                return stateInfo.normalizedTime;
-            return 0;
-        }
-    }
 
     public event System.Action<float> OnAimAnimatinoChanged;
     public event System.Action<string> OnAnimationEventCalled;

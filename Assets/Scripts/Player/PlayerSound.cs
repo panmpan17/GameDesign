@@ -46,6 +46,7 @@ public class PlayerSound : MonoBehaviour
     void Awake()
     {
         movement.OnJumpEvent += OnJump;
+        movement.OnRejumpEvent += OnJump;
         movement.OnJumpEndEvent += OnLand;
         movement.OnRollEvent += OnRoll;
 

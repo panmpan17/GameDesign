@@ -56,6 +56,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     {
         if (_dialogueGraph != null) return;
 
+        PauseTimeTrack.Pause(this);
         OpenMenu();
         _canvas.enabled = true;
 
@@ -63,7 +64,6 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         _dialogueGraph.SetUp(this);
         _dialogueGraph.Start();
         _dialogueGraph.Proccessing();
-        return;
     }
 
 
@@ -201,6 +201,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
 
     public void OnDialogueEnd()
     {
+        PauseTimeTrack.Unpause(this);
         _dialogueGraph.TearDown();
         _dialogueGraph = null;
         _canvas.enabled = false;
@@ -238,7 +239,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
 
             if (merchandise.BowUpgrade)
             {
-                InventoryGainUI.ins.ShowBowUpgrade(merchandise.BowUpgrade, GameManager.ins.Player.UpgradeBow);
+                InventoryGainUI.ins.ShowBowUpgrade(merchandise.BowUpgrade);
             }
             else
             {

@@ -10,6 +10,9 @@ public class TreasureChest : MonoBehaviour
     [SerializeField]
     private ValueWithEnable<int> coreGain;
     [SerializeField]
+    private BowParameter bowUpgrade;
+
+    [SerializeField]
     private Animator animator;
 
     [SerializeField]
@@ -42,8 +45,15 @@ public class TreasureChest : MonoBehaviour
             yield return miliSecond;
         }
 
-        int appleAmount = appleGain.Enable ? appleGain.Value : 0;
-        int coreAmount = coreGain.Enable ? coreGain.Value : 0;
-        InventoryGainUI.ins.ShowInventoryGain(appleAmount, coreAmount);
+        if (bowUpgrade)
+        {
+            InventoryGainUI.ins.ShowBowUpgrade(bowUpgrade);
+        }
+        else
+        {
+            int appleAmount = appleGain.Enable ? appleGain.Value : 0;
+            int coreAmount = coreGain.Enable ? coreGain.Value : 0;
+            InventoryGainUI.ins.ShowInventoryGain(appleAmount, coreAmount);
+        }
     }
 }

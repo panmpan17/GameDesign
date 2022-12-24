@@ -63,10 +63,10 @@ public class PlayerMovement : MonoBehaviour
     private AnimationCurve rollSpeedCurve;
     [SerializeField]
     private Timer waitRollTimer;
+    private Timer _rollTimer;
 
-    private bool _rolling = false;
     private Vector3 _rollDirection = Vector3.zero;
-    public bool IsRolling => _rolling;
+    public bool IsRolling { get => _rollTimer.Running; set => _rollTimer.Running = value; }
 
     [Header("Slope Sliding")]
     [SerializeField]
@@ -131,6 +131,9 @@ public class PlayerMovement : MonoBehaviour
         jumpHoldTimer.Running = false;
 
         followTargetPointer.Target = followTarget;
+
+        _rollTimer.TargetTime = rollTime;
+        _rollTimer.Running = false;
     }
 
 
@@ -139,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleAimRotation();
 
-        if (_rolling)
+        if (IsRolling)
             HandleRolling();
         else
         {
@@ -237,17 +240,19 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleRolling()
     {
-        float progress = animation.RollAnimationProgress;
-        _velocity = _rollDirection * (rollSpeed * rollSpeedCurve.Evaluate(progress));
-
-        if (progress >= 1)
+        if (!_rollTimer.UpdateEnd)
         {
-            _rolling = false;
-            OnRollEndEvent?.Invoke();
-
-            if (waitJumpTimer.Running) Jump();
-            if (waitRollTimer.Running) Roll();
+            _velocity = _rollDirection * (rollSpeed * rollSpeedCurve.Evaluate(_rollTimer.Progress));
+            return;
         }
+
+        IsRolling = false;
+        OnRollEndEvent?.Invoke();
+
+        if (waitJumpTimer.Running) Jump();
+        else if (waitRollTimer.Running) Roll();
+        waitJumpTimer.Running = false;
+        waitRollTimer.Running = false;
     }
 
     void HandlePhysic()
@@ -348,17 +353,16 @@ public class PlayerMovement : MonoBehaviour
             return;
         if (behaviour.IsDead)
             return;
-        if (_rolling || _jumping || !IsGrounded)
+        if (IsRolling || _jumping || !IsGrounded)
         {
             waitRollTimer.Running = false;
             waitJumpTimer.Reset();
+            jumpHoldTimer.Running = false;
             return;
         }
         if (IsSlopSliding)
             return;
 
-        if (jumpHoldTimer.TargetTime > 0)
-            jumpHoldTimer.Reset();
         Jump();
     }
 
@@ -369,6 +373,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        if (jumpHoldTimer.TargetTime > 0)
+            jumpHoldTimer.Reset();
+
         _liftFromGround = false;
         _yVelocity = jumpForce;
 
@@ -389,9 +396,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         if (behaviour.IsDead)
             return;
-        if (_rolling || _jumping || !IsGrounded)
+        if (IsRolling || _jumping || !IsGrounded)
         {
-
             waitJumpTimer.Running = false;
             waitRollTimer.Reset();
             return;
@@ -402,7 +408,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Roll()
     {
-        _rolling = true;
+        _rollTimer.Reset();
+
         if (!input.HasMovementAxis)
         {
             FaceWithFollowTarget();
@@ -425,6 +432,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         OnRollEvent?.Invoke();
+        // Debug.Break();
     }
 #endregion
 

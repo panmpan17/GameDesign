@@ -11,7 +11,7 @@ public class TriggerPlayerEvent : MonoBehaviour
 
     public void UpgradeBow()
     {
-        InventoryGainUI.ins.ShowBowUpgrade(bowUpgrade, GameManager.ins.Player.UpgradeBow);
+        InventoryGainUI.ins.ShowBowUpgrade(bowUpgrade);
     }
 
     public void AddApple(int count)

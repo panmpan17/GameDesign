@@ -160,15 +160,18 @@ public class BossFightManager : MonoBehaviour
         GameManager.ins.Player.SetInvincible(true);
         yield return new WaitForSeconds(endingCutsceneDelay);
 
-        GameManager.ins.Player.Input.Disable();
-        
-        // GameManager.ins.Player.enabled = false;
+        // GetComponentInChildren<SlimeBehaviour>();
+        GameObject[] slimes = GameObject.FindGameObjectsWithTag(SlimeBehaviourTreeRunner.Tag);
+        for (int i = 0; i < slimes.Length; i++)
+        {
+            slimes[i].GetComponent<XnodeBehaviourTree.BehaviourTreeRunner>().enabled = false;
+        }
 
-        // Time.timeScale = 1;
+        GameManager.ins.Player.Input.Disable();
         GameObject ending = Instantiate(endingCutscene);
 
         yield return new WaitForSeconds(cutsceneDuration);
         LoadScene.ins.Load("MainMenu");
-        // Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
