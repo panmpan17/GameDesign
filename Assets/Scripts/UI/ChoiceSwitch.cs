@@ -96,17 +96,21 @@ public class ChoiceSwitch : Selectable
 
     public override void OnMove(AxisEventData eventData)
     {
-        if (_changeResolutionColddown.DeltaTime < 0.4f)
-            return;
-
-        _changeResolutionColddown.Update();
         switch (eventData.moveDir)
         {
             case MoveDirection.Left:
+                if (_changeResolutionColddown.UnscaledDeltaTime < 0.4f)
+                    return;
+
+                _changeResolutionColddown.Update();
                 SwitchLeft();
                 break;
 
             case MoveDirection.Right:
+                if (_changeResolutionColddown.UnscaledDeltaTime < 0.4f)
+                    return;
+
+                _changeResolutionColddown.Update();
                 SwitchRight();
                 break;
 

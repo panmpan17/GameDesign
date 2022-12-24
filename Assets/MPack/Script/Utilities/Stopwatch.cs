@@ -8,9 +8,13 @@ namespace MPack
         public float LastTime;
         public float DeltaTime => Time.time - LastTime;
 
+        public float LastUnscaledTime;
+        public float UnscaledDeltaTime => Time.unscaledTime - LastUnscaledTime;
+
         public void Update()
         {
             LastTime = Time.time;
+            LastUnscaledTime = Time.unscaledTime;
         }
     }
 

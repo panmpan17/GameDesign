@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using MPack;
+using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
+using UnityEngine.InputSystem.UI;
 
 
 public class PauseMenu : AbstractMenu
@@ -18,6 +18,8 @@ public class PauseMenu : AbstractMenu
     private EventReference pauseEvent;
     [SerializeField]
     private EventReference focusEvent;
+
+    private InputSystemUIInputModule uiInputModule;
 
 
     void Awake()
@@ -39,6 +41,14 @@ public class PauseMenu : AbstractMenu
         canvas.enabled = true;
         EventSystem.current.SetSelectedGameObject(firstSelected);
         OpenMenu();
+        StartCoroutine(C_Delay());
+    }
+
+    IEnumerator C_Delay()
+    {
+        yield return new WaitForEndOfFrame();
+        uiInputModule ??= EventSystem.current.GetComponent<InputSystemUIInputModule>();
+        uiInputModule.cancel.action.performed += OnCancel;
     }
 
     public void Resume()
@@ -48,22 +58,33 @@ public class PauseMenu : AbstractMenu
         EventSystem.current.SetSelectedGameObject(null);
         focusEvent.Invoke();
         CloseMenu();
+
+        var uiInputModule = EventSystem.current.GetComponent<InputSystemUIInputModule>();
+        uiInputModule.cancel.action.performed -= OnCancel;
     }
 
     public void OpenSetting()
     {
         _lastSelected = EventSystem.current.currentSelectedGameObject;
         AbstractMenu.S_OpenMenu("Setting");
+
+        uiInputModule.cancel.action.performed -= OnCancel;
     }
 
     protected override void BackToThisMenu()
     {
         EventSystem.current.SetSelectedGameObject(_lastSelected);
+        uiInputModule.cancel.action.performed += OnCancel;
     }
 
     public void MainMenu()
     {
         LoadScene.ins.Load("MainMenu");
         Time.timeScale = 1;
+    }
+
+    void OnCancel(CallbackContext callbackContext)
+    {
+        Resume();
     }
 }

@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 8597513746860517944}
   - component: {fileID: 889269862508453186}
   - component: {fileID: 4721107581627122839}
+  - component: {fileID: 6583770824254689484}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -297,6 +298,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundPreset: {fileID: 11400000, guid: 75877fc6b18214d76913e474932c4245, type: 2}
+--- !u!114 &6583770824254689484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065567136224903866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &4960128426274055843
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +446,7 @@ GameObject:
   - component: {fileID: 4960128426515486315}
   - component: {fileID: 4960128426515486314}
   - component: {fileID: 7039515879313341550}
+  - component: {fileID: 8200722477955670670}
   m_Layer: 5
   m_Name: SettingButton
   m_TagString: Untagged
@@ -567,6 +582,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundPreset: {fileID: 11400000, guid: 75877fc6b18214d76913e474932c4245, type: 2}
+--- !u!114 &8200722477955670670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960128426515486312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &4960128426684841308
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +608,7 @@ GameObject:
   - component: {fileID: 4960128426684841310}
   - component: {fileID: 4960128426684841309}
   - component: {fileID: 4254047447810741088}
+  - component: {fileID: 7762266186399752225}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -715,6 +744,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundPreset: {fileID: 11400000, guid: 75877fc6b18214d76913e474932c4245, type: 2}
+--- !u!114 &7762266186399752225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960128426684841308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &4960128426835408074
 GameObject:
   m_ObjectHideFlags: 0

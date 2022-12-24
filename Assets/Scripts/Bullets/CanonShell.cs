@@ -76,7 +76,7 @@ public class CanonShell : BulletBehaviour
 
             var playerBehaviour = hits[0].GetComponent<PlayerBehaviour>();
 
-            if (!playerBehaviour.CanDamage)
+            if (!playerBehaviour.TryToDamage())
             {
                 yield return null;
                 continue;

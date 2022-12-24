@@ -99,11 +99,12 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public event System.Action OnHurt;
     public event System.Action OnDeath;
     public event System.Action OnRevive;
+    public event System.Action OnHeal;
+    public event System.Action OnDodgeSuccess;
 
     public bool CursorFocued { get; protected set; }
     public bool IsDrawingBow { get; private set; }
     public bool IsDead => _handleDeath;
-    public bool CanDamage => !Movement.IsRolling && !_handleDeath && !_invincible;
 
     private int _walkingCameraIndex;
 
@@ -307,6 +308,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             inventory.ChangeAppleCount(-1);
             _health += appleHealPoint;
             healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
+            OnHeal?.Invoke();
         }
     }
 
@@ -360,9 +362,20 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 #endregion
 
 
+    public bool TryToDamage()
+    {
+        if (movement.IsRolling)
+        {
+            OnDodgeSuccess?.Invoke();
+            return false;
+        }
+
+        return !_handleDeath && !_invincible;
+    }
+
     public void OnDamage(float amount)
     {
-        if (!CanDamage) return;
+        if (!TryToDamage()) return;
 
         _health -= amount;
 

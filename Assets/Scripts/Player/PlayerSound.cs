@@ -40,7 +40,11 @@ public class PlayerSound : MonoBehaviour
     [SerializeField]
     private AudioClipSet hurtClip;
     [SerializeField]
+    private AudioClipSet healClip;
+    [SerializeField]
     private AudioClipSet rollClip;
+    [SerializeField]
+    private AudioClipSet dodgeSuccessClip;
 
 
     void Awake()
@@ -56,6 +60,8 @@ public class PlayerSound : MonoBehaviour
         behaviour.OnPickItem += OnPickItem;
         behaviour.OnBowUpgrade += OnBowUpgrade;
         behaviour.OnHurt += OnHurt;
+        behaviour.OnHeal += OnHeal;
+        behaviour.OnDodgeSuccess += OnDodgeSuccess;
 
         animation.OnAnimationEventCalled += OnAnimationEvent;
     }
@@ -64,6 +70,7 @@ public class PlayerSound : MonoBehaviour
     void OnJump() => oneShotAudioSource.PlayOneShot(jumpClip);
     void OnLand() => oneShotAudioSource.PlayOneShot(landClip);
     void OnRoll() => oneShotAudioSource.PlayOneShot(rollClip);
+    void OnDodgeSuccess() => oneShotAudioSource.PlayOneShot(dodgeSuccessClip);
 
     void OnAnimationEvent(string eventName)
     {
@@ -88,4 +95,5 @@ public class PlayerSound : MonoBehaviour
     void OnBowUpgrade() => oneShotAudioSource.PlayOneShot(levelUpClip);
 
     void OnHurt() => oneShotAudioSource.PlayOneShot(hurtClip);
+    void OnHeal() => oneShotAudioSource.PlayOneShot(healClip);
 }

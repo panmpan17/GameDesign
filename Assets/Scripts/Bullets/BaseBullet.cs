@@ -36,7 +36,7 @@ public class BaseBullet : BulletBehaviour
 
         var playerBehaviour = collider.GetComponent<PlayerBehaviour>();
 
-        if (!playerBehaviour.CanDamage)
+        if (!playerBehaviour.TryToDamage())
             return;
 
         PutBackToPool();
