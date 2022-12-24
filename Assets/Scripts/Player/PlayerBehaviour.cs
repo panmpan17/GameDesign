@@ -30,6 +30,14 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private float waitShootTime;
     private bool _waitShoot;
     private Stopwatch _waitShootStopwatch;
+    [SerializeField]
+    private float keepTargetTime;
+
+    private Ray _currentRay;
+    private Stopwatch _focusedStopwatch;
+    private Transform _focusedTarget;
+    public Vector3 CurrentRayHitPosition { get; private set; }
+
 
     [Header("Reference")]
     [SerializeField]
@@ -91,6 +99,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private bool focusCursorWhenPointerDown;
 #endif
 
+
+#region Actions
     public event System.Action OnDrawBow;
     public event System.Action OnDrawBowEnd;
     public event System.Action<float> OnBowShoot;
@@ -101,6 +111,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     public event System.Action OnRevive;
     public event System.Action OnHeal;
     public event System.Action OnDodgeSuccess;
+#endregion
 
     public bool CursorFocued { get; protected set; }
     public bool IsDrawingBow { get; private set; }
@@ -110,9 +121,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     private bool _handleDeath = false;
     private bool _invincible = false;
-
-    private Ray _currentRay;
-    public Vector3 CurrentRayHitPosition { get; private set; }
 
 
     void Awake()
@@ -164,17 +172,39 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
     void Update()
     {
-        _currentRay = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
-
-        if (Physics.Raycast(_currentRay, out RaycastHit shootTargetHit, 50, hitLayers))
-            CurrentRayHitPosition = shootTargetHit.point;
-        else
-            CurrentRayHitPosition = _currentRay.GetPoint(50);
-
+        UpdateAimingRay();
         UpdateInteractCheck();
     }
 
-    private void UpdateInteractCheck()
+    void UpdateAimingRay()
+    {
+        _currentRay = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
+
+        if (Physics.Raycast(_currentRay, out RaycastHit shootTargetHit, 50, hitLayers))
+        {
+            if (shootTargetHit.collider.CompareTag(SlimeCore.Tag))
+            {
+                _focusedStopwatch.Update();
+                _focusedTarget = shootTargetHit.collider.transform;
+            }
+            else
+            {
+                if (!_focusedTarget || _focusedStopwatch.DeltaTime > keepTargetTime)
+                    CurrentRayHitPosition = shootTargetHit.point;
+                else
+                    CurrentRayHitPosition = _focusedTarget.position;
+            }
+        }
+        else
+        {
+            if (!_focusedTarget || _focusedStopwatch.DeltaTime > keepTargetTime)
+                CurrentRayHitPosition = _currentRay.GetPoint(50);
+            else
+                CurrentRayHitPosition = _focusedTarget.position;
+        }
+    }
+
+    void UpdateInteractCheck()
     {
         bool isOverlap = Physics.OverlapSphereNonAlloc(body.position, interactRaycastDistance, _interactColliders, interactLayer) > 0;
 
@@ -227,6 +257,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
         IsDrawingBow = true;
 
+        _focusedTarget = null;
+
         bow.OnAimDown();
         OnDrawBow?.Invoke();
     }
@@ -238,6 +270,8 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             return;
 
         IsDrawingBow = false;
+
+        _focusedTarget = null;
 
         bool isBowFullyDrawed = animation.IsDrawArrowFullyPlayed;
         bow.OnAimUp(isBowFullyDrawed, CurrentRayHitPosition);
@@ -328,6 +362,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     }
 #endregion
 
+
 #region Movement Event
     void OnRoll()
     {
@@ -362,6 +397,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 #endregion
 
 
+#region Health relative
     public bool TryToDamage()
     {
         if (movement.IsRolling)
@@ -415,6 +451,10 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
         bow.DisableAllArrows();
     }
+
+    public void SetInvincible(bool status) => _invincible = status;
+#endregion
+
 
     public void InstantTeleportTo(Vector3 position)
     {
@@ -476,7 +516,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     }
 #endregion
 
-    public void SetInvincible(bool status) => _invincible = status;
 
     void OnDestroy()
     {

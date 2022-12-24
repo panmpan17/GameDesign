@@ -45,4 +45,16 @@ public class BowParameter : ScriptableObject
             SecondDrawExtendIgnoreGravityTime += parameter.SecondDrawExtendIgnoreGravityTime;
         }
     }
+
+    public void LogParamaters()
+    {
+        Debug.LogFormat(
+            "ArrowSpeed: {0}~{1}\nFirst Draw Duration: {2}\nIgnore Gravity: {3}\nSecond Draw Duration: {4}\nSecond Draw Ignore Gravity{5}",
+            ArrowSpeed.Min,
+            ArrowSpeed.Max,
+            FirstDrawDuration,
+            IgnoreGravityTime,
+            SecondDrawDuration,
+            SecondDrawExtendIgnoreGravityTime);
+    }
 }

@@ -45,6 +45,7 @@ public class Bow : MonoBehaviour
 
         _currentParameter = ScriptableObject.CreateInstance<BowParameter>();
         _currentParameter.CombineParamaters(bowParameters);
+        // _currentParameter.LogParamaters();
     }
 
     public void Setup(PlayerBehaviour playerBehaviour)
@@ -130,6 +131,7 @@ public class Bow : MonoBehaviour
     {
         bowParameters.Add(upgradeBowParameter);
         _currentParameter.CombineParamaters(bowParameters);
+        // _currentParameter.LogParamaters();
     }
 
     public void DisableAllArrows()
