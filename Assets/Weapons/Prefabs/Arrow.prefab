@@ -214,7 +214,7 @@ MonoBehaviour:
   collider: {fileID: 1301579139043960994}
   trail: {fileID: 941763731}
   particle: {fileID: 2494633608834896899}
-  hit: {fileID: 11400000, guid: 7dbaf8a5ec4794f7586838c0af9e173e, type: 2}
+  hitGroundEffect: {fileID: 11400000, guid: a69088f5458da42639120b2044ad7289, type: 2}
   gravityScaleCurve:
     Constant:
       serializedVersion: 2
@@ -252,7 +252,6 @@ MonoBehaviour:
     UseVariable: 0
   audioSource: {fileID: 6143134266637802778}
   bounceOffSound: {fileID: 11400000, guid: b7be6d09c3f894898af842f18442c495, type: 2}
-  bodyHit: {fileID: 11400000, guid: bcecb671b14c54fb19a226b104da64de, type: 2}
 --- !u!82 &6143134266637802778
 AudioSource:
   m_ObjectHideFlags: 0

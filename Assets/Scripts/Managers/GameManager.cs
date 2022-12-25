@@ -82,10 +82,17 @@ public class GameManager : MonoBehaviour
 #endregion
 
 
-    [ConsoleCommand("load name:string")]
+    [ConsoleCommand("tp :string")]
     public static void LoadPoint1(string name)
     {
-        Debug.Log(name);
+        foreach (PlayerSpawnPoint point in ins._spawnPoints)
+        {
+            if (point.PointName == name)
+            {
+                GameManager.ins.Player.InstantTeleportTo(point.transform.position);
+            }
+        }
+        // Debug.Log(name);
         // s_loadPoint = true;
         // s_pointIndex = 0;
         // LoadScene.ins.Load(SceneManager.GetActiveScene().name);
