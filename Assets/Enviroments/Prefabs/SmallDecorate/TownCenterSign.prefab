@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 270061435192939369}
   - component: {fileID: 9089340391492137247}
   - component: {fileID: 7031169953503813730}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,8 @@ GameObject:
   - component: {fileID: 7505878020150123103}
   - component: {fileID: 6883162554101323258}
   - component: {fileID: 8674232594569240880}
-  m_Layer: 0
+  - component: {fileID: 3789623354730198992}
+  m_Layer: 10
   m_Name: TownCenterSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,3 +271,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3789623354730198992
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7161265355162484965}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0114067, y: 2.6183608, z: 0.42370686}
+  m_Center: {x: 0.14834599, y: 0.2566591, z: -0.029075805}

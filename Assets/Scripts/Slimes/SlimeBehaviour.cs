@@ -42,6 +42,8 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     [SerializeField]
     private float coreDamagedImpulseForce;
     [SerializeField]
+    private bool coreDamagePauseFrame;
+    [SerializeField]
     private float sinkTime;
     [SerializeField]
     private float sinkHeight;
@@ -149,7 +151,9 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
         if (impulseSource && coreDamagedImpulseForce > 0)
             impulseSource.GenerateImpulse(coreDamagedImpulseForce);
 
-        StartCoroutine(C_CoreDamagedPause());
+        if (coreDamagePauseFrame)
+            StartCoroutine(C_CoreDamagedPause());
+
         _animationController?.SwitchToAnimation("Hurt");
         audioSource.Play(hitCoreSound);
 
@@ -167,7 +171,6 @@ public class SlimeBehaviour : MonoBehaviour, ISlimeBehaviour
     {
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(0.08f);
-        // yield return null;
         Time.timeScale = 1;
     }
 

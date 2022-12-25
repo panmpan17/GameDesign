@@ -36,6 +36,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private Ray _currentRay;
     private Stopwatch _focusedStopwatch;
     private Transform _focusedTarget;
+    private Vector3 _bowShootPoint;
     public Vector3 CurrentRayHitPosition { get; private set; }
 
 
@@ -182,25 +183,26 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
         if (Physics.Raycast(_currentRay, out RaycastHit shootTargetHit, 50, hitLayers))
         {
+            CurrentRayHitPosition = _bowShootPoint = shootTargetHit.point;
+
             if (shootTargetHit.collider.CompareTag(SlimeCore.Tag))
             {
                 _focusedStopwatch.Update();
                 _focusedTarget = shootTargetHit.collider.transform;
+                _bowShootPoint = _focusedTarget.position;
             }
             else
             {
-                if (!_focusedTarget || _focusedStopwatch.DeltaTime > keepTargetTime)
-                    CurrentRayHitPosition = shootTargetHit.point;
-                else
-                    CurrentRayHitPosition = _focusedTarget.position;
+                if (_focusedTarget && _focusedStopwatch.DeltaTime <= keepTargetTime)
+                    _bowShootPoint = _focusedTarget.position;
             }
         }
         else
         {
-            if (!_focusedTarget || _focusedStopwatch.DeltaTime > keepTargetTime)
-                CurrentRayHitPosition = _currentRay.GetPoint(50);
-            else
-                CurrentRayHitPosition = _focusedTarget.position;
+            CurrentRayHitPosition = _bowShootPoint = _currentRay.GetPoint(50);
+
+            if (_focusedTarget && _focusedStopwatch.DeltaTime <= keepTargetTime)
+                _bowShootPoint = _focusedTarget.position;
         }
     }
 
@@ -274,7 +276,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         _focusedTarget = null;
 
         bool isBowFullyDrawed = animation.IsDrawArrowFullyPlayed;
-        bow.OnAimUp(isBowFullyDrawed, CurrentRayHitPosition);
+        bow.OnAimUp(isBowFullyDrawed, _bowShootPoint);
 
         OnDrawBowEnd?.Invoke();
     }
