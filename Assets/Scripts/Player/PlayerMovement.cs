@@ -31,6 +31,10 @@ public class PlayerMovement : MonoBehaviour
     private float walkSpeed;
     [SerializeField]
     private float turnSpeed;
+    [SerializeField]
+    private bool slopAdjustVelocity = true;
+    [SerializeField]
+    private LayerMaskReference slopLayers;
 
     [Header("Camera Rotation")]
     [SerializeField]
@@ -302,7 +306,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (!_jumping)
         {
-            _yVelocity = 0;
+            if (slopAdjustVelocity)
+            {
+                _velocity = AdjustVelocityTolope(_velocity);
+                _yVelocity = _velocity.y;
+            }
+            else
+                _yVelocity = 0;
             return;
         }
 
@@ -322,6 +332,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (waitRollTimer.Running)
             Roll();
+    }
+
+    Vector3 AdjustVelocityTolope(Vector3 velocity)
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast (ray, out RaycastHit hitInfo, 0.2f, slopLayers.Value))
+        {
+            var slopeRotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+            var adjustedVelocity = slopeRotation * velocity;
+            if (adjustedVelocity.y < 0)
+                return adjustedVelocity;
+        }
+        return velocity;
     }
 #endregion
 

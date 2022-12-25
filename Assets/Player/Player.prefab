@@ -5058,6 +5058,13 @@ MonoBehaviour:
   followTargetPointer: {fileID: 11400000, guid: bc106bd3fae424e6a944b21fe6f0f9d7, type: 2}
   walkSpeed: 10
   turnSpeed: 480
+  slopAdjustVelocity: 1
+  slopLayers:
+    Constant:
+      serializedVersion: 2
+      m_Bits: 0
+    Variable: {fileID: 11400000, guid: 8bcaccc7d2be14333823d7f3525ba117, type: 2}
+    UseVariable: 1
   drawBowSlowDown:
     Constant: 0
     Variable: {fileID: 11400000, guid: 5bfae8fca493c466ca2c1d21fd47c763, type: 2}
