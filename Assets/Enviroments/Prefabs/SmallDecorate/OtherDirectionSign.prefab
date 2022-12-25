@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 4852747437943887140}
   - component: {fileID: 7258847521492296174}
   - component: {fileID: 990840418065335991}
+  - component: {fileID: 2660065112764972011}
   m_Layer: 10
   m_Name: OtherDirectionSign
   m_TagString: Untagged
@@ -284,3 +285,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0114071, y: 2.6183603, z: 0.42370665}
   m_Center: {x: 0.14834648, y: 0.25665903, z: -0.029075732}
+--- !u!114 &2660065112764972011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9204345179998928955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab27835f35fae41779b0b7fa695a2f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 11400000, guid: b575b4b88978b470ba4d550684c168bc, type: 2}
+  sound: {fileID: 11400000, guid: 4810d12837dfe4cc5b56e839c4af0e1e, type: 2}
+  audioSource: {fileID: 0}
+  <SetParent>k__BackingField: 0
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls: []
