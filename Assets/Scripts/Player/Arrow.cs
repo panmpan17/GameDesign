@@ -176,7 +176,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
         StopArrow();
 
-        if (playHitGroundEffect)
+        if (playHitGroundEffect && hitGroundEffect)
         {
             hitGroundEffect.AddWaitingList(transform.position, transform.rotation);
         }
