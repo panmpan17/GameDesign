@@ -68,12 +68,8 @@ public class SceneComposer : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    [MenuItem("Game/開始編輯", false, 0)]
     public static void StartEditing()
     {
-        if (EditorSceneManager.GetActiveScene().name != "MainGame")
-            EditorSceneManager.OpenScene("Assets/Scenes/MainGame.unity");
-
         string[] activeScenes = GetEditorActiveSceneNames();
 
         SceneComposer composer = FindObjectOfType<SceneComposer>();
