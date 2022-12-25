@@ -23,7 +23,7 @@ public class Arrow : MonoBehaviour, IPoolableObj
     private ParticleSystem.MinMaxGradient startColor;
 
     [SerializeField]
-    private EffectReference hit;
+    private EffectReference hitGroundEffect;
 
     [Header("Parameter")]
     [SerializeField]
@@ -135,9 +135,12 @@ public class Arrow : MonoBehaviour, IPoolableObj
 
     void HandleHit(Transform otherTransform)
     {
+        bool playHitGroundEffect = true;
         if (otherTransform.GetComponent<OnArrowHit>() is var arrowHit && arrowHit)
         {
+            playHitGroundEffect = !arrowHit.HasEffect;
             arrowHit.Trigger(transform.position);
+
             if (arrowHit.SetParent)
             {
                 transform.SetParent(otherTransform);
@@ -172,6 +175,11 @@ public class Arrow : MonoBehaviour, IPoolableObj
         }
 
         StopArrow();
+
+        if (playHitGroundEffect)
+        {
+            hitGroundEffect.AddWaitingList(transform.position, transform.rotation);
+        }
     }
 
     void BounceOffArrow(bool playBounceOffSound)

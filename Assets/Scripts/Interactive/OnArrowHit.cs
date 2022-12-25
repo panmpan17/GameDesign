@@ -14,6 +14,7 @@ public class OnArrowHit : MonoBehaviour
     private AudioSource audioSource;
 
     [field: SerializeField] public bool SetParent { get; protected set; }
+    public bool HasEffect => effect;
 
     public UnityEvent OnTrigger;
 
