@@ -85,16 +85,18 @@ public class GameManager : MonoBehaviour
     [ConsoleCommand("tp :string")]
     public static void LoadPoint1(string name)
     {
+        if (name.ToLower() == "last")
+        {
+            GameManager.ins.Player.InstantTeleportTo(GameManager.ins._currentSpawnPoint.transform.position);
+            return;
+        }
         foreach (PlayerSpawnPoint point in ins._spawnPoints)
         {
-            if (point.PointName == name)
+            if (point.PointName.ToLower() == name.ToLower())
             {
+                GameManager.ins._currentSpawnPoint = point;
                 GameManager.ins.Player.InstantTeleportTo(point.transform.position);
             }
         }
-        // Debug.Log(name);
-        // s_loadPoint = true;
-        // s_pointIndex = 0;
-        // LoadScene.ins.Load(SceneManager.GetActiveScene().name);
     }
 }

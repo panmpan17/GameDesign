@@ -35,7 +35,19 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
     public void TriggerFire()
     {
         audioSource.Play(sound);
-        StartCoroutine(C_ShootBullet());
+        ShootBullet();
+        // StartCoroutine(C_ShootBullet());
+    }
+
+    void ShootBullet()
+    {
+        BulletBehaviour bullet;
+        Vector3 position = transform.position;
+        for (int i = 0; i < _segmentPoints.Length; i++)
+        {
+            bullet = bulletType.Pool.Get();
+            Shoot(bullet, position, _segmentPoints[i]);
+        }
     }
 
     IEnumerator C_ShootBullet(int loopCap=15)
@@ -46,15 +58,7 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
         for (int i = 0; i < _segmentPoints.Length; i++)
         {
             bullet = bulletType.Pool.Get();
-
-            Vector3 worldDirection = transform.TransformDirection(_segmentPoints[i]);
-
-            if (bulletType.UseBillboardRotate)
-                bullet.transform.SetPositionAndRotation(position + worldDirection * radius, BulletBillboards.ins.FaceCameraRotation);
-            else
-                bullet.transform.position = position + worldDirection * radius;
-
-            bullet.Shoot(worldDirection * bulletSpeed);
+            Shoot(bullet, position, _segmentPoints[i]);
 
             if (++loopCount > loopCap)
             {
@@ -62,6 +66,19 @@ public class CircularBulletTrigger : MonoBehaviour, ITriggerFire
                 yield return null;
             }
         }
+    }
+
+    void Shoot(BulletBehaviour bullet, Vector3 basePosition, Vector3 seqmentDirection)
+    {
+        Vector3 worldDirection = transform.TransformDirection(seqmentDirection);
+
+        if (bulletType.UseBillboardRotate)
+            bullet.transform.SetPositionAndRotation(basePosition + worldDirection * radius, BulletBillboards.ins.FaceCameraRotation);
+        else
+            bullet.transform.position = basePosition + worldDirection * radius;
+
+        bullet.Shoot((transform.rotation * seqmentDirection) * bulletSpeed);
+        // bullet.Shoot(worldDirection * bulletSpeed);
     }
 
     public void TriggerFireWithParameter(int parameter)

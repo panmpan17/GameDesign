@@ -556,6 +556,7 @@ MonoBehaviour:
   drawGizmos: 0
   RotateSpeed: 120
   RaycastPoint: 0
+  LockRotationXZAxis: 1
 --- !u!114 &-4594338539556295542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +919,7 @@ MonoBehaviour:
   drawGizmos: 0
   RotateSpeed: 100
   RaycastPoint: 0
+  LockRotationXZAxis: 1
 --- !u!114 &-1896704842355934017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,6 +990,7 @@ MonoBehaviour:
   drawGizmos: 0
   RotateSpeed: 120
   RaycastPoint: 0
+  LockRotationXZAxis: 1
 --- !u!114 &-1283932047603647419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1824,7 +1827,7 @@ MonoBehaviour:
   m_Name: FaceTargetNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: 760, y: 856}
+  position: {x: 760, y: 840}
   ports:
     keys:
     - Input
@@ -1844,6 +1847,7 @@ MonoBehaviour:
   drawGizmos: 0
   RotateSpeed: 120
   RaycastPoint: 0
+  LockRotationXZAxis: 1
 --- !u!114 &4107443429029181675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2407,6 +2411,7 @@ MonoBehaviour:
   drawGizmos: 0
   RotateSpeed: 100
   RaycastPoint: 0
+  LockRotationXZAxis: 1
 --- !u!114 &7491178181710969884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2511,7 +2516,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   drawGizmos: 0
-  duration: 3
+  duration: 0.8
 --- !u!114 &7897838211826125902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2619,7 +2624,7 @@ MonoBehaviour:
   m_Name: JumpForwardNode
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  position: {x: -792, y: 24}
+  position: {x: -792, y: 40}
   ports:
     keys:
     - Input

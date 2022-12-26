@@ -13,6 +13,8 @@ namespace XnodeBehaviourTree
         public float RotateSpeed;
         public bool RaycastPoint;
 
+        public bool LockRotationXZAxis;
+
 
         public override void OnInitial()
         {
@@ -44,6 +46,10 @@ namespace XnodeBehaviourTree
             destinationRotation = Quaternion.RotateTowards(context.transform.rotation, destinationRotation, RotateSpeed * Time.deltaTime);
 
             float angleDifference = Quaternion.Angle(context.transform.rotation, destinationRotation);
+
+            if (LockRotationXZAxis)
+                destinationRotation = Quaternion.Euler(0, destinationRotation.eulerAngles.y, 0);
+
             context.transform.rotation = destinationRotation;
 
             return angleDifference < 0.01f ? State.Success : State.Running;
@@ -63,6 +69,9 @@ namespace XnodeBehaviourTree
                     destinationRotation = Quaternion.LookRotation(hit.point - hit2.point, context.transform.up);
                 }
             }
+
+            if (LockRotationXZAxis)
+                destinationRotation = Quaternion.Euler(0, destinationRotation.eulerAngles.y, 0);
 
             return destinationRotation;
         }
