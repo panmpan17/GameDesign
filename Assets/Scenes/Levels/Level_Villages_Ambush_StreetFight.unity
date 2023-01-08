@@ -578,7 +578,10 @@ MonoBehaviour:
   - {fileID: 1367520253}
   - {fileID: 597026890}
   - {fileID: 723684099}
-  OnEndEvent:
+  fightStartedEvent: {fileID: 11400000, guid: ac7ad538e5fc6448fa1fc39f9b12189b, type: 2}
+  fightWaveUpdateEvent: {fileID: 11400000, guid: 037be006b3a164bb082a78a15e08e537, type: 2}
+  fightEndedEvent: {fileID: 11400000, guid: 068daa4819a6d4219807fb34f82465e8, type: 2}
+  OnCompletedEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &160338483
@@ -719,7 +722,10 @@ MonoBehaviour:
   - {fileID: 1224466766}
   - {fileID: 2131843732}
   - {fileID: 1729381892}
-  OnEndEvent:
+  fightStartedEvent: {fileID: 11400000, guid: ac7ad538e5fc6448fa1fc39f9b12189b, type: 2}
+  fightWaveUpdateEvent: {fileID: 11400000, guid: 037be006b3a164bb082a78a15e08e537, type: 2}
+  fightEndedEvent: {fileID: 11400000, guid: 068daa4819a6d4219807fb34f82465e8, type: 2}
+  OnCompletedEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &205229282

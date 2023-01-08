@@ -14,6 +14,24 @@ public class PlayerStatusHUD : MonoBehaviour
     [SerializeField]
     private AimCursor aimCursor;
 
+    [Header("Fight Stage")]
+    [SerializeField]
+    private GameObject stageGameobject;
+    [SerializeField]
+    private LanguageText stageText;
+    [SerializeField]
+    private FillBarControl stageFillbar;
+    private int _currentWaveIndex;
+    private int _maxWaveIndex;
+
+    [Space(8)]
+    [SerializeField]
+    private EventReference fightStartedEvent;
+    [SerializeField]
+    private EventReference fightWaveUpdateEvent;
+    [SerializeField]
+    private EventReference fightEndedEvent;
+
     [Header("Health")]
     [SerializeField]
     private EventReference healthEvent;
@@ -37,6 +55,11 @@ public class PlayerStatusHUD : MonoBehaviour
     {
         healthFill.SetFillAmount(1);
         healthEvent.InvokeFloatEvents += ChangeHealthAmount;
+
+        stageText.languageProcess += OnFightStageLanguageTextProcess;
+        fightStartedEvent.InvokeIntEvents += OnFightStarted;
+        fightWaveUpdateEvent.InvokeIntEvents += OnFightWaveUpdated;
+        fightEndedEvent.InvokeEvents += OnFightEnded;
 
         // TODO: bad
         if ((GameObject.FindWithTag(PlayerBehaviour.Tag) is var playerGameObject) && playerGameObject &&
@@ -92,6 +115,32 @@ public class PlayerStatusHUD : MonoBehaviour
                 return;
             }
         }
+    }
+
+
+    string OnFightStageLanguageTextProcess(string content, TextMeshPro text, TextMeshProUGUI textGUI)
+    {
+        return content + string.Format(" {0}/{1}", _currentWaveIndex, _maxWaveIndex);
+    }
+    void OnFightStarted(int maxWaveIndex)
+    {
+        _maxWaveIndex = maxWaveIndex;
+        _currentWaveIndex = 1;
+        stageFillbar.SetFillAmount(1f / (float)maxWaveIndex);
+
+        stageText.Reload();
+        stageGameobject.SetActive(true);
+    }
+    void OnFightWaveUpdated(int currentWaveIndex)
+    {
+        _currentWaveIndex = currentWaveIndex;
+        stageFillbar.SetFillAmount((float)_currentWaveIndex / (float)_maxWaveIndex);
+
+        stageText.Reload();
+    }
+    void OnFightEnded()
+    {
+        stageGameobject.SetActive(false);
     }
 
 

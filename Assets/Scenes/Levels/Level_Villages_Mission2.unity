@@ -304,7 +304,10 @@ MonoBehaviour:
   spawnedSlimes: {fileID: 0}
   waves:
   - {fileID: 1965513363}
-  OnEndEvent:
+  fightStartedEvent: {fileID: 11400000, guid: ac7ad538e5fc6448fa1fc39f9b12189b, type: 2}
+  fightWaveUpdateEvent: {fileID: 11400000, guid: 037be006b3a164bb082a78a15e08e537, type: 2}
+  fightEndedEvent: {fileID: 11400000, guid: 068daa4819a6d4219807fb34f82465e8, type: 2}
+  OnCompletedEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 432343693}

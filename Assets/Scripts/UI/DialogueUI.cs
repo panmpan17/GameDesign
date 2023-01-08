@@ -179,8 +179,8 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         newChoiceButton.GetComponent<RectTransform>().anchoredPosition = anchoredPosition;
 
         var languageText = newChoiceButton.GetComponentInChildren<LanguageText>();
-        languageText.SetupLanguageProcesor(
-            (text, textMeshPro, textMeshProUGUI) => string.Format("{0}: {1}<sprite=0>", text, merchandise.RequireCoreCount));
+        languageText.languageProcess += (text, textMeshPro, textMeshProUGUI) => 
+            string.Format("{0}: {1}<sprite=0>", text, merchandise.RequireCoreCount);
         languageText.ChangeId(merchandise.NameLanguageID);
 
         // : 3 < sprite = 0 >

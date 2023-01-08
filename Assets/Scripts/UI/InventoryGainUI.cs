@@ -66,7 +66,7 @@ public class InventoryGainUI : MonoBehaviour
         ins = this;
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = animator.enabled = false;
-        upgradeTitleLanguage.SetupLanguageProcesor(UpgradeTitleTextChanged);
+        upgradeTitleLanguage.languageProcess += UpgradeTitleTextChanged;
     }
 
     public void ShowBowUpgrade(BowParameter bowUpgrade)

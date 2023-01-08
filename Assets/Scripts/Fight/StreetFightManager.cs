@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Audio;
+using MPack;
 
 public class StreetFightManager : MonoBehaviour
 {
@@ -24,7 +24,15 @@ public class StreetFightManager : MonoBehaviour
     private int _waveIndex;
     private bool _waveStarted;
 
-    public UnityEvent OnEndEvent;
+    [SerializeField]
+    private EventReference fightStartedEvent;
+    [SerializeField]
+    private EventReference fightWaveUpdateEvent;
+    [SerializeField]
+    private EventReference fightEndedEvent;
+
+    [UnityEngine.Serialization.FormerlySerializedAs("OnEndEvent")]
+    public UnityEvent OnCompletedEvent;
 
     void Awake()
     {
@@ -53,6 +61,7 @@ public class StreetFightManager : MonoBehaviour
             waves[_waveIndex].StartWave(spawnedSlimes, OnWaveStarted);
             _waveStarted = false;
             _waveIndex++;
+            fightWaveUpdateEvent?.Invoke(_waveIndex);
         }
     }
 
@@ -73,6 +82,7 @@ public class StreetFightManager : MonoBehaviour
         _waveIndex++;
 
         enabled = true;
+        fightStartedEvent?.Invoke(waves.Length);
     }
 
     void OnWaveStarted()
@@ -92,7 +102,8 @@ public class StreetFightManager : MonoBehaviour
 
         AudioVolumeControl.ins.FadeInEnvironmentVolume();
 
-        OnEndEvent.Invoke();
+        fightEndedEvent?.Invoke();
+        OnCompletedEvent.Invoke();
     }
 
     void ResetFight()
@@ -114,5 +125,7 @@ public class StreetFightManager : MonoBehaviour
         _waveIndex = 0;
         foreach (FightWave wave in waves)
             wave.ResetFight();
+
+        fightEndedEvent?.Invoke();
     }
 }

@@ -20,7 +20,8 @@ namespace MPack {
 		private Text uiText;
 
         public delegate string LanguageProcess(string text, TextMeshPro textMeshPro, TextMeshProUGUI textMeshProUGUI);
-		private LanguageProcess languageProcess;
+		public event LanguageProcess languageProcess;
+
         private System.Action<Vector2> sizeChangeEvent;
 
 		public string Text {
@@ -102,14 +103,6 @@ namespace MPack {
 		{
             if (LanguageMgr.DataLoaded) Text = LanguageMgr.GetTextById(id);
 		}
-
-		/// <summary>
-		/// Add text processor, called before value actually get set
-		/// </summary>
-		/// <param name="process">Delegate</param>
-		public void SetupLanguageProcesor(LanguageProcess process) {
-            languageProcess = process;
-        }
 
         /// <summary>
         /// Add event to sizeChangeEvent, called when language switch, Only work with TextMeshPro
