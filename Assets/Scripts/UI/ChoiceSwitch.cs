@@ -30,8 +30,6 @@ public class ChoiceSwitch : Selectable
     public UnityEvent leftEvent;
     public UnityEvent rightEvent;
 
-    private Stopwatch _changeResolutionColddown;
-
     private FloatTween _fadeTween;
 
     protected override void Start()
@@ -99,18 +97,10 @@ public class ChoiceSwitch : Selectable
         switch (eventData.moveDir)
         {
             case MoveDirection.Left:
-                if (_changeResolutionColddown.UnscaledDeltaTime < 0.4f)
-                    return;
-
-                _changeResolutionColddown.Update();
                 SwitchLeft();
                 break;
 
             case MoveDirection.Right:
-                if (_changeResolutionColddown.UnscaledDeltaTime < 0.4f)
-                    return;
-
-                _changeResolutionColddown.Update();
                 SwitchRight();
                 break;
 

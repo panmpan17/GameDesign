@@ -13,7 +13,6 @@ public class InventoryGainUI : MonoBehaviour
 
     public static InventoryGainUI ins;
 
-
     [SerializeField]
     private Inventory playerInventory;
     [SerializeField]
@@ -21,7 +20,7 @@ public class InventoryGainUI : MonoBehaviour
     [SerializeField]
     private float waitDuration;
 
-    [Header("Title")]
+    [Header("Dialog title")]
     [SerializeField]
     private LanguageText titleLanguageText;
     [SerializeField]
@@ -40,6 +39,8 @@ public class InventoryGainUI : MonoBehaviour
     private Vector2 bothApplePosition;
     [SerializeField]
     private Vector2 bothCorePosition;
+
+    [Space(8)]
     [SerializeField]
     private RectTransform appleGain;
     [SerializeField]

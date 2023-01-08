@@ -50,18 +50,11 @@ public class SettingMenu : AbstractMenu
     private ChoiceSwitch resolutionSwitch;
     [SerializeField]
     private TextMeshProUGUI resolutionText;
+    private Stopwatch _changeResolutionColddown;
 
     [Space(8)]
     [SerializeField]
-    private ChoiceSwitch windowTypeSwitch;
-    [SerializeField]
-    private LanguageText windowTypeText;
-    [SerializeField]
-    [LauguageID]
-    private int fullscreenLanguageID;
-    [SerializeField]
-    [LauguageID]
-    private int windowedLanguageID;
+    private Toggle isFullscreenToggle;
 
     [Space(8)]
     [SerializeField]
@@ -102,8 +95,7 @@ public class SettingMenu : AbstractMenu
         resolutionSwitch.leftEvent.AddListener(DownSizeResolution);
         resolutionSwitch.rightEvent.AddListener(UpSizeResolution);
 
-        windowTypeSwitch.leftEvent.AddListener(ToggleFullscreen);
-        windowTypeSwitch.rightEvent.AddListener(ToggleFullscreen);
+        isFullscreenToggle.onValueChanged.AddListener(ToggleFullscreen);
 
         qualitySwitch.leftEvent.AddListener(DecreaseQuality);
         qualitySwitch.rightEvent.AddListener(IncreaseQuality);
@@ -141,7 +133,7 @@ public class SettingMenu : AbstractMenu
                 currentResolutionIndex = i;
         }
 
-        windowTypeText.ChangeId(Screen.fullScreen ? fullscreenLanguageID : windowedLanguageID);
+        isFullscreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
 
         ApplyQualityText();
     }
@@ -195,23 +187,9 @@ public class SettingMenu : AbstractMenu
         Screen.SetResolution(resolution.x, resolution.y, Screen.fullScreen);
     }
 
-
-    void ToggleFullscreen()
+    void ToggleFullscreen(bool isFullscreen)
     {
-        if (Screen.fullScreen)
-        {
-            windowTypeText.ChangeId(windowedLanguageID);
-            Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.Windowed);
-
-            GetComponent<InputSystemUIInputModule>().move.action.Reset();
-        }
-        else
-        {
-            windowTypeText.ChangeId(fullscreenLanguageID);
-            Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow);
-
-            GetComponent<InputSystemUIInputModule>().move.action.Reset();
-        }
+        Screen.SetResolution(Screen.width, Screen.height, isFullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed);
     }
 #endregion
 

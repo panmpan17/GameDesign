@@ -10,10 +10,8 @@ using TMPro;
 public class DialogueUI : AbstractMenu, IDialogueInterpreter
 {
     [SerializeField]
-    private SpeakerUIReference mainCharacter;
-    [HideInInspector]
-    [SerializeField]
-    private SpeakerUIReference npc;
+    [UnityEngine.Serialization.FormerlySerializedAs("mainCharacter")]
+    private SpeakerUIReference speakerUI;
 
     [Header("Button")]
     [SerializeField]
@@ -46,8 +44,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
 
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
-        mainCharacter.Parent.SetActive(false);
-        npc.Parent.SetActive(false);
+        speakerUI.Parent.SetActive(false);
 
         dialogueStartEvent.InvokeDialogueGraphEvents += StartDialogue;
     }
@@ -71,7 +68,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     public void ChangeToQuestion(QuestionNode node)
     {
         CleanUpLastNode();
-        mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, false);
+        speakerUI.ChangeUI(node.Speaker, node.ContentLaguageID, false);
 
         Vector2 anchoredPosition = firstAnchoredPosition;
         Button lastButton = null;
@@ -123,13 +120,13 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
     public void ChangeToDialogue(DialogueNode node)
     {
         CleanUpLastNode();
-        mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, true);
+        speakerUI.ChangeUI(node.Speaker, node.ContentLaguageID, true);
     }
 
     public void ChangeToMerchant(OpenMerchantNode node)
     {
         CleanUpLastNode();
-        mainCharacter.ChangeUI(node.Speaker, node.ContentLaguageID, false);
+        speakerUI.ChangeUI(node.Speaker, node.ContentLaguageID, false);
 
         Button lastButton = InstantiateMerchantRejectButton(node);
 
