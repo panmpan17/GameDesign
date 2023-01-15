@@ -4812,6 +4812,67 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &281424774906272269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5427696999554420779}
+  - component: {fileID: 5453034287157518976}
+  - component: {fileID: 2441451473383190386}
+  m_Layer: 6
+  m_Name: ReferenceSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5427696999554420779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281424774906272269}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2787180225705632307}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5453034287157518976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281424774906272269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568f6e1da6cce4e3189d7af2eaeb7c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPointer: {fileID: 11400000, guid: d078023746b8f4112adc4bdd062eb354, type: 2}
+  target: {fileID: 2787180225705632307}
+--- !u!114 &2441451473383190386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281424774906272269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568f6e1da6cce4e3189d7af2eaeb7c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformPointer: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
+  target: {fileID: 3063964680199003412}
 --- !u!1 &1299987840853877888
 GameObject:
   m_ObjectHideFlags: 0
@@ -4991,6 +5052,7 @@ GameObject:
   - component: {fileID: 2787180225705632303}
   - component: {fileID: 2787180225705632296}
   - component: {fileID: 9159183767146581692}
+  - component: {fileID: 1041648154}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -5014,6 +5076,7 @@ Transform:
   - {fileID: 118747340}
   - {fileID: 3063964680199003412}
   - {fileID: 4384000123764544041}
+  - {fileID: 5427696999554420779}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5037,7 +5100,7 @@ MonoBehaviour:
     Constant: 0
     Variable: {fileID: 11400000, guid: e601110d664924f8e9768b096aa837fe, type: 2}
     UseVariable: 1
-  allowToggleConsoleWindow: 0
+  allowToggleConsoleWindow: 1
 --- !u!114 &2787180225705632301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5152,29 +5215,19 @@ MonoBehaviour:
   bow: {fileID: 5260637637954937081}
   waitShootTime: 0.4
   keepTargetTime: 0.15
-  bodyPointer: {fileID: 11400000, guid: d3d6219f9eae647fbae2dd130df42484, type: 2}
-  feetPointer: {fileID: 11400000, guid: d078023746b8f4112adc4bdd062eb354, type: 2}
-  body: {fileID: 3063964680199003412}
-  feet: {fileID: 2787180225705632307}
   maxHealth: 100
   healthChangeEvent: {fileID: 11400000, guid: 17b0e71977e87429b972945c2b722bf1, type: 2}
-  appleHealPoint: 10
+  appleHealPoint: 16
   hitLayers:
     serializedVersion: 2
     m_Bits: 5376
   pauseEvent: {fileID: 11400000, guid: a4d9e9ff7b3664a2ba30364afecb38e8, type: 2}
   focusEvent: {fileID: 11400000, guid: 6b1e6f134a2df4a15902e25accbbaee4, type: 2}
   enlargeMinimapEvent: {fileID: 11400000, guid: 9d8dea50af10c4e1bb61b7261e2ff2e5, type: 2}
-  interactLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  interactRaycastDistance: 2
-  canInteractEvent: {fileID: 11400000, guid: b8fbbb11370b2494f8dd72fc8925e369, type: 2}
-  dialogueEndEvent: {fileID: 11400000, guid: 84a6f59297b02472a8eb2953de76e458, type: 2}
   inventory: {fileID: 11400000, guid: 7db8e84510a234032a71364640969ac4, type: 2}
   startCoreCount:
-    Enable: 0
-    Value: 0
+    Enable: 1
+    Value: 20
   startAppleCount:
     Enable: 0
     Value: 0
@@ -5268,6 +5321,27 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: -0.1, y: -0.1, z: 0}
+--- !u!114 &1041648154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787180225705632297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be35e21c46ba24862bf0607528d3acb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviour: {fileID: 2787180225705632302}
+  movement: {fileID: 2787180225705632301}
+  inventory: {fileID: 11400000, guid: 7db8e84510a234032a71364640969ac4, type: 2}
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  interactRaycastDistance: 2
+  canInteractEvent: {fileID: 11400000, guid: b8fbbb11370b2494f8dd72fc8925e369, type: 2}
+  dialogueEndEvent: {fileID: 11400000, guid: 84a6f59297b02472a8eb2953de76e458, type: 2}
 --- !u!1 &2787180225754473551
 GameObject:
   m_ObjectHideFlags: 0

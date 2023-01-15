@@ -13,11 +13,10 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     [Header("Other components")]
     private Camera mainCamera;
     [SerializeField]
-    private InputInterface input;
-    [SerializeField]
     private PlayerMovement movement;
     [SerializeField]
     private new PlayerAnimation animation;
+    private InputInterface input;
     public InputInterface Input => input;
     public PlayerMovement Movement => movement;
 
@@ -39,17 +38,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private Vector3 _bowShootPoint;
     public Vector3 CurrentRayHitPosition { get; private set; }
 
-
-    [Header("Reference")]
-    [SerializeField]
-    private TransformPointer bodyPointer;
-    [SerializeField]
-    private TransformPointer feetPointer;
-    [SerializeField]
-    private Transform body;
-    [SerializeField]
-    private Transform feet;
-
     [Header("Health")]
     [SerializeField]
     private float maxHealth;
@@ -68,34 +56,17 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     private EventReference focusEvent;
     [SerializeField]
     private EventReference enlargeMinimapEvent;
-
-    [Header("Interact")]
-    [SerializeField]
-    private LayerMask interactLayer;
-    [SerializeField]
-    private float interactRaycastDistance;
-    [SerializeField]
-    private EventReference canInteractEvent;
-    [SerializeField]
-    private EventReference dialogueEndEvent;
-
-    private GameObject _interactObject;
-    private bool LastCanInteract => _interactObject != null;
-    private Collider[] _interactColliders = new Collider[1];
     
     [Header("Inventory")]
     [SerializeField]
     private Inventory inventory;
 
 #if UNITY_EDITOR
+    [Header("Editor Only")]
     [SerializeField]
     private ValueWithEnable<int> startCoreCount;
     [SerializeField]
     private ValueWithEnable<int> startAppleCount;
-#endif
-
-#if UNITY_EDITOR
-    [Header("Editor Only")]
     [SerializeField]
     private bool focusCursorWhenPointerDown;
 #endif
@@ -130,28 +101,22 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         input.OnAimDown += OnAimDown;
         input.OnAimUp += OnAimUp;
         input.OnEscap += OnEscap;
-        input.OnInteract += OnInteract;
         input.OnEatApple += OnEatApple;
         input.OnMinimapEnlargeDown += OnEnlargeMinimap;
         input.OnMinimapEnlargeUp += OnShrinkMinimap;
-        // inpu
 
         movement.OnRollEvent += OnRoll;
         movement.OnRollEndEvent += OnRollEnd;
-        // movement.OnJumpEndEvent += OnJumpEnd;
 
         animation.OnAimAnimatinoChanged += OnAimProgress;
 
         focusEvent.InvokeEvents += FocusCursor;
-        dialogueEndEvent.InvokeEvents += DialogueUIEnd;
         AbstractMenu.OnFirstMenuOpen += OnFirstMenuOpen;
         AbstractMenu.OnLastMenuClose += OnLastMenuClose;
 
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walk");
 
         mainCamera = mainCamera == null ? Camera.main : mainCamera;
-        bodyPointer.Target = body;
-        feetPointer.Target = feet;
 
         bow.Setup(this);
 
@@ -174,7 +139,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     void Update()
     {
         UpdateAimingRay();
-        UpdateInteractCheck();
     }
 
     void UpdateAimingRay()
@@ -205,35 +169,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
                 _bowShootPoint = _focusedTarget.position;
         }
     }
-
-    void UpdateInteractCheck()
-    {
-        bool isOverlap = Physics.OverlapSphereNonAlloc(body.position, interactRaycastDistance, _interactColliders, interactLayer) > 0;
-
-        if (isOverlap)
-        {
-            if (!LastCanInteract)
-                CheckGameObjectIsRightClickInteractable(_interactColliders[0].gameObject);
-        }
-        else
-        {
-            if (LastCanInteract)
-            {
-                _interactObject = null;
-                canInteractEvent.Invoke(false);
-            }
-        }
-    }
-
-    void CheckGameObjectIsRightClickInteractable(GameObject interactGameObject)
-    {
-        if (!interactGameObject.CompareTag("RightClickInteractive"))
-            return;
-
-        _interactObject = interactGameObject;
-        canInteractEvent.Invoke(true);
-    }
-
 
 #region Input Events
     void OnAimDown()
@@ -293,42 +228,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
             OutFocusCursor();
         }
 #endif
-    }
-
-    public void OnInteract()
-    {
-        if (!CursorFocued)
-            return;
-        if (!_interactObject)
-            return;
-
-        if (_interactObject.GetComponent<NPCControl>() is var npc && npc)
-        {
-            npc.StartDialogue();
-
-            canInteractEvent?.Invoke(false);
-            movement.FaceRotationWithoutRotateFollowTarget(npc.transform.position);
-            return;
-        }
-
-        else if (_interactObject.GetComponent<TreasureChest>() is var chest && chest)
-        {
-            chest.Open();
-            canInteractEvent?.Invoke(false);
-            movement.FaceRotationWithoutRotateFollowTarget(chest.transform.position);
-        }
-
-        else if (_interactObject.GetComponent<PortalGate>() is var portal && portal)
-        {
-            InstantTeleportTo(portal.Teleport());
-            canInteractEvent?.Invoke(false);
-        }
-
-        else if (_interactObject.GetComponent<PickupFlower>() is var flower && flower)
-        {
-            flower.Pickup();
-            inventory.FlowerEvent.Invoke(true);
-        }
     }
 
     void OnEatApple()
@@ -492,14 +391,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         input.Enable();
         FocusCursor();
     }
-
-    void DialogueUIEnd()
-    {
-        if (LastCanInteract)
-        {
-            canInteractEvent.Invoke(true);
-        }
-    }
 #endregion
 
 
@@ -522,7 +413,6 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     void OnDestroy()
     {
         focusEvent.InvokeEvents -= FocusCursor;
-        dialogueEndEvent.InvokeEvents -= DialogueUIEnd;
         AbstractMenu.OnFirstMenuOpen -= OnFirstMenuOpen;
         AbstractMenu.OnLastMenuClose -= OnLastMenuClose;
     }
