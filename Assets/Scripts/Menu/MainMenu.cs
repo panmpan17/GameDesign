@@ -17,8 +17,11 @@ public class MainMenu : AbstractMenu
     private GameObject creditMenu;
     [SerializeField]
     private GameObject creditCloseButton;
+    [SerializeField]
+    private GameObject skipButton;
 
     private GameObject _lastSelected;
+    private Coroutine _delayLoadScene;
 
     void Start()
     {
@@ -30,15 +33,21 @@ public class MainMenu : AbstractMenu
         GetComponent<Animator>().enabled = false;
         GetComponent<Canvas>().enabled = false;
         cutscene.gameObject.SetActive(true);
-        StartCoroutine(C_DelayLoadScene());
+
+        EventSystem.current.SetSelectedGameObject(skipButton);
+        _delayLoadScene = StartCoroutine(C_DelayLoadScene());
         // cutscene.stopped += OnCutSceneFinished;
     }
 
     IEnumerator C_DelayLoadScene()
     {
         yield return new WaitForSeconds((float)cutscene.duration);
+        _delayLoadScene = null;
         LoadScene.ins.Load(GameSceneName);
     }
+
+    public void OpenSaveMenu()
+    {}
 
     public void Setting()
     {
@@ -49,6 +58,15 @@ public class MainMenu : AbstractMenu
     protected override void BackToThisMenu()
     {
         EventSystem.current.SetSelectedGameObject(_lastSelected);
+    }
+
+    public void SkipCutscene()
+    {
+        if (_delayLoadScene != null)
+            StopCoroutine(_delayLoadScene);
+        _delayLoadScene = null;
+
+        LoadScene.ins.Load(GameSceneName);
     }
 
     public void Exit()

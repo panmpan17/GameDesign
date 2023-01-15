@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 // using UnityEngine.InputSystem.Utilities;
 using MPack;
 using TMPro;
@@ -72,6 +73,7 @@ public class SettingMenu : AbstractMenu
     private int highQualityLanguageID;
 
 
+    private InputSystemUIInputModule _uiInputModule;
     private Canvas _canvas;
 
     void Awake()
@@ -109,6 +111,9 @@ public class SettingMenu : AbstractMenu
 
         EventSystem.current.SetSelectedGameObject(firstSelected);
         enabled = _canvas.enabled = true;
+
+        _uiInputModule ??= EventSystem.current.GetComponent<InputSystemUIInputModule>();
+        _uiInputModule.cancel.action.performed += OnCancel;
     }
 
     void ApplyCurrentSettingToUI()
@@ -229,6 +234,8 @@ public class SettingMenu : AbstractMenu
     {
         AudioVolumeControl.ins.ReloadSoundVolumeFromPreference();
         enabled = _canvas.enabled = false;
+
+        _uiInputModule.cancel.action.performed -= OnCancel;
         CloseMenu();
     }
 
@@ -240,6 +247,22 @@ public class SettingMenu : AbstractMenu
         ySensity.Value = ySensityInevert.isOn ? -ySensitySlider.value : ySensitySlider.value;
 
         enabled = _canvas.enabled = false;
+
+        _uiInputModule.cancel.action.performed -= OnCancel;
         CloseMenu();
+    }
+
+
+    void OnCancel(CallbackContext callbackContext)
+    {
+        Save();
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+
+        if (_uiInputModule)
+            _uiInputModule.cancel.action.performed -= OnCancel;
     }
 }

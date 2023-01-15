@@ -74,5 +74,7 @@ public class LoadScene : MonoBehaviour
     {
         _operation = null;
         _canvas.enabled = enabled = false;
+
+        DroppedItem.Pool.ClearObjects();
     }
 }

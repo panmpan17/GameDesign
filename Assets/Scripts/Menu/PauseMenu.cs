@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 using UnityEngine.InputSystem.UI;
+using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
 
 public class PauseMenu : AbstractMenu
@@ -19,7 +19,7 @@ public class PauseMenu : AbstractMenu
     [SerializeField]
     private EventReference focusEvent;
 
-    private InputSystemUIInputModule uiInputModule;
+    private InputSystemUIInputModule _uiInputModule;
 
 
     void Awake()
@@ -33,6 +33,9 @@ public class PauseMenu : AbstractMenu
         base.OnDestroy();
         pauseEvent.InvokeEvents -= Pause;
         Time.timeScale = 1;
+
+        if (_uiInputModule)
+            _uiInputModule.cancel.action.performed -= OnCancel;
     }
 
     void Pause()
@@ -47,8 +50,8 @@ public class PauseMenu : AbstractMenu
     IEnumerator C_Delay()
     {
         yield return new WaitForEndOfFrame();
-        uiInputModule ??= EventSystem.current.GetComponent<InputSystemUIInputModule>();
-        uiInputModule.cancel.action.performed += OnCancel;
+        _uiInputModule ??= EventSystem.current.GetComponent<InputSystemUIInputModule>();
+        _uiInputModule.cancel.action.performed += OnCancel;
     }
 
     public void Resume()
@@ -59,8 +62,8 @@ public class PauseMenu : AbstractMenu
         focusEvent.Invoke();
         CloseMenu();
 
-        var uiInputModule = EventSystem.current.GetComponent<InputSystemUIInputModule>();
-        uiInputModule.cancel.action.performed -= OnCancel;
+        _uiInputModule ??= EventSystem.current.GetComponent<InputSystemUIInputModule>();
+        _uiInputModule.cancel.action.performed -= OnCancel;
     }
 
     public void OpenSetting()
@@ -68,13 +71,13 @@ public class PauseMenu : AbstractMenu
         _lastSelected = EventSystem.current.currentSelectedGameObject;
         AbstractMenu.S_OpenMenu("Setting");
 
-        uiInputModule.cancel.action.performed -= OnCancel;
+        _uiInputModule.cancel.action.performed -= OnCancel;
     }
 
     protected override void BackToThisMenu()
     {
         EventSystem.current.SetSelectedGameObject(_lastSelected);
-        uiInputModule.cancel.action.performed += OnCancel;
+        _uiInputModule.cancel.action.performed += OnCancel;
     }
 
     public void MainMenu()
