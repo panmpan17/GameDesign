@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
-
+using System.IO;
 
 public class MainMenu : AbstractMenu
 {
@@ -19,6 +19,9 @@ public class MainMenu : AbstractMenu
     private GameObject creditCloseButton;
     [SerializeField]
     private GameObject skipButton;
+
+    [SerializeField]
+    private SaveDataReference saveDataReference;
 
     private GameObject _lastSelected;
     private Coroutine _delayLoadScene;
@@ -47,7 +50,11 @@ public class MainMenu : AbstractMenu
     }
 
     public void OpenSaveMenu()
-    {}
+    {
+        saveDataReference.ReadFromFilePath(Path.Join(Application.persistentDataPath, "save1"));
+
+        LoadScene.ins.LoadWithSaveData(GameSceneName);
+    }
 
     public void Setting()
     {

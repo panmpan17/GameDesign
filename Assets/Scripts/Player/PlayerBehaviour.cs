@@ -32,6 +32,10 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     [SerializeField]
     private float keepTargetTime;
 
+    [SerializeField]
+    private BowParameter[] bowUpgrades;
+    private bool[] _upgradeUnlocks;
+
     private Ray _currentRay;
     private Stopwatch _focusedStopwatch;
     private Transform _focusedTarget;
@@ -60,6 +64,14 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
     [Header("Inventory")]
     [SerializeField]
     private Inventory inventory;
+
+    [Header("Save")]
+    [SerializeField]
+    private SaveDataReference saveDataReference;
+    [SerializeField]
+    private EventReference saveDataExtractEvent;
+    [SerializeField]
+    private EventReference saveDataRestoreEvent;
 
 #if UNITY_EDITOR
     [Header("Editor Only")]
@@ -113,16 +125,19 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         focusEvent.InvokeEvents += FocusCursor;
         AbstractMenu.OnFirstMenuOpen += OnFirstMenuOpen;
         AbstractMenu.OnLastMenuClose += OnLastMenuClose;
+        saveDataExtractEvent.InvokeEvents += OnSaveDataExtract;
+        saveDataRestoreEvent.InvokeEvents += OnSaveDataRestore;
 
         _walkingCameraIndex = CameraSwitcher.GetCameraIndex("Walk");
 
         mainCamera = mainCamera == null ? Camera.main : mainCamera;
 
         bow.Setup(this);
+        _upgradeUnlocks = new bool[bowUpgrades.Length];
 
 #if UNITY_EDITOR
-        if (startCoreCount.Enable) inventory.ChangeCoreCount(startCoreCount.Value);
-        if (startAppleCount.Enable) inventory.ChangeAppleCount(startAppleCount.Value);
+        if (startCoreCount.Enable) inventory.CoreCount = startCoreCount.Value;
+        if (startAppleCount.Enable) inventory.AppleCount = startAppleCount.Value;
 #endif
     }
 
@@ -240,7 +255,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 
         if (inventory.AppleCount >= 1)
         {
-            inventory.ChangeAppleCount(-1);
+            inventory.AppleCount -= 1;
             _health += appleHealPoint;
             healthChangeEvent?.Invoke(Mathf.Clamp(_health / maxHealth, 0, 1));
             OnHeal?.Invoke();
@@ -397,7 +412,7 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
 #region Game Item Interact
     public void PickItemUp(ItemType itemType)
     {
-        inventory.ChangeCoreCount(1);
+        inventory.CoreCount += 1;
         OnPickItem?.Invoke();
     }
 
@@ -406,8 +421,52 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         bow.UpgradeBow(upgradeParameter);
         OnBowParameterChanged?.Invoke(bow.CurrentParameter, upgradeParameter);
         OnBowUpgrade?.Invoke();
+
+        for (int i = 0; i < bowUpgrades.Length; i++)
+        {
+            if (bowUpgrades[i] == upgradeParameter)
+            {
+                _upgradeUnlocks[i] = true;
+                return;
+            }
+        }
+    }
+    public void UpgradeBowBySave(BowParameter upgradeParameter)
+    {
+        bow.UpgradeBow(upgradeParameter);
+        OnBowParameterChanged?.Invoke(bow.CurrentParameter, upgradeParameter);
     }
 #endregion
+
+    void OnSaveDataExtract()
+    {
+        saveDataReference.Data.AppleCount = inventory.AppleCount;
+        saveDataReference.Data.CoreCount = inventory.CoreCount;
+        saveDataReference.Data.HasFollower = inventory.HasFlower;
+
+        saveDataReference.Data.HealthPoint = _health;
+        saveDataReference.Data.BowUpgrade1Aquired = _upgradeUnlocks[0];
+        saveDataReference.Data.BowUpgrade2Aquired = _upgradeUnlocks[1];
+        saveDataReference.Data.BowUpgrade3Aquired = _upgradeUnlocks[2];
+    }
+
+    void OnSaveDataRestore()
+    {
+        inventory.AppleCount = saveDataReference.Data.AppleCount;
+        inventory.CoreCount = saveDataReference.Data.CoreCount;
+        inventory.HasFlower = saveDataReference.Data.HasFollower;
+
+        _health = saveDataReference.Data.HealthPoint;
+        healthChangeEvent?.Invoke(_health / maxHealth);
+
+        _upgradeUnlocks[0] = saveDataReference.Data.BowUpgrade1Aquired;
+        _upgradeUnlocks[1] = saveDataReference.Data.BowUpgrade2Aquired;
+        _upgradeUnlocks[2] = saveDataReference.Data.BowUpgrade3Aquired;
+
+        if (_upgradeUnlocks[0]) UpgradeBowBySave(bowUpgrades[0]);
+        if (_upgradeUnlocks[1]) UpgradeBowBySave(bowUpgrades[1]);
+        if (_upgradeUnlocks[2]) UpgradeBowBySave(bowUpgrades[2]);
+    }
 
 
     void OnDestroy()
@@ -415,5 +474,31 @@ public class PlayerBehaviour : MonoBehaviour, ICanBeDamage
         focusEvent.InvokeEvents -= FocusCursor;
         AbstractMenu.OnFirstMenuOpen -= OnFirstMenuOpen;
         AbstractMenu.OnLastMenuClose -= OnLastMenuClose;
+        saveDataExtractEvent.InvokeEvents -= OnSaveDataExtract;
+        saveDataRestoreEvent.InvokeEvents -= OnSaveDataRestore;
     }
+
+#region Console window command
+    [ConsoleCommand("fullhealth")]
+    public static void Command_RestoreFullHealth()
+    {
+        PlayerBehaviour player = GameManager.ins.Player;
+        player._health = player.maxHealth;
+        player.healthChangeEvent.Invoke(1);
+    }
+
+    [ConsoleCommand("dead")]
+    public static void Command_Dead()
+    {
+        PlayerBehaviour player = GameManager.ins.Player;
+        player.InstantDeath();
+    }
+
+    [ConsoleCommand("upgrade :int")]
+    public static void Command_UnlockUpgrade(int index)
+    {
+        PlayerBehaviour player = GameManager.ins.Player;
+        player.UpgradeBow(player.bowUpgrades[index]);
+    }
+#endregion
 }

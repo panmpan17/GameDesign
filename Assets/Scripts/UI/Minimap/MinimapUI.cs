@@ -47,4 +47,9 @@ public class MinimapUI : MonoBehaviour
             _rectTransform.sizeDelta = _smallSizeDelta;
         }
     }
+
+    void OnDestroy()
+    {
+        enlargeEvent.InvokeBoolEvents -= ChangeEnlargeMode;
+    }
 }

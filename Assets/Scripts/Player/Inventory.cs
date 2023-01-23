@@ -6,26 +6,33 @@ using UnityEngine;
 public class Inventory : ScriptableObject
 {
     [System.NonSerialized]
-    public int CoreCount;
+    private int _coreCount;
+    public int CoreCount { get => _coreCount;
+        set {
+            _coreCount = value;
+            CoreEvent.Invoke(_coreCount);
+        }
+    }
     public EventReference CoreEvent;
 
     [System.NonSerialized]
-    public int AppleCount;
+    private int _appleCount;
+    public int AppleCount { get => _appleCount;
+        set {
+            _appleCount = value;
+            AppleEvent.Invoke(_appleCount);
+        }
+    }
     public EventReference AppleEvent;
 
     public EventReference FlowerEvent;
 
-    public void ChangeCoreCount(int amount)
-    {
-        if (amount == 0) return;
-        CoreCount += amount;
-        CoreEvent.Invoke(CoreCount);
-    }
-
-    public void ChangeAppleCount(int amount)
-    {
-        if (amount == 0) return;
-        AppleCount += amount;
-        AppleEvent.Invoke(AppleCount);
+    [System.NonSerialized]
+    private bool _hasFlower;
+    public bool HasFlower { get => _hasFlower;
+        set {
+            _hasFlower = value;
+            FlowerEvent.Invoke(value);
+        }
     }
 }

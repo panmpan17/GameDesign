@@ -82,6 +82,8 @@ public class StreetFightManager : MonoBehaviour
         _waveIndex++;
 
         enabled = true;
+
+        GameManager.ins.StartFight();
         fightStartedEvent?.Invoke(waves.Length);
     }
 
@@ -102,6 +104,7 @@ public class StreetFightManager : MonoBehaviour
 
         AudioVolumeControl.ins.FadeInEnvironmentVolume();
 
+        GameManager.ins.EndFight();
         fightEndedEvent?.Invoke();
         OnCompletedEvent.Invoke();
     }
@@ -127,5 +130,6 @@ public class StreetFightManager : MonoBehaviour
             wave.ResetFight();
 
         fightEndedEvent?.Invoke();
+        GameManager.ins.EndFight();
     }
 }

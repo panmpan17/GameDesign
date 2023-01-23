@@ -73,6 +73,7 @@ public class BossFightManager : MonoBehaviour
         borderWall.SetActive(true);
 
         BGMPlayer.ins.BlendNewBGM(bgmClip);
+        GameManager.ins.StartFight();
 
         StartCoroutine(C_BossEnterEvent());
     }
@@ -148,6 +149,8 @@ public class BossFightManager : MonoBehaviour
         AudioVolumeControl.ins.FadeInEnvironmentVolume();
 
         DroppedItem.Pool.PutAllAliveObjects();
+
+        GameManager.ins.EndFight();
     }
 
     void OnBossDeath()

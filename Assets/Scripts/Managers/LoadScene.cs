@@ -11,6 +11,12 @@ public class LoadScene : MonoBehaviour
     public static LoadScene ins;
 
     [SerializeField]
+    private SaveDataReference saveDataReference;
+    [SerializeField]
+    private EventReference saveDataRestoreEvent;
+    private bool _cariedSaveData;
+
+    [SerializeField]
     private Transform rect;
     [SerializeField]
     private FillBarControl fillBar;
@@ -41,17 +47,26 @@ public class LoadScene : MonoBehaviour
             return;
 
         fillBar.SetFillAmount(_operation.progress);
-    //     if (timer.UpdateEnd)
-    //     {
-    //         timer.Reset();
-    //     }
-    //     fillBar.SetFillAmount(timer.Progress);
     }
 
     public void Load(string sceneName)
     {
         _sceneName = sceneName;
         _canvas.enabled = enabled = true;
+        _cariedSaveData = false;
+
+        fillBar.SetFillAmount(0);
+
+        TweenFactory.RemoveAllTween();
+        gameObject.Tween("LoadRectScale", 0, 1, .8f, TweenScaleFunctions.CubicEaseOut, ScaleRect, ScaleUpCompleted);
+    }
+
+    public void LoadWithSaveData(string sceneName)
+    {
+        _sceneName = sceneName;
+        _canvas.enabled = enabled = true;
+        _cariedSaveData = true;
+
         fillBar.SetFillAmount(0);
         gameObject.Tween("LoadRectScale", 0, 1, .8f, TweenScaleFunctions.CubicEaseOut, ScaleRect, ScaleUpCompleted);
     }
@@ -65,13 +80,17 @@ public class LoadScene : MonoBehaviour
     {
         _operation = SceneManager.LoadSceneAsync(_sceneName, LoadSceneMode.Single);
 
-        _operation.completed += delegate {
-            gameObject.Tween("LoadRectScale", 1, 0, 0.5f, TweenScaleFunctions.CubicEaseOut, ScaleRect, ScaleDownCompleted);
-        };
+        _operation.completed += OnLoadSceneAsyncOperationCompleted;
+    }
+
+    void OnLoadSceneAsyncOperationCompleted(AsyncOperation operation)
+    {
+        gameObject.Tween("LoadRectScale", 1, 0, 0.5f, TweenScaleFunctions.CubicEaseOut, ScaleRect, ScaleDownCompleted);
     }
 
     void ScaleDownCompleted(ITween<float> data)
     {
+        saveDataRestoreEvent.Invoke();
         _operation = null;
         _canvas.enabled = enabled = false;
 

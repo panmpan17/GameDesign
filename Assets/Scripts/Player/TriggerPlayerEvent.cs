@@ -16,11 +16,11 @@ public class TriggerPlayerEvent : MonoBehaviour
 
     public void AddApple(int count)
     {
-        inventory.ChangeAppleCount(count);
+        inventory.AppleCount += count;
     }
 
     public void TakeFlowerFromInventory()
     {
-        inventory.FlowerEvent.Invoke(false);
+        inventory.HasFlower = false;
     }
 }

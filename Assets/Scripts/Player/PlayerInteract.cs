@@ -97,7 +97,7 @@ public class PlayerInteract : MonoBehaviour
         else if (_interactObject.GetComponent<PickupFlower>() is var flower && flower)
         {
             flower.Pickup();
-            inventory.FlowerEvent.Invoke(true);
+            inventory.HasFlower = true;
         }
     }
 

@@ -70,4 +70,9 @@ public class MinimapControl : MonoBehaviour
             }
         }
     }
+
+    void OnDestroy()
+    {
+        enlargeEvent.InvokeBoolEvents -= OnEnlarge;
+    }
 }

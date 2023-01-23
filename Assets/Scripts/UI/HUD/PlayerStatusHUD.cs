@@ -57,6 +57,7 @@ public class PlayerStatusHUD : MonoBehaviour
         healthEvent.InvokeFloatEvents += ChangeHealthAmount;
 
         stageText.languageProcess += OnFightStageLanguageTextProcess;
+
         fightStartedEvent.InvokeIntEvents += OnFightStarted;
         fightWaveUpdateEvent.InvokeIntEvents += OnFightWaveUpdated;
         fightEndedEvent.InvokeEvents += OnFightEnded;
@@ -154,6 +155,15 @@ public class PlayerStatusHUD : MonoBehaviour
         gameObject.Tween("HUDFade", 0, 1, duration, TweenScaleFunctions.CubicEaseIn, (tweenData) => canvasGroup.alpha = tweenData.CurrentValue);
     }
 
+
+    void OnDestroy()
+    {
+        healthEvent.InvokeFloatEvents -= ChangeHealthAmount;
+
+        fightStartedEvent.InvokeIntEvents -= OnFightStarted;
+        fightWaveUpdateEvent.InvokeIntEvents -= OnFightWaveUpdated;
+        fightEndedEvent.InvokeEvents -= OnFightEnded;
+    }
 
     [System.Serializable]
     public struct BowUpgradeUI

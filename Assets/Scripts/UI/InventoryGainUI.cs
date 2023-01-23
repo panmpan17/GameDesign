@@ -147,8 +147,8 @@ public class InventoryGainUI : MonoBehaviour
         _canvas.enabled = animator.enabled = false;
 
         PauseTimeTrack.Unpause(this);
-        playerInventory.ChangeAppleCount(appleAmount);
-        playerInventory.ChangeCoreCount(coreAmount);
+        playerInventory.AppleCount += appleAmount;
+        playerInventory.CoreCount += coreAmount;
     }
 
     string UpgradeTitleTextChanged(string text, TextMeshPro textMeshPro, TextMeshProUGUI textMeshProUGUI)

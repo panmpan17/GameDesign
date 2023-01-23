@@ -5215,6 +5215,10 @@ MonoBehaviour:
   bow: {fileID: 5260637637954937081}
   waitShootTime: 0.4
   keepTargetTime: 0.15
+  bowUpgrades:
+  - {fileID: 11400000, guid: 885f9d3c9c1d7b144a5f8e1cb224a15c, type: 2}
+  - {fileID: 11400000, guid: f283acc776a551b4184dd2ea9e1b0c4c, type: 2}
+  - {fileID: 11400000, guid: 333cc4055fbaef6469d9d36d0158332e, type: 2}
   maxHealth: 100
   healthChangeEvent: {fileID: 11400000, guid: 17b0e71977e87429b972945c2b722bf1, type: 2}
   appleHealPoint: 16
@@ -5225,8 +5229,11 @@ MonoBehaviour:
   focusEvent: {fileID: 11400000, guid: 6b1e6f134a2df4a15902e25accbbaee4, type: 2}
   enlargeMinimapEvent: {fileID: 11400000, guid: 9d8dea50af10c4e1bb61b7261e2ff2e5, type: 2}
   inventory: {fileID: 11400000, guid: 7db8e84510a234032a71364640969ac4, type: 2}
+  saveDataReference: {fileID: 11400000, guid: bfc6f62b383dd42588a41ae539f55be8, type: 2}
+  saveDataExtractEvent: {fileID: 11400000, guid: 45b13bc65cd0149678eb91d8c4cf7f70, type: 2}
+  saveDataRestoreEvent: {fileID: 11400000, guid: 88947fd734b124849b468cf0175d1e6b, type: 2}
   startCoreCount:
-    Enable: 1
+    Enable: 0
     Value: 20
   startAppleCount:
     Enable: 0
@@ -5336,12 +5343,12 @@ MonoBehaviour:
   behaviour: {fileID: 2787180225705632302}
   movement: {fileID: 2787180225705632301}
   inventory: {fileID: 11400000, guid: 7db8e84510a234032a71364640969ac4, type: 2}
+  canInteractEvent: {fileID: 11400000, guid: b8fbbb11370b2494f8dd72fc8925e369, type: 2}
+  dialogueEndEvent: {fileID: 11400000, guid: 84a6f59297b02472a8eb2953de76e458, type: 2}
   interactLayer:
     serializedVersion: 2
     m_Bits: 4096
   interactRaycastDistance: 2
-  canInteractEvent: {fileID: 11400000, guid: b8fbbb11370b2494f8dd72fc8925e369, type: 2}
-  dialogueEndEvent: {fileID: 11400000, guid: 84a6f59297b02472a8eb2953de76e458, type: 2}
 --- !u!1 &2787180225754473551
 GameObject:
   m_ObjectHideFlags: 0

@@ -232,7 +232,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
         {
             Merchant.Merchandise merchandise = node.Merchant.Merchandises[index];
             node.Merchant.BuyCount[index]++;
-            playerInventory.ChangeCoreCount(-merchandise.RequireCoreCount);
+            playerInventory.CoreCount -= merchandise.RequireCoreCount;
 
             if (merchandise.BowUpgrade)
             {
@@ -240,7 +240,7 @@ public class DialogueUI : AbstractMenu, IDialogueInterpreter
             }
             else
             {
-                playerInventory.ChangeAppleCount(merchandise.AppleGain);
+                playerInventory.AppleCount += merchandise.AppleGain;
             }
             node.Skip();
         }

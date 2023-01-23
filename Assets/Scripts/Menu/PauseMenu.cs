@@ -1,3 +1,4 @@
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,12 @@ public class PauseMenu : AbstractMenu
     private EventReference pauseEvent;
     [SerializeField]
     private EventReference focusEvent;
+
+    [Header("Saving")]
+    [SerializeField]
+    private SaveDataReference saveDataReference;
+    [SerializeField]
+    private EventReference extractSaveDataEvent;
 
     private InputSystemUIInputModule _uiInputModule;
 
@@ -82,6 +89,9 @@ public class PauseMenu : AbstractMenu
 
     public void MainMenu()
     {
+        extractSaveDataEvent.Invoke();
+        saveDataReference.SaveToFilePath(Path.Join(Application.persistentDataPath, "save1"));
+
         LoadScene.ins.Load("MainMenu");
         Time.timeScale = 1;
     }

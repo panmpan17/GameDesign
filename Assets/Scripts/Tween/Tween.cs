@@ -356,6 +356,13 @@ namespace DigitalRuby.Tween
         {
             return Time.unscaledDeltaTime;
         }
+    
+    
+    
+        public static void RemoveAllTween()
+        {
+            tweens.Clear();
+        }
     }
 
     /// <summary>

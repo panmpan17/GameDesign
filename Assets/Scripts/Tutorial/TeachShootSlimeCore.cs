@@ -81,6 +81,12 @@ public class TeachShootSlimeCore : MonoBehaviour
     void CloseFocusFrame()
     {
         SimpleTutorialHint.ins.CloseFocus();
-        CameraSwitcher.ins.SwitchTo("Walk");
+        // CameraSwitcher.ins.SwitchTo("Walk");
+    }
+
+    void OnDestroy()
+    {
+        focusOpenEvent.InvokeEvents -= OpenFocusFrame;
+        focusCloseEvent.InvokeEvents -= CloseFocusFrame;
     }
 }
