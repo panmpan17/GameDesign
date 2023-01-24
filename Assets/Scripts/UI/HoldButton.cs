@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using MPack;
 
@@ -14,9 +15,9 @@ public class HoldButton : Button
     [SerializeField]
     private Image progressImage;
 
-    private InputSystemUIInputModule _uiInputModule;
+    private InputAction _submitAction;
 
-    private bool Pressed => _uiInputModule.submit.action.IsPressed();
+    private bool Pressed => _submitAction.IsPressed();
 
     public override void OnPointerClick(PointerEventData eventData) {}
     public override void OnSubmit(BaseEventData eventData) {}
@@ -24,7 +25,7 @@ public class HoldButton : Button
     protected override void Start()
     {
         base.Start();
-        _uiInputModule = EventSystem.current.GetComponent<InputSystemUIInputModule>();
+        _submitAction = EventSystem.current.GetComponent<InputSystemUIInputModule>().submit.action;
         holdTimer.Running = false;
     }
 

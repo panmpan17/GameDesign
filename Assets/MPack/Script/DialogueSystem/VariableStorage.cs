@@ -86,6 +86,59 @@ namespace MPack
             else if (_floatVaribles.Remove(key)) return;
         }
 
+
+        public void ExportFloatVariableForSerialization(out string[] names, out float[] values)
+        {
+            List<string> namelist = new List<string>();
+            List<float> valueList = new List<float>();
+
+            int index = 0;
+            foreach (KeyValuePair<string, float> pair in _floatVaribles)
+            {
+                namelist.Add(pair.Key);
+                valueList.Add(pair.Value);
+                index++;
+            }
+
+            names = namelist.ToArray();
+            values = valueList.ToArray();
+        }
+
+        public void ExportIntVariableForSerialization(out string[] names, out int[] values)
+        {
+            List<string> namelist = new List<string>();
+            List<int> valueList = new List<int>();
+
+            int index = 0;
+            foreach (KeyValuePair<string, int> pair in _integerVaribles)
+            {
+                namelist.Add(pair.Key);
+                valueList.Add(pair.Value);
+                index ++;
+            }
+
+            names = namelist.ToArray();
+            values = valueList.ToArray();
+        }
+
+        public void ExportBoolVariableForSerialization(out string[] names, out bool[] values)
+        {
+            List<string> namelist = new List<string>();
+            List<bool> valueList = new List<bool>();
+
+            int index = 0;
+            foreach (KeyValuePair<string, bool> pair in _booleanVaribles)
+            {
+                namelist.Add(pair.Key);
+                valueList.Add(pair.Value);
+                index++;
+            }
+
+            names = namelist.ToArray();
+            values = valueList.ToArray();
+        }
+
+
         [System.Serializable]
         public class BooleanVaribleSet
         {

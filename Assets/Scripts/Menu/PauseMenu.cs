@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using CallbackContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
@@ -26,23 +27,13 @@ public class PauseMenu : AbstractMenu
     [SerializeField]
     private EventReference extractSaveDataEvent;
 
-    private InputSystemUIInputModule _uiInputModule;
+    private InputAction _cancelAction;
 
 
     void Awake()
     {
         pauseEvent.InvokeEvents += Pause;
         canvas.enabled = false;
-    }
-
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-        pauseEvent.InvokeEvents -= Pause;
-        Time.timeScale = 1;
-
-        if (_uiInputModule)
-            _uiInputModule.cancel.action.performed -= OnCancel;
     }
 
     void Pause()
@@ -57,8 +48,10 @@ public class PauseMenu : AbstractMenu
     IEnumerator C_Delay()
     {
         yield return new WaitForEndOfFrame();
-        _uiInputModule ??= EventSystem.current.GetComponent<InputSystemUIInputModule>();
-        _uiInputModule.cancel.action.performed += OnCancel;
+
+        if (_cancelAction == null)
+            _cancelAction = EventSystem.current.GetComponent<InputSystemUIInputModule>().cancel.action;
+        _cancelAction.performed += OnCancel;
     }
 
     public void Resume()
@@ -69,8 +62,9 @@ public class PauseMenu : AbstractMenu
         focusEvent.Invoke();
         CloseMenu();
 
-        _uiInputModule ??= EventSystem.current.GetComponent<InputSystemUIInputModule>();
-        _uiInputModule.cancel.action.performed -= OnCancel;
+        if (_cancelAction == null)
+            _cancelAction = EventSystem.current.GetComponent<InputSystemUIInputModule>().cancel.action;
+        _cancelAction.performed -= OnCancel;
     }
 
     public void OpenSetting()
@@ -78,13 +72,13 @@ public class PauseMenu : AbstractMenu
         _lastSelected = EventSystem.current.currentSelectedGameObject;
         AbstractMenu.S_OpenMenu("Setting");
 
-        _uiInputModule.cancel.action.performed -= OnCancel;
+        _cancelAction.performed -= OnCancel;
     }
 
     protected override void BackToThisMenu()
     {
         EventSystem.current.SetSelectedGameObject(_lastSelected);
-        _uiInputModule.cancel.action.performed += OnCancel;
+        _cancelAction.performed += OnCancel;
     }
 
     public void MainMenu()
@@ -99,5 +93,16 @@ public class PauseMenu : AbstractMenu
     void OnCancel(CallbackContext callbackContext)
     {
         Resume();
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        pauseEvent.InvokeEvents -= Pause;
+        Time.timeScale = 1;
+
+        // somehow, even when ui input module destroy, the action won't destroy
+        if (_cancelAction != null)
+            _cancelAction.performed -= OnCancel;
     }
 }

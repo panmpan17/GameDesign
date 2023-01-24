@@ -31,6 +31,14 @@ public class StreetFightManager : MonoBehaviour
     [SerializeField]
     private EventReference fightEndedEvent;
 
+    [Header("Saving")]
+    [SerializeField]
+    private SaveDataReference saveDataReference;
+    [SerializeField]
+    private EventReference saveDataRestoreEvent; 
+    [SerializeField]
+    private string uuid;
+
     [UnityEngine.Serialization.FormerlySerializedAs("OnEndEvent")]
     public UnityEvent OnCompletedEvent;
 
@@ -40,6 +48,8 @@ public class StreetFightManager : MonoBehaviour
         entranceDetect.OnPlayerEnterEvent += OnPlayerEnterEntrance;
 
         spawnedSlimes ??= ScriptableObject.CreateInstance<GameObjectList>();
+
+        saveDataRestoreEvent.InvokeEvents += OnSaveDataRestore;
     }
 
     void Update()
@@ -107,6 +117,7 @@ public class StreetFightManager : MonoBehaviour
         GameManager.ins.EndFight();
         fightEndedEvent?.Invoke();
         OnCompletedEvent.Invoke();
+        saveDataReference.AddFinishedStreetFight(uuid);
     }
 
     void ResetFight()
@@ -131,5 +142,20 @@ public class StreetFightManager : MonoBehaviour
 
         fightEndedEvent?.Invoke();
         GameManager.ins.EndFight();
+    }
+
+    void OnSaveDataRestore()
+    {
+        bool isFinished = saveDataReference.StreetFightIsFinished(uuid);
+
+        if (!isFinished)
+            return;
+
+        entranceDetect.gameObject.SetActive(false);
+    }
+
+    void OnDestroy()
+    {
+        saveDataRestoreEvent.InvokeEvents -= OnSaveDataRestore;
     }
 }

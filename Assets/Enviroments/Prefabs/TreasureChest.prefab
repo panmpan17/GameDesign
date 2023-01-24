@@ -140,7 +140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 893544754662352036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9094c460457e4e1994f4040e6892007, type: 3}
   m_Name: 
@@ -151,9 +151,14 @@ MonoBehaviour:
   coreGain:
     Enable: 1
     Value: 2
+  bowUpgrade: {fileID: 0}
   animator: {fileID: 1086285429}
   audioSource: {fileID: 771419192}
   openSound: {fileID: 11400000, guid: 6d84e78057bb9452c92e0eb0eeccdfa7, type: 2}
+  saveDataReference: {fileID: 11400000, guid: bfc6f62b383dd42588a41ae539f55be8, type: 2}
+  saveDataExtractEvent: {fileID: 11400000, guid: 45b13bc65cd0149678eb91d8c4cf7f70, type: 2}
+  saveDataRestoreEvent: {fileID: 11400000, guid: 88947fd734b124849b468cf0175d1e6b, type: 2}
+  uuid: 
 --- !u!82 &771419192
 AudioSource:
   m_ObjectHideFlags: 0

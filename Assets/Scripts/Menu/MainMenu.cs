@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using UnityEngine.Timeline;
+using UnityEngine.UI;
 using UnityEngine.Playables;
 using System.IO;
 
@@ -21,6 +19,9 @@ public class MainMenu : AbstractMenu
     private GameObject skipButton;
 
     [SerializeField]
+    private Button loadSceneButton;
+
+    [SerializeField]
     private SaveDataReference saveDataReference;
 
     private GameObject _lastSelected;
@@ -29,17 +30,19 @@ public class MainMenu : AbstractMenu
     void Start()
     {
         OpenMenu();
+        loadSceneButton.interactable = File.Exists(Path.Join(Application.persistentDataPath, "save1"));
     }
 
     public void StartGame()
     {
+        saveDataReference.StartFresh();
+
         GetComponent<Animator>().enabled = false;
         GetComponent<Canvas>().enabled = false;
         cutscene.gameObject.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(skipButton);
         _delayLoadScene = StartCoroutine(C_DelayLoadScene());
-        // cutscene.stopped += OnCutSceneFinished;
     }
 
     IEnumerator C_DelayLoadScene()

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using MPack;
 
+
+[ExecuteInEditMode]
 public class TreasureChest : MonoBehaviour
 {
     [SerializeField]
@@ -20,7 +22,23 @@ public class TreasureChest : MonoBehaviour
     [SerializeField]
     private AudioClipSet openSound;
 
+    [Header("Saving")]
+    [SerializeField]
+    private SaveDataReference saveDataReference;
+    [SerializeField]
+    private EventReference saveDataExtractEvent;
+    [SerializeField]
+    private EventReference saveDataRestoreEvent;
+    [SerializeField]
+    private string uuid;
+
     private bool _opened;
+
+    void Awake()
+    {
+        saveDataExtractEvent.InvokeEvents += OnSaveDataExtract;
+        saveDataRestoreEvent.InvokeEvents += OnSaveDataRestore;
+    }
 
     public void Open()
     {
@@ -55,5 +73,28 @@ public class TreasureChest : MonoBehaviour
             int coreAmount = coreGain.Enable ? coreGain.Value : 0;
             InventoryGainUI.ins.ShowInventoryGain(appleAmount, coreAmount);
         }
+    }
+
+    void OnSaveDataExtract()
+    {
+        if (_opened)
+            saveDataReference.AddOpenedTreasureChest(uuid);
+    }
+
+    void OnSaveDataRestore()
+    {
+        _opened = saveDataReference.TreasureChestIsOpened(uuid);
+        if (!_opened)
+            return;
+
+        // TODO: If player interact detect the treasure chest when file loaded, the interact key won't go away
+        animator.enabled = true;
+        animator.Update(100);
+    }
+
+    void OnDestroy()
+    {
+        saveDataExtractEvent.InvokeEvents -= OnSaveDataExtract;
+        saveDataRestoreEvent.InvokeEvents -= OnSaveDataRestore;
     }
 }

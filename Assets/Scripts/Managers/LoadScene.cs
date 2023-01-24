@@ -90,7 +90,9 @@ public class LoadScene : MonoBehaviour
 
     void ScaleDownCompleted(ITween<float> data)
     {
-        saveDataRestoreEvent.Invoke();
+        if (_cariedSaveData)
+            saveDataRestoreEvent.Invoke();
+
         _operation = null;
         _canvas.enabled = enabled = false;
 

@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
 
     public void RegisterSpawnPoint(PlayerSpawnPoint spawnPoint)
     {
-        Debug.Log("Register point");
         _spawnPoints.Add(spawnPoint);
 
 #if UNITY_EDITOR
@@ -107,8 +106,6 @@ public class GameManager : MonoBehaviour
     void OnSaveDataRestore()
     {
         string savePointName = saveDataReference.Data.SpawnPointName;
-
-        Debug.Log("Restore to point: " + savePointName);
 
         for (int i = 0; i < _spawnPoints.Count; i++)
         {

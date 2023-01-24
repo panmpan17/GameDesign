@@ -378,8 +378,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: uuid
+      value: plain_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: coreGain.Value
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: coreGain.Enable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: appleGain.Enable
@@ -2647,8 +2659,20 @@ PrefabInstance:
       value: -7.05
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: uuid
+      value: plain_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: coreGain.Value
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: coreGain.Enable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: appleGain.Enable
@@ -3540,6 +3564,9 @@ MonoBehaviour:
   fightStartedEvent: {fileID: 11400000, guid: ac7ad538e5fc6448fa1fc39f9b12189b, type: 2}
   fightWaveUpdateEvent: {fileID: 11400000, guid: 037be006b3a164bb082a78a15e08e537, type: 2}
   fightEndedEvent: {fileID: 11400000, guid: 068daa4819a6d4219807fb34f82465e8, type: 2}
+  saveDataReference: {fileID: 11400000, guid: bfc6f62b383dd42588a41ae539f55be8, type: 2}
+  saveDataRestoreEvent: {fileID: 11400000, guid: 88947fd734b124849b468cf0175d1e6b, type: 2}
+  uuid: Plain
   OnCompletedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -3694,6 +3721,14 @@ PrefabInstance:
       value: -7.209
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: uuid
+      value: plain_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: bowUpgrade
       value: 
       objectReference: {fileID: 11400000, guid: 885f9d3c9c1d7b144a5f8e1cb224a15c, type: 2}
@@ -3703,7 +3738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: coreGain.Enable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 893544754662352035, guid: 9a0c49ba0042b4c809975757c73df4f7, type: 3}
       propertyPath: appleGain.Enable
