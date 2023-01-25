@@ -19,4 +19,9 @@ public class PickupFlower : MonoBehaviour
         gameObject.SetActive(false);
         OnPickup.Invoke();
     }
+
+    public void OnSaveRestore()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -70,6 +70,29 @@ public class TeachShootSlimeCore : MonoBehaviour
         npcControl.StartDialogue();
     }
 
+    public void ResumeTutorialFromSave()
+    {
+        StartCoroutine(C_ResumeTutorialProcess());
+    }
+
+    IEnumerator C_ResumeTutorialProcess()
+    {
+        GameObjectList slimeList = ScriptableObject.CreateInstance<GameObjectList>();
+        slimeList.List = new List<GameObject>();
+
+        spawnSlimeTrigger.SetSpawnSlimeList(slimeList);
+        spawnSlimeTrigger.TriggerFire();
+
+        yield return new WaitForSeconds(2);
+
+        var core = slimeList.List[0].GetComponentInChildren<SlimeCore>();
+        focusTarget = core.transform;
+
+        arrow.gameObject.SetActive(true);
+        arrow.position = focusTarget.position;
+    }
+
+
     void OpenFocusFrame()
     {
         SimpleTutorialHint.ins.FocusAtWorldPosition(focusTarget.position);

@@ -434,6 +434,7 @@ GameObject:
   - component: {fileID: 485064583}
   - component: {fileID: 485064584}
   - component: {fileID: 485064585}
+  - component: {fileID: 485064586}
   m_Layer: 0
   m_Name: GameStartPoint
   m_TagString: Untagged
@@ -498,6 +499,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hint: {fileID: 11400000, guid: ac44081836f094a3ebbca0a1594f3925, type: 2}
+--- !u!114 &485064586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485064582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bd2ea85556d4d4891493bc303336bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventReference: {fileID: 11400000, guid: 88947fd734b124849b468cf0175d1e6b, type: 2}
+  Event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 485064585}
+        m_TargetAssemblyTypeName: SimpleTutorialHintTrigger, Assembly-CSharp
+        m_MethodName: CloseThisHint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  FloatEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  IntEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  BoolEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &532334919
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,6 +716,7 @@ GameObject:
   - component: {fileID: 723684780}
   - component: {fileID: 723684779}
   - component: {fileID: 723684778}
+  - component: {fileID: 723684782}
   m_Layer: 12
   m_Name: TutorialVillager
   m_TagString: RightClickInteractive
@@ -805,10 +844,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1708096958}
-  - {fileID: 1645975931}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 66.649, z: 0}
+--- !u!114 &723684782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723684776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23faf64b4890a4bfb81bc2848f36d197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variableStorage: {fileID: 11400000, guid: 70ec3d9e124de4eb6bbbcc9c65a65ed7, type: 2}
+  saveDataRestoreEvent: {fileID: 11400000, guid: 88947fd734b124849b468cf0175d1e6b, type: 2}
+  variableMatchPattern: {fileID: 11400000, guid: 19a79cacc4e36427e91b428e0190b8a8, type: 2}
+  OnValueMatched:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 723684777}
+        m_TargetAssemblyTypeName: NPCControl, Assembly-CSharp
+        m_MethodName: UnregisterMarker
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &726355085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1354,7 @@ GameObject:
   - component: {fileID: 1586638975}
   - component: {fileID: 1586638974}
   - component: {fileID: 1586638973}
+  - component: {fileID: 1586638976}
   m_Layer: 0
   m_Name: TeachShootSlimeCore
   m_TagString: Untagged
@@ -1367,121 +1436,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1645975930
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1645975931}
-  - component: {fileID: 1645975933}
-  - component: {fileID: 1645975932}
-  m_Layer: 12
-  m_Name: Spot Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1645975931
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645975930}
-  m_LocalRotation: {x: -0.5987839, y: -0.6251188, z: 0.37610862, w: -0.33049464}
-  m_LocalPosition: {x: 0.07933372, y: 3.8820014, z: 1.9051743}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 723684781}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 59.999, y: 79.16, z: 90}
---- !u!114 &1645975932
+--- !u!114 &1586638976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645975930}
+  m_GameObject: {fileID: 1586638972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Script: {fileID: 11500000, guid: 23faf64b4890a4bfb81bc2848f36d197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
---- !u!108 &1645975933
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645975930}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 0
-  m_Shape: 0
-  m_Color: {r: 1, g: 0.94326496, b: 0.9292453, a: 1}
-  m_Intensity: 8.1
-  m_Range: 5.8539085
-  m_SpotAngle: 86.472565
-  m_InnerSpotAngle: 57.777153
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 0
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
+  variableStorage: {fileID: 11400000, guid: 70ec3d9e124de4eb6bbbcc9c65a65ed7, type: 2}
+  saveDataRestoreEvent: {fileID: 11400000, guid: 88947fd734b124849b468cf0175d1e6b, type: 2}
+  variableMatchPattern: {fileID: 11400000, guid: d01b454ccf4c442abad63c89288ed4c7, type: 2}
+  OnValueMatched:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1586638974}
+        m_TargetAssemblyTypeName: TeachShootSlimeCore, Assembly-CSharp
+        m_MethodName: ResumeTutorialFromSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1694253211
 GameObject:
   m_ObjectHideFlags: 0

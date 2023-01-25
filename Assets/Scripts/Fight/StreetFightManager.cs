@@ -117,7 +117,9 @@ public class StreetFightManager : MonoBehaviour
         GameManager.ins.EndFight();
         fightEndedEvent?.Invoke();
         OnCompletedEvent.Invoke();
-        saveDataReference.AddFinishedStreetFight(uuid);
+
+        if (uuid != "")
+            saveDataReference.AddFinishedStreetFight(uuid);
     }
 
     void ResetFight()
@@ -152,6 +154,9 @@ public class StreetFightManager : MonoBehaviour
             return;
 
         entranceDetect.gameObject.SetActive(false);
+
+        for (int i = 0; i < waves.Length; i++)
+            waves[i].DestroyFight();
     }
 
     void OnDestroy()

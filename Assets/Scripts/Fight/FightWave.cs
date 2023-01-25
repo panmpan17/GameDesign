@@ -42,4 +42,10 @@ public class FightWave : MonoBehaviour
         foreach (AbstractSpawnSlime trigger in spawnSlimeTriggers)
             trigger.ResetFight();
     }
+
+    public void DestroyFight()
+    {
+        foreach (AbstractSpawnSlime trigger in spawnSlimeTriggers)
+            trigger.DestroyFight();
+    }
 }

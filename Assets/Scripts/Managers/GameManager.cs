@@ -72,8 +72,11 @@ public class GameManager : MonoBehaviour
 #region Player spawn point
     public void ChangePlayerSpawnPoint(PlayerSpawnPoint spawnPoint)
     {
-        _currentSpawnPoint = spawnPoint;
-        _currentSpawnPoint.OnChangeToSpawnPoint();
+        if (_currentSpawnPoint != spawnPoint)
+        {
+            _currentSpawnPoint = spawnPoint;
+            _currentSpawnPoint.OnChangeToSpawnPoint();
+        }
     }
 
     public void RegisterSpawnPoint(PlayerSpawnPoint spawnPoint)
@@ -126,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     public void EndFight()
     {
-        _inFight = true;
+        _inFight = false;
     }
 
     void OnDestroy()

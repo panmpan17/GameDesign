@@ -5,6 +5,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using MPack;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 [CreateAssetMenu(menuName="Game/Save Data")]
 public class SaveDataReference : ScriptableObject
@@ -17,11 +21,16 @@ public class SaveDataReference : ScriptableObject
     private List<string> openedTreasureChestUUIDs = new List<string>();
     [System.NonSerialized]
     private List<string> finishedStreetFightUUIDs = new List<string>();
+    [SerializeField]
+    private List<MerchantRecord> merchantRecords = new List<MerchantRecord>();
 
     public void StartFresh()
     {
         Data = new SaveData();
         openedTreasureChestUUIDs.Clear();
+        finishedStreetFightUUIDs.Clear();
+        merchantRecords.Clear();
+        merchantRecords.Clear();
     }
 
     public void SaveToFilePath(string path)
@@ -51,6 +60,9 @@ public class SaveDataReference : ScriptableObject
 
         openedTreasureChestUUIDs.Clear();
         finishedStreetFightUUIDs.Clear();
+        merchantRecords.Clear();
+        // openedTreasureChestUUIDs.AddRange(Data.OpenedTreasureChestUUIDs);
+        finishedStreetFightUUIDs.AddRange(Data.FinishedStreeFightUUIDs);
 
         SetVariableUsingNameValueArray(variableStorage.Set, Data.VariableBoolNames, Data.VariableBoolValues);
         SetVariableUsingNameValueArray(variableStorage.Set, Data.VariableIntNames, Data.VariableIntValues);
@@ -96,10 +108,25 @@ public class SaveDataReference : ScriptableObject
         return false;
     }
 
+    public void AddMerchantRecord(string merchantUUID, int[] buyCount) => merchantRecords.Add(new MerchantRecord { UUID = merchantUUID, BuyCount = buyCount });
+    public int[] GetMerchantBuyCount(string merchantUUID)
+    {
+        if (Data.MerchantRecords == null)
+            return null;
+
+        foreach (MerchantRecord merchantRecord in Data.MerchantRecords)
+        {
+            if (merchantRecord.UUID == merchantUUID)
+                return merchantRecord.BuyCount;
+        }
+        return null;
+    }
+
     public void FinalizeData()
     {
         Data.OpenedTreasureChestUUIDs = openedTreasureChestUUIDs.ToArray();
         Data.FinishedStreeFightUUIDs = finishedStreetFightUUIDs.ToArray();
+        Data.MerchantRecords = merchantRecords.ToArray();
 
         variableStorage.ExportBoolVariableForSerialization(out string[] boolVariableNames, out bool[] boolVariableValues);
         Data.VariableBoolNames = boolVariableNames;
@@ -113,6 +140,53 @@ public class SaveDataReference : ScriptableObject
         Data.VariableFloatNames = floatVariableNames;
         Data.VariableFloatValues = floatVariableValues;
     }
+
+
+#if UNITY_EDITOR
+    [MenuItem("Game/Open Persistent Data Path")]
+    public static void s_OpenPersistentDataPath()
+    {
+        EditorUtility.RevealInFinder(Application.persistentDataPath);
+    }
+    [MenuItem("Game/Convert Binnary File To Json", true)]
+    public static bool s_Validate_ConvertBinnaryFileToJson()
+    {
+        return File.Exists(Path.Combine(Application.persistentDataPath, "save1"));
+    }
+    [MenuItem("Game/Convert Binnary File To Json")]
+    public static void s_ConvertBinnaryFileToJson()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "save1");
+
+        var saveDataReference = ScriptableObject.CreateInstance<SaveDataReference>();
+
+        string variableStorageUUID = AssetDatabase.FindAssets("t:VariableStorage")[0];
+        saveDataReference.variableStorage = AssetDatabase.LoadAssetAtPath<VariableStorage>(AssetDatabase.GUIDToAssetPath(variableStorageUUID));
+        saveDataReference.ReadFromFilePath(path);
+
+        string stringData = JsonUtility.ToJson(saveDataReference.Data, true);
+        System.IO.File.WriteAllText(path + ".json", stringData);
+    }
+
+    [MenuItem("Game/Convert Json To Binnary File", true)]
+    public static bool s_Validate_ConvertJsonToBinnaryFile()
+    {
+        return File.Exists(Path.Combine(Application.persistentDataPath, "save1.json"));
+    }
+    [MenuItem("Game/Convert Json To Binnary File")]
+    public static void s_ConvertJsonToBinnaryFile()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "save1");
+        string stringData = System.IO.File.ReadAllText(path + ".json");
+        SaveDataReference.SaveData saveData = JsonUtility.FromJson<SaveDataReference.SaveData>(stringData);
+
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+        FileStream stream = new FileStream(path, FileMode.Create);
+        binaryFormatter.Serialize(stream, saveData);
+        stream.Close();
+    }
+#endif
 
 
     [System.Serializable]
@@ -135,8 +209,6 @@ public class SaveDataReference : ScriptableObject
         public bool BowUpgrade2Aquired;
         public bool BowUpgrade3Aquired;
 
-        // TODO: mission solved, mark remove from the map
-
         public string[] OpenedTreasureChestUUIDs;
         public string[] FinishedStreeFightUUIDs;
 
@@ -149,5 +221,14 @@ public class SaveDataReference : ScriptableObject
 
         public string[] VariableBoolNames;
         public bool[] VariableBoolValues;
+
+        public MerchantRecord[] MerchantRecords;
+    }
+
+    [System.Serializable]
+    public struct MerchantRecord
+    {
+        public string UUID;
+        public int[] BuyCount;
     }
 }

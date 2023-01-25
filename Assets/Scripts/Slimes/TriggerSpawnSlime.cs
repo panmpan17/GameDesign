@@ -13,6 +13,7 @@ public abstract class AbstractSpawnSlime : MonoBehaviour, ITriggerFire
     public abstract void TriggerFireWithParameter(int parameter);
 
     public virtual void ResetFight() {}
+    public virtual void DestroyFight() {}
 
     protected void TriggerOnSlimeSpawnedCallback()
     {

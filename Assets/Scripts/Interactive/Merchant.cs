@@ -7,6 +7,8 @@ using MPack;
 [CreateAssetMenu(menuName="Game/Merchant")]
 public class Merchant : ScriptableObject
 {
+    public string UUID;
+
     public Merchandise[] Merchandises;
     [System.NonSerialized]
     private int[] _buyCount;
@@ -21,6 +23,19 @@ public class Merchant : ScriptableObject
     {
         Merchandise merchandise = Merchandises[index];
         return merchandise.PurchaseLimit.Enable && BuyCount[index] >= merchandise.PurchaseLimit.Value;
+    }
+
+    public void OnSaveDataExtract(SaveDataReference saveDataReference)
+    {
+        saveDataReference.AddMerchantRecord(UUID, _buyCount);
+    }
+
+    public void OnSaveDataRestore(SaveDataReference saveDataReference)
+    {
+        int[] result = saveDataReference.GetMerchantBuyCount(UUID);
+
+        if (result != null)
+            _buyCount = result;
     }
 
     [System.Serializable]

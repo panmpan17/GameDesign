@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 243203753}
   - component: {fileID: 243203752}
   - component: {fileID: 243203755}
+  - component: {fileID: 243203756}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -509,6 +510,24 @@ MonoBehaviour:
   - Level_Sound
   - Level_Fjord_Tutorial
   - Level_Fjord_StartVillage
+--- !u!114 &243203756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243203751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849beb86028af4a11ba564451cc42fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  merchants:
+  - {fileID: 11400000, guid: c04b5fbe0d3bd453a98c762f639ff0c7, type: 2}
+  - {fileID: 11400000, guid: 37ffdfdcd023d4e6cb306277c46f0ba2, type: 2}
+  saveDataReference: {fileID: 11400000, guid: bfc6f62b383dd42588a41ae539f55be8, type: 2}
+  saveDataExtractEvent: {fileID: 11400000, guid: 45b13bc65cd0149678eb91d8c4cf7f70, type: 2}
+  saveDataRestoreEvent: {fileID: 11400000, guid: 88947fd734b124849b468cf0175d1e6b, type: 2}
 --- !u!1 &251388829
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,4 +52,16 @@ public class SlimeFixedPoint : AbstractSpawnSlime
             slimes[i].gameObject.SetActive(true);
         }
     }
+
+    public override void DestroyFight()
+    {
+        int length = slimes.Length;
+        for (int i = 0; i < length; i++)
+        {
+            if (slimes[i])
+            {
+                Destroy(slimes[i].gameObject);
+            }
+        }
+    }
 }
