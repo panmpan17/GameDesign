@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 584428104}
-  m_IndirectSpecularColor: {r: 0.2890663, g: 0.8951222, b: 1.1652141, a: 1}
+  m_IndirectSpecularColor: {r: 0.289043, g: 0.89450574, b: 1.1643875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -985,6 +985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
@@ -1001,6 +1002,7 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: -8498200188605416678, guid: 9d5a49eea6ca24c5fac47b1f3ff7bd76, type: 3}
   m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!114 &441455070
 MonoBehaviour:
   m_ObjectHideFlags: 0
